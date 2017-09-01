@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="paneGlobal" prefHeight="890.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerMatchMaking">
+   <children>
+      <ImageView fx:id="backGround" fitHeight="916.0" fitWidth="918.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/BattleFields/WindowMatchMaking.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="textCountDown" fill="WHITE" layoutX="387.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30" textAlignment="CENTER" wrappingWidth="144.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Button fx:id="buttonMenu" layoutX="13.0" layoutY="10.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" text="Меню" />
+      <Pane fx:id="paneControlField" layoutX="194.0" layoutY="193.0" prefHeight="536.0" prefWidth="536.0">
+         <children>
+            <ImageView fx:id="imageMessageGenerator" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Triggers/TriggerGenerator.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageMessageBarracks" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="72.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Triggers/TriggerBarracks.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageMessageFactory" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="153.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Triggers/TriggerFactory.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageMessageWall" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="244.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Triggers/TriggerWall.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageMessageTurret" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="329.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Triggers/TriggerTurret.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageMessageUpgrade" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="401.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Triggers/TriggerUpgrade.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Pane fx:id="paneControlBuild" layoutX="759.0" layoutY="217.0">
+         <children>
+            <Button fx:id="buttonBuildBarracks" layoutY="84.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Бараки" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonUpgradeBuild" layoutY="424.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Улучшить" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonBuildWall" layoutY="254.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Стена" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonBuildGenerator" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Генератор" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonBuildTurret" layoutY="339.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Турель" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonBuildFactory" layoutY="169.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Завод" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="paneControlArmy" layoutX="60.0" layoutY="218.0">
+         <children>
+            <Button fx:id="buttonProductGunner2" layoutY="84.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Автоматчик II" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonProductTank3" layoutY="424.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Танк III" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonProductTank1" layoutY="254.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Танк I" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonProductGunner1" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Автоматчик I" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonProductTank2" layoutY="339.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Танк II" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonProductGunner3" layoutY="169.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Автоматчик III" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="buttonInfo" layoutX="163.0" layoutY="10.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" text="Справка" />
+      <Button fx:id="buttonCreateArmy" layoutX="50.0" layoutY="97.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="Создать армию">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="buttonEndTurn" layoutX="383.0" layoutY="97.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="160.0" text="Закончить ход">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Pane fx:id="paneTriggerEnergy" layoutX="629.0" layoutY="8.0" prefHeight="40.0" prefWidth="278.0" />
+      <ImageView fx:id="imageMessageEnergy" fitHeight="144.0" fitWidth="344.0" layoutX="566.0" layoutY="48.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Triggers/TriggerEnergy.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="365.0" layoutY="820.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Вызвать поддержку">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="buttonBuild" layoutX="698.0" layoutY="97.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="Построить ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
