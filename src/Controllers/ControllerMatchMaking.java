@@ -2,7 +2,6 @@ package Controllers;
 
 import BattleFields.BattleField;
 import BattleFields.ControlBattler;
-import BattleFields.DataUnit;
 import BattleFields.Point;
 import Players.Player;
 import ResourceInit.Resource;
@@ -22,10 +21,10 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ControllerMatchMaking implements Initializable {
+
+public final class ControllerMatchMaking implements Initializable {
 
     @FXML
     private Text textCountDown;
@@ -96,12 +95,13 @@ public class ControllerMatchMaking implements Initializable {
     private ImageView imageMessageUpgrade;
 
     //Механизм внутренней игры:
-    private ControlBattler controlBattler = new ControlBattler(new BattleField(), new ArrayList<DataUnit>());
+    private ControlBattler controlBattler = new ControlBattler(new BattleField());
     //Графические ресурсы:
     private Resource resource = new Resource();
 
     private Boolean click = false;
     private Unity unit;
+    private String labelUnit = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -117,9 +117,9 @@ public class ControllerMatchMaking implements Initializable {
     private void nextTurn() {
         controlBattler.nextTurnOfCurrentPlayer();
         System.out.println(controlBattler.getPlayer().getColorType());
-        System.out.println(controlBattler.getHowICanBuild());
-        System.out.println(controlBattler.getHowICanProductArmy());
-        System.out.println(controlBattler.getHowICanProductTanks());
+        System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
+        System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
+        System.out.println("Осталось танков: " + controlBattler.getHowICanProductTanks());
     }
 
 
@@ -248,6 +248,7 @@ public class ControllerMatchMaking implements Initializable {
         } catch (Exception ignored) {
         }
     }
+
     private void launchTimer(Player player) {
         //Таймер:
         if (player.getColorType().equals("+")) {
@@ -379,21 +380,25 @@ public class ControllerMatchMaking implements Initializable {
         buttonBuildGenerator.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getGenerator();
+            labelUnit = "building";
         });
         //Постройка бараков:
         buttonBuildBarracks.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getBarracksHorisontal();
+            labelUnit = "building";
         });
         //Постройка завода:
         buttonBuildFactory.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getFactoryHorisontal();
+            labelUnit = "building";
         });
         //Постройка турели:
         buttonBuildTurret.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getTurret();
+            labelUnit = "building";
         });
         //Постройка стены:
         buttonBuildWall.setOnMouseClicked(event -> {
@@ -404,21 +409,40 @@ public class ControllerMatchMaking implements Initializable {
         buttonProductGunner1.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getGunner();
+            labelUnit = "gunner";
         });
         //Создание танка:
         buttonProductTank1.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getTank();
+            labelUnit = "tank";
         });
         //Инкапсуляция производства:
         paneControlField.setOnMouseClicked(event -> {
             if (click) {
-                click = !click;
-                Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit);
-                controlBattler.getBattleField().toString();
-                drawGraphic();
-                System.out.println();
+                click = false;
+                if (labelUnit.equals("building") && controlBattler.getHowICanBuild() > 0) {
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                        System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
+                    }
+                    controlBattler.getBattleField().toString();
+                    drawGraphic();
+                    System.out.println();
+                }
+
+                if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                        System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
+                    }
+                    controlBattler.getBattleField().toString();
+                    drawGraphic();
+                    System.out.println();
+                }
+
             }
         });
     }

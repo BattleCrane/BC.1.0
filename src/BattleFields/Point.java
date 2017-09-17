@@ -1,6 +1,10 @@
 package BattleFields;
 
-public class Point {
+/**
+ * Класс Point реализует координаты объектов на оси XoY
+ */
+
+public final class Point {
     private int x;
     private int y;
 
@@ -9,7 +13,7 @@ public class Point {
         this.y = y;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
@@ -17,13 +21,11 @@ public class Point {
         this.x = x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
     public void setY(int y) {
         this.y = y;
     }
-
-
 }

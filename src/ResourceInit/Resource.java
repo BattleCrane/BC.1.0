@@ -3,9 +3,14 @@ package ResourceInit;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Класс Resources загружает графические объекты и делегирует над ними.
+ */
+
 public class Resource {
 
-    public Resource() {}
+    public Resource() {
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Штабы:
@@ -25,6 +30,7 @@ public class Resource {
         unit.setFitHeight(67.0);
         return unit;
     }
+
     public final ImageView getGeneratorLevel1Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Generator\\Generator - Level 1.png"));
         unit.setFitWidth(67.0);
@@ -38,6 +44,7 @@ public class Resource {
         unit.setFitHeight(67.0);
         return unit;
     }
+
     public final ImageView getGeneratorLevel2Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Generator\\Generator - Level 2.png"));
         unit.setFitWidth(67.0);
@@ -51,6 +58,7 @@ public class Resource {
         wallBlue.setFitHeight(67.0);
         return wallBlue;
     }
+
     public final ImageView getGeneratorLevel3Red() {
         ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Generator\\Generator - Level 3.png"));
         wallBlue.setFitWidth(67.0);
@@ -82,6 +90,7 @@ public class Resource {
         barracksLevel1Blue.setFitHeight(33.5);
         return barracksLevel1Blue;
     }
+
     public final ImageView getBarracksLevel1Red() {
         ImageView barracksLevel1Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 1.png"));
         barracksLevel1Blue.setFitWidth(67.0);
@@ -95,6 +104,7 @@ public class Resource {
         barracksLevel2Blue.setFitHeight(33.5);
         return barracksLevel2Blue;
     }
+
     public final ImageView getBarracksLevel2Red() {
         ImageView barracksLevel2Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 2.png"));
         barracksLevel2Blue.setFitWidth(67.0);
@@ -108,6 +118,7 @@ public class Resource {
         barracksLevel3Blue.setFitHeight(33.5);
         return barracksLevel3Blue;
     }
+
     public final ImageView getBarracksLevel3Red() {
         ImageView barracksLevel3Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 3.png"));
         barracksLevel3Blue.setFitWidth(67.0);
@@ -123,6 +134,7 @@ public class Resource {
         unit.setFitHeight(67.0);
         return unit;
     }
+
     public final ImageView getFactoryLevelRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 1.png"));
         unit.setFitWidth(100.5);
@@ -136,6 +148,7 @@ public class Resource {
         unit.setFitHeight(67.0);
         return unit;
     }
+
     public final ImageView getFactoryLevel2Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 2.png"));
         unit.setFitWidth(67.0);
@@ -149,6 +162,7 @@ public class Resource {
         unit.setFitHeight(100.5);
         return unit;
     }
+
     public final ImageView getFactoryLevel3Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3.png"));
         unit.setFitWidth(67.0);
@@ -164,6 +178,7 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getTurretLevel1Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 1.png"));
         unit.setFitWidth(33.5);
@@ -177,6 +192,7 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getTurretLevel2Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 2.png"));
         unit.setFitWidth(33.5);
@@ -194,6 +210,7 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getGunnerRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Gunner\\Gunner.png"));
         unit.setFitWidth(33.5);
@@ -207,6 +224,7 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getGunnerReadyRed() {
         ImageView unit = new ImageView(new Image("file: src\\Resources\\RedUnity\\Army\\Gunner\\Gunner-Ready.png"));
         unit.setFitWidth(33.5);
@@ -220,6 +238,7 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getTankRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Tank\\Tank.png"));
         unit.setFitWidth(33.5);
@@ -233,6 +252,7 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getTankReadyRed() {
         ImageView unit = new ImageView(new Image("file: src\\Resources\\RedUnity\\Army\\Tank\\Tank-Ready.png"));
         unit.setFitWidth(33.5);

@@ -2,20 +2,30 @@ package BattleFields;
 
 
 import Players.Player;
-import Unities.BattleUnit;
-import Unities.TargetUnit;
-import Unities.Unit;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Класс ControlBattler контролирует внутреннее состояние процесса игры.
+ * Он хранит в себе все двух игроков, все типы юнитов.
+ * Выполняет методы:
+ * 1.) Инициализация (стартовая позиция игроков);
+ * 2.) Размещение юнитов на поле боя;
+ * а.) Проверка территории на пустоту;
+ * 3.) Удаление юнитов с поля боя;
+ * 4.) Создание нового хода:
+ * а.) Смена игрока;
+ * б.) Отображение активных строений;
+ * в.) Отображение активных боевых единиц;
+ * г.) Отображение возможных построек;
+ * д.) Отображение возможных автоматчиков;
+ * е.) Отображение возможных танков.
+ * 5.) Отрисовка территорий
+ */
 //Контроллер игры, делегат
 public class ControlBattler {
 
     //Основные переменные:
-    private List<DataUnit> listData = new ArrayList<>();
     private Pane paneBattle;
     private BattleField battleField = new BattleField();
     private int turn = 1;
@@ -27,35 +37,31 @@ public class ControlBattler {
     private Player opponentPlayer;
 
     //Юниты:
-    //Юнит-цель:
-    static TargetUnit targetUnit = new TargetUnit();
     //Строения:
     private int howICanBuild;
     //Штаб:
-    private Unit headquaters = new Unit(2, 2, "h", 8);
+    private Unity headquaters = new Unity(2, 2, "h");
     //Бараки:
-    private Unit barracksVertical = new Unit(2, 1, "b", 1);
-    private Unit barracksHorisontal = new Unit(1, 2, "b", 1);
+    private Unity barracksVertical = new Unity(2, 1, "b");
+    private Unity barracksHorisontal = new Unity(1, 2, "b");
     //Генератор:
-    private Unit generator = new Unit(2, 2, "g", 1);
+    private Unity generator = new Unity(2, 2, "g");
     //Завод:
-    private Unit factoryVertical = new Unit(3, 2, "f", 1);
-    private Unit factoryHorisontal = new Unit(2, 3, "f", 1);
+    private Unity factoryVertical = new Unity(3, 2, "f");
+    private Unity factoryHorisontal = new Unity(2, 3, "f");
     //Турель:
-    private BattleUnit turret = new BattleUnit(1, 1, "t", 2, 1);
+    private Unity turret = new Unity(1, 1, "t");
     //Стена:
-    private Unit wall = new Unit(1, 1, "w", 4);
+    private Unity wall = new Unity(1, 1, "w");
 
     //Армия:
     private int howICanProductArmy;
     private int howICanProductTanks;
-    private BattleUnit gunner = new BattleUnit(1, 1, "G", 1, 1);
-    private BattleUnit tank = new BattleUnit(1, 1, "T", 2, 2);
+    private Unity gunner = new Unity(1, 1, "G");
+    private Unity tank = new Unity(1, 1, "T");
 
-    //Второй конструктор для графического контейнера
-    public ControlBattler(BattleField battleField, List<DataUnit> listData) {
+    public ControlBattler(BattleField battleField) {
         this.battleField = battleField;
-        this.listData = listData;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +82,7 @@ public class ControlBattler {
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void putUnity(Player player, Point point, Unity unity) {
+    public boolean putUnity(Player player, Point point, Unity unity) {
 
         if (isEmptyTerritory(point, unity)) {
             for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
@@ -87,66 +93,52 @@ public class ControlBattler {
                     }
                 }
             }
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void constructBuilding(Player player, Point point, Unit unit){
-
-        int startX = point.getX();
-        int startY = point.getY();
-        int finishX = point.getX() + unit.getWidth();
-        int finishY = point.getY() + unit.getHeight();
-        boolean canBuild = false;
-
-        if (point.getX() - 1 < 0){
-            startX = point.getX();
+    private Boolean isEmptyTerritory(Point point, Unity unity) {
+        if (point.getX() + unity.getWidth() > 16 || point.getY() + unity.getHeight() > 16) {
+            return false;
         }
-        if (point.getY() - 1 < 0){
-            startY = point.getY();
-        }
-        if (point.getX() + unit.getWidth() > 16){
-            finishX = 16;
-        }
-        if (point.getY() + unit.getHeight() > 16){
-            finishY = 16;
-        }
-
-        for (int i = startX; i < finishX; i++){
-            if (battleField.getMatrix().get(i).get(startY).contains(player.getColorType())){
-                canBuild = true;
-            }
-        }
-        for (int j = startY; j < finishY; j++){
-            if (battleField.getMatrix().get(finishX - 1).get(j).contains(player.getColorType())){
-                canBuild = true;
-            }
-        }
-        for (int i = finishX - 1; i > startX - 1; i--){
-            if (battleField.getMatrix().get(i).get(finishY - 1).contains(player.getColorType())){
-                canBuild = true;
-            }
-        }
-        for (int j = finishY - 1; j > startY - 1; j--){
-            if (battleField.getMatrix().get(startX).get(j).contains(player.getColorType())){
-                canBuild = true;
-            }
-        }
-        if (canBuild){
-            putUnity(player, point, unit);
-        }
-    }
-
-
-
-    public void deleteUnity(Point point, Unity unity) {
-        if (isEmptyTerritory(point, unity)) {
-            for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
-                for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
-                    this.battleField.getMatrix().get(i).set(j, unity.getId());
+        for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
+            for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
+                if (!this.battleField.getMatrix().get(i).get(j).equals("  0")) {
+                    return false;
                 }
             }
         }
+        return true;
     }
+
+    public void deleteUnity(Point point, Unity unity) {
+
+    }
+
+
+    //После нажатия закончить ход
+    public void nextTurnOfCurrentPlayer() {
+        turn = (turn + 1) % 2;
+        whatTurn();
+        showReadyArmy(player);
+        showReadyBuilding(player);
+        getHowCanBuild(player);
+        getHowCanProductArmy(player);
+        getHowCanProductTanks(player);
+    }
+
+    private void whatTurn() {
+        if (turn == playerBlue.getTurn()) {
+            player = playerBlue;
+            opponentPlayer = playerRed;
+        } else {
+            player = playerRed;
+            opponentPlayer = playerBlue;
+        }
+    }
+
 
     private void showReadyArmy(Player player) {
         for (int i = 0; i < 16; i++) {
@@ -166,31 +158,6 @@ public class ControlBattler {
                     this.battleField.getMatrix().get(i).set(j, "!" + this.battleField.getMatrix().get(i).get(j));
                 }
             }
-        }
-    }
-
-    private Boolean isEmptyTerritory(Point point, Unity unity) {
-        if (point.getX() + unity.getWidth() > 16 || point.getY() + unity.getHeight() > 16) {
-            return false;
-        }
-        for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
-            for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
-                if (!this.battleField.getMatrix().get(i).get(j).equals("  0")) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
-    private void whatTurn() {
-        if (turn == playerBlue.getTurn()) {
-            player = playerBlue;
-            opponentPlayer = playerRed;
-        } else {
-            player = playerRed;
-            opponentPlayer = playerBlue;
         }
     }
 
@@ -227,23 +194,6 @@ public class ControlBattler {
         }
     }
 
-    //После нажатия закончить ход
-    public void nextTurnOfCurrentPlayer() {
-        turn = (turn + 1) % 2;
-        whatTurn();
-        showReadyArmy(player);
-        showReadyBuilding(player);
-        getHowCanBuild(player);
-        getHowCanProductArmy(player);
-        getHowCanProductTanks(player);
-
-
-    }
-
-    public void correctTerritory() {
-
-    }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public BattleField getBattleField() {
@@ -252,14 +202,6 @@ public class ControlBattler {
 
     public void setBattleField(BattleField battleField) {
         this.battleField = battleField;
-    }
-
-    public List<DataUnit> getListData() {
-        return listData;
-    }
-
-    public void setListData(List<DataUnit> listData) {
-        this.listData = listData;
     }
 
     public Pane getPaneBattle() {
@@ -310,83 +252,83 @@ public class ControlBattler {
         this.opponentPlayer = opponentPlayer;
     }
 
-    public Unit getHeadquaters() {
+    public Unity getHeadquaters() {
         return headquaters;
     }
 
-    public void setHeadquaters(Unit headquaters) {
+    public void setHeadquaters(Unity headquaters) {
         this.headquaters = headquaters;
     }
 
-    public Unit getBarracksVertical() {
+    public Unity getBarracksVertical() {
         return barracksVertical;
     }
 
-    public void setBarracksVertical(Unit barracksVertical) {
+    public void setBarracksVertical(Unity barracksVertical) {
         this.barracksVertical = barracksVertical;
     }
 
-    public Unit getBarracksHorisontal() {
+    public Unity getBarracksHorisontal() {
         return barracksHorisontal;
     }
 
-    public void setBarracksHorisontal(Unit barracksHorisontal) {
+    public void setBarracksHorisontal(Unity barracksHorisontal) {
         this.barracksHorisontal = barracksHorisontal;
     }
 
-    public Unit getGenerator() {
+    public Unity getGenerator() {
         return generator;
     }
 
-    public void setGenerator(Unit generator) {
+    public void setGenerator(Unity generator) {
         this.generator = generator;
     }
 
-    public Unit getFactoryVertical() {
+    public Unity getFactoryVertical() {
         return factoryVertical;
     }
 
-    public void setFactoryVertical(Unit factoryVertical) {
+    public void setFactoryVertical(Unity factoryVertical) {
         this.factoryVertical = factoryVertical;
     }
 
-    public Unit getFactoryHorisontal() {
+    public Unity getFactoryHorisontal() {
         return factoryHorisontal;
     }
 
-    public void setFactoryHorisontal(Unit factoryHorisontal) {
+    public void setFactoryHorisontal(Unity factoryHorisontal) {
         this.factoryHorisontal = factoryHorisontal;
     }
 
-    public BattleUnit getTurret() {
+    public Unity getTurret() {
         return turret;
     }
 
-    public void setTurret(BattleUnit turret) {
+    public void setTurret(Unity turret) {
         this.turret = turret;
     }
 
-    public Unit getWall() {
+    public Unity getWall() {
         return wall;
     }
 
-    public void setWall(Unit wall) {
+    public void setWall(Unity wall) {
         this.wall = wall;
     }
 
-    public BattleUnit getGunner() {
+    public Unity getGunner() {
         return gunner;
     }
 
-    public void setGunner(BattleUnit gunner) {
+    public void setGunner(Unity gunner) {
         this.gunner = gunner;
     }
 
-    public BattleUnit getTank() {
+    public Unity getTank() {
         return tank;
     }
 
-    public void setTank(BattleUnit tank) {
+    public void setTank(Unity tank) {
         this.tank = tank;
     }
 
@@ -413,12 +355,59 @@ public class ControlBattler {
     public void setHowICanProductTanks(int howICanProductTanks) {
         this.howICanProductTanks = howICanProductTanks;
     }
-
-    public static TargetUnit getTargetUnit() {
-        return targetUnit;
-    }
-
-    public static void setTargetUnit(TargetUnit targetUnit) {
-        ControlBattler.targetUnit = targetUnit;
-    }
 }
+
+//    public void constructBuilding(Player player, Point point, Unity unit){
+//
+//        int startX = point.getX();
+//        int startY = point.getY();
+//        int finishX = point.getX() + unit.getWidth();
+//        int finishY = point.getY() + unit.getHeight();
+//        boolean canBuild = false;
+//
+//        if (point.getX() - 1 < 0){
+//            startX = point.getX();
+//        }
+//        if (point.getY() - 1 < 0){
+//            startY = point.getY();
+//        }
+//        if (point.getX() + unit.getWidth() > 16){
+//            finishX = 16;
+//        }
+//        if (point.getY() + unit.getHeight() > 16){
+//            finishY = 16;
+//        }
+//
+//        for (int i = startX; i < finishX; i++){
+//            if (battleField.getMatrix().get(i).get(startY).contains(player.getColorType())){
+//                canBuild = true;
+//            }
+//        }
+//        for (int j = startY; j < finishY; j++){
+//            if (battleField.getMatrix().get(finishX - 1).get(j).contains(player.getColorType())){
+//                canBuild = true;
+//            }
+//        }
+//        for (int i = finishX - 1; i > startX - 1; i--){
+//            if (battleField.getMatrix().get(i).get(finishY - 1).contains(player.getColorType())){
+//                canBuild = true;
+//            }
+//        }
+//        for (int j = finishY - 1; j > startY - 1; j--){
+//            if (battleField.getMatrix().get(startX).get(j).contains(player.getColorType())){
+//                canBuild = true;
+//            }
+//        }
+//        if (canBuild){
+//            putUnity(player, point, unit);
+//        }
+//    }
+//
+//
+//
+//
+
+
+//    public void correctTerritory() {
+//
+//    }

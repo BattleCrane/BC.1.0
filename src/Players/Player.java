@@ -1,14 +1,17 @@
 package Players;
 
+/**
+ * Класс Player реализует состояние игрока во время матча.
+ * Каждый игрок обладает:
+ * 1.) Ходом;
+ * 2.) Запасом энергии;
+ * 3.) Цветом;
+ */
+
 public class Player {
     private int turn;
     private int energy;
     private String colorType;
-
-    public Player(int turn, int energy) {
-        this.turn = turn;
-        this.energy = energy;
-    }
 
     public Player(int turn, int energy, String colorType) {
         this.turn = turn;
@@ -36,7 +39,7 @@ public class Player {
         return colorType;
     }
 
-    public void setColorType(String  colorType) {
+    public void setColorType(String colorType) {
         this.colorType = colorType;
     }
 }
