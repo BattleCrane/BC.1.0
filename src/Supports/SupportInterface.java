@@ -1,7 +1,8 @@
 package Supports;
 
 /**
- * Created by мсиайнина on 16.09.2017.
+ * Интерфейс SupportInterface описывает методы для абстрактного класса Support:
+ * run() - происходит событие бонуса
  */
 public interface SupportInterface {
 

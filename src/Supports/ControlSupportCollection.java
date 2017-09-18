@@ -3,7 +3,7 @@ package Supports;
 /**
  * Класс ControlSupportCollection хранит в себе экземпляры класса Support и делегирует над ними
  */
-public class ControlSupportCollection {
+public final class ControlSupportCollection {
 
     private final SupportInterface obstacle = new Support(1) {
         @Override
