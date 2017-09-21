@@ -23,6 +23,13 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Класс ControllerMatchMaking реализует интерфейс Initializable.
+ * Занимается инициализацией и событиями игры, а именно:
+ *   1.) инициализация событий;
+ *   2.) дилигирующий метод "смена хода";
+ *   3.) отрисовка графики;
+ */
 
 public final class ControllerMatchMaking implements Initializable {
 
@@ -108,7 +115,7 @@ public final class ControllerMatchMaking implements Initializable {
         initializeMessages();
         controlBattler.initializeField();
         controlBattler.getBattleField().toString();
-
+        buttonCreateArmy.setVisible(false);
         drawGraphic();
         initializeGameButtons();
         System.out.println(controlBattler.getPlayer().getColorType());
@@ -375,12 +382,35 @@ public final class ControllerMatchMaking implements Initializable {
 
     private void initializeGameButtons() {
         //Следующий ход:
-        buttonEndTurn.setOnMouseClicked(event -> nextTurn());
+        buttonEndTurn.setOnMouseClicked(event -> {
+            nextTurn();
+            if (controlBattler.getHowICanProductArmy() > 0 || controlBattler.getHowICanProductTanks() > 0){
+                buttonCreateArmy.setVisible(true);
+            } else {
+                buttonCreateArmy.setVisible(false);
+            }
+            buttonBuild.setVisible(true);
+            paneControlBuild.setVisible(false);
+            paneControlArmy.setVisible(false);
+        });
+
+        //Выбрать строительство:
+        buttonBuild.setOnMouseClicked(event -> {
+            paneControlBuild.setVisible(true);
+            buttonCreateArmy.setVisible(false);
+        });
+
+        //Выбрать производство армии:
+        buttonCreateArmy.setOnMouseClicked(event -> {
+            paneControlArmy.setVisible(true);
+            buttonBuild.setVisible(false);
+        });
+
         //Постройка генератора:
         buttonBuildGenerator.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getGenerator();
-            labelUnit = "building";
+            labelUnit = "generator";
         });
         //Постройка бараков:
         buttonBuildBarracks.setOnMouseClicked(event -> {
@@ -392,7 +422,7 @@ public final class ControllerMatchMaking implements Initializable {
         buttonBuildFactory.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getFactoryHorisontal();
-            labelUnit = "building";
+            labelUnit = "factory";
         });
         //Постройка турели:
         buttonBuildTurret.setOnMouseClicked(event -> {
@@ -404,6 +434,7 @@ public final class ControllerMatchMaking implements Initializable {
         buttonBuildWall.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getWall();
+            labelUnit = "building";
         });
         //Создание автоматчика:
         buttonProductGunner1.setOnMouseClicked(event -> {
@@ -423,7 +454,8 @@ public final class ControllerMatchMaking implements Initializable {
                 click = false;
                 if (labelUnit.equals("building") && controlBattler.getHowICanBuild() > 0) {
                     Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                    if (controlBattler.checkingConstructOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                            controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
                         System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
                     }
@@ -437,6 +469,28 @@ public final class ControllerMatchMaking implements Initializable {
                     if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
                         System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
+                    }
+                    controlBattler.getBattleField().toString();
+                    drawGraphic();
+                    System.out.println();
+                }
+
+                if (labelUnit.equals("factory") && controlBattler.getHowCanBuildFactories() > 0 && controlBattler.getHowICanBuild() > 0) {
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                        System.out.println("Осталось заводов: " + controlBattler.getHowICanProductArmy());
+                    }
+                    controlBattler.getBattleField().toString();
+                    drawGraphic();
+                    System.out.println();
+                }
+
+                if (labelUnit.equals("generator") && controlBattler.getHowICanBuild() > 0 && controlBattler.getHowICanBuild() <= 2 && !controlBattler.isConstructedGenerator()) {
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                        controlBattler.setConstructedGenerator(true);
                     }
                     controlBattler.getBattleField().toString();
                     drawGraphic();

@@ -46,6 +46,7 @@ public class ControlBattler {
     private Unity barracksHorisontal = new Unity(1, 2, "b");
     //Генератор:
     private Unity generator = new Unity(2, 2, "g");
+    private boolean isConstructedGenerator;
     //Завод:
     private Unity factoryVertical = new Unity(3, 2, "f");
     private Unity factoryHorisontal = new Unity(2, 3, "f");
@@ -90,6 +91,7 @@ public class ControlBattler {
                     battleField.getMatrix().get(i).set(j, " " + player.getColorType() + unity.getId());
                     if (i == point.getX() && j == point.getY()) {
                         battleField.getMatrix().get(i).set(j, player.getColorType() + unity.getId() + "'");
+                        System.out.println(i + " " + j);
                     }
                 }
             }
@@ -113,6 +115,36 @@ public class ControlBattler {
         return true;
     }
 
+    //Проверка расположения рядом строения:
+    public boolean checkingConstructOfBuilding(Point point, Unity unity, Player player) {
+        int startPointX = point.getX() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей)
+        int startPointY = point.getY() - 1;
+
+        for (int i = startPointX; i <= startPointX + unity.getWidth() + 1 ; i++) {
+            for (int j = startPointY; j <= startPointY + unity.getHeight() + 1; j++) {
+                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                    if (battleField.getMatrix().get(i).get(j).contains(player.getColorType())){
+                        System.out.println("X: " + j + " Y: " + i);
+
+                        return true;
+
+                    } else {
+                        System.out.println("Условие не выполнено");
+                        System.out.println("X: " + j + " Y: " + i);
+                        System.out.println("Color: " + player.getColorType());
+                        System.out.println("Element: " + battleField.getMatrix().get(j).get(i));
+                    }
+                }
+            }
+        }
+        System.out.println("Не выполнено");
+        return false;
+    }
+
+
+
+
+
     public void deleteUnity(Point point, Unity unity) {
 
     }
@@ -127,6 +159,7 @@ public class ControlBattler {
         getHowCanBuild(player);
         getHowCanProductArmy(player);
         getHowCanProductTanks(player);
+        isConstructedGenerator = false;
     }
 
     private void whatTurn() {
@@ -192,6 +225,10 @@ public class ControlBattler {
                 }
             }
         }
+    }
+
+    public int getHowCanBuildFactories() {
+        return howICanProductArmy - howICanProductTanks;
     }
 
 
@@ -355,6 +392,14 @@ public class ControlBattler {
     public void setHowICanProductTanks(int howICanProductTanks) {
         this.howICanProductTanks = howICanProductTanks;
     }
+
+    public boolean isConstructedGenerator() {
+        return isConstructedGenerator;
+    }
+
+    public void setConstructedGenerator(boolean constructedGenerator) {
+        isConstructedGenerator = constructedGenerator;
+    }
 }
 
 //    public void constructBuilding(Player player, Point point, Unity unit){
@@ -411,3 +456,55 @@ public class ControlBattler {
 //    public void correctTerritory() {
 //
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        for (int i = startPointX; i < point.getX() + unity.getWidth() + 1; i++) {
+//            if (i >= 0 && i < 16 && startPointY >= 0 && startPointY < 16) {
+//                if (battleField.getMatrix().get(i).get(startPointY).contains(player.getColorType()) &&
+//                        (!battleField.getMatrix().get(i).get(startPointY).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
+//                    return true;
+//                }
+//            }
+//            startPointX = i;
+//        }
+//        for (int j = startPointY; j < point.getY() + unity.getHeight() + 1; j++) {
+//            if (battleField.getMatrix().get(startPointX).get(j).contains(player.getColorType()) &&
+//                    (!battleField.getMatrix().get(startPointX).get(j).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
+//                return true;
+//            }
+//        }
+//        for (; sta > point.getX() + unity.getWidth() + 1; i--) {
+//            if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) &&
+//                    (!battleField.getMatrix().get(i).get(j).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
+//                return true;
+//            }
+//        }
+//        for (; j > point.getY() + unity.getHeight() + 1; j--) {
+//            if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) &&
+//                    (!battleField.getMatrix().get(i).get(j).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
+//                return true;
+//            }
+//        }

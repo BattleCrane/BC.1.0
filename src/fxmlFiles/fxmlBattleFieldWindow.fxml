@@ -52,7 +52,7 @@
                </image>
             </ImageView>
          </children></Pane>
-      <Pane fx:id="paneControlBuild" layoutX="759.0" layoutY="217.0">
+      <Pane fx:id="paneControlBuild" layoutX="759.0" layoutY="217.0" visible="false">
          <children>
             <Button fx:id="buttonBuildBarracks" layoutY="84.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Бараки" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                <font>
@@ -86,7 +86,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="paneControlArmy" layoutX="60.0" layoutY="218.0">
+      <Pane fx:id="paneControlArmy" layoutX="60.0" layoutY="218.0" visible="false">
          <children>
             <Button fx:id="buttonProductGunner2" layoutY="84.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="103.0" text="Автоматчик II" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                <font>
