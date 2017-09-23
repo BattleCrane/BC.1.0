@@ -5,6 +5,7 @@ import Players.Player;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -123,32 +124,45 @@ public class ControlBattler {
         int startPointY = point.getY() - 1;
         Pattern pattern = Pattern.compile("[hgbfwt]");
 
-
-
-        for (int i = startPointX; i <= startPointX + unity.getWidth() + 1 ; i++) {
+        for (int i = startPointX; i <= startPointX + unity.getWidth() + 1; i++) {
             for (int j = startPointY; j <= startPointY + unity.getHeight() + 1; j++) {
                 if (i >= 0 && i < 16 && j >= 0 && j < 16) {
                     Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-                    if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) && matcher.find()){
-                        System.out.println("X: " + j + " Y: " + i);
-
+                    if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) && matcher.find()) {
                         return true;
-
-                    } else {
-                        System.out.println("Условие не выполнено");
-                        System.out.println("X: " + j + " Y: " + i);
-                        System.out.println("Color: " + player.getColorType());
-                        System.out.println("Element: " + battleField.getMatrix().get(j).get(i));
                     }
                 }
             }
         }
-        System.out.println("Не выполнено");
         return false;
     }
 
+    public boolean upgradeBuilding(Point point, Player player){ //Здесь я остановился:
+        boolean isUpgraded = false;
+        List<String> list = battleField.getMatrix().get(point.getX());
+        if (isFindUnity(point) && list.get(point.getY()).contains(player.getColorType())){
+            switch (list.get(point.getY()).charAt(list.size() - 2)){
+                case 'g': //Улучшение генератора:
+                    isUpgraded = true;
+                    break;
+                case 'b': //Улучшение бараков:
+                    isUpgraded = true;
+                    break;
+                case 'f': //Улучшение завода:
+                    isUpgraded = true;
+                    break;
+                case 't': //Улучшение туррели:
+                    isUpgraded = true;
+                    break;
+            }
+        }
+        return isUpgraded;
+    }
 
-
+    //Проверка MouseClicked на Unity
+    private boolean isFindUnity(Point point){
+        return battleField.getMatrix().get(point.getX()).get(point.getY()).contains("'");
+    }
 
 
     public void deleteUnity(Point point, Unity unity) {
@@ -462,29 +476,6 @@ public class ControlBattler {
 //    public void correctTerritory() {
 //
 //    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //        for (int i = startPointX; i < point.getX() + unity.getWidth() + 1; i++) {
