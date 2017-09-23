@@ -5,6 +5,9 @@ import Players.Player;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Класс ControlBattler контролирует внутреннее состояние процесса игры.
  * Он хранит в себе все двух игроков, все типы юнитов.
@@ -84,7 +87,6 @@ public class ControlBattler {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public boolean putUnity(Player player, Point point, Unity unity) {
-
         if (isEmptyTerritory(point, unity)) {
             for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
                 for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
@@ -116,14 +118,18 @@ public class ControlBattler {
     }
 
     //Проверка расположения рядом строения:
-    public boolean checkingConstructOfBuilding(Point point, Unity unity, Player player) {
+    public boolean checkConstructionOfBuilding(Point point, Unity unity, Player player) {
         int startPointX = point.getX() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей)
         int startPointY = point.getY() - 1;
+        Pattern pattern = Pattern.compile("[hgbfwt]");
+
+
 
         for (int i = startPointX; i <= startPointX + unity.getWidth() + 1 ; i++) {
             for (int j = startPointY; j <= startPointY + unity.getHeight() + 1; j++) {
                 if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-                    if (battleField.getMatrix().get(i).get(j).contains(player.getColorType())){
+                    Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
+                    if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) && matcher.find()){
                         System.out.println("X: " + j + " Y: " + i);
 
                         return true;

@@ -26,9 +26,9 @@ import java.util.ResourceBundle;
 /**
  * Класс ControllerMatchMaking реализует интерфейс Initializable.
  * Занимается инициализацией и событиями игры, а именно:
- *   1.) инициализация событий;
- *   2.) дилигирующий метод "смена хода";
- *   3.) отрисовка графики;
+ * 1.) инициализация событий;
+ * 2.) дилигирующий метод "смена хода";
+ * 3.) отрисовка графики;
  */
 
 public final class ControllerMatchMaking implements Initializable {
@@ -384,7 +384,7 @@ public final class ControllerMatchMaking implements Initializable {
         //Следующий ход:
         buttonEndTurn.setOnMouseClicked(event -> {
             nextTurn();
-            if (controlBattler.getHowICanProductArmy() > 0 || controlBattler.getHowICanProductTanks() > 0){
+            if (controlBattler.getHowICanProductArmy() > 0 || controlBattler.getHowICanProductTanks() > 0) {
                 buttonCreateArmy.setVisible(true);
             } else {
                 buttonCreateArmy.setVisible(false);
@@ -412,91 +412,89 @@ public final class ControllerMatchMaking implements Initializable {
             unit = controlBattler.getGenerator();
             labelUnit = "generator";
         });
+
         //Постройка бараков:
         buttonBuildBarracks.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getBarracksHorisontal();
             labelUnit = "building";
         });
+
         //Постройка завода:
         buttonBuildFactory.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getFactoryHorisontal();
             labelUnit = "factory";
         });
+
         //Постройка турели:
         buttonBuildTurret.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getTurret();
             labelUnit = "building";
         });
+
         //Постройка стены:
         buttonBuildWall.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getWall();
             labelUnit = "building";
         });
+
         //Создание автоматчика:
         buttonProductGunner1.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getGunner();
             labelUnit = "gunner";
         });
+
         //Создание танка:
         buttonProductTank1.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getTank();
             labelUnit = "tank";
         });
+
         //Инкапсуляция производства:
         paneControlField.setOnMouseClicked(event -> {
             if (click) {
                 click = false;
+                Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                //Если строите бараки или стену:
                 if (labelUnit.equals("building") && controlBattler.getHowICanBuild() > 0) {
-                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                    if (controlBattler.checkingConstructOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                    if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
                             controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
                         System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
                     }
-                    controlBattler.getBattleField().toString();
-                    drawGraphic();
-                    System.out.println();
                 }
-
+                //Если строите завод:
+                if (labelUnit.equals("factory") && controlBattler.getHowCanBuildFactories() > 0 && controlBattler.getHowICanBuild() > 0) {
+                    if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                            controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                        System.out.println("Осталось заводов: " + controlBattler.getHowICanProductArmy());
+                    }
+                }
+                //Если строите генератор:
+                if (labelUnit.equals("generator") && controlBattler.getHowICanBuild() > 0 && controlBattler.getHowICanBuild() <= 2 && !controlBattler.isConstructedGenerator()) {
+                    if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                            controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                        controlBattler.setConstructedGenerator(true);
+                    }
+                }
+                //Если создаете автоматчика:
                 if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
-                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
                     if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
                         System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
                     }
-                    controlBattler.getBattleField().toString();
-                    drawGraphic();
-                    System.out.println();
                 }
 
-                if (labelUnit.equals("factory") && controlBattler.getHowCanBuildFactories() > 0 && controlBattler.getHowICanBuild() > 0) {
-                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
-                        System.out.println("Осталось заводов: " + controlBattler.getHowICanProductArmy());
-                    }
-                    controlBattler.getBattleField().toString();
-                    drawGraphic();
-                    System.out.println();
-                }
-
-                if (labelUnit.equals("generator") && controlBattler.getHowICanBuild() > 0 && controlBattler.getHowICanBuild() <= 2 && !controlBattler.isConstructedGenerator()) {
-                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
-                        controlBattler.setConstructedGenerator(true);
-                    }
-                    controlBattler.getBattleField().toString();
-                    drawGraphic();
-                    System.out.println();
-                }
-
+                drawGraphic();
+                controlBattler.getBattleField().toString();
+                System.out.println();
             }
         });
     }
