@@ -15,8 +15,8 @@ package Unities;
 
 public final class Unity {
 
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
     private String id;
 
     public Unity(int width, int height, String id) {
@@ -24,6 +24,15 @@ public final class Unity {
         this.height = height;
         this.id = id;
     }
+
+    public Unity() {
+
+    }
+
+    public Unity(String id) {
+        this.id = id;
+    }
+
 
     public void setId(String id) {
         this.id = id;

@@ -455,6 +455,12 @@ public final class ControllerMatchMaking implements Initializable {
             labelUnit = "tank";
         });
 
+        //Улучшение строения:
+        buttonUpgradeBuild.setOnMouseClicked(event -> {
+            click = !click;
+            labelUnit = "upgradeBuilding";
+        });
+
         //Инкапсуляция производства:
         paneControlField.setOnMouseClicked(event -> {
             if (click) {
@@ -484,6 +490,14 @@ public final class ControllerMatchMaking implements Initializable {
                         controlBattler.setConstructedGenerator(true);
                     }
                 }
+                //Если улучшаем строение:
+                if (labelUnit.equals("upgradeBuilding")){
+                    if (controlBattler.upgradeBuilding(pointClick, controlBattler.getPlayer())) { //Если удалось улучшить строение:
+                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                    }
+                }
+
+
                 //Если создаете автоматчика:
                 if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
                     if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {

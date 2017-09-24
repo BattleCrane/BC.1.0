@@ -44,7 +44,7 @@ public class ControlBattler {
     //Строения:
     private int howICanBuild;
     //Штаб:
-    private Unity headquaters = new Unity(2, 2, "h");
+    private Unity headquarters = new Unity(2, 2, "h");
     //Бараки:
     private Unity barracksVertical = new Unity(2, 1, "b");
     private Unity barracksHorisontal = new Unity(1, 2, "b");
@@ -69,11 +69,15 @@ public class ControlBattler {
         this.battleField = battleField;
     }
 
+    public ControlBattler() {
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void initializeField() {
         //Размещение штабов:
-        putUnity(playerRed, new Point(0, 0), headquaters);
-        putUnity(playerBlue, new Point(14, 14), headquaters);
+        putUnity(playerRed, new Point(0, 0), headquarters);
+        putUnity(playerBlue, new Point(14, 14), headquarters);
 
         //Размещение стен:
         for (int j = 0; j < 5; j++) {
@@ -137,35 +141,121 @@ public class ControlBattler {
         return false;
     }
 
-    public boolean upgradeBuilding(Point point, Player player){ //Здесь я остановился:
+    public boolean upgradeBuilding(Point point, Player player) { //Здесь я остановился:
         boolean isUpgraded = false;
         List<String> list = battleField.getMatrix().get(point.getX());
-        if (isFindUnity(point) && list.get(point.getY()).contains(player.getColorType())){
-            switch (list.get(point.getY()).charAt(list.size() - 2)){
-                case 'g': //Улучшение генератора:
+        int y = point.getY();
+        Unity unityBuild = new Unity(list.get(y));
+        if (isFindUnity(point) && list.get(y).contains(player.getColorType())) {
+            System.out.println(list.get(y).substring(1, 2));
+            switch (list.get(y).substring(1, 2)) { //Смотрим строение:
+                case "g": //Улучшение генератора:
+                    if (levelUp(unityBuild)) { //Необходимо переписать матрицу
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        if (unityBuild.getId().contains("<")) {
+                            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 1) + unityBuild.getId().substring(1));
+                                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                            } catch (Exception ignored) {
+                            }
+                        }
+                        if (unityBuild.getId().contains(">")) {
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 2) + unityBuild.getId().substring(1));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    }
                     isUpgraded = true;
                     break;
-                case 'b': //Улучшение бараков:
+                case "b": //Улучшение бараков:
+                    if (levelUp(unityBuild)) {
+                        if (unityBuild.getId().contains("<")) {
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 1) + unityBuild.getId().substring(1));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                        if (unityBuild.getId().contains(">")) {
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 2) + unityBuild.getId().substring(1));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    }
                     isUpgraded = true;
                     break;
-                case 'f': //Улучшение завода:
+                case "f": //Улучшение завода:
+                    if (levelUp(unityBuild)) {
+                        if (unityBuild.getId().contains("<")) {
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 3) + unityBuild.getId().substring(1));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                        if (unityBuild.getId().contains(">")) {
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 2) + unityBuild.getId().substring(1));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    }
                     isUpgraded = true;
                     break;
-                case 't': //Улучшение туррели:
+                case "t": //Улучшение туррели:
+                    if (levelUp(unityBuild) && unityBuild.getId().contains("^")) {
+                        if (unityBuild.getId().contains("<")) {
+                            try {
+                                unityBuild.setId(Integer.parseInt(
+                                        unityBuild.getId().substring(0, 1) + 1) + unityBuild.getId().substring(1));
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    }
                     isUpgraded = true;
                     break;
             }
         }
+        battleField.getMatrix().get(point.getX()).set(y, unityBuild.getId());
+
         return isUpgraded;
     }
 
     //Проверка MouseClicked на Unity
-    private boolean isFindUnity(Point point){
+    private boolean isFindUnity(Point point) {
         return battleField.getMatrix().get(point.getX()).get(point.getY()).contains("'");
+    }
+
+    public boolean levelUp(Unity unity) {
+        boolean isUpgraded = false;
+        System.out.println(unity.getId().substring(1, 2));
+        switch (unity.getId().substring(1, 2)) {
+            case "^":
+                unity.setId(unity.getId().substring(0, 1) + '<' + unity.getId().substring(2));
+                isUpgraded = true;
+                break;
+            case "<":
+                unity.setId(unity.getId().substring(0, 1) + '>' + unity.getId().substring(2));
+                isUpgraded = true;
+                break;
+        }
+        return isUpgraded;
     }
 
 
     public void deleteUnity(Point point, Unity unity) {
+
+
+    }
+
+    public void correctTerritory() {
 
     }
 
@@ -309,12 +399,12 @@ public class ControlBattler {
         this.opponentPlayer = opponentPlayer;
     }
 
-    public Unity getHeadquaters() {
-        return headquaters;
+    public Unity getHeadquarters() {
+        return headquarters;
     }
 
-    public void setHeadquaters(Unity headquaters) {
-        this.headquaters = headquaters;
+    public void setHeadquarters(Unity headquarters) {
+        this.headquarters = headquarters;
     }
 
     public Unity getBarracksVertical() {
@@ -422,86 +512,3 @@ public class ControlBattler {
     }
 }
 
-//    public void constructBuilding(Player player, Point point, Unity unit){
-//
-//        int startX = point.getX();
-//        int startY = point.getY();
-//        int finishX = point.getX() + unit.getWidth();
-//        int finishY = point.getY() + unit.getHeight();
-//        boolean canBuild = false;
-//
-//        if (point.getX() - 1 < 0){
-//            startX = point.getX();
-//        }
-//        if (point.getY() - 1 < 0){
-//            startY = point.getY();
-//        }
-//        if (point.getX() + unit.getWidth() > 16){
-//            finishX = 16;
-//        }
-//        if (point.getY() + unit.getHeight() > 16){
-//            finishY = 16;
-//        }
-//
-//        for (int i = startX; i < finishX; i++){
-//            if (battleField.getMatrix().get(i).get(startY).contains(player.getColorType())){
-//                canBuild = true;
-//            }
-//        }
-//        for (int j = startY; j < finishY; j++){
-//            if (battleField.getMatrix().get(finishX - 1).get(j).contains(player.getColorType())){
-//                canBuild = true;
-//            }
-//        }
-//        for (int i = finishX - 1; i > startX - 1; i--){
-//            if (battleField.getMatrix().get(i).get(finishY - 1).contains(player.getColorType())){
-//                canBuild = true;
-//            }
-//        }
-//        for (int j = finishY - 1; j > startY - 1; j--){
-//            if (battleField.getMatrix().get(startX).get(j).contains(player.getColorType())){
-//                canBuild = true;
-//            }
-//        }
-//        if (canBuild){
-//            putUnity(player, point, unit);
-//        }
-//    }
-//
-//
-//
-//
-
-
-//    public void correctTerritory() {
-//
-//    }
-
-
-//        for (int i = startPointX; i < point.getX() + unity.getWidth() + 1; i++) {
-//            if (i >= 0 && i < 16 && startPointY >= 0 && startPointY < 16) {
-//                if (battleField.getMatrix().get(i).get(startPointY).contains(player.getColorType()) &&
-//                        (!battleField.getMatrix().get(i).get(startPointY).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
-//                    return true;
-//                }
-//            }
-//            startPointX = i;
-//        }
-//        for (int j = startPointY; j < point.getY() + unity.getHeight() + 1; j++) {
-//            if (battleField.getMatrix().get(startPointX).get(j).contains(player.getColorType()) &&
-//                    (!battleField.getMatrix().get(startPointX).get(j).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
-//                return true;
-//            }
-//        }
-//        for (; sta > point.getX() + unity.getWidth() + 1; i--) {
-//            if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) &&
-//                    (!battleField.getMatrix().get(i).get(j).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
-//                return true;
-//            }
-//        }
-//        for (; j > point.getY() + unity.getHeight() + 1; j--) {
-//            if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) &&
-//                    (!battleField.getMatrix().get(i).get(j).contains("G") || !battleField.getMatrix().get(i).get(j).contains("T"))) {
-//                return true;
-//            }
-//        }
