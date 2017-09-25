@@ -19,10 +19,19 @@ public final class Unity {
     private int height;
     private String id;
 
+    private int hitPoints;
+
     public Unity(int width, int height, String id) {
         this.width = width;
         this.height = height;
         this.id = id;
+    }
+
+    public Unity(int width, int height, String id, int hitPoints) {
+        this.width = width;
+        this.height = height;
+        this.id = id;
+        this.hitPoints = hitPoints;
     }
 
     public Unity() {
@@ -48,5 +57,9 @@ public final class Unity {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
     }
 }

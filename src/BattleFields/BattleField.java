@@ -17,7 +17,8 @@ public final class BattleField {
 
     public BattleField() {
         for (int i = 0; i < 16; i++) {
-            this.matrix.add(Arrays.asList("  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0", "  0"));
+            this.matrix.add(Arrays.asList("     0", "     0", "     0", "     0", "     0", "     0", "     0",
+                    "     0", "     0", "     0", "     0", "     0", "     0", "     0", "     0", "     0"));
         }
     }
 

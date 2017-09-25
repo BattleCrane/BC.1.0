@@ -136,111 +136,111 @@ public final class ControllerMatchMaking implements Initializable {
                 for (int j = 0; j < 16; j++) {
                     switch (controlBattler.getBattleField().getMatrix().get(i).get(j)) {
                         //Штаб:
-                        case "+h'":
+                        case "8^?+h'":
                             ImageView headquartersBlue = resource.getHeadquartersBlue();
                             headquartersBlue.setLayoutX(467);
                             headquartersBlue.setLayoutY(467);
                             paneControlField.getChildren().add(new Pane(headquartersBlue));
                             break;
-                        case "-h'":
+                        case "8^?-h'":
                             ImageView headquartersRed = resource.getHeadquartersRed();
                             headquartersRed.setLayoutX(2);
                             headquartersRed.setLayoutY(2);
                             paneControlField.getChildren().add(new Pane(headquartersRed));
                             break;
                         //Генератор:
-                        case "+g'":
+                        case "1^?+g'":
                             ImageView generatorLevel1Blue = resource.getGeneratorLevel1Blue();
                             generatorLevel1Blue.setLayoutX(33.5 * j);
                             generatorLevel1Blue.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(generatorLevel1Blue));
                             break;
-                        case "-g'":
+                        case "1^?-g'":
                             ImageView generatorLevel1Red = resource.getGeneratorLevel1Red();
                             generatorLevel1Red.setLayoutX(33.5 * j);
                             generatorLevel1Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(generatorLevel1Red));
                             break;
                         //Бараки:
-                        case "+b'":
+                        case "1^?+b'":
                             ImageView barracksLevel1Blue = resource.getBarracksLevel1Blue();
                             barracksLevel1Blue.setLayoutX(33.5 * j);
                             barracksLevel1Blue.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(barracksLevel1Blue));
                             break;
-                        case "-b'":
+                        case "1^?-b'":
                             ImageView barracksLevel1Red = resource.getBarracksLevel1Red();
                             barracksLevel1Red.setLayoutX(33.5 * j);
                             barracksLevel1Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(barracksLevel1Red));
                             break;
                         //Завод:
-                        case "+f'":
+                        case "1^?+f'":
                             ImageView factoryLevel1Blue = resource.getFactoryLevel1Blue();
                             factoryLevel1Blue.setLayoutX(33.5 * j);
                             factoryLevel1Blue.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(factoryLevel1Blue));
                             break;
-                        case "-f'":
+                        case "1^?-f'":
                             ImageView factoryLevel1Red = resource.getFactoryLevelRed();
                             factoryLevel1Red.setLayoutX(33.5 * j);
                             factoryLevel1Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(factoryLevel1Red));
                             break;
                         //Турель:
-                        case "+t'":
+                        case "1^?+t'":
                             ImageView turretLevel1Blue = resource.getTurretLevel1Blue();
                             turretLevel1Blue.setLayoutX(33.5 * j);
                             turretLevel1Blue.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(turretLevel1Blue));
                             break;
-                        case "-t'":
+                        case "1^?-t'":
                             ImageView turretLevel1Red = resource.getTurretLevel1Red();
                             turretLevel1Red.setLayoutX(33.5 * j);
                             turretLevel1Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(turretLevel1Red));
                             break;
                         //Стена:
-                        case "-w'":
+                        case "4^?-w'":
                             ImageView imageViewRedWall = resource.getWallRed();
                             imageViewRedWall.setLayoutX(33.5 * j);
                             imageViewRedWall.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(imageViewRedWall);
                             break;
-                        case "+w'":
+                        case "4^?+w'":
                             ImageView imageViewBlueWall = resource.getWallBlue();
                             imageViewBlueWall.setLayoutX(33.5 * j);
                             imageViewBlueWall.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(imageViewBlueWall);
                             break;
                         //Автоматчик:
-                        case "+G'":
+                        case "1^?+G'":
                             ImageView imageViewBlueGunner = resource.getGunnerBlue();
                             imageViewBlueGunner.setLayoutX(33.5 * j);
                             imageViewBlueGunner.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(imageViewBlueGunner);
                             break;
-                        case "-G'":
+                        case "1^?-G'":
                             ImageView imageViewRedGunner = resource.getGunnerRed();
                             imageViewRedGunner.setLayoutX(33.5 * j);
                             imageViewRedGunner.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(imageViewRedGunner);
                             break;
                         //Танк:
-                        case "+T'":
+                        case "2^?+T'":
                             ImageView imageViewBlueTank = resource.getTankBlue();
                             imageViewBlueTank.setLayoutX(33.5 * j);
                             imageViewBlueTank.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(imageViewBlueTank);
                             break;
-                        case "-T'":
+                        case "2^?-T'":
                             ImageView imageViewRedTank = resource.getTankRed();
                             imageViewRedTank.setLayoutX(33.5 * j);
                             imageViewRedTank.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(imageViewRedTank);
                             break;
                         //Пустое поле:
-                        case "  0":
+                        case "     0":
                             ImageView imageViewCell = new ImageView(new Image("file:src\\Resources\\BattleFields\\Cell.png"));
                             imageViewCell.setFitWidth(33.5);
                             imageViewCell.setFitHeight(33.5);

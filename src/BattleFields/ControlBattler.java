@@ -4,7 +4,6 @@ package BattleFields;
 import Players.Player;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,26 +43,26 @@ public class ControlBattler {
     //Строения:
     private int howICanBuild;
     //Штаб:
-    private Unity headquarters = new Unity(2, 2, "h");
+    private Unity headquarters = new Unity(2, 2, "h", 8);
     //Бараки:
-    private Unity barracksVertical = new Unity(2, 1, "b");
-    private Unity barracksHorisontal = new Unity(1, 2, "b");
+    private Unity barracksVertical = new Unity(2, 1, "b", 1);
+    private Unity barracksHorisontal = new Unity(1, 2, "b", 1);
     //Генератор:
-    private Unity generator = new Unity(2, 2, "g");
+    private Unity generator = new Unity(2, 2, "g", 1);
     private boolean isConstructedGenerator;
     //Завод:
-    private Unity factoryVertical = new Unity(3, 2, "f");
-    private Unity factoryHorisontal = new Unity(2, 3, "f");
+    private Unity factoryVertical = new Unity(3, 2, "f", 1);
+    private Unity factoryHorisontal = new Unity(2, 3, "f", 1);
     //Турель:
-    private Unity turret = new Unity(1, 1, "t");
+    private Unity turret = new Unity(1, 1, "t", 1);
     //Стена:
-    private Unity wall = new Unity(1, 1, "w");
+    private Unity wall = new Unity(1, 1, "w", 4);
 
     //Армия:
     private int howICanProductArmy;
     private int howICanProductTanks;
-    private Unity gunner = new Unity(1, 1, "G");
-    private Unity tank = new Unity(1, 1, "T");
+    private Unity gunner = new Unity(1, 1, "G", 1);
+    private Unity tank = new Unity(1, 1, "T", 2);
 
     public ControlBattler(BattleField battleField) {
         this.battleField = battleField;
@@ -95,11 +94,13 @@ public class ControlBattler {
         if (isEmptyTerritory(point, unity)) {
             for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
                 for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
-                    battleField.getMatrix().get(i).set(j, " " + player.getColorType() + unity.getId());
+                    String newUnity = unity.getHitPoints() + "^" + "?" + player.getColorType() + unity.getId();
                     if (i == point.getX() && j == point.getY()) {
-                        battleField.getMatrix().get(i).set(j, player.getColorType() + unity.getId() + "'");
-                        System.out.println(i + " " + j);
+                        newUnity = newUnity + "'";
+                    } else {
+                        newUnity = newUnity + ".";
                     }
+                    battleField.getMatrix().get(i).set(j, newUnity);
                 }
             }
             return true;
@@ -114,7 +115,7 @@ public class ControlBattler {
         }
         for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
             for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
-                if (!this.battleField.getMatrix().get(i).get(j).equals("  0")) {
+                if (!this.battleField.getMatrix().get(i).get(j).equals("     0")) {
                     return false;
                 }
             }
@@ -284,31 +285,43 @@ public class ControlBattler {
 
 
     private void showReadyArmy(Player player) {
+        Pattern pattern = Pattern.compile("[GTt]");
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (this.battleField.getMatrix().get(i).get(j).equals(player.getColorType() + "G") || this.battleField.getMatrix().get(i).get(j).equals(player.getColorType() + "T") ||
-                        this.battleField.getMatrix().get(i).get(j).equals(player.getColorType() + "t")) {
-                    this.battleField.getMatrix().get(i).set(j, "!" + this.battleField.getMatrix().get(i).get(j));
+                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
+                List<String> list = battleField.getMatrix().get(i);
+                if (matcher.find() && list.contains(player.getColorType())) {
+                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
+                    battleField.getMatrix().get(i).set(j, readyUnity);
                 }
             }
         }
     }
 
     private void showReadyBuilding(Player player) {
+        Pattern pattern = Pattern.compile("[bf]'");
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (this.battleField.getMatrix().get(i).get(j).equals(player.getColorType() + "b'") || this.battleField.getMatrix().get(i).get(j).equals(player.getColorType() + "f'")) {
-                    this.battleField.getMatrix().get(i).set(j, "!" + this.battleField.getMatrix().get(i).get(j));
+                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
+                List<String> list = battleField.getMatrix().get(i);
+                if (matcher.find() && list.contains(player.getColorType())) {
+                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
+                    battleField.getMatrix().get(i).set(j, readyUnity);
                 }
             }
         }
     }
 
     private void getHowCanBuild(Player player) {
+        Pattern pattern = Pattern.compile("g'");
         howICanBuild = 1;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (this.battleField.getMatrix().get(i).get(j).equals(player.getColorType() + "g'")) {
+                List<String> list = battleField.getMatrix().get(i);
+                Matcher matcher = pattern.matcher(list.get(j));
+                if (matcher.find() && list.get(j).contains(player.getColorType())) {
+                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
+                    battleField.getMatrix().get(i).set(j, readyUnity);
                     howICanBuild++;
                 }
             }
@@ -316,10 +329,13 @@ public class ControlBattler {
     }
 
     private void getHowCanProductArmy(Player player) {
+        Pattern pattern = Pattern.compile("[!?][+-]b'");
         howICanProductArmy = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (this.battleField.getMatrix().get(i).get(j).equals("!" + player.getColorType() + "b'")) {
+                List<String> list = battleField.getMatrix().get(i);
+                Matcher matcher = pattern.matcher(list.get(j));
+                if (matcher.find() && list.get(j).contains(player.getColorType())) {
                     howICanProductArmy++;
                 }
             }
@@ -342,7 +358,7 @@ public class ControlBattler {
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public BattleField getBattleField() {
         return battleField;
     }
