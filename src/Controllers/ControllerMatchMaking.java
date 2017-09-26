@@ -161,6 +161,17 @@ public final class ControllerMatchMaking implements Initializable {
                             generatorLevel1Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(generatorLevel1Red));
                             break;
+                        case "2<?+g'":
+                            ImageView generatorLevel2Blue = resource.getGeneratorLevel2Blue();
+                            generatorLevel2Blue.setLayoutX(33.5 * j);
+                            generatorLevel2Blue.setLayoutY(33.5 * i);
+                            paneControlField.getChildren().add(new Pane(generatorLevel2Blue));
+                            break;
+                        case "2<!-g'":
+                            ImageView generatorLevel2Red = resource.getGeneratorLevel2Red();
+                            generatorLevel2Red.setLayoutX(33.5 * j);
+                            generatorLevel2Red.setLayoutY(33.5 * i);
+                            paneControlField.getChildren().add(new Pane(generatorLevel2Red));
                         //Бараки:
                         case "1^?+b'":
                             ImageView barracksLevel1Blue = resource.getBarracksLevel1Blue();
@@ -471,7 +482,6 @@ public final class ControllerMatchMaking implements Initializable {
                     if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
                             controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
-                        System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
                     }
                 }
                 //Если строите завод:
@@ -479,7 +489,6 @@ public final class ControllerMatchMaking implements Initializable {
                     if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
                             controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
-                        System.out.println("Осталось заводов: " + controlBattler.getHowICanProductArmy());
                     }
                 }
                 //Если строите генератор:
@@ -502,7 +511,13 @@ public final class ControllerMatchMaking implements Initializable {
                 if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
                     if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
-                        System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
+                    }
+                }
+
+                //Если создаете танк:
+                if (labelUnit.equals("tank") && controlBattler.getHowICanProductTanks() > 0) {
+                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                        controlBattler.setHowICanProductTanks(controlBattler.getHowICanProductTanks() - 1);
                     }
                 }
 

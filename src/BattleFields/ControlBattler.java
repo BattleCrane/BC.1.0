@@ -149,16 +149,16 @@ public class ControlBattler {
         int y = point.getY();
         Unity unityBuild = new Unity(list.get(y));
         if (isFindUnity(point) && list.get(y).contains(player.getColorType())) {
-            System.out.println(list.get(y).substring(1, 2));
-            switch (list.get(y).substring(1, 2)) { //Смотрим строение:
+            System.out.println(list.get(y).substring(4, 5));
+            switch (list.get(y).substring(4, 5)) { //Смотрим строение:
                 case "g": //Улучшение генератора:
                     if (levelUp(unityBuild)) { //Необходимо переписать матрицу
                         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         if (unityBuild.getId().contains("<")) {
                             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 1) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                             } catch (Exception ignored) {
                             }
@@ -232,6 +232,7 @@ public class ControlBattler {
 
     //Проверка MouseClicked на Unity
     private boolean isFindUnity(Point point) {
+        System.out.println("Нашёл юнита!");
         return battleField.getMatrix().get(point.getX()).get(point.getY()).contains("'");
     }
 
@@ -344,10 +345,13 @@ public class ControlBattler {
     }
 
     private void getHowCanProductTanks(Player player) {
+        Pattern pattern = Pattern.compile("[!?][+-]f'");
         howICanProductTanks = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (this.battleField.getMatrix().get(i).get(j).equals("!" + player.getColorType() + "f'")) {
+                List<String> list = battleField.getMatrix().get(i);
+                Matcher matcher = pattern.matcher(list.get(j));
+                if (matcher.find() && list.get(j).contains(player.getColorType())) {
                     howICanProductTanks++;
                 }
             }
