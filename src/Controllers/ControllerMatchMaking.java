@@ -161,7 +161,7 @@ public final class ControllerMatchMaking implements Initializable {
                             generatorLevel1Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(generatorLevel1Red));
                             break;
-                        case "2<?+g'":
+                        case "2<!+g'":
                             ImageView generatorLevel2Blue = resource.getGeneratorLevel2Blue();
                             generatorLevel2Blue.setLayoutX(33.5 * j);
                             generatorLevel2Blue.setLayoutY(33.5 * i);
@@ -172,6 +172,19 @@ public final class ControllerMatchMaking implements Initializable {
                             generatorLevel2Red.setLayoutX(33.5 * j);
                             generatorLevel2Red.setLayoutY(33.5 * i);
                             paneControlField.getChildren().add(new Pane(generatorLevel2Red));
+                            break;
+                        case "4>!+g'":
+                            ImageView generatorLevel3Blue = resource.getGeneratorLevel3Blue();
+                            generatorLevel3Blue.setLayoutX(33.5 * j);
+                            generatorLevel3Blue.setLayoutY(33.5 * i);
+                            paneControlField.getChildren().add(new Pane(generatorLevel3Blue));
+                            break;
+                        case "4>!-g'":
+                            ImageView generatorLevel3Red = resource.getGeneratorLevel3Red();
+                            generatorLevel3Red.setLayoutX(33.5 * j);
+                            generatorLevel3Red.setLayoutY(33.5 * i);
+                            paneControlField.getChildren().add(new Pane(generatorLevel3Red));
+                            break;
                         //Бараки:
                         case "1^?+b'":
                             ImageView barracksLevel1Blue = resource.getBarracksLevel1Blue();
@@ -482,6 +495,7 @@ public final class ControllerMatchMaking implements Initializable {
                     if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
                             controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                         controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+
                     }
                 }
                 //Если строите завод:
@@ -500,7 +514,7 @@ public final class ControllerMatchMaking implements Initializable {
                     }
                 }
                 //Если улучшаем строение:
-                if (labelUnit.equals("upgradeBuilding")){
+                if (labelUnit.equals("upgradeBuilding") && controlBattler.getHowICanBuild() > 0){
                     if (controlBattler.upgradeBuilding(pointClick, controlBattler.getPlayer())) { //Если удалось улучшить строение:
                         controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
                     }

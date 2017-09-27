@@ -165,8 +165,8 @@ public class ControlBattler {
                         }
                         if (unityBuild.getId().contains(">")) {
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 2) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 2;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                             } catch (Exception ignored) {
                             }
                         }
