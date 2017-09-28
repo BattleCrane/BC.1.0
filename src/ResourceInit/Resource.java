@@ -10,8 +10,16 @@ import javafx.scene.image.ImageView;
 public class Resource {
 
     public Resource() {
+
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Пустая клетка
+    public final ImageView getEmptyField() {
+        ImageView field = new ImageView(new Image("file:src\\Resources\\BattleFields\\Cell.png"));
+        field.setFitWidth(33.5);
+        field.setFitHeight(33.5);
+        return field;
+    }
 
     //Штабы:
     public final ImageView getHeadquartersBlue() {
