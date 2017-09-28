@@ -153,13 +153,10 @@ public class ControlBattler {
             switch (list.get(y).substring(4, 5)) { //Смотрим строение:
                 case "g": //Улучшение генератора:
                     if (levelUp(unityBuild)) { //Необходимо переписать матрицу
-                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         if (unityBuild.getId().contains("<")) {
-                            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                             try {
                                 int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
                                 unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                             } catch (Exception ignored) {
                             }
                         }
@@ -177,15 +174,15 @@ public class ControlBattler {
                     if (levelUp(unityBuild)) {
                         if (unityBuild.getId().contains("<")) {
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 1) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                             } catch (Exception ignored) {
                             }
                         }
                         if (unityBuild.getId().contains(">")) {
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 2) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 2;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                             } catch (Exception ignored) {
                             }
                         }
@@ -196,15 +193,15 @@ public class ControlBattler {
                     if (levelUp(unityBuild)) {
                         if (unityBuild.getId().contains("<")) {
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 3) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 3;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                             } catch (Exception ignored) {
                             }
                         }
                         if (unityBuild.getId().contains(">")) {
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 2) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 2;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                             } catch (Exception ignored) {
                             }
                         }
@@ -212,14 +209,12 @@ public class ControlBattler {
                     isUpgraded = true;
                     break;
                 case "t": //Улучшение туррели:
-                    if (levelUp(unityBuild) && unityBuild.getId().contains("^")) {
-                        if (unityBuild.getId().contains("<")) {
+                    if (levelUp(unityBuild) && unityBuild.getId().contains("<")) {
                             try {
-                                unityBuild.setId(Integer.parseInt(
-                                        unityBuild.getId().substring(0, 1) + 1) + unityBuild.getId().substring(1));
+                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
+                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
                             } catch (Exception ignored) {
                             }
-                        }
                     }
                     isUpgraded = true;
                     break;

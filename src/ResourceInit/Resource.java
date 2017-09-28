@@ -151,22 +151,22 @@ public class Resource {
 
     public final ImageView getFactoryLevel2Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 2.png"));
-        unit.setFitWidth(67.0);
-        unit.setFitHeight(100.5);
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
         return unit;
     }
 
     public final ImageView getFactoryLevel3Blue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Factory\\Factory - Level 3.png"));
-        unit.setFitWidth(67.0);
-        unit.setFitHeight(100.5);
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
         return unit;
     }
 
     public final ImageView getFactoryLevel3Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3.png"));
-        unit.setFitWidth(67.0);
-        unit.setFitHeight(100.5);
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
         return unit;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
