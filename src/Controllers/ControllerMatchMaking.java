@@ -3,6 +3,7 @@ package Controllers;
 import BattleFields.BattleField;
 import BattleFields.ControlBattler;
 import BattleFields.Point;
+import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
 import Unities.Unity;
@@ -114,8 +115,9 @@ public final class ControllerMatchMaking implements Initializable {
         initializeMessages();
         controlBattler.initializeField();
         controlBattler.getBattleField().toString();
+        controlBattler.getIdentificationField().toString();
         buttonCreateArmy.setVisible(false);
-        drawGraphic();
+        Painter.drawGraphic(controlBattler, resource, paneControlField);
         initializeGameButtons();
         System.out.println(controlBattler.getPlayer().getColorType());
     }
@@ -304,14 +306,14 @@ public final class ControllerMatchMaking implements Initializable {
         buttonBuildTurret.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getTurret();
-            labelUnit = "building";
+            labelUnit = "turret";
         });
 
         //Постройка стены:
         buttonBuildWall.setOnMouseClicked(event -> {
             click = !click;
             unit = controlBattler.getWall();
-            labelUnit = "building";
+            labelUnit = "wall";
         });
 
         //Создание автоматчика:
@@ -336,595 +338,80 @@ public final class ControllerMatchMaking implements Initializable {
 
         //Инкапсуляция производства:
         paneControlField.setOnMouseClicked(event -> {
-            if (click) {
-                click = false;
-                Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                //Если строите бараки или стену:
-                if (labelUnit.equals("building") && controlBattler.getHowICanBuild() > 0) {
-                    if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                            controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+            try{
+                if (click) {
+                    click = false;
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    //Если строите бараки или стену:
+                    if (labelUnit.equals("building") && controlBattler.getHowICanBuild() > 0) {
+                        if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                                controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
 
+                        }
                     }
-                }
-                //Если строите завод:
-                if (labelUnit.equals("factory") && controlBattler.getHowCanBuildFactories() > 0 && controlBattler.getHowICanBuild() > 0) {
-                    if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                            controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                    //Если строите завод:
+                    if (labelUnit.equals("factory") && controlBattler.getHowCanBuildFactories() > 0 && controlBattler.getHowICanBuild() > 0) {
+                        if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                                controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                        }
                     }
-                }
-                //Если строите генератор:
-                if (labelUnit.equals("generator") && controlBattler.getHowICanBuild() > 0 && controlBattler.getHowICanBuild() <= 2 && !controlBattler.isConstructedGenerator()) {
-                    if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                            controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
-                        controlBattler.setConstructedGenerator(true);
+                    //Если строите генератор:
+                    if (labelUnit.equals("generator") && controlBattler.getHowICanBuild() > 0 && controlBattler.getHowICanBuild() <= 2 && !controlBattler.isConstructedGenerator()) {
+                        if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                                controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                            controlBattler.setConstructedGenerator(true);
+                        }
                     }
-                }
-                //Если улучшаем строение:
-                if (labelUnit.equals("upgradeBuilding") && controlBattler.getHowICanBuild() > 0) {
-                    if (controlBattler.upgradeBuilding(pointClick, controlBattler.getPlayer())) { //Если удалось улучшить строение:
-                        controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                    //Если создаем стену:
+                    if (labelUnit.equals("wall") && controlBattler.getHowICanBuild() > 0) {
+                        if (controlBattler.checkConstructionOfBuilding(pointClick, controlBattler.getBarracksHorisontal(), controlBattler.getPlayer()) &&
+                                controlBattler.putDoubleWall(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+
+                        }
                     }
-                }
+                    //Если создаем турель:
+                    if (labelUnit.equals("turret") && controlBattler.getHowICanBuild() > 0) {
+                        if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
+                                controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+
+                        }
+                    }
+
+                    //Если улучшаем строение:
+                    if (labelUnit.equals("upgradeBuilding") && controlBattler.getHowICanBuild() > 0) {
+                        if (controlBattler.upgradeBuilding(pointClick, controlBattler.getPlayer())) { //Если удалось улучшить строение:
+                            controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                        }
+                    }
 
 
-                //Если создаете автоматчика:
-                if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
-                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                    //Если создаете автоматчика:
+                    if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
+                        if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                        }
                     }
-                }
 
-                //Если создаете танк:
-                if (labelUnit.equals("tank") && controlBattler.getHowICanProductTanks() > 0) {
-                    if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                        controlBattler.setHowICanProductTanks(controlBattler.getHowICanProductTanks() - 1);
+                    //Если создаете танк:
+                    if (labelUnit.equals("tank") && controlBattler.getHowICanProductTanks() > 0) {
+                        if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
+                            controlBattler.setHowICanProductTanks(controlBattler.getHowICanProductTanks() - 1);
+                        }
                     }
-                }
 
-                drawGraphic();
-                controlBattler.getBattleField().toString();
-                System.out.println();
-            }
+
+                    Painter.drawGraphic(controlBattler, resource, paneControlField);
+                    controlBattler.getBattleField().toString();
+                    controlBattler.getIdentificationField().toString();
+                    System.out.println();
+                }
+            } catch (Exception ignored){} //Может выскочить null
+
         });
     }
-
-
-    private void drawGraphic() {
-        try {
-            for (int i = 0; i < 16; i++) {
-                for (int j = 0; j < 16; j++) {
-                    String element = controlBattler.getBattleField().getMatrix().get(i).get(j);
-                    ImageView currentUnity = new ImageView();
-                    switch (element.substring(0, 2) + element.substring(3)) {
-                        //Штаб:
-                        case "8^+h'":
-                            currentUnity = resource.getHeadquartersBlue();
-                            break;
-                        case "8^-h'":
-                            currentUnity = resource.getHeadquartersRed();
-                            break;
-                        //Генератор:
-                        //--Уровень 1:
-                        case "1^+g'":
-                            currentUnity = resource.getGeneratorLevel1Blue();
-                            break;
-                        case "1^-g'":
-                            currentUnity = resource.getGeneratorLevel1Red();
-                            break;
-                        //--Уровень 2:
-                        case "2<+g'":
-                            currentUnity = resource.getGeneratorLevel2Blue();
-                            break;
-                        case "2<-g'":
-                            currentUnity= resource.getGeneratorLevel2Red();
-                            break;
-                        //--Уровень 3:
-                        case "4>+g'":
-                            currentUnity = resource.getGeneratorLevel3Blue();
-                            break;
-                        case "4>-g'":
-                            currentUnity = resource.getGeneratorLevel3Red();
-                            break;
-                        //Бараки:
-                        //--Уровень 1:
-                        case "1^+b'":
-                            currentUnity = resource.getBarracksLevel1Blue();
-                            break;
-                        case "1^-b'":
-                            currentUnity = resource.getBarracksLevel1Red();
-                            break;
-                        //--Уровень 2:
-                        case "2<+b'":
-                            currentUnity = resource.getBarracksLevel2Blue();
-                            break;
-                        case "2<-b'":
-                            currentUnity = resource.getBarracksLevel2Red();
-                            break;
-                        //--Уровень 3:
-                        case "4>+b'":
-                            currentUnity = resource.getBarracksLevel3Blue();
-                            break;
-                        case "4>-b'":
-                            currentUnity = resource.getBarracksLevel3Red();
-                            break;
-                        //Завод:
-                        //--Уровень 1:
-                        case "1^+f'":
-                            currentUnity = resource.getFactoryLevel1Blue();
-                            break;
-                        case "1^-f'":
-                            currentUnity = resource.getFactoryLevelRed();
-                            break;
-                        //--Уровень 2:
-                        case "4<+f'":
-                            currentUnity = resource.getFactoryLevel2Blue();
-                            break;
-                        case "4<-f'":
-                            currentUnity = resource.getFactoryLevel2Red();
-                            break;
-                        //--Уровень 3:
-                        case "6>+f'":
-                            currentUnity = resource.getFactoryLevel3Blue();
-                            break;
-                        case "6>-f'":
-                            currentUnity = resource.getFactoryLevel3Red();
-                            break;
-                        //Турель:
-                        //--Уровень 1:
-                        case "1^+t'":
-                            currentUnity = resource.getTurretLevel1Blue();
-                            break;
-                        case "1^-t'":
-                            currentUnity = resource.getTurretLevel1Red();
-                            break;
-                        //--Уровень 2:
-                        case "2<+t'":
-                            currentUnity = resource.getTurretLevel2Blue();
-                            break;
-                        case "2<-t'":
-                            currentUnity = resource.getTurretLevel2Red();
-                            break;
-                        //Стена:
-                        case "4^-w'":
-                            currentUnity = resource.getWallRed();
-                            break;
-                        case "4^+w'":
-                            currentUnity = resource.getWallBlue();
-                            break;
-                        //Автоматчик:
-                        case "1^+G'":
-                            currentUnity = resource.getGunnerBlue();
-                            break;
-                        case "1^-G'":
-                            currentUnity = resource.getGunnerRed();
-                            break;
-                        //Танк:
-                        case "2^+T'":
-                            currentUnity = resource.getTankBlue();
-                            break;
-                        case "2^-T'":
-                            currentUnity = resource.getTankRed();
-                            break;
-                        //Пустое поле:
-                        case "    0":
-                            currentUnity = resource.getEmptyField();
-                            break;
-                    }
-                    currentUnity.setLayoutX(33.5 * j);
-                    currentUnity.setLayoutY(33.5 * i);
-                    paneControlField.getChildren().add(currentUnity);
-                }
-            }
-
-        } catch (Exception ignored) {
-        }
-    }
 }
-
-
-//Не могу избежать дублирования кода!
-//    private void drawGraphic() {
-//        try {
-//            for (int i = 0; i < 16; i++) {
-//                for (int j = 0; j < 16; j++) {
-//                    String element = controlBattler.getBattleField().getMatrix().get(i).get(j);
-//                    ImageView currentUnity = new ImageView();
-//                    currentUnity.setLayoutX(33.5 * j);
-//                    currentUnity.setLayoutY(33.5 * j);
-//                    switch (element.substring(0, 2) + element.substring(3)) {
-//                        //Штаб:
-//                        case "8^+h'":
-//                            currentUnity = resource.getHeadquartersBlue();
-//                            break;
-//                        case "8^-h'":
-//                            currentUnity = resource.getHeadquartersRed();
-//                            break;
-//                        //Генератор:
-//                        //--Уровень 1:
-//                        case "1^+g'":
-//                            currentUnity = resource.getGeneratorLevel1Blue();
-//                            break;
-//                        case "1^-g'":
-//                            currentUnity = resource.getGeneratorLevel1Red();
-//                            break;
-//                        //--Уровень 2:
-//                        case "2<+g'":
-//                            currentUnity = resource.getGeneratorLevel2Blue();
-//                            break;
-//                        case "2<-g'":
-//                            currentUnity= resource.getGeneratorLevel2Red();
-//                            break;
-//                        //--Уровень 3:
-//                        case "4>+g'":
-//                            currentUnity = resource.getGeneratorLevel3Blue();
-//                            break;
-//                        case "4>-g'":
-//                            currentUnity = resource.getGeneratorLevel3Red();
-//                            break;
-//                        //Бараки:
-//                        //--Уровень 1:
-//                        case "1^+b'":
-//                            currentUnity = resource.getBarracksLevel1Blue();
-//                            break;
-//                        case "1^-b'":
-//                            currentUnity = resource.getBarracksLevel1Red();
-//                            break;
-//                        //--Уровень 2:
-//                        case "2<+b'":
-//                            currentUnity = resource.getBarracksLevel2Blue();
-//                            break;
-//                        case "2<-b'":
-//                            currentUnity = resource.getBarracksLevel2Red();
-//                            break;
-//                        //--Уровень 3:
-//                        case "4>+b'":
-//                            currentUnity = resource.getBarracksLevel3Blue();
-//                            break;
-//                        case "4>-b'":
-//                            currentUnity = resource.getBarracksLevel3Red();
-//                            break;
-//                        //Завод:
-//                        //--Уровень 1:
-//                        case "1^+f'":
-//                            currentUnity = resource.getFactoryLevel1Blue();
-//                            break;
-//                        case "1^-f'":
-//                            currentUnity = resource.getFactoryLevelRed();
-//                            break;
-//                        //--Уровень 2:
-//                        case "4<+f'":
-//                            currentUnity = resource.getFactoryLevel2Blue();
-//                            break;
-//                        case "4<-f'":
-//                            currentUnity = resource.getFactoryLevel2Red();
-//                            break;
-//                        //--Уровень 3:
-//                        case "6>+f'":
-//                            currentUnity = resource.getFactoryLevel3Blue();
-//                            break;
-//                        case "6>-f'":
-//                            currentUnity = resource.getFactoryLevel3Red();
-//                            break;
-//                        //Турель:
-//                        //--Уровень 1:
-//                        case "1^+t'":
-//                            currentUnity = resource.getTurretLevel1Blue();
-//                            break;
-//                        case "1^-t'":
-//                            currentUnity = resource.getTurretLevel1Red();
-//                            break;
-//                        //--Уровень 2:
-//                        case "2<+t'":
-//                            currentUnity = resource.getTurretLevel2Blue();
-//                            break;
-//                        case "2<-t'":
-//                            currentUnity = resource.getTurretLevel2Red();
-//                            break;
-//                        //Стена:
-//                        case "4^-w'":
-//                            currentUnity = resource.getWallRed();
-//                            break;
-//                        case "4^+w'":
-//                            currentUnity = resource.getWallBlue();
-//                            break;
-//                        //Автоматчик:
-//                        case "1^+G'":
-//                            currentUnity = resource.getGunnerBlue();
-//                            break;
-//                        case "1^-G'":
-//                            currentUnity = resource.getGunnerRed();
-//                            break;
-//                        //Танк:
-//                        case "2^+T'":
-//                            currentUnity = resource.getTankBlue();
-//                            break;
-//                        case "2^-T'":
-//                            currentUnity = resource.getTankRed();
-//                            break;
-//                        //Пустое поле:
-//                        case "    0":
-//                            currentUnity = resource.getEmptyField();
-//                            break;
-//                    }
-//                    paneControlField.getChildren().add(new Pane(currentUnity));
-//                }
-//            }
-//
-//        } catch (Exception ignored) {
-//        }
-//    }
-
-
-
-
-
-//    private void drawGraphic() {
-//        try {
-//            for (int i = 0; i < 16; i++) {
-//                for (int j = 0; j < 16; j++) {
-//                    String element = controlBattler.getBattleField().getMatrix().get(i).get(j);
-//                    switch (element.substring(0, 2) + element.substring(3)) {
-//                        //Штаб:
-//                        case "8^+h'":
-//                            ImageView headquartersBlue = resource.getHeadquartersBlue();
-//                            headquartersBlue.setLayoutX(33.5 * j);
-//                            headquartersBlue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(headquartersBlue));
-//                            break;
-//                        case "8^-h'":
-//                            ImageView headquartersRed = resource.getHeadquartersRed();
-//                            headquartersRed.setLayoutX(33.5 * j);
-//                            headquartersRed.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(headquartersRed));
-//                            break;
-//
-//                        //Генератор:
-//                        //Уровень 1:
-//                        case "1^+g'":
-//                            ImageView generatorLevel1Blue = resource.getGeneratorLevel1Blue();
-//                            generatorLevel1Blue.setLayoutX(33.5 * j);
-//                            generatorLevel1Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(generatorLevel1Blue));
-//                            break;
-//                        case "1^-g'":
-//
-//                            ImageView generatorLevel1Red = resource.getGeneratorLevel1Red();
-//                            generatorLevel1Red.setLayoutX(33.5 * j);
-//                            generatorLevel1Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(generatorLevel1Red));
-//                            break;
-//
-//                        //Уровень 2:
-//
-//                        case "2<+g'":
-//                            ImageView generatorLevel2Blue = resource.getGeneratorLevel2Blue();
-//                            generatorLevel2Blue.setLayoutX(33.5 * j);
-//                            generatorLevel2Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(generatorLevel2Blue));
-//                            break;
-//
-//                        case "2<-g'":
-//                            ImageView generatorLevel2Red = resource.getGeneratorLevel2Red();
-//                            generatorLevel2Red.setLayoutX(33.5 * j);
-//                            generatorLevel2Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(generatorLevel2Red));
-//                            break;
-//
-//                        //Уровень 3:
-//
-//                        case "4>+g'":
-//                            ImageView generatorLevel3Blue = resource.getGeneratorLevel3Blue();
-//                            generatorLevel3Blue.setLayoutX(33.5 * j);
-//                            generatorLevel3Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(generatorLevel3Blue));
-//                            break;
-//
-//                        case "4>-g'":
-//                            ImageView generatorLevel3Red = resource.getGeneratorLevel3Red();
-//                            generatorLevel3Red.setLayoutX(33.5 * j);
-//                            generatorLevel3Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(generatorLevel3Red));
-//                            break;
-//
-//                        //Бараки:
-//
-//                        //Уровень 1:
-//
-//                        case "1^+b'":
-//                            ImageView barracksLevel1Blue = resource.getBarracksLevel1Blue();
-//                            barracksLevel1Blue.setLayoutX(33.5 * j);
-//                            barracksLevel1Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(barracksLevel1Blue));
-//                            break;
-//
-//                        case "1^-b'":
-//                            ImageView barracksLevel1Red = resource.getBarracksLevel1Red();
-//                            barracksLevel1Red.setLayoutX(33.5 * j);
-//                            barracksLevel1Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(barracksLevel1Red));
-//                            break;
-//
-//                        //Уровень 2:
-//
-//                        case "2<+b'":
-//                            ImageView barracksLevel2Blue = resource.getBarracksLevel2Blue();
-//                            barracksLevel2Blue.setLayoutX(33.5 * j);
-//                            barracksLevel2Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(barracksLevel2Blue));
-//                            break;
-//
-//                        case "2<-b'":
-//                            ImageView barracksLevel2Red = resource.getBarracksLevel2Red();
-//                            barracksLevel2Red.setLayoutX(33.5 * j);
-//                            barracksLevel2Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(barracksLevel2Red));
-//                            break;
-//
-//                        //Уровень 3:
-//
-//                        case "4>+b'":
-//                            ImageView barracksLevel3Blue = resource.getBarracksLevel3Blue();
-//                            barracksLevel3Blue.setLayoutX(33.5 * j);
-//                            barracksLevel3Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(barracksLevel3Blue));
-//                            break;
-//
-//                        case "4>-b'":
-//                            ImageView barracksLevel3Red = resource.getBarracksLevel3Red();
-//                            barracksLevel3Red.setLayoutX(33.5 * j);
-//                            barracksLevel3Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(barracksLevel3Red));
-//
-//                            break;
-//
-//                        //Завод:
-//
-//                        //Уровень 1:
-//
-//                        case "1^+f'":
-//                            ImageView factoryLevel1Blue = resource.getFactoryLevel1Blue();
-//                            factoryLevel1Blue.setLayoutX(33.5 * j);
-//                            factoryLevel1Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(factoryLevel1Blue));
-//                            break;
-//
-//                        case "1^-f'":
-//                            ImageView factoryLevel1Red = resource.getFactoryLevelRed();
-//                            factoryLevel1Red.setLayoutX(33.5 * j);
-//                            factoryLevel1Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(factoryLevel1Red));
-//                            break;
-//
-//                        //Уровень 2:
-//
-//                        case "4<+f'":
-//                            ImageView factoryLevel2Blue = resource.getFactoryLevel2Blue();
-//                            factoryLevel2Blue.setLayoutX(33.5 * j);
-//                            factoryLevel2Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(factoryLevel2Blue));
-//                            break;
-//
-//                        case "4<-f'":
-//                            ImageView factoryLevel2Red = resource.getFactoryLevel2Red();
-//                            factoryLevel2Red.setLayoutX(33.5 * j);
-//                            factoryLevel2Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(factoryLevel2Red));
-//                            break;
-//
-//                        //Уровень 3:
-//                        case "6>+f'":
-//                            ImageView factoryLevel3Blue = resource.getFactoryLevel3Blue();
-//                            factoryLevel3Blue.setLayoutX(33.5 * j);
-//                            factoryLevel3Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(factoryLevel3Blue));
-//                            break;
-//                        case "6>-f'":
-//                            ImageView factoryLevel3Red = resource.getFactoryLevel3Red();
-//                            factoryLevel3Red.setLayoutX(33.5 * j);
-//                            factoryLevel3Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(factoryLevel3Red));
-//                            break;
-//
-//                        //Турель:
-//
-//                        case "1^+t'":
-//                            ImageView turretLevel1Blue = resource.getTurretLevel1Blue();
-//                            turretLevel1Blue.setLayoutX(33.5 * j);
-//                            turretLevel1Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(turretLevel1Blue));
-//                            break;
-//                        case "1^-t'":
-//
-//                            ImageView turretLevel1Red = resource.getTurretLevel1Red();
-//                            turretLevel1Red.setLayoutX(33.5 * j);
-//                            turretLevel1Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(turretLevel1Red));
-//
-//                            break;
-//
-//                        case "2<+t'":
-//                            ImageView turretLevel2Blue = resource.getTurretLevel2Blue();
-//                            turretLevel2Blue.setLayoutX(33.5 * j);
-//                            turretLevel2Blue.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(turretLevel2Blue));
-//
-//                            break;
-//
-//                        case "2<-t'":
-//                            ImageView turretLevel2Red = resource.getTurretLevel2Red();
-//                            turretLevel2Red.setLayoutX(33.5 * j);
-//                            turretLevel2Red.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(new Pane(turretLevel2Red));
-//                            break;
-//
-//                        //Стена:
-//
-//                        case "4^-w'":
-//                            ImageView imageViewRedWall = resource.getWallRed();
-//                            imageViewRedWall.setLayoutX(33.5 * j);
-//                            imageViewRedWall.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewRedWall);
-//                            break;
-//
-//                        case "4^+w'":
-//                            ImageView imageViewBlueWall = resource.getWallBlue();
-//                            imageViewBlueWall.setLayoutX(33.5 * j);
-//                            imageViewBlueWall.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewBlueWall);
-//                            break;
-//
-//                        //Автоматчик:
-//                        case "1^+G'":
-//                            ImageView imageViewBlueGunner = resource.getGunnerBlue();
-//                            imageViewBlueGunner.setLayoutX(33.5 * j);
-//                            imageViewBlueGunner.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewBlueGunner);
-//                            break;
-//
-//                        case "1^-G'":
-//                            ImageView imageViewRedGunner = resource.getGunnerRed();
-//                            imageViewRedGunner.setLayoutX(33.5 * j);
-//                            imageViewRedGunner.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewRedGunner);
-//                            break;
-//
-//                        //Танк:
-//                        case "2^+T'":
-//                            ImageView imageViewBlueTank = resource.getTankBlue();
-//                            imageViewBlueTank.setLayoutX(33.5 * j);
-//                            imageViewBlueTank.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewBlueTank);
-//
-//                            break;
-//                        case "2^-T'":
-//                            ImageView imageViewRedTank = resource.getTankRed();
-//                            imageViewRedTank.setLayoutX(33.5 * j);
-//                            imageViewRedTank.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewRedTank);
-//                            break;
-//
-//                        //Пустое поле:
-//                        case "    0":
-//                            ImageView imageViewCell = new ImageView(new Image("file:src\\Resources\\BattleFields\\Cell.png"));
-//                            imageViewCell.setFitWidth(33.5);
-//                            imageViewCell.setFitHeight(33.5);
-//                            imageViewCell.setLayoutX(33.5 * j);
-//                            imageViewCell.setLayoutY(33.5 * i);
-//                            paneControlField.getChildren().add(imageViewCell);
-//                            break;
-//
-//                    }
-//
-//                }
-//
-//            }
-//
-//
-//        } catch (Exception ignored) {
-//
-//        }
-//
-//    }

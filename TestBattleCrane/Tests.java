@@ -10,20 +10,11 @@ public class Tests {
     @Test
     public void levelUp(){
         //Тест на бараки:
-        Unity barracksFistLevel = new Unity("1^!+b'");
-        Unity barracksSecondLevel = new Unity("1<!+b'");
-        Unity barracksThirdLevel = new Unity("1>!+b'");
-        assertTrue(barracksSecondLevel.getId(), controlBattler.levelUp(barracksFistLevel));
-        assertTrue(barracksThirdLevel.getId(), controlBattler.levelUp(barracksSecondLevel));
-        assertFalse(barracksThirdLevel.getId(), controlBattler.levelUp(barracksThirdLevel));
-
-//        //Тест на генераторы:
-//        Unity generatorFistLevel = new Unity("1^!-g'");
-//        Unity generatorSecondLevel = new Unity("1<!-g'");
-//        Unity generatorThirdLevel = new Unity("1>!-g'");
-//        assertTrue(barracksSecondLevel.getId(), controlBattler.levelUp(barracksFistLevel));
-//        assertTrue(barracksThirdLevel.getId(), controlBattler.levelUp(barracksSecondLevel));
-//        assertFalse(barracksThirdLevel.getId(), controlBattler.levelUp(barracksThirdLevel));
-
+        String barracksFistLevel = "1^!+b'";
+        String barracksSecondLevel = "1<!+b'";
+        String barracksThirdLevel = "1>!+b'";
+        assertEquals(barracksSecondLevel, controlBattler.levelUp(barracksFistLevel));
+        assertEquals(barracksThirdLevel, controlBattler.levelUp(barracksSecondLevel));
+        assertEquals(null, controlBattler.levelUp(barracksThirdLevel));
     }
 }

@@ -4,6 +4,8 @@ package BattleFields;
 import Players.Player;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -32,6 +34,7 @@ public class ControlBattler {
     //Основные переменные:
     private Pane paneBattle;
     private BattleField battleField = new BattleField();
+    private IdentificationField identificationField = new IdentificationField();
     private int turn = 1;
 
     //Игроки:
@@ -55,7 +58,7 @@ public class ControlBattler {
     private Unity factoryVertical = new Unity(3, 2, "f", 1);
     private Unity factoryHorisontal = new Unity(2, 3, "f", 1);
     //Турель:
-    private Unity turret = new Unity(1, 1, "t", 1);
+    private Unity turret = new Unity(1, 1, "t", 2);
     //Стена:
     private Unity wall = new Unity(1, 1, "w", 4);
 
@@ -70,7 +73,6 @@ public class ControlBattler {
     }
 
     public ControlBattler() {
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +91,6 @@ public class ControlBattler {
         }
         nextTurnOfCurrentPlayer();
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public boolean putUnity(Player player, Point point, Unity unity) {
         if (isEmptyTerritory(point, unity)) {
@@ -101,7 +102,34 @@ public class ControlBattler {
                     } else {
                         newUnity = newUnity + ".";
                     }
+                    identificationField.getMatrix().get(i).set(j, "" + identificationField.getNumberUnity());
                     battleField.getMatrix().get(i).set(j, newUnity);
+                }
+            }
+            identificationField.setNumberUnity(identificationField.getNumberUnity() + 1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public boolean putDoubleWall(Player player, Point point, Unity unity) {
+        Point pointShiftRight = new Point(point.getX(), point.getY());
+        pointShiftRight.setY(pointShiftRight.getY() + 1);
+        if (isEmptyTerritory(point, unity) && isEmptyTerritory(pointShiftRight, unity)) {
+            for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
+                for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
+                    String newUnity = unity.getHitPoints() + "^" + "?" + player.getColorType() + unity.getId();
+                    if (i == point.getX() && j == point.getY()) {
+                        newUnity = newUnity + "'";
+                    }
+                    identificationField.getMatrix().get(i).set(j, "" + identificationField.getNumberUnity());
+                    identificationField.setNumberUnity(identificationField.getNumberUnity() + 1);
+                    identificationField.getMatrix().get(i).set(j + 1, "" + identificationField.getNumberUnity());
+                    identificationField.setNumberUnity(identificationField.getNumberUnity() + 1);
+                    battleField.getMatrix().get(i).set(j, newUnity);
+                    battleField.getMatrix().get(i).set(j + 1, newUnity);
                 }
             }
             return true;
@@ -145,107 +173,92 @@ public class ControlBattler {
 
     public boolean upgradeBuilding(Point point, Player player) { //Здесь я остановился:
         boolean isUpgraded = false;
-        List<String> list = battleField.getMatrix().get(point.getX());
-        int y = point.getY();
-        Unity unityBuild = new Unity(list.get(y));
-        if (isFindUnity(point) && list.get(y).contains(player.getColorType())) {
-            System.out.println(list.get(y).substring(4, 5));
-            switch (list.get(y).substring(4, 5)) { //Смотрим строение:
-                case "g": //Улучшение генератора:
-                    if (levelUp(unityBuild)) { //Необходимо переписать матрицу
-                        if (unityBuild.getId().contains("<")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
+        if (battleField.getMatrix().get(point.getX()).get(point.getY()).contains(player.getColorType())) {
+            for (int i = 0; i < 16; i++){
+                for (int j = 0; j < 16; j++){
+                    String unityBuild = battleField.getMatrix().get(i).get(j);
+                    if (identificationField.getMatrix().get(i).get(j).equals(String.valueOf(getIdentification(point)))){
+                        try {
+                            switch (battleField.getMatrix().get(i).get(j).substring(4, 5)) { //Смотрим строение:
+                                case "g": //Улучшение генератора:
+                                    if (!unityBuild.contains(">")){
+                                        unityBuild = levelUp(unityBuild);
+                                        if (unityBuild.contains("<")) {
+                                            unityBuild = changeHitPoints(unityBuild, 1);
+                                        }
+                                        if (unityBuild.contains(">")) {
+                                            unityBuild = changeHitPoints(unityBuild, 2);
+                                        }
+                                        isUpgraded = true;
+                                    }
+                                    break;
+                                case "b": //Улучшение бараков:
+                                    if (!unityBuild.contains(">")) {
+                                        unityBuild = levelUp(unityBuild);
+                                        if (unityBuild.contains("<")) {
+                                            unityBuild = changeHitPoints(unityBuild, 1);
+                                        }
+                                        if (unityBuild.contains(">")) {
+                                            unityBuild = changeHitPoints(unityBuild, 2);
+                                        }
+                                        isUpgraded = true;
+                                    }
+                                    break;
+                                case "f": //Улучшение завода:
+                                    if (!unityBuild.contains(">")) {
+                                        unityBuild = levelUp(unityBuild);
+                                        if (unityBuild.contains("<")) {
+                                            unityBuild = changeHitPoints(unityBuild, 3);
+                                        }
+                                        if (unityBuild.contains(">")) {
+                                            unityBuild = changeHitPoints(unityBuild, 2);
+                                        }
+                                        isUpgraded = true;
+                                    }
+                                    break;
+                                case "t": //Улучшение туррели:
+                                    if (unityBuild.contains("^")) {
+                                    unityBuild = levelUp(unityBuild);
+                                        unityBuild = changeHitPoints(unityBuild, 2);
+                                    }
+                                    isUpgraded = true;
+                                    break;
                             }
-                        }
-                        if (unityBuild.getId().contains(">")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 2;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
-                            }
-                        }
-                    }
-                    isUpgraded = true;
-                    break;
-                case "b": //Улучшение бараков:
-                    if (levelUp(unityBuild)) {
-                        if (unityBuild.getId().contains("<")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
-                            }
-                        }
-                        if (unityBuild.getId().contains(">")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 2;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
-                            }
-                        }
-                    }
-                    isUpgraded = true;
-                    break;
-                case "f": //Улучшение завода:
-                    if (levelUp(unityBuild)) {
-                        if (unityBuild.getId().contains("<")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 3;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
-                            }
-                        }
-                        if (unityBuild.getId().contains(">")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 2;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
-                            }
+                        } catch (Exception ignored) {
                         }
                     }
-                    isUpgraded = true;
-                    break;
-                case "t": //Улучшение туррели:
-                    if (levelUp(unityBuild) && unityBuild.getId().contains("<")) {
-                            try {
-                                int upgradedHitPoints = Integer.parseInt(unityBuild.getId().substring(0, 1)) + 1;
-                                unityBuild.setId(upgradedHitPoints + unityBuild.getId().substring(1));
-                            } catch (Exception ignored) {
-                            }
-                    }
-                    isUpgraded = true;
-                    break;
+                    battleField.getMatrix().get(i).set(j, unityBuild);
+                }
+                }
             }
-        }
-        battleField.getMatrix().get(point.getX()).set(y, unityBuild.getId());
 
         return isUpgraded;
     }
 
-    //Проверка MouseClicked на Unity
-    private boolean isFindUnity(Point point) {
-        return battleField.getMatrix().get(point.getX()).get(point.getY()).contains("'");
+    private int getIdentification(Point point){
+        return Integer.parseInt(identificationField.getMatrix().get(point.getX()).get(point.getY()));
     }
 
-    public boolean levelUp(Unity unity) {
-        boolean isUpgraded = false;
-        System.out.println(unity.getId().substring(1, 2));
-        switch (unity.getId().substring(1, 2)) {
+    @NotNull
+    private String changeHitPoints(String unityBuild, int temp) {
+        int upgradedHitPoints = Integer.parseInt(unityBuild.substring(0, 1)) + temp;
+        return upgradedHitPoints + unityBuild.substring(1);
+    }
+
+
+
+    @Nullable
+    public String levelUp(String unity) {
+        System.out.println(unity.substring(1, 2));
+        switch (unity.substring(1, 2)) {
             case "^":
-                unity.setId(unity.getId().substring(0, 1) + '<' + unity.getId().substring(2));
-                isUpgraded = true;
-                break;
+                System.out.println("UP");
+                return unity.substring(0, 1) + '<' + unity.substring(2);
             case "<":
-                unity.setId(unity.getId().substring(0, 1) + '>' + unity.getId().substring(2));
-                isUpgraded = true;
-                break;
+                return unity.substring(0, 1) + '>' + unity.substring(2);
         }
-        return isUpgraded;
+        return unity;
     }
-
 
     public void deleteUnity(Point point, Unity unity) {
 
@@ -255,7 +268,6 @@ public class ControlBattler {
     public void correctTerritory() {
 
     }
-
 
     //После нажатия закончить ход
     public void nextTurnOfCurrentPlayer() {
@@ -278,7 +290,6 @@ public class ControlBattler {
             opponentPlayer = playerBlue;
         }
     }
-
 
     private void showReadyArmy(Player player) {
         Pattern pattern = Pattern.compile("[GTt]");
@@ -355,7 +366,6 @@ public class ControlBattler {
     public int getHowCanBuildFactories() {
         return howICanProductArmy - howICanProductTanks;
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public BattleField getBattleField() {
@@ -525,5 +535,71 @@ public class ControlBattler {
     public void setConstructedGenerator(boolean constructedGenerator) {
         isConstructedGenerator = constructedGenerator;
     }
+
+    public IdentificationField getIdentificationField() {
+        return identificationField;
+    }
+
+
+    private class Pair {
+        Point point;
+        boolean isFoundPoint;
+
+        private Pair(Point point, boolean isFoundPoint) {
+            this.point = point;
+            this.isFoundPoint = isFoundPoint;
+        }
+    }
 }
 
+//Проверка MouseClicked на Unity
+//    private Pair isFindUnity(Point point) {
+//        String clickedElement = battleField.getMatrix().get(point.getX()).get(point.getY());
+//        if (clickedElement.contains("'")) {
+//            return new Pair(point, true);
+//        }
+//        if (clickedElement.contains(".")) {
+//            System.out.println("не корень:");
+//            String currentUnity = clickedElement.substring(4, 5);
+//            for (int i = point.getX() - 1; i < point.getX() + 3; i++) {
+//                for (int j = point.getY() - 2; i < point.getY() + 5; j++) {
+//                    if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+//                        System.out.println("i: " + i + "     " + "j: " + j);
+//                        String currentElement = battleField.getMatrix().get(j).get(i);
+//                        System.out.println(currentElement);
+//                        if (currentElement.contains("'") && currentElement.contains(currentUnity)) {
+//                            switch (currentUnity) {
+//                                case "g":
+//                                    for (int k = j; k < j + 2; k++) {
+//                                        for (int l = i; l < i + 2; l++) {
+//                                            System.out.println("inner");
+//                                            if (battleField.getMatrix().get(l).get(k).equals(clickedElement)) {
+//                                                return new Pair(new Point(i, j), true);
+//                                            }
+//                                        }
+//                                    }
+//                                    break;
+//                                case "f":
+//                                    for (int k = j; k < j + 3; k++) {
+//                                        for (int l = i; l < i + 2; l++) {
+//                                            if (battleField.getMatrix().get(l).get(k).equals(clickedElement)) {
+//                                                return new Pair(new Point(i, j), true);
+//                                            }
+//                                        }
+//                                    }
+//                                    break;
+//                                case "b":
+//                                    for (int k = j; k < j + 2; k++) {
+//                                            if (battleField.getMatrix().get(j).get(k).equals(clickedElement)) {
+//                                                return new Pair(new Point(i, j), true);
+//                                            }
+//                                    }
+//                                    break;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return new Pair(null, false);
+//    }

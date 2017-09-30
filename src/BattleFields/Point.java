@@ -13,7 +13,7 @@ public final class Point {
         this.y = y;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 
@@ -21,7 +21,7 @@ public final class Point {
         this.x = x;
     }
 
-    int getY() {
+    public int getY() {
         return y;
     }
 
