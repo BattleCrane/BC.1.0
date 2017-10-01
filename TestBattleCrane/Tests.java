@@ -17,4 +17,15 @@ public class Tests {
         assertEquals(barracksThirdLevel, controlBattler.levelUp(barracksSecondLevel));
         assertEquals(null, controlBattler.levelUp(barracksThirdLevel));
     }
+
+    @Test
+    public void sleepUnity(){
+        //Тест на бараки:
+        String barracksFistLevel = "1^!+b'";
+        String someUnityTest1 = "3<!+z'";
+        String someUnityTest2 = "5>?+r'";
+        assertEquals("1^?+b'", controlBattler.sleepUnity(barracksFistLevel));
+        assertEquals("3<?+z'", controlBattler.sleepUnity(someUnityTest1));
+        assertEquals("5>?+r'", controlBattler.sleepUnity(someUnityTest2));
+    }
 }

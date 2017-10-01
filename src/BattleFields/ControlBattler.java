@@ -312,6 +312,10 @@ public class ControlBattler {
             }
         }
     }
+    public String sleepUnity(String string) {
+        return string.substring(0, 2) + "?" + string.substring(3);
+    }
+
 
     private void showReadyBuilding(Player player) {
         Pattern pattern = Pattern.compile("[bf]'");
