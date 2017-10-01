@@ -21,6 +21,13 @@ public class Resource {
         return field;
     }
 
+    public final ImageView getDestroyedField(){
+        ImageView field = new ImageView(new Image("file:src\\Resources\\BattleFields\\DestroyedField.png"));
+        field.setFitWidth(33.5);
+        field.setFitHeight(33.5);
+        return field;
+    }
+
     //Штабы:
     public final ImageView getHeadquartersBlue() {
         return new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters.png"));
@@ -227,14 +234,14 @@ public class Resource {
     }
 
     public final ImageView getGunnerReadyBlue() {
-        ImageView unit = new ImageView(new Image("file: src\\Resources\\BlueUnity\\Army\\Gunner\\Gunner-Ready.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Gunner\\GunnerReady.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
     }
 
     public final ImageView getGunnerReadyRed() {
-        ImageView unit = new ImageView(new Image("file: src\\Resources\\RedUnity\\Army\\Gunner\\Gunner-Ready.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Gunner\\GunnerReady.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
@@ -255,14 +262,14 @@ public class Resource {
     }
 
     public final ImageView getTankReadyBlue() {
-        ImageView unit = new ImageView(new Image("file: src\\Resources\\BlueUnity\\Army\\Tank\\Tank-Ready.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Tank\\TankReady.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
     }
 
     public final ImageView getTankReadyRed() {
-        ImageView unit = new ImageView(new Image("file: src\\Resources\\RedUnity\\Army\\Tank\\Tank-Ready.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Tank\\TankReady.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;

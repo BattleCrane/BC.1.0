@@ -260,7 +260,15 @@ public class ControlBattler {
         return unity;
     }
 
-    public void deleteUnity(Point point, Unity unity) {
+    public void checkDestroyedUnities() {
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                if( battleField.getMatrix().get(i).get(j).substring(0, 1).equals("0")){
+                    battleField.getMatrix().get(i).set(j, "XXXXXX");
+                }
+            }
+        }
+
 
 
     }
@@ -297,7 +305,7 @@ public class ControlBattler {
             for (int j = 0; j < 16; j++) {
                 Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
                 List<String> list = battleField.getMatrix().get(i);
-                if (matcher.find() && list.contains(player.getColorType())) {
+                if (matcher.find() && list.get(j).contains(player.getColorType())) {
                     String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
                     battleField.getMatrix().get(i).set(j, readyUnity);
                 }
@@ -311,7 +319,7 @@ public class ControlBattler {
             for (int j = 0; j < 16; j++) {
                 Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
                 List<String> list = battleField.getMatrix().get(i);
-                if (matcher.find() && list.contains(player.getColorType())) {
+                if (matcher.find() && list.get(j).contains(player.getColorType())) {
                     String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
                     battleField.getMatrix().get(i).set(j, readyUnity);
                 }
@@ -538,17 +546,6 @@ public class ControlBattler {
 
     public IdentificationField getIdentificationField() {
         return identificationField;
-    }
-
-
-    private class Pair {
-        Point point;
-        boolean isFoundPoint;
-
-        private Pair(Point point, boolean isFoundPoint) {
-            this.point = point;
-            this.isFoundPoint = isFoundPoint;
-        }
     }
 }
 

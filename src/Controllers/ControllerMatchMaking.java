@@ -1,5 +1,6 @@
 package Controllers;
 
+import BattleFields.Attacker;
 import BattleFields.BattleField;
 import BattleFields.ControlBattler;
 import BattleFields.Point;
@@ -22,6 +23,8 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Класс ControllerMatchMaking реализует интерфейс Initializable.
@@ -107,6 +110,7 @@ public final class ControllerMatchMaking implements Initializable {
     private Resource resource = new Resource();
 
     private Boolean click = false;
+    private Boolean clickForAttack = false;
     private Unity unit;
     private String labelUnit = "";
 
@@ -119,11 +123,13 @@ public final class ControllerMatchMaking implements Initializable {
         buttonCreateArmy.setVisible(false);
         Painter.drawGraphic(controlBattler, resource, paneControlField);
         initializeGameButtons();
+//        initializeBattleUnities();
         System.out.println(controlBattler.getPlayer().getColorType());
     }
 
     private void nextTurn() {
         controlBattler.nextTurnOfCurrentPlayer();
+        labelUnit = "";
         System.out.println(controlBattler.getPlayer().getColorType());
         System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
         System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
@@ -259,7 +265,13 @@ public final class ControllerMatchMaking implements Initializable {
         //Следующий ход:
         buttonEndTurn.setOnMouseClicked(event -> {
             nextTurn();
-            if (controlBattler.getHowICanProductArmy() > 0 || controlBattler.getHowICanProductTanks() > 0) {
+            Painter.drawGraphic(controlBattler, resource, paneControlField);
+            if (controlBattler.getHowICanProductArmy() - controlBattler.getHowICanProductTanks() > 0) {
+                buttonBuildFactory.setVisible(true);
+            } else {
+                buttonBuildFactory.setVisible(false);
+            }
+            if (controlBattler.getHowICanProductTanks() > 0 || controlBattler.getHowICanProductArmy() > 0) {
                 buttonCreateArmy.setVisible(true);
             } else {
                 buttonCreateArmy.setVisible(false);
@@ -338,7 +350,7 @@ public final class ControllerMatchMaking implements Initializable {
 
         //Инкапсуляция производства:
         paneControlField.setOnMouseClicked(event -> {
-            try{
+            try {
                 if (click) {
                     click = false;
                     Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
@@ -403,14 +415,58 @@ public final class ControllerMatchMaking implements Initializable {
                             controlBattler.setHowICanProductTanks(controlBattler.getHowICanProductTanks() - 1);
                         }
                     }
+                    //Если атакуем:
 
 
-                    Painter.drawGraphic(controlBattler, resource, paneControlField);
-                    controlBattler.getBattleField().toString();
-                    controlBattler.getIdentificationField().toString();
-                    System.out.println();
+                } else {
+                    System.out.println("Выбрали юнита");
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    String clickedUnit = controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY());
+                    System.out.println("Юнит: " + clickedUnit);
+                    if (clickedUnit.contains(controlBattler.getPlayer().getColorType()) && clickedUnit.contains("!")) {
+                        switch (clickedUnit.substring(4, 5)) {
+                            case "G":
+                                System.out.println("Это автоматчик: " + clickedUnit);
+                                    paneControlField.setOnMouseClicked(secondEvent -> {
+                                        Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                                        System.out.println("Второй клик: ");
+                                        if (!controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()).
+                                                contains(controlBattler.getPlayer().getColorType())) {
+                                            Pattern pattern = Pattern.compile("[hgbfwtGT]");
+                                            Matcher matcher = pattern.matcher(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()));
+                                            if (matcher.find()) {
+                                                controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).set(pointSecondClick.getY(),
+                                                        Attacker.attack(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()), 1));
+                                                System.out.println("ATTACK!");
+                                                controlBattler.getBattleField().toString();
+                                                //Метод "Убрать готовность юнита" ! -> ?
+                                                //Рекурсия!!!!!!!
+                                            }
+                                        }
+                                    });
+                                break;
+                            case "T":
+                                click = !click;
+                                break;
+                        }
+                    }
                 }
-            } catch (Exception ignored){} //Может выскочить null
+                //После события:
+                controlBattler.checkDestroyedUnities();
+                Painter.drawGraphic(controlBattler, resource, paneControlField);
+                controlBattler.getBattleField().toString();
+                controlBattler.getIdentificationField().toString();
+                System.out.println();
+            } catch (Exception ignored) {
+            } //Может выскочить null
+
+        });
+    }
+
+    private void initializeBattleUnities() {
+        paneControlField.setOnMouseClicked(event -> {
+            Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+
 
         });
     }
