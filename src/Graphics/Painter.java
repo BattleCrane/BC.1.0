@@ -81,6 +81,9 @@ public final class Painter {
                             case "2<-b'":
                                 currentUnity = resource.getBarracksLevel2Red();
                                 break;
+                            case "1<+b'":
+                                currentUnity = resource.getBarracksLevel2Blue1HP();
+                                break;
                             //--Уровень 3:
                             case "4>+b'":
                                 currentUnity = resource.getBarracksLevel3Blue();
@@ -150,7 +153,7 @@ public final class Painter {
                             case "    0":
                                 currentUnity = resource.getEmptyField();
                                 break;
-                            case "XXXXXX":
+                            case "XXXXX":
                                 currentUnity = resource.getDestroyedField();
                                 break;
                         }

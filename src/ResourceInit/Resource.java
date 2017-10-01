@@ -127,6 +127,15 @@ public class Resource {
         return barracksLevel2Blue;
     }
 
+    public final ImageView getBarracksLevel2Blue1HP() {
+        ImageView barracksLevel2Blue1Hp = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Barracks\\Barracks - Level 2 1HP.png"));
+        barracksLevel2Blue1Hp.setFitWidth(67.0);
+        barracksLevel2Blue1Hp.setFitHeight(33.5);
+        return barracksLevel2Blue1Hp;
+    }
+
+
+
     public final ImageView getBarracksLevel3Blue() {
         ImageView barracksLevel3Blue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Barracks\\Barracks - Level 3.png"));
         barracksLevel3Blue.setFitWidth(67.0);

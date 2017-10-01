@@ -111,7 +111,6 @@ public final class ControllerMatchMaking implements Initializable {
     private Resource resource = new Resource();
 
     private Boolean click = false;
-    private Boolean clickForAttack = false;
     private Unity unit;
     private String labelUnit = "";
 
@@ -124,7 +123,6 @@ public final class ControllerMatchMaking implements Initializable {
         buttonCreateArmy.setVisible(false);
         Painter.drawGraphic(controlBattler, resource, paneControlField);
         initializeGameButtons();
-//        initializeBattleUnities();
         System.out.println(controlBattler.getPlayer().getColorType());
     }
 
@@ -351,7 +349,7 @@ public final class ControllerMatchMaking implements Initializable {
 
         //Инкапсуляция производства:
 
-        EventHandler<? super MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+        EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 {
@@ -438,16 +436,25 @@ public final class ControllerMatchMaking implements Initializable {
                                                 Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                                 Matcher matcher = pattern.matcher(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()));
                                                 if (matcher.find()) {
-                                                    controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).set(pointSecondClick.getY(),
-                                                            Attacker.attack(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()), 1));
+                                                    for (int i = 0; i < 16; i++){
+                                                        for (int j = 0; j < 16; j++){
+                                                            if (controlBattler.getIdentificationField().getMatrix().get(i).get(j).
+                                                                    equals(controlBattler.getIdentificationField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()))){
+                                                                controlBattler.getBattleField().getMatrix().get(i).set(j,
+                                                                        Attacker.attack(controlBattler.getBattleField().getMatrix().get(i).get(j), 1));
+                                                            }
+                                                        }
+                                                    }
                                                     System.out.println("ATTACK!");
                                                     controlBattler.getBattleField().getMatrix().get(pointClick.getX()).set(pointClick.getY(),
                                                             controlBattler.sleepUnity(controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY())));
                                                     controlBattler.getBattleField().toString();
                                                     System.out.println("ZZZ: " + controlBattler.sleepUnity(controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY())));
                                                     paneControlField.setOnMouseClicked(this);
+                                                    controlBattler.checkDestroyedUnities();
                                                 }
                                             }
+                                            paneControlField.setOnMouseClicked(this);
                                         });
                                         break;
                                     case "T":
@@ -476,7 +483,6 @@ public final class ControllerMatchMaking implements Initializable {
                             }
                         }
                         //После события:
-                        controlBattler.checkDestroyedUnities();
                         Painter.drawGraphic(controlBattler, resource, paneControlField);
                         controlBattler.getBattleField().toString();
                         controlBattler.getIdentificationField().toString();

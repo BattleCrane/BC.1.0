@@ -38,7 +38,7 @@ public final class IdentificationField {
         return stringBuilder.toString();
     }
 
-    final List<List<String>> getMatrix() {
+    public final List<List<String>> getMatrix() {
         return matrix;
     }
 
