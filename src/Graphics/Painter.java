@@ -29,6 +29,11 @@ public final class Painter {
                             isReadyUnit = true;
                             System.out.println("Found");
                             break;
+                        case "1^!+T'":
+                            currentUnity = resource.getTankReadyBlue1HP();
+                            isReadyUnit = true;
+                            System.out.println("Found");
+                            break;
                         case "2^!-T'":
                             currentUnity = resource.getTankReadyRed();
                             System.out.println("Found");
@@ -41,8 +46,50 @@ public final class Painter {
                             case "8^+h'":
                                 currentUnity = resource.getHeadquartersBlue();
                                 break;
+                            case "1^+h'":
+                                currentUnity = resource.getHeadquartersBlue1HP();
+                                break;
+                            case "2^+h'":
+                                currentUnity = resource.getHeadquartersBlue2HP();
+                                break;
+                            case "3^+h'":
+                                currentUnity = resource.getHeadquartersBlue3HP();
+                                break;
+                            case "4^+h'":
+                                currentUnity = resource.getHeadquartersBlue4HP();
+                                break;
+                            case "5^+h'":
+                                currentUnity = resource.getHeadquartersBlue5HP();
+                                break;
+                            case "6^+h'":
+                                currentUnity = resource.getHeadquartersBlue6HP();
+                                break;
+                            case "7^+h'":
+                                currentUnity = resource.getHeadquartersBlue7HP();
+                                break;
                             case "8^-h'":
                                 currentUnity = resource.getHeadquartersRed();
+                                break;
+                            case "1^-h'":
+                                currentUnity = resource.getHeadquartersRed1HP();
+                                break;
+                            case "2^-h'":
+                                currentUnity = resource.getHeadquartersRed2HP();
+                                break;
+                            case "3^-h'":
+                                currentUnity = resource.getHeadquartersRed3HP();
+                                break;
+                            case "4^-h'":
+                                currentUnity = resource.getHeadquartersRed4HP();
+                                break;
+                            case "5^-h'":
+                                currentUnity = resource.getHeadquartersRed5HP();
+                                break;
+                            case "6^-h'":
+                                currentUnity = resource.getHeadquartersRed6HP();
+                                break;
+                            case "7^-h'":
+                                currentUnity = resource.getHeadquartersRed7HP();
                                 break;
                             //Генератор:
                             //--Уровень 1:
@@ -56,15 +103,39 @@ public final class Painter {
                             case "2<+g'":
                                 currentUnity = resource.getGeneratorLevel2Blue();
                                 break;
+                            case "1<+g'":
+                                currentUnity = resource.getGeneratorLevel2Blue1HP();
+                                break;
                             case "2<-g'":
                                 currentUnity= resource.getGeneratorLevel2Red();
+                                break;
+                            case "1<-g'":
+                                currentUnity= resource.getGeneratorLevel2Red1HP();
                                 break;
                             //--Уровень 3:
                             case "4>+g'":
                                 currentUnity = resource.getGeneratorLevel3Blue();
                                 break;
+                            case "3>+g'":
+                                currentUnity = resource.getGeneratorLevel3Blue3HP();
+                                break;
+                            case "2>+g'":
+                                currentUnity = resource.getGeneratorLevel3Blue2HP();
+                                break;
+                            case "1>+g'":
+                                currentUnity = resource.getGeneratorLevel3Blue1HP();
+                                break;
                             case "4>-g'":
                                 currentUnity = resource.getGeneratorLevel3Red();
+                                break;
+                            case "1>-g'":
+                                currentUnity = resource.getGeneratorLevel3Red1HP();
+                                break;
+                            case "2>-g'":
+                                currentUnity = resource.getGeneratorLevel3Red2HP();
+                                break;
+                            case "3>-g'":
+                                currentUnity = resource.getGeneratorLevel3Red3HP();
                                 break;
                             //Бараки:
                             //--Уровень 1:
@@ -91,6 +162,15 @@ public final class Painter {
                             case "4>-b'":
                                 currentUnity = resource.getBarracksLevel3Red();
                                 break;
+                            case "3>+b'":
+                                currentUnity = resource.getBarracksLevel3Blue3HP();
+                                break;
+                            case "2>+b'":
+                                currentUnity = resource.getBarracksLevel3Blue2HP();
+                                break;
+                            case "1>+b'":
+                                currentUnity = resource.getBarracksLevel3Blue1HP();
+                                break;
                             //Завод:
                             //--Уровень 1:
                             case "1^+f'":
@@ -106,9 +186,33 @@ public final class Painter {
                             case "4<-f'":
                                 currentUnity = resource.getFactoryLevel2Red();
                                 break;
+                            case "1<+f'":
+                                currentUnity = resource.getFactoryLevel2Blue1HP();
+                                break;
+                            case "2<+f'":
+                                currentUnity = resource.getFactoryLevel2Blue2HP();
+                                break;
+                            case "3<+f'":
+                                currentUnity = resource.getFactoryLevel2Blue3HP();
+                                break;
                             //--Уровень 3:
                             case "6>+f'":
                                 currentUnity = resource.getFactoryLevel3Blue();
+                                break;
+                            case "5>+f'":
+                                currentUnity = resource.getFactoryLevel3Blue5HP();
+                                break;
+                            case "4>+f'":
+                                currentUnity = resource.getFactoryLevel3Blue4HP();
+                                break;
+                            case "3>+f'":
+                                currentUnity = resource.getFactoryLevel3Blue3HP();
+                                break;
+                            case "2>+f'":
+                                currentUnity = resource.getFactoryLevel3Blue2HP();
+                                break;
+                            case "1>+f'":
+                                currentUnity = resource.getFactoryLevel3Blue1HP();
                                 break;
                             case "6>-f'":
                                 currentUnity = resource.getFactoryLevel3Red();
@@ -118,12 +222,24 @@ public final class Painter {
                             case "2^+t'":
                                 currentUnity = resource.getTurretLevel1Blue();
                                 break;
+                            case "1^+t'":
+                                currentUnity = resource.getTurretLevel1Blue1HP();
+                                break;
                             case "2^-t'":
                                 currentUnity = resource.getTurretLevel1Red();
                                 break;
                             //--Уровень 2:
                             case "4<+t'":
                                 currentUnity = resource.getTurretLevel2Blue();
+                                break;
+                            case "1<+t'":
+                                currentUnity = resource.getTurretLevel2Blue1HP();
+                                break;
+                            case "2<+t'":
+                                currentUnity = resource.getTurretLevel2Blue2HP();
+                                break;
+                            case "3<+t'":
+                                currentUnity = resource.getTurretLevel2Blue3HP();
                                 break;
                             case "4<-t'":
                                 currentUnity = resource.getTurretLevel2Red();
@@ -135,6 +251,15 @@ public final class Painter {
                             case "4^+w'":
                                 currentUnity = resource.getWallBlue();
                                 break;
+                            case "1^+w'":
+                                currentUnity = resource.getWallBlue1HP();
+                                break;
+                            case "2^+w'":
+                                currentUnity = resource.getWallBlue2HP();
+                                break;
+                            case "3^+w'":
+                                currentUnity = resource.getWallBlue3HP();
+                                break;
                             //Автоматчик:
                             case "1^+G'":
                                 currentUnity = resource.getGunnerBlue();
@@ -145,6 +270,9 @@ public final class Painter {
                             //Танк:
                             case "2^+T'":
                                 currentUnity = resource.getTankBlue();
+                                break;
+                            case "1^+T'":
+                                currentUnity = resource.getTankBlue1HP();
                                 break;
                             case "2^-T'":
                                 currentUnity = resource.getTankRed();
