@@ -33,43 +33,43 @@ public class Resource {
         return new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters.png"));
     }
     public final ImageView getHeadquartersBlue1HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 1 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 1HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getHeadquartersBlue2HP() {
-        ImageView unit =  new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 2 HP.png"));
+        ImageView unit =  new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 2HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getHeadquartersBlue3HP() {
-        ImageView unit =  new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 3 HP.png"));
+        ImageView unit =  new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 3HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getHeadquartersBlue4HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 4 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 4HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getHeadquartersBlue5HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 5 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 5HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getHeadquartersBlue6HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 6 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 6HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getHeadquartersBlue7HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 7 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters 7HP.png"));
         unit.setFitWidth(67.0);
         unit.setFitHeight(67.0);
         return unit;
@@ -225,19 +225,19 @@ public class Resource {
         return wallBlue;
     }
     public final ImageView getWallBlue1HP() {
-        ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Wall\\Wall 1 HP.png"));
+        ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Wall\\Wall 1HP.png"));
         wallBlue.setFitWidth(33.5);
         wallBlue.setFitHeight(33.5);
         return wallBlue;
     }
     public final ImageView getWallBlue2HP() {
-        ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Wall\\Wall 2 HP.png"));
+        ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Wall\\Wall 2HP.png"));
         wallBlue.setFitWidth(33.5);
         wallBlue.setFitHeight(33.5);
         return wallBlue;
     }
     public final ImageView getWallBlue3HP() {
-        ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Wall\\Wall 3 HP.png"));
+        ImageView wallBlue = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Wall\\Wall 3HP.png"));
         wallBlue.setFitWidth(33.5);
         wallBlue.setFitHeight(33.5);
         return wallBlue;
@@ -453,19 +453,19 @@ public class Resource {
         return unit;
     }
     public final ImageView getTurretLevel2Blue1HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2 1 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2 1HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
     }
     public final ImageView getTurretLevel2Blue2HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2 2 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2 2HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
     }
     public final ImageView getTurretLevel2Blue3HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2 3 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2 3HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
@@ -517,7 +517,7 @@ public class Resource {
         return unit;
     }
     public final ImageView getTankBlue1HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Tank\\Tank 1 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Tank\\Tank 1HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;
@@ -537,7 +537,7 @@ public class Resource {
         return unit;
     }
     public final ImageView getTankReadyBlue1HP() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Tank\\TankReady 1 HP.png"));
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Tank\\TankReady 1HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;

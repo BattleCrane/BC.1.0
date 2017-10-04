@@ -155,6 +155,9 @@ public final class Painter {
                             case "1<+b'":
                                 currentUnity = resource.getBarracksLevel2Blue1HP();
                                 break;
+                            case "1<-b'":
+                                currentUnity = resource.getBarracksLevel2Red1HP();
+                                break;
                             //--Уровень 3:
                             case "4>+b'":
                                 currentUnity = resource.getBarracksLevel3Blue();
