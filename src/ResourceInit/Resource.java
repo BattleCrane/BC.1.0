@@ -243,6 +243,7 @@ public class Resource {
         return wallBlue;
     }
 
+
     public final ImageView getWallRed() {
         ImageView wallRed = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Wall\\Wall.png"));
         wallRed.setFitWidth(33.5);
