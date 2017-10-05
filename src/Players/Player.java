@@ -18,6 +18,9 @@ public class Player {
         this.energy = energy;
         this.colorType = colorType;
     }
+    public Player(String colorType) {
+        this.colorType = colorType;
+    }
 
     public int getTurn() {
         return turn;

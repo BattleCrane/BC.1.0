@@ -1,5 +1,7 @@
 package BattleFields;
 
+import javafx.animation.FadeTransition;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * Он вызывается в конце каждого хода и выводит на консоль состояние поля боя.
  */
 
-public final class BattleField {
+public final class BattleField implements Field {
 
     private final List<List<String>> matrix = new ArrayList<>();
 

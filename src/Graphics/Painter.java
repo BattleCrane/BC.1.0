@@ -231,6 +231,9 @@ public final class Painter {
                             case "2^-t'":
                                 currentUnity = resource.getTurretLevel1Red();
                                 break;
+                            case "q^-t'":
+                                currentUnity = resource.getTurretLevel1Red1HP();
+                                break;
                             //--Уровень 2:
                             case "4<+t'":
                                 currentUnity = resource.getTurretLevel2Blue();
@@ -247,9 +250,27 @@ public final class Painter {
                             case "4<-t'":
                                 currentUnity = resource.getTurretLevel2Red();
                                 break;
+                            case "1<-t'":
+                                currentUnity = resource.getTurretLevel2Red1HP();
+                                break;
+                            case "2<-t'":
+                                currentUnity = resource.getTurretLevel2Red2HP();
+                                break;
+                            case "3<-t'":
+                                currentUnity = resource.getTurretLevel2Red3HP();
+                                break;
                             //Стена:
                             case "4^-w'":
                                 currentUnity = resource.getWallRed();
+                                break;
+                            case "3^-w'":
+                                currentUnity = resource.getWallRed3HP();
+                                break;
+                            case "2^-w'":
+                                currentUnity = resource.getWallRed2HP();
+                                break;
+                            case "1^-w'":
+                                currentUnity = resource.getWallRed1HP();
                                 break;
                             case "4^+w'":
                                 currentUnity = resource.getWallBlue();

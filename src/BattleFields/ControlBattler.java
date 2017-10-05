@@ -6,7 +6,6 @@ import Unities.Unity;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,13 +49,13 @@ public class ControlBattler {
     private Unity headquarters = new Unity(2, 2, "h", 8);
     //Бараки:
     private Unity barracksVertical = new Unity(2, 1, "b", 1);
-    private Unity barracksHorisontal = new Unity(1, 2, "b", 1);
+    private Unity barracksHorizontal = new Unity(1, 2, "b", 1);
     //Генератор:
     private Unity generator = new Unity(2, 2, "g", 1);
     private boolean isConstructedGenerator;
     //Завод:
     private Unity factoryVertical = new Unity(3, 2, "f", 1);
-    private Unity factoryHorisontal = new Unity(2, 3, "f", 1);
+    private Unity factoryHorizontal = new Unity(2, 3, "f", 1);
     //Турель:
     private Unity turret = new Unity(1, 1, "t", 2);
     //Стена:
@@ -452,12 +451,12 @@ public class ControlBattler {
         this.barracksVertical = barracksVertical;
     }
 
-    public Unity getBarracksHorisontal() {
-        return barracksHorisontal;
+    public Unity getBarracksHorizontal() {
+        return barracksHorizontal;
     }
 
-    public void setBarracksHorisontal(Unity barracksHorisontal) {
-        this.barracksHorisontal = barracksHorisontal;
+    public void setBarracksHorizontal(Unity barracksHorizontal) {
+        this.barracksHorizontal = barracksHorizontal;
     }
 
     public Unity getGenerator() {
@@ -476,12 +475,12 @@ public class ControlBattler {
         this.factoryVertical = factoryVertical;
     }
 
-    public Unity getFactoryHorisontal() {
-        return factoryHorisontal;
+    public Unity getFactoryHorizontal() {
+        return factoryHorizontal;
     }
 
-    public void setFactoryHorisontal(Unity factoryHorisontal) {
-        this.factoryHorisontal = factoryHorisontal;
+    public void setFactoryHorizontal(Unity factoryHorizontal) {
+        this.factoryHorizontal = factoryHorizontal;
     }
 
     public Unity getTurret() {

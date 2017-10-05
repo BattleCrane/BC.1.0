@@ -9,7 +9,7 @@ import java.util.List;
  * При создании нового юнита на поле боя происходит запись его номера в матрицу.
  * Работает вместо координат юнита.
  */
-public final class IdentificationField {
+public final class IdentificationField implements Field {
 
     private final List<List<String>> matrix = new ArrayList<>();
     private int numberUnity = 1;

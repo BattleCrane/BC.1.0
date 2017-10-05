@@ -302,14 +302,14 @@ public final class ControllerMatchMaking implements Initializable {
         //Постройка бараков:
         buttonBuildBarracks.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getBarracksHorisontal();
+            unit = controlBattler.getBarracksHorizontal();
             labelUnit = "building";
         });
 
         //Постройка завода:
         buttonBuildFactory.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getFactoryHorisontal();
+            unit = controlBattler.getFactoryHorizontal();
             labelUnit = "factory";
         });
 
@@ -382,7 +382,7 @@ public final class ControllerMatchMaking implements Initializable {
                             }
                             //Если создаем стену:
                             if (labelUnit.equals("wall") && controlBattler.getHowICanBuild() > 0) {
-                                if (controlBattler.checkConstructionOfBuilding(pointClick, controlBattler.getBarracksHorisontal(), controlBattler.getPlayer()) &&
+                                if (controlBattler.checkConstructionOfBuilding(pointClick, controlBattler.getBarracksHorizontal(), controlBattler.getPlayer()) &&
                                         controlBattler.putDoubleWall(controlBattler.getPlayer(), pointClick, unit)) {
                                     controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
 
@@ -393,6 +393,7 @@ public final class ControllerMatchMaking implements Initializable {
                                 if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
                                         controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                                     controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                                    Attacker.radiusAttack(controlBattler, controlBattler.getBattleField(), controlBattler.getIdentificationField(), pointClick, 2, 1, controlBattler.getOpponentPlayer());
 
                                 }
                             }

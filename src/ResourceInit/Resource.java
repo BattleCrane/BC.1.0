@@ -250,6 +250,26 @@ public class Resource {
         wallRed.setFitHeight(33.5);
         return wallRed;
     }
+    public final ImageView getWallRed3HP() {
+        ImageView wallRed = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Wall\\Wall 3HP.png"));
+        wallRed.setFitWidth(33.5);
+        wallRed.setFitHeight(33.5);
+        return wallRed;
+    }
+
+    public final ImageView getWallRed2HP() {
+        ImageView wallRed = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Wall\\Wall 2HP.png"));
+        wallRed.setFitWidth(33.5);
+        wallRed.setFitHeight(33.5);
+        return wallRed;
+    }
+
+    public final ImageView getWallRed1HP() {
+        ImageView wallRed = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Wall\\Wall 1HP.png"));
+        wallRed.setFitWidth(33.5);
+        wallRed.setFitHeight(33.5);
+        return wallRed;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Бараки: (по умолчанию горизонтальные)
@@ -445,6 +465,12 @@ public class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+    public final ImageView getTurretLevel1Red1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 1 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
 
     public final ImageView getTurretLevel2Blue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Turret\\Turret - Level 2.png"));
@@ -473,6 +499,24 @@ public class Resource {
 
     public final ImageView getTurretLevel2Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 2.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTurretLevel2Red1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 2 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTurretLevel2Red2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 2 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTurretLevel2Red3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Turret\\Turret - Level 2 3HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;

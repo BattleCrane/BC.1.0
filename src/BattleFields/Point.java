@@ -25,7 +25,7 @@ public final class Point {
         return y;
     }
 
-    public void setY(int y) {
+    void setY(int y) {
         this.y = y;
     }
 }
