@@ -13,7 +13,7 @@ import java.util.List;
  * Он вызывается в конце каждого хода и выводит на консоль состояние поля боя.
  */
 
-public final class BattleField implements Field {
+public final class BattleField {
 
     private final List<List<String>> matrix = new ArrayList<>();
 

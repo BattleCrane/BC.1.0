@@ -33,19 +33,25 @@ public class Tests {
     }
     @Test
     public void radiusAttack(){
-        ControlBattler controlBattler = new ControlBattler(new BattleField());
-        controlBattler.setPlayer(new Player("-"));
-        controlBattler.putUnity(new Player("+"), new Point(8, 10), controlBattler.getFactoryVertical());
-        controlBattler.putUnity(new Player("+"), new Point(10, 12), controlBattler.getBarracksHorizontal());
-        controlBattler.putUnity(new Player("+"), new Point(11, 10), controlBattler.getHeadquarters());
-        controlBattler.putUnity(new Player("-"), new Point(11, 12), controlBattler.getTurret());
-        controlBattler.getBattleField().toString();
-        try {
-            Attacker.radiusAttack(controlBattler, controlBattler.getBattleField(), controlBattler.getIdentificationField(), new Point(11, 12), 2, 1, controlBattler.getOpponentPlayer());
-        } catch (Exception ignored){
-        }
-        controlBattler.getBattleField().toString();
-        controlBattler.getIdentificationField().toString();
+        //Test №1:
+        System.out.println("Test №1:");
+        ControlBattler controlBattlerTest1 = new ControlBattler(new BattleField());
+        controlBattlerTest1.setPlayer(new Player("-"));
+        controlBattlerTest1.putUnity(new Player("+"), new Point(8, 10), controlBattlerTest1.getFactoryVertical());
+        controlBattlerTest1.putUnity(new Player("+"), new Point(10, 12), controlBattlerTest1.getBarracksHorizontal());
+        controlBattlerTest1.putUnity(new Player("+"), new Point(11, 10), controlBattlerTest1.getHeadquarters());
+        controlBattlerTest1.putUnity(new Player("-"), new Point(11, 12), controlBattlerTest1.getTurret());
+        Attacker.radiusAttack(controlBattlerTest1, new Point(11, 12), 2, 1);
+        controlBattlerTest1.getBattleField().toString();
+
+        //Test №2:
+        System.out.println("Test №1:");
+        ControlBattler controlBattlerTest2 = new ControlBattler(new BattleField());
+        controlBattlerTest2.initializeField();
+        controlBattlerTest1.setPlayer(new Player("+"));
+        controlBattlerTest2.putUnity(new Player("+"), new Point(0, 5), controlBattlerTest2.getTurret());
+        Attacker.radiusAttack(controlBattlerTest2, new Point (0, 5), 2, 1);
+        controlBattlerTest2.getBattleField().toString();
     }
 
 }

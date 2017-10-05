@@ -393,7 +393,7 @@ public final class ControllerMatchMaking implements Initializable {
                                 if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
                                         controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
                                     controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
-                                    Attacker.radiusAttack(controlBattler, controlBattler.getBattleField(), controlBattler.getIdentificationField(), pointClick, 2, 1, controlBattler.getOpponentPlayer());
+                                    Attacker.radiusAttack(controlBattler, pointClick, 2, 1);
 
                                 }
                             }

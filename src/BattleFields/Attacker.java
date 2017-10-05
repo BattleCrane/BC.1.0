@@ -18,23 +18,28 @@ public final class Attacker {
         return  newHitPoints + targetUnity.substring(1);
     }
 
-    public static void radiusAttack(ControlBattler controlBattler, BattleField battleField, IdentificationField identificationField, Point middle, int radius, int damage, Player opponentPlayer){
+    public static void radiusAttack(ControlBattler controlBattler,Point middle, int radius, int damage){
         int x = middle.getX();
         int y = middle.getY();
-        int countShift = 0;
+        int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
         Pattern pattern = Pattern.compile("[hgbfwtGT]");
         for (int i = x - radius; i < x + radius + 1; i++){
             for (int j = y - countShift; j < y + 1 + countShift; j++){
-                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
                 boolean  inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
-                boolean  isThis = battleField.getMatrix().get(i).get(j).equals(battleField.getMatrix().get(x).get(y));
-                if (inBounds && matcher.find() && !isThis){
-                    for (int q = 0; q < 16; q++){
-                        for (int w = 0; w < 16; w++){
-                            if (identificationField.getMatrix().get(q).get(w).equals(identificationField.getMatrix().get(i).get(j)) &&
-                                    !battleField.getMatrix().get(q).get(w).contains(controlBattler.getPlayer().getColorType())){
-                                battleField.getMatrix().get(q).set(w, attack(battleField.getMatrix().get(q).get(w), damage));
-                                System.out.println(identificationField.getMatrix().get(i).get(j));
+                if (inBounds){
+                    String currentUnity = controlBattler.getBattleField().getMatrix().get(i).get(j);
+                    Matcher matcher = pattern.matcher(currentUnity);
+                    boolean  isSame = currentUnity.equals(controlBattler.getBattleField().getMatrix().get(x).get(y));
+                    if (matcher.find() && !isSame){
+                        for (int q = 0; q < 16; q++){
+                            for (int w = 0; w < 16; w++){
+                                String otherUnity = controlBattler.getBattleField().getMatrix().get(q).get(w);
+                                String otherUnityNumber = controlBattler.getIdentificationField().getMatrix().get(q).get(w);
+                                String currentUnityNumber = controlBattler.getIdentificationField().getMatrix().get(i).get(j);
+                                if (otherUnityNumber.equals(currentUnityNumber) &&
+                                        !otherUnity.contains(controlBattler.getPlayer().getColorType())){
+                                    controlBattler.getBattleField().getMatrix().get(q).set(w, attack(otherUnity, damage));
+                                }
                             }
                         }
                     }
@@ -42,7 +47,7 @@ public final class Attacker {
             }
             countShift++;
             if (i >= x){
-                countShift = countShift - 2;
+                countShift = countShift - 2; //Перетягивание countShift--
             }
         }
         controlBattler.checkDestroyedUnities();
