@@ -1,11 +1,13 @@
 package BattleFields;
 
 
+import Adjutants.AdjutantWakeUpper;
 import Players.Player;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,7 +30,7 @@ import java.util.regex.Pattern;
  * 5.) Отрисовка территорий
  */
 //Контроллер игры, делегат
-public class ControlBattler {
+public class BattleManager {
 
     //Основные переменные:
     private Pane paneBattle;
@@ -67,14 +69,12 @@ public class ControlBattler {
     private Unity gunner = new Unity(1, 1, "G", 1);
     private Unity tank = new Unity(1, 1, "T", 2);
 
-    public ControlBattler(BattleField battleField) {
+    public BattleManager(BattleField battleField) {
         this.battleField = battleField;
     }
+    public BattleManager() {}
 
-    public ControlBattler() {
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void initializeField() {
         //Размещение штабов:
         putUnity(playerRed, new Point(0, 0), headquarters);
@@ -93,10 +93,10 @@ public class ControlBattler {
 
     public boolean putUnity(Player player, Point point, Unity unity) {
         if (isEmptyTerritory(point, unity)) {
-            for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
-                for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
+            for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+                for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                     String newUnity = unity.getHitPoints() + "^" + "?" + player.getColorType() + unity.getId();
-                    if (i == point.getX() && j == point.getY()) {
+                    if (i == point.X() && j == point.Y()) {
                         newUnity = newUnity + "'";
                     } else {
                         newUnity = newUnity + ".";
@@ -114,13 +114,13 @@ public class ControlBattler {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public boolean putDoubleWall(Player player, Point point, Unity unity) {
-        Point pointShiftRight = new Point(point.getX(), point.getY());
-        pointShiftRight.setY(pointShiftRight.getY() + 1);
+        Point pointShiftRight = new Point(point.X(), point.Y());
+        pointShiftRight.setY(pointShiftRight.Y() + 1);
         if (isEmptyTerritory(point, unity) && isEmptyTerritory(pointShiftRight, unity)) {
-            for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
-                for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
+            for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+                for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                     String newUnity = unity.getHitPoints() + "^" + "?" + player.getColorType() + unity.getId();
-                    if (i == point.getX() && j == point.getY()) {
+                    if (i == point.X() && j == point.Y()) {
                         newUnity = newUnity + "'";
                     }
                     identificationField.getMatrix().get(i).set(j, "" + identificationField.getNumberUnity());
@@ -137,12 +137,13 @@ public class ControlBattler {
         }
     }
 
+    @NotNull
     private Boolean isEmptyTerritory(Point point, Unity unity) {
-        if (point.getX() + unity.getWidth() > 16 || point.getY() + unity.getHeight() > 16) {
+        if (point.X() + unity.getWidth() > 16 || point.Y() + unity.getHeight() > 16) {
             return false;
         }
-        for (int i = point.getX(); i < point.getX() + unity.getWidth(); i++) {
-            for (int j = point.getY(); j < point.getY() + unity.getHeight(); j++) {
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                 if (!this.battleField.getMatrix().get(i).get(j).equals("     0")) {
                     return false;
                 }
@@ -153,12 +154,11 @@ public class ControlBattler {
 
     //Проверка расположения рядом строения:
     public boolean checkConstructionOfBuilding(Point point, Unity unity, Player player) {
-        int startPointX = point.getX() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей)
-        int startPointY = point.getY() - 1;
+        int startX = point.X() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей координат)
+        int startY = point.Y() - 1;
         Pattern pattern = Pattern.compile("[hgbfwt]");
-
-        for (int i = startPointX; i <= startPointX + unity.getWidth() + 1; i++) {
-            for (int j = startPointY; j <= startPointY + unity.getHeight() + 1; j++) {
+        for (int i = startX; i <= startX + unity.getWidth() + 1; i++) {
+            for (int j = startY; j <= startY + unity.getHeight() + 1; j++) {
                 if (i >= 0 && i < 16 && j >= 0 && j < 16) {
                     Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
                     if (battleField.getMatrix().get(i).get(j).contains(player.getColorType()) && matcher.find()) {
@@ -170,23 +170,23 @@ public class ControlBattler {
         return false;
     }
 
-    public boolean upgradeBuilding(Point point, Player player) { //Здесь я остановился:
+    public boolean upgradeBuilding(Point point, Player player) {
         boolean isUpgraded = false;
-        if (battleField.getMatrix().get(point.getX()).get(point.getY()).contains(player.getColorType())) {
-            for (int i = 0; i < 16; i++){
-                for (int j = 0; j < 16; j++){
+        if (battleField.getMatrix().get(point.X()).get(point.Y()).contains(player.getColorType())) {
+            for (int i = 0; i < 16; i++) {
+                for (int j = 0; j < 16; j++) {
                     String unityBuild = battleField.getMatrix().get(i).get(j);
-                    if (identificationField.getMatrix().get(i).get(j).equals(String.valueOf(getIdentification(point)))){
+                    if (identificationField.getMatrix().get(i).get(j).equals(String.valueOf(getIdentification(point)))) {
                         try {
-                            switch (battleField.getMatrix().get(i).get(j).substring(4, 5)) { //Смотрим строение:
+                            switch (unityBuild.substring(4, 5)) { //Смотрим строение:
                                 case "g": //Улучшение генератора:
-                                    if (!unityBuild.contains(">")){
+                                    if (!unityBuild.contains(">")) {
                                         unityBuild = levelUp(unityBuild);
-                                        if (unityBuild.contains("<")) {
-                                            unityBuild = changeHitPoints(unityBuild, 1);
+                                        if (unityBuild != null && unityBuild.contains("<")) {
+                                            unityBuild = increaseHitPoints(unityBuild, 1);
                                         }
-                                        if (unityBuild.contains(">")) {
-                                            unityBuild = changeHitPoints(unityBuild, 2);
+                                        if (unityBuild != null && unityBuild.contains(">")) {
+                                            unityBuild = increaseHitPoints(unityBuild, 2);
                                         }
                                         isUpgraded = true;
                                     }
@@ -194,11 +194,11 @@ public class ControlBattler {
                                 case "b": //Улучшение бараков:
                                     if (!unityBuild.contains(">")) {
                                         unityBuild = levelUp(unityBuild);
-                                        if (unityBuild.contains("<")) {
-                                            unityBuild = changeHitPoints(unityBuild, 1);
+                                        if (unityBuild != null && unityBuild.contains("<")) {
+                                            unityBuild = increaseHitPoints(unityBuild, 1);
                                         }
-                                        if (unityBuild.contains(">")) {
-                                            unityBuild = changeHitPoints(unityBuild, 2);
+                                        if (unityBuild != null && unityBuild.contains(">")) {
+                                            unityBuild = increaseHitPoints(unityBuild, 2);
                                         }
                                         isUpgraded = true;
                                     }
@@ -206,19 +206,19 @@ public class ControlBattler {
                                 case "f": //Улучшение завода:
                                     if (!unityBuild.contains(">")) {
                                         unityBuild = levelUp(unityBuild);
-                                        if (unityBuild.contains("<")) {
-                                            unityBuild = changeHitPoints(unityBuild, 3);
+                                        if (unityBuild != null && unityBuild.contains("<")) {
+                                            unityBuild = increaseHitPoints(unityBuild, 3);
                                         }
-                                        if (unityBuild.contains(">")) {
-                                            unityBuild = changeHitPoints(unityBuild, 2);
+                                        if (unityBuild != null && unityBuild.contains(">")) {
+                                            unityBuild = increaseHitPoints(unityBuild, 2);
                                         }
                                         isUpgraded = true;
                                     }
                                     break;
                                 case "t": //Улучшение туррели:
                                     if (unityBuild.contains("^")) {
-                                    unityBuild = levelUp(unityBuild);
-                                        unityBuild = changeHitPoints(unityBuild, 2);
+                                        unityBuild = levelUp(unityBuild);
+                                        unityBuild = increaseHitPoints(unityBuild, 2);
                                     }
                                     isUpgraded = true;
                                     break;
@@ -228,30 +228,26 @@ public class ControlBattler {
                     }
                     battleField.getMatrix().get(i).set(j, unityBuild);
                 }
-                }
             }
-
+        }
         return isUpgraded;
     }
 
-    private int getIdentification(Point point){
-        return Integer.parseInt(identificationField.getMatrix().get(point.getX()).get(point.getY()));
+    private int getIdentification(Point point) {
+        return Integer.parseInt(identificationField.getMatrix().get(point.X()).get(point.Y()));
     }
 
     @NotNull
-    private String changeHitPoints(String unityBuild, int temp) {
-        int upgradedHitPoints = Integer.parseInt(unityBuild.substring(0, 1)) + temp;
+    private String increaseHitPoints(String unityBuild, int quantity) {
+        int upgradedHitPoints = Integer.parseInt(unityBuild.substring(0, 1)) + quantity;
         return upgradedHitPoints + unityBuild.substring(1);
     }
 
 
-
     @Nullable
     public String levelUp(String unity) {
-        System.out.println(unity.substring(1, 2));
         switch (unity.substring(1, 2)) {
             case "^":
-                System.out.println("UP");
                 return unity.substring(0, 1) + '<' + unity.substring(2);
             case "<":
                 return unity.substring(0, 1) + '>' + unity.substring(2);
@@ -260,35 +256,29 @@ public class ControlBattler {
     }
 
     public void checkDestroyedUnities() {
-        for (int i = 0; i < 16; i++){
-            for (int j = 0; j < 16; j++){
-                if( battleField.getMatrix().get(i).get(j).substring(0, 1).equals("0")){
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (battleField.getMatrix().get(i).get(j).substring(0, 1).equals("0")) {
                     battleField.getMatrix().get(i).set(j, "XXXXXX");
                 }
             }
         }
-
-
-
     }
 
-    public void correctTerritory() {
-
-    }
-
-    //После нажатия закончить ход
+    //Следующий ход:
     public void nextTurnOfCurrentPlayer() {
         turn = (turn + 1) % 2;
-        whatTurn();
-        showReadyArmy(player);
-        showReadyBuilding(player);
+        whatIsTurn();
+        AdjutantWakeUpper.wakeUpArmy(battleField, player);
+        AdjutantWakeUpper.wakeUpBuilding(battleField, player);
         getHowCanBuild(player);
         getHowCanProductArmy(player);
         getHowCanProductTanks(player);
         isConstructedGenerator = false;
     }
 
-    private void whatTurn() {
+    //Определяет чей ход^
+    private void whatIsTurn() {
         if (turn == playerBlue.getTurn()) {
             player = playerBlue;
             opponentPlayer = playerRed;
@@ -298,37 +288,40 @@ public class ControlBattler {
         }
     }
 
-    private void showReadyArmy(Player player) {
-        Pattern pattern = Pattern.compile("[GTt]");
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-                List<String> list = battleField.getMatrix().get(i);
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-                    battleField.getMatrix().get(i).set(j, readyUnity);
-                }
-            }
-        }
-    }
-    public String sleepUnity(String string) {
-        return string.substring(0, 2) + "?" + string.substring(3);
-    }
+//    //Переводит в боевое состояние пехоту:
+//    private void showReadyArmy(Player player) {
+//        Pattern pattern = Pattern.compile("[GTt]");
+//        for (int i = 0; i < 16; i++) {
+//            for (int j = 0; j < 16; j++) {
+//                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
+//                List<String> list = battleField.getMatrix().get(i);
+//                if (matcher.find() && list.get(j).contains(player.getColorType())) {
+//                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
+//                    battleField.getMatrix().get(i).set(j, readyUnity);
+//                }
+//            }
+//        }
+//    }
+
+//    //Усыпляет юнита:
+//    public String sleepUnity(String string) {
+//        return string.substring(0, 2) + "?" + string.substring(3);
+//    }
 
 
-    private void showReadyBuilding(Player player) {
-        Pattern pattern = Pattern.compile("[bf]'");
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-                List<String> list = battleField.getMatrix().get(i);
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-                    battleField.getMatrix().get(i).set(j, readyUnity);
-                }
-            }
-        }
-    }
+//    private void showReadyBuilding(Player player) {
+//        Pattern pattern = Pattern.compile("[bf]'");
+//        for (int i = 0; i < 16; i++) {
+//            for (int j = 0; j < 16; j++) {
+//                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
+//                List<String> list = battleField.getMatrix().get(i);
+//                if (matcher.find() && list.get(j).contains(player.getColorType())) {
+//                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
+//                    battleField.getMatrix().get(i).set(j, readyUnity);
+//                }
+//            }
+//        }
+//    }
 
     private void getHowCanBuild(Player player) {
         Pattern pattern = Pattern.compile("g'");
@@ -551,55 +544,3 @@ public class ControlBattler {
         return identificationField;
     }
 }
-
-//Проверка MouseClicked на Unity
-//    private Pair isFindUnity(Point point) {
-//        String clickedElement = battleField.getMatrix().get(point.getX()).get(point.getY());
-//        if (clickedElement.contains("'")) {
-//            return new Pair(point, true);
-//        }
-//        if (clickedElement.contains(".")) {
-//            System.out.println("не корень:");
-//            String currentUnity = clickedElement.substring(4, 5);
-//            for (int i = point.getX() - 1; i < point.getX() + 3; i++) {
-//                for (int j = point.getY() - 2; i < point.getY() + 5; j++) {
-//                    if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-//                        System.out.println("i: " + i + "     " + "j: " + j);
-//                        String currentElement = battleField.getMatrix().get(j).get(i);
-//                        System.out.println(currentElement);
-//                        if (currentElement.contains("'") && currentElement.contains(currentUnity)) {
-//                            switch (currentUnity) {
-//                                case "g":
-//                                    for (int k = j; k < j + 2; k++) {
-//                                        for (int l = i; l < i + 2; l++) {
-//                                            System.out.println("inner");
-//                                            if (battleField.getMatrix().get(l).get(k).equals(clickedElement)) {
-//                                                return new Pair(new Point(i, j), true);
-//                                            }
-//                                        }
-//                                    }
-//                                    break;
-//                                case "f":
-//                                    for (int k = j; k < j + 3; k++) {
-//                                        for (int l = i; l < i + 2; l++) {
-//                                            if (battleField.getMatrix().get(l).get(k).equals(clickedElement)) {
-//                                                return new Pair(new Point(i, j), true);
-//                                            }
-//                                        }
-//                                    }
-//                                    break;
-//                                case "b":
-//                                    for (int k = j; k < j + 2; k++) {
-//                                            if (battleField.getMatrix().get(j).get(k).equals(clickedElement)) {
-//                                                return new Pair(new Point(i, j), true);
-//                                            }
-//                                    }
-//                                    break;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return new Pair(null, false);
-//    }

@@ -1,4 +1,5 @@
 package BattleFields;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Класс Point реализует координаты объектов на оси XoY
@@ -13,15 +14,13 @@ public final class Point {
         this.y = y;
     }
 
-    public int getX() {
+    @Contract(pure = true)
+    public int X() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
+    @Contract(pure = true)
+    public int Y() {
         return y;
     }
 

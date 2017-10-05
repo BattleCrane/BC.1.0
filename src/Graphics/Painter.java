@@ -1,17 +1,17 @@
 package Graphics;
 
-import BattleFields.ControlBattler;
+import BattleFields.BattleManager;
 import ResourceInit.Resource;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public final class Painter {
-    public static void drawGraphic(ControlBattler controlBattler, Resource resource, Pane paneControlField){
+    public static void drawGraphic(BattleManager battleManager, Resource resource, Pane paneControlField){
         try {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     boolean isReadyUnit = false;
-                    String element = controlBattler.getBattleField().getMatrix().get(i).get(j);
+                    String element = battleManager.getBattleField().getMatrix().get(i).get(j);
                     ImageView currentUnity = new ImageView();
                     switch (element){
                         //Готовый автоматчик:

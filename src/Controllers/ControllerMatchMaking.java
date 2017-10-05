@@ -1,9 +1,8 @@
 package Controllers;
 
-import BattleFields.Attacker;
-import BattleFields.BattleField;
-import BattleFields.ControlBattler;
-import BattleFields.Point;
+import Adjutants.AdjutantAttacker;
+import Adjutants.AdjutantSleeper;
+import BattleFields.*;
 import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
@@ -49,6 +48,7 @@ public final class ControllerMatchMaking implements Initializable {
     private Pane paneControlArmy;
     @FXML
     private Pane paneTriggerEnergy;
+
     //Глобальные кнопки:
     @FXML
     private Button buttonMenu;
@@ -106,33 +106,33 @@ public final class ControllerMatchMaking implements Initializable {
     private ImageView imageMessageUpgrade;
 
     //Механизм внутренней игры:
-    private ControlBattler controlBattler = new ControlBattler(new BattleField());
+    private BattleManager battleManager = new BattleManager(new BattleField());
     //Графические ресурсы:
     private Resource resource = new Resource();
 
-    private Boolean click = false;
+    private Boolean click = false; //Небольшая защелка для кликов мыши
     private Unity unit;
-    private String labelUnit = "";
+    private String labelUnit = ""; //Определитель действия
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeMessages();
-        controlBattler.initializeField();
-        controlBattler.getBattleField().toString();
-        controlBattler.getIdentificationField().toString();
+        battleManager.initializeField();
+        battleManager.getBattleField().toString();
+        battleManager.getIdentificationField().toString();
         buttonCreateArmy.setVisible(false);
-        Painter.drawGraphic(controlBattler, resource, paneControlField);
+        Painter.drawGraphic(battleManager, resource, paneControlField);
         initializeGameButtons();
-        System.out.println(controlBattler.getPlayer().getColorType());
+        System.out.println(battleManager.getPlayer().getColorType());
     }
 
     private void nextTurn() {
-        controlBattler.nextTurnOfCurrentPlayer();
+        battleManager.nextTurnOfCurrentPlayer();
         labelUnit = "";
-        System.out.println(controlBattler.getPlayer().getColorType());
-        System.out.println("Осталось построек: " + controlBattler.getHowICanBuild());
-        System.out.println("Осталось автоматчиков: " + controlBattler.getHowICanProductArmy());
-        System.out.println("Осталось танков: " + controlBattler.getHowICanProductTanks());
+        System.out.println(battleManager.getPlayer().getColorType());
+        System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
+        System.out.println("Осталось автоматчиков: " + battleManager.getHowICanProductArmy());
+        System.out.println("Осталось танков: " + battleManager.getHowICanProductTanks());
     }
 
 
@@ -264,13 +264,13 @@ public final class ControllerMatchMaking implements Initializable {
         //Следующий ход:
         buttonEndTurn.setOnMouseClicked(event -> {
             nextTurn();
-            Painter.drawGraphic(controlBattler, resource, paneControlField);
-            if (controlBattler.getHowICanProductArmy() - controlBattler.getHowICanProductTanks() > 0) {
+            Painter.drawGraphic(battleManager, resource, paneControlField);
+            if (battleManager.getHowICanProductArmy() - battleManager.getHowICanProductTanks() > 0) {
                 buttonBuildFactory.setVisible(true);
             } else {
                 buttonBuildFactory.setVisible(false);
             }
-            if (controlBattler.getHowICanProductTanks() > 0 || controlBattler.getHowICanProductArmy() > 0) {
+            if (battleManager.getHowICanProductTanks() > 0 || battleManager.getHowICanProductArmy() > 0) {
                 buttonCreateArmy.setVisible(true);
             } else {
                 buttonCreateArmy.setVisible(false);
@@ -295,49 +295,49 @@ public final class ControllerMatchMaking implements Initializable {
         //Постройка генератора:
         buttonBuildGenerator.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getGenerator();
+            unit = battleManager.getGenerator();
             labelUnit = "generator";
         });
 
         //Постройка бараков:
         buttonBuildBarracks.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getBarracksHorizontal();
+            unit = battleManager.getBarracksHorizontal();
             labelUnit = "building";
         });
 
         //Постройка завода:
         buttonBuildFactory.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getFactoryHorizontal();
+            unit = battleManager.getFactoryHorizontal();
             labelUnit = "factory";
         });
 
         //Постройка турели:
         buttonBuildTurret.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getTurret();
+            unit = battleManager.getTurret();
             labelUnit = "turret";
         });
 
         //Постройка стены:
         buttonBuildWall.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getWall();
+            unit = battleManager.getWall();
             labelUnit = "wall";
         });
 
         //Создание автоматчика:
         buttonProductGunner1.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getGunner();
+            unit = battleManager.getGunner();
             labelUnit = "gunner";
         });
 
         //Создание танка:
         buttonProductTank1.setOnMouseClicked(event -> {
             click = !click;
-            unit = controlBattler.getTank();
+            unit = battleManager.getTank();
             labelUnit = "tank";
         });
 
@@ -358,101 +358,101 @@ public final class ControllerMatchMaking implements Initializable {
                             click = false;
                             Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
                             //Если строите бараки или стену:
-                            if (labelUnit.equals("building") && controlBattler.getHowICanBuild() > 0) {
-                                if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                                        controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                            if (labelUnit.equals("building") && battleManager.getHowICanBuild() > 0) {
+                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
 
                                 }
                             }
                             //Если строите завод:
-                            if (labelUnit.equals("factory") && controlBattler.getHowCanBuildFactories() > 0 && controlBattler.getHowICanBuild() > 0) {
-                                if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                                        controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                            if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
+                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
                                 }
                             }
                             //Если строите генератор:
-                            if (labelUnit.equals("generator") && controlBattler.getHowICanBuild() > 0 && controlBattler.getHowICanBuild() <= 2 && !controlBattler.isConstructedGenerator()) {
-                                if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                                        controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
-                                    controlBattler.setConstructedGenerator(true);
+                            if (labelUnit.equals("generator") && battleManager.getHowICanBuild() > 0 && battleManager.getHowICanBuild() <= 2 && !battleManager.isConstructedGenerator()) {
+                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+                                    battleManager.setConstructedGenerator(true);
                                 }
                             }
                             //Если создаем стену:
-                            if (labelUnit.equals("wall") && controlBattler.getHowICanBuild() > 0) {
-                                if (controlBattler.checkConstructionOfBuilding(pointClick, controlBattler.getBarracksHorizontal(), controlBattler.getPlayer()) &&
-                                        controlBattler.putDoubleWall(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                            if (labelUnit.equals("wall") && battleManager.getHowICanBuild() > 0) {
+                                if (battleManager.checkConstructionOfBuilding(pointClick, battleManager.getBarracksHorizontal(), battleManager.getPlayer()) &&
+                                        battleManager.putDoubleWall(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
 
                                 }
                             }
                             //Если создаем турель:
-                            if (labelUnit.equals("turret") && controlBattler.getHowICanBuild() > 0) {
-                                if (controlBattler.checkConstructionOfBuilding(pointClick, unit, controlBattler.getPlayer()) &&
-                                        controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
-                                    Attacker.radiusAttack(controlBattler, pointClick, 2, 1);
+                            if (labelUnit.equals("turret") && battleManager.getHowICanBuild() > 0) {
+                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+                                    AdjutantAttacker.radiusAttack(battleManager, pointClick, 2, 1);
 
                                 }
                             }
 
                             //Если улучшаем строение:
-                            if (labelUnit.equals("upgradeBuilding") && controlBattler.getHowICanBuild() > 0) {
-                                if (controlBattler.upgradeBuilding(pointClick, controlBattler.getPlayer())) { //Если удалось улучшить строение:
-                                    controlBattler.setHowICanBuild(controlBattler.getHowICanBuild() - 1);
+                            if (labelUnit.equals("upgradeBuilding") && battleManager.getHowICanBuild() > 0) {
+                                if (battleManager.upgradeBuilding(pointClick, battleManager.getPlayer())) { //Если удалось улучшить строение:
+                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
                                 }
                             }
 
 
                             //Если создаете автоматчика:
-                            if (labelUnit.equals("gunner") && controlBattler.getHowICanProductArmy() > 0) {
-                                if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanProductArmy(controlBattler.getHowICanProductArmy() - 1);
+                            if (labelUnit.equals("gunner") && battleManager.getHowICanProductArmy() > 0) {
+                                if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
                                 }
                             }
 
                             //Если создаете танк:
-                            if (labelUnit.equals("tank") && controlBattler.getHowICanProductTanks() > 0) {
-                                if (controlBattler.putUnity(controlBattler.getPlayer(), pointClick, unit)) {
-                                    controlBattler.setHowICanProductTanks(controlBattler.getHowICanProductTanks() - 1);
+                            if (labelUnit.equals("tank") && battleManager.getHowICanProductTanks() > 0) {
+                                if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                    battleManager.setHowICanProductTanks(battleManager.getHowICanProductTanks() - 1);
                                 }
                             }
                             //Если атакуем:
                         } else {
                             System.out.println("Выбрали юнита");
                             Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                            String clickedUnit = controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY());
+                            String clickedUnit = battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y());
                             System.out.println("Юнит: " + clickedUnit);
-                            if (clickedUnit.contains(controlBattler.getPlayer().getColorType()) && clickedUnit.contains("!")) {
+                            if (clickedUnit.contains(battleManager.getPlayer().getColorType()) && clickedUnit.contains("!")) {
                                 switch (clickedUnit.substring(4, 5)) {
                                     case "G":
                                         System.out.println("Это автоматчик: " + clickedUnit);
                                         paneControlField.setOnMouseClicked(secondEvent -> {
                                             Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
                                             System.out.println("Второй клик: ");
-                                            if (!controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()).
-                                                    contains(controlBattler.getPlayer().getColorType())) {
+                                            if (!battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y()).
+                                                    contains(battleManager.getPlayer().getColorType())) {
                                                 Pattern pattern = Pattern.compile("[hgbfwtGT]");
-                                                Matcher matcher = pattern.matcher(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()));
+                                                Matcher matcher = pattern.matcher(battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y()));
                                                 if (matcher.find()) {
                                                     for (int i = 0; i < 16; i++){
                                                         for (int j = 0; j < 16; j++){
-                                                            if (controlBattler.getIdentificationField().getMatrix().get(i).get(j).
-                                                                    equals(controlBattler.getIdentificationField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()))){
-                                                                controlBattler.getBattleField().getMatrix().get(i).set(j,
-                                                                        Attacker.attack(controlBattler.getBattleField().getMatrix().get(i).get(j), 1));
+                                                            if (battleManager.getIdentificationField().getMatrix().get(i).get(j).
+                                                                    equals(battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y()))){
+                                                                battleManager.getBattleField().getMatrix().get(i).set(j,
+                                                                        AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                             }
                                                         }
                                                     }
                                                     System.out.println("ATTACK!");
-                                                    controlBattler.getBattleField().getMatrix().get(pointClick.getX()).set(pointClick.getY(),
-                                                            controlBattler.sleepUnity(controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY())));
-                                                    controlBattler.getBattleField().toString();
-                                                    System.out.println("ZZZ: " + controlBattler.sleepUnity(controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY())));
+                                                    battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y())));
+                                                    battleManager.getBattleField().toString();
+                                                    System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y())));
                                                     paneControlField.setOnMouseClicked(this);
-                                                    controlBattler.checkDestroyedUnities();
+                                                    battleManager.checkDestroyedUnities();
                                                 }
                                             }
                                             paneControlField.setOnMouseClicked(this);
@@ -460,42 +460,22 @@ public final class ControllerMatchMaking implements Initializable {
                                         break;
                                     case "T":
                                         System.out.println("Это танк: " + clickedUnit);
-                                        paneControlField.setOnMouseClicked(secondEvent -> {
-                                            Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
-                                            System.out.println("Второй клик: ");
-                                            if (!controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()).
-                                                    contains(controlBattler.getPlayer().getColorType())) {
-                                                Pattern pattern = Pattern.compile("[hgbfwtGT]");
-                                                Matcher matcher = pattern.matcher(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()));
-                                                if (matcher.find()) {
-                                                    controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).set(pointSecondClick.getY(),
-                                                            Attacker.attack(controlBattler.getBattleField().getMatrix().get(pointSecondClick.getX()).get(pointSecondClick.getY()), 1));
-                                                    System.out.println("ATTACK!");
-                                                    controlBattler.getBattleField().getMatrix().get(pointClick.getX()).set(pointClick.getY(),
-                                                            controlBattler.sleepUnity(controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY())));
-                                                    controlBattler.getBattleField().toString();
-                                                    System.out.println("ZZZ: " + controlBattler.sleepUnity(controlBattler.getBattleField().getMatrix().get(pointClick.getX()).get(pointClick.getY())));
-                                                    paneControlField.setOnMouseClicked(this);
-                                                }
-                                            }
-                                        });
+
                                         break;
                                 }
                             }
                         }
                         //После события:
-                        Painter.drawGraphic(controlBattler, resource, paneControlField);
-                        controlBattler.getBattleField().toString();
-                        controlBattler.getIdentificationField().toString();
+                        Painter.drawGraphic(battleManager, resource, paneControlField);
+                        battleManager.getBattleField().toString();
+                        battleManager.getIdentificationField().toString();
                         System.out.println();
                     } catch (Exception ignored) {
-                    } //Может выскочить null
+                    }
 
                 }
             }
         };
-
-
         paneControlField.setOnMouseClicked(eventHandler);
     }
 }

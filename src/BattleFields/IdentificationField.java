@@ -1,5 +1,7 @@
 package BattleFields;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,10 +40,12 @@ public final class IdentificationField {
         return stringBuilder.toString();
     }
 
+    @Contract(pure = true)
     public final List<List<String>> getMatrix() {
         return matrix;
     }
 
+    @Contract(pure = true)
     int getNumberUnity() {
         return numberUnity;
     }
