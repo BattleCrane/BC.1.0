@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by мсиайнина on 05.10.2017.
  */
-public class AdjutantSleeper {
+public final class AdjutantSleeper {
     //Усыпляет юнита:
     @NotNull
     public static String sleepUnity(String string) {

@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by мсиайнина on 05.10.2017.
  */
-public class AdjutantWakeUpper {
-
+public final class AdjutantWakeUpper {
     public static void wakeUpUnities(BattleManager battleManager){
         Pattern patternBarracksAndFactories = Pattern.compile("[bf]'");
         Pattern patternGunnersAndTanks = Pattern.compile("[GTt]");
@@ -19,7 +18,8 @@ public class AdjutantWakeUpper {
                 List<String> list = battleManager.getBattleField().getMatrix().get(i);
                 Matcher matcherBarracksAndFactories = patternBarracksAndFactories.matcher(list.get(j));
                 Matcher matcherGunnersAndTanks = patternGunnersAndTanks.matcher(list.get(j));
-                if ((matcherBarracksAndFactories.find() || matcherGunnersAndTanks.find()) && list.get(j).contains(battleManager.getPlayer().getColorType())) {
+                if ((matcherBarracksAndFactories.find() || matcherGunnersAndTanks.find()) && list.get(j).
+                        contains(battleManager.getPlayer().getColorType())) {
                     String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
                    battleManager.getBattleField().getMatrix().get(i).set(j, readyUnity);
                    if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("t")){

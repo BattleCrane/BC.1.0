@@ -58,6 +58,20 @@ public final class AdjutantAttacker {
         battleManager.checkDestroyedUnities();
     }
 
+    public boolean checkTarget(BattleManager battleManager, Point attackerPoint, Point targetPoint){
+        Pattern pattern = Pattern.compile("[hgbfwt]");
+        if (attackerPoint.X() == targetPoint.X()){
+            for (int j = min(attackerPoint.Y(), targetPoint.Y()); j < max(attackerPoint.Y(), targetPoint.Y()); j++){
+                Matcher matcher = pattern.matcher(battleManager.getBattleField().getMatrix().get(attackerPoint.X()).get(j));
+                if (matcher.find()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
     @Contract(pure = true)
     private static int min(int a, int b) {
         if (a <= b) {

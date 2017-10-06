@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Created by мсиайнина on 05.10.2017.
  */
-public class AdjutantReporter {
+public final class AdjutantReporter {
     public static int getHowCanProductArmy(BattleManager battleManager) {
         Pattern pattern = Pattern.compile("[!?][+-]b'");
         int howICanProductArmy = 0;

@@ -259,9 +259,15 @@ public class BattleManager {
             for (int j = 0; j < 16; j++) {
                 if (battleField.getMatrix().get(i).get(j).substring(0, 1).equals("0")) {
                     battleField.getMatrix().get(i).set(j, "XXXXXX");
+
                 }
             }
         }
+    }
+
+    private void removeFromPaneControlField(Pane paneControlField, Point point){
+        int id = Integer.parseInt(identificationField.getMatrix().get(point.X()).get(point.Y()));
+        paneControlField.getChildren().set(id, null);
     }
 
     //Следующий ход:

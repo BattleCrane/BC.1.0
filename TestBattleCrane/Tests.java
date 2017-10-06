@@ -29,6 +29,7 @@ public class Tests {
         assertEquals("3<?+z'", AdjutantSleeper.sleepUnity(someUnityTest1));
         assertEquals("5>?+r'", AdjutantSleeper.sleepUnity(someUnityTest2));
     }
+
     @Test
     public void radiusAttack(){
         //Test №1:
@@ -43,13 +44,21 @@ public class Tests {
         battleManagerTest1.getBattleField().toString();
 
         //Test №2:
-        System.out.println("Test №1:");
+        System.out.println("Test №2:");
         BattleManager battleManagerTest2 = new BattleManager(new BattleField());
         battleManagerTest2.initializeField();
         battleManagerTest1.setPlayer(new Player("+"));
         battleManagerTest2.putUnity(new Player("+"), new Point(0, 5), battleManagerTest2.getTurret());
         AdjutantAttacker.radiusAttack(battleManagerTest2, new Point (0, 5), 2, 1);
         battleManagerTest2.getBattleField().toString();
+    }
+
+    @Test
+    public void checkTarget(){
+        System.out.println("Test №1:");
+        BattleManager battleManagerTest1 = new BattleManager(new BattleField());
+        battleManagerTest1.initializeField();
+        battleManagerTest1.setPlayer(new Player("+"));
     }
 
 }
