@@ -231,7 +231,7 @@ public final class Painter {
                             case "2^-t'":
                                 currentUnity = resource.getTurretLevel1Red();
                                 break;
-                            case "q^-t'":
+                            case "1^-t'":
                                 currentUnity = resource.getTurretLevel1Red1HP();
                                 break;
                             //--Уровень 2:
