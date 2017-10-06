@@ -1,14 +1,13 @@
 package BattleFields;
 
 
+import Adjutants.AdjutantReporter;
 import Adjutants.AdjutantWakeUpper;
 import Players.Player;
 import Unities.Unity;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -269,15 +268,12 @@ public class BattleManager {
     public void nextTurnOfCurrentPlayer() {
         turn = (turn + 1) % 2;
         whatIsTurn();
-        AdjutantWakeUpper.wakeUpArmy(battleField, player);
-        AdjutantWakeUpper.wakeUpBuilding(battleField, player);
-        getHowCanBuild(player);
-        getHowCanProductArmy(player);
-        getHowCanProductTanks(player);
+        AdjutantWakeUpper.wakeUpUnities(this);
+        AdjutantReporter.getReportAboutUnities(this);
         isConstructedGenerator = false;
     }
 
-    //Определяет чей ход^
+    //Определяет чей ход:
     private void whatIsTurn() {
         if (turn == playerBlue.getTurn()) {
             player = playerBlue;
@@ -287,86 +283,6 @@ public class BattleManager {
             opponentPlayer = playerBlue;
         }
     }
-
-//    //Переводит в боевое состояние пехоту:
-//    private void showReadyArmy(Player player) {
-//        Pattern pattern = Pattern.compile("[GTt]");
-//        for (int i = 0; i < 16; i++) {
-//            for (int j = 0; j < 16; j++) {
-//                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-//                List<String> list = battleField.getMatrix().get(i);
-//                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-//                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-//                    battleField.getMatrix().get(i).set(j, readyUnity);
-//                }
-//            }
-//        }
-//    }
-
-//    //Усыпляет юнита:
-//    public String sleepUnity(String string) {
-//        return string.substring(0, 2) + "?" + string.substring(3);
-//    }
-
-
-//    private void showReadyBuilding(Player player) {
-//        Pattern pattern = Pattern.compile("[bf]'");
-//        for (int i = 0; i < 16; i++) {
-//            for (int j = 0; j < 16; j++) {
-//                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-//                List<String> list = battleField.getMatrix().get(i);
-//                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-//                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-//                    battleField.getMatrix().get(i).set(j, readyUnity);
-//                }
-//            }
-//        }
-//    }
-
-    private void getHowCanBuild(Player player) {
-        Pattern pattern = Pattern.compile("g'");
-        howICanBuild = 1;
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                List<String> list = battleField.getMatrix().get(i);
-                Matcher matcher = pattern.matcher(list.get(j));
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-                    battleField.getMatrix().get(i).set(j, readyUnity);
-                    howICanBuild++;
-                }
-            }
-        }
-    }
-
-    private void getHowCanProductArmy(Player player) {
-        Pattern pattern = Pattern.compile("[!?][+-]b'");
-        howICanProductArmy = 0;
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                List<String> list = battleField.getMatrix().get(i);
-                Matcher matcher = pattern.matcher(list.get(j));
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-                    howICanProductArmy++;
-                }
-            }
-        }
-    }
-
-    private void getHowCanProductTanks(Player player) {
-        Pattern pattern = Pattern.compile("[!?][+-]f'");
-        howICanProductTanks = 0;
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                List<String> list = battleField.getMatrix().get(i);
-                Matcher matcher = pattern.matcher(list.get(j));
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-                    howICanProductTanks++;
-                }
-            }
-        }
-    }
-
     public int getHowCanBuildFactories() {
         return howICanProductArmy - howICanProductTanks;
     }

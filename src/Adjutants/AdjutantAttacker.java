@@ -17,6 +17,8 @@ public final class AdjutantAttacker {
         int newHitPoints = Integer.parseInt(targetUnity.substring(0, 1));
         if (newHitPoints - damage >= 0) {
             newHitPoints = newHitPoints - damage;
+        } else {
+            newHitPoints = 0;
         }
         return newHitPoints + targetUnity.substring(1);
     }

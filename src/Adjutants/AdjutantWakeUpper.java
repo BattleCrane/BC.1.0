@@ -1,8 +1,7 @@
 package Adjutants;
 
-import BattleFields.BattleField;
-import Players.Player;
-
+import BattleFields.BattleManager;
+import BattleFields.Point;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,31 +11,25 @@ import java.util.regex.Pattern;
  */
 public class AdjutantWakeUpper {
 
-    //Переводит в боевое состояние пехоту и танки:
-    public static void wakeUpArmy(BattleField battleField, Player player) {
-        Pattern pattern = Pattern.compile("[GTt]");
+    public static void wakeUpUnities(BattleManager battleManager){
+        Pattern patternBarracksAndFactories = Pattern.compile("[bf]'");
+        Pattern patternGunnersAndTanks = Pattern.compile("[GTt]");
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-                List<String> list = battleField.getMatrix().get(i);
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
+                List<String> list = battleManager.getBattleField().getMatrix().get(i);
+                Matcher matcherBarracksAndFactories = patternBarracksAndFactories.matcher(list.get(j));
+                Matcher matcherGunnersAndTanks = patternGunnersAndTanks.matcher(list.get(j));
+                if ((matcherBarracksAndFactories.find() || matcherGunnersAndTanks.find()) && list.get(j).contains(battleManager.getPlayer().getColorType())) {
                     String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-                    battleField.getMatrix().get(i).set(j, readyUnity);
-                }
-            }
-        }
-    }
-
-    //Переводит в боевое состояние строения:
-    public static void wakeUpBuilding(BattleField battleField, Player player) {
-        Pattern pattern = Pattern.compile("[bf]'");
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                Matcher matcher = pattern.matcher(battleField.getMatrix().get(i).get(j));
-                List<String> list = battleField.getMatrix().get(i);
-                if (matcher.find() && list.get(j).contains(player.getColorType())) {
-                    String readyUnity = list.get(j).substring(0, 2) + "!" + list.get(j).substring(3);
-                    battleField.getMatrix().get(i).set(j, readyUnity);
+                   battleManager.getBattleField().getMatrix().get(i).set(j, readyUnity);
+                   if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("t")){
+                       if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("^")){
+                           AdjutantAttacker.radiusAttack(battleManager, new Point(i, j), 2, 1);
+                       }
+                       if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("<")){
+                           AdjutantAttacker.radiusAttack(battleManager, new Point(i, j), 3, 1);
+                       }
+                   }
                 }
             }
         }

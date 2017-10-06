@@ -107,9 +107,11 @@ public final class ControllerMatchMaking implements Initializable {
 
     //Механизм внутренней игры:
     private BattleManager battleManager = new BattleManager(new BattleField());
+
     //Графические ресурсы:
     private Resource resource = new Resource();
 
+    //Триггеры:
     private Boolean click = false; //Небольшая защелка для кликов мыши
     private Unity unit;
     private String labelUnit = ""; //Определитель действия
@@ -119,7 +121,6 @@ public final class ControllerMatchMaking implements Initializable {
         initializeMessages();
         battleManager.initializeField();
         battleManager.getBattleField().toString();
-        battleManager.getIdentificationField().toString();
         buttonCreateArmy.setVisible(false);
         Painter.drawGraphic(battleManager, resource, paneControlField);
         initializeGameButtons();
@@ -348,7 +349,6 @@ public final class ControllerMatchMaking implements Initializable {
         });
 
         //Инкапсуляция производства:
-
         EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
@@ -432,15 +432,16 @@ public final class ControllerMatchMaking implements Initializable {
                                         paneControlField.setOnMouseClicked(secondEvent -> {
                                             Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
                                             System.out.println("Второй клик: ");
-                                            if (!battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y()).
-                                                    contains(battleManager.getPlayer().getColorType())) {
+                                            String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                            if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                                 Pattern pattern = Pattern.compile("[hgbfwtGT]");
-                                                Matcher matcher = pattern.matcher(battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y()));
+                                                Matcher matcher = pattern.matcher(targetAttackUnity);
                                                 if (matcher.find()) {
                                                     for (int i = 0; i < 16; i++){
                                                         for (int j = 0; j < 16; j++){
-                                                            if (battleManager.getIdentificationField().getMatrix().get(i).get(j).
-                                                                    equals(battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y()))){
+                                                            String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
+                                                            String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                                            if (attackerUnitID.equals(targetUnitID)){
                                                                 battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                         AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                             }
@@ -448,11 +449,13 @@ public final class ControllerMatchMaking implements Initializable {
                                                     }
                                                     System.out.println("ATTACK!");
                                                     battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y())));
+                                                            AdjutantSleeper.sleepUnity(clickedUnit));
                                                     battleManager.getBattleField().toString();
-                                                    System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y())));
-                                                    paneControlField.setOnMouseClicked(this);
+                                                    System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
                                                     battleManager.checkDestroyedUnities();
+                                                    Painter.drawGraphic(battleManager, resource, paneControlField);
+                                                    paneControlField.setOnMouseClicked(this);
+
                                                 }
                                             }
                                             paneControlField.setOnMouseClicked(this);
@@ -460,7 +463,37 @@ public final class ControllerMatchMaking implements Initializable {
                                         break;
                                     case "T":
                                         System.out.println("Это танк: " + clickedUnit);
+                                        paneControlField.setOnMouseClicked(secondEvent -> {
+                                            Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                                            System.out.println("Второй клик: ");
+                                            String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                            if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
+                                                Pattern pattern = Pattern.compile("[hgbfwtGT]");
+                                                Matcher matcher = pattern.matcher(targetAttackUnity);
+                                                if (matcher.find()) {
+                                                    for (int i = 0; i < 16; i++){
+                                                        for (int j = 0; j < 16; j++){
+                                                            String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
+                                                            String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                                            if (attackerUnitID.equals(targetUnitID)){
+                                                                battleManager.getBattleField().getMatrix().get(i).set(j,
+                                                                        AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
+                                                            }
+                                                        }
+                                                    }
+                                                    System.out.println("ATTACK!");
+                                                    battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
+                                                            AdjutantSleeper.sleepUnity(clickedUnit));
+                                                    battleManager.getBattleField().toString();
+                                                    System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                    battleManager.checkDestroyedUnities();
+                                                    Painter.drawGraphic(battleManager, resource, paneControlField);
+                                                    paneControlField.setOnMouseClicked(this);
 
+                                                }
+                                            }
+                                            paneControlField.setOnMouseClicked(this);
+                                        });
                                         break;
                                 }
                             }
@@ -472,7 +505,6 @@ public final class ControllerMatchMaking implements Initializable {
                         System.out.println();
                     } catch (Exception ignored) {
                     }
-
                 }
             }
         };
