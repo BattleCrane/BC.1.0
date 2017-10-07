@@ -8,41 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by мсиайнина on 05.10.2017.
+ * Класс AdjutantReporter с помощью метода getReportAboutUnities рапортует о том, какие юниты и сколько их вы можете сделать.
  */
 public final class AdjutantReporter {
-    public static int getHowCanProductArmy(BattleManager battleManager) {
-        Pattern pattern = Pattern.compile("[!?][+-]b'");
-        int howICanProductArmy = 0;
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                List<String> list = battleManager.getBattleField().getMatrix().get(i);
-                Matcher matcher = pattern.matcher(list.get(j));
-                if (matcher.find() && list.get(j).contains(battleManager.getPlayer().getColorType())) {
-                    howICanProductArmy++;
-                }
-            }
-        }
-        return howICanProductArmy;
-    }
-
-    public static int getHowCanProductTanks(BattleManager battleManager) {
-        Pattern pattern = Pattern.compile("[!?][+-]f'");
-        int howICanProductTanks = 0;
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                List<String> list = battleManager.getBattleField().getMatrix().get(i);
-                Matcher matcher = pattern.matcher(list.get(j));
-                if (matcher.find() && list.get(j).contains(battleManager.getPlayer().getColorType())) {
-                    howICanProductTanks++;
-                }
-            }
-        }
-        return howICanProductTanks;
-    }
-
-
-
     public static void getReportAboutUnities(BattleManager battleManager){
         Pattern patternBarracks = Pattern.compile("[!?][+-]b'"); //Шаблон бараков
         Pattern patternGenerators = Pattern.compile("g'"); //Шаблон генераторов

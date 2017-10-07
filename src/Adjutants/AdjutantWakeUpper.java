@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by мсиайнина on 05.10.2017.
+ * Класс AdjutantWakeUpper с помощью метода wakeUpUnities активирует ваших юнитов в начале хода.
  */
 public final class AdjutantWakeUpper {
     public static void wakeUpUnities(BattleManager battleManager){

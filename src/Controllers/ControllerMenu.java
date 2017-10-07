@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
  * Класс ControllerMenu реализует интерфейс Initializable.
  * Описывает методы событий в окне меню.
  */
-public class ControllerMenu implements Initializable {
+public final class ControllerMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

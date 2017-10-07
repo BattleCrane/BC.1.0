@@ -6,11 +6,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class Tests {
-    BattleManager battleManager = new BattleManager();
+
 
     @Test
     public void levelUp(){
         //Тест на бараки:
+        BattleManager battleManager = new BattleManager();
         String barracksFistLevel = "1^!+b'";
         String barracksSecondLevel = "1<!+b'";
         String barracksThirdLevel = "1>!+b'";
@@ -55,10 +56,37 @@ public class Tests {
 
     @Test
     public void checkTarget(){
-        System.out.println("Test №1:");
         BattleManager battleManagerTest1 = new BattleManager(new BattleField());
         battleManagerTest1.initializeField();
         battleManagerTest1.setPlayer(new Player("+"));
+        battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point (0, 15), battleManagerTest1.getGunner());
+        assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(0, 4), new Point(0, 15)));
+
+        battleManagerTest1.putUnity(new Player("-"), new Point(0, 9), battleManagerTest1.getTank());
+        assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(0, 4), new Point(0, 15)));
+
+        battleManagerTest1.putUnity(new Player("-"), new Point(0, 7), battleManagerTest1.getTurret());
+        assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(0, 4), new Point(0, 15)));
+
+        battleManagerTest1.putUnity(new Player("-"), new Point(0, 5), battleManagerTest1.getGenerator());
+        assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(0, 4), new Point(0, 15)));
+        //Вывод поля боя:
+        battleManagerTest1.getBattleField().toString();
+
+        battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point(15, 0), battleManagerTest1.getTank());
+        battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point(8, 0), battleManagerTest1.getGenerator());
+        battleManagerTest1.getBattleField().toString();
+        assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(4, 0)));
+
+        assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(1, 0)));
+        assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(10, 3)));
+
+        battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point(10, 10), battleManagerTest1.getTank());
+        assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(10, 10), new Point(4, 4)));
+        assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(10, 10), new Point(1, 1)));
+        battleManagerTest1.getBattleField().toString();
+
+
     }
 
 }

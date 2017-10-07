@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
  * Класс Resources загружает графические объекты и делегирует над ними.
  */
 
-public class Resource {
+public final class Resource {
 
     public Resource() {
 

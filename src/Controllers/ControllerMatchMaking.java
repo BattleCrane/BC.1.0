@@ -436,7 +436,9 @@ public final class ControllerMatchMaking implements Initializable {
                                             if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                                 Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                                 Matcher matcher = pattern.matcher(targetAttackUnity);
-                                                if (matcher.find()) {
+                                                System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
+                                                System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
+                                                if (matcher.find() && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                     for (int i = 0; i < 16; i++){
                                                         for (int j = 0; j < 16; j++){
                                                             String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);

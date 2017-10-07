@@ -3,7 +3,7 @@ package Adjutants;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by мсиайнина on 05.10.2017.
+ * Класс AdjutantSleeper с помощью метода sleepUnity деактивирует выбранного юнита.
  */
 public final class AdjutantSleeper {
     //Усыпляет юнита:
