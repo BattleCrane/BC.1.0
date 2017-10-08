@@ -71,11 +71,9 @@ public class Tests {
         battleManagerTest1.putUnity(new Player("-"), new Point(0, 5), battleManagerTest1.getGenerator());
         assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(0, 4), new Point(0, 15)));
         //Вывод поля боя:
-        battleManagerTest1.getBattleField().toString();
 
         battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point(15, 0), battleManagerTest1.getTank());
         battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point(8, 0), battleManagerTest1.getGenerator());
-        battleManagerTest1.getBattleField().toString();
         assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(4, 0)));
 
         assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(1, 0)));
@@ -84,8 +82,14 @@ public class Tests {
         battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), new Point(10, 10), battleManagerTest1.getTank());
         assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(10, 10), new Point(4, 4)));
         assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(10, 10), new Point(1, 1)));
-        battleManagerTest1.getBattleField().toString();
 
+
+        battleManagerTest1.putUnity(new Player("-"), new Point(1, 14), battleManagerTest1.getGunner());
+        assertTrue(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(1, 14)));
+
+        battleManagerTest1.putUnity(new Player("-"), new Point(4, 10), battleManagerTest1.getGenerator());
+        assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(1, 14)));
+        battleManagerTest1.getBattleField().toString();
 
     }
 

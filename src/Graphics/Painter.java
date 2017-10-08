@@ -5,8 +5,12 @@ import ResourceInit.Resource;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Painter {
     public static void drawGraphic(BattleManager battleManager, Resource resource, Pane paneControlField){
+        System.out.println(paneControlField.getChildren().removeAll(paneControlField.getChildren()));
         try {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
@@ -198,6 +202,15 @@ public final class Painter {
                             case "3<+f'":
                                 currentUnity = resource.getFactoryLevel2Blue3HP();
                                 break;
+                            case "1<-f'":
+                                currentUnity = resource.getFactoryLevel2Red1HP();
+                                break;
+                            case "2<-f'":
+                                currentUnity = resource.getFactoryLevel2Red2HP();
+                                break;
+                            case "3<-f'":
+                                currentUnity = resource.getFactoryLevel2Red3HP();
+                                break;
                             //--Уровень 3:
                             case "6>+f'":
                                 currentUnity = resource.getFactoryLevel3Blue();
@@ -219,6 +232,21 @@ public final class Painter {
                                 break;
                             case "6>-f'":
                                 currentUnity = resource.getFactoryLevel3Red();
+                                break;
+                            case "1>-f'":
+                                currentUnity = resource.getFactoryLevel3Red1HP();
+                                break;
+                            case "2>-f'":
+                                currentUnity = resource.getFactoryLevel3Red2HP();
+                                break;
+                            case "3>-f'":
+                                currentUnity = resource.getFactoryLevel3Red3HP();
+                                break;
+                            case "4>-f'":
+                                currentUnity = resource.getFactoryLevel3Red4HP();
+                                break;
+                            case "5>-f'":
+                                currentUnity = resource.getFactoryLevel3Red5HP();
                                 break;
                             //Турель:
                             //--Уровень 1:

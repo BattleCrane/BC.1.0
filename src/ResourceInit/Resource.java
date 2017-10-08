@@ -399,6 +399,24 @@ public final class Resource {
         unit.setFitHeight(67.0);
         return unit;
     }
+    public final ImageView getFactoryLevel2Red1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 2 1HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel2Red2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 2 2HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel2Red3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 2 3HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
 
     public final ImageView getFactoryLevel3Blue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Factory\\Factory - Level 3.png"));
@@ -439,6 +457,36 @@ public final class Resource {
 
     public final ImageView getFactoryLevel3Red() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel3Red1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3 1HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel3Red2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3 2HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel3Red3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3 3HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel3Red4HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3 4HP.png"));
+        unit.setFitWidth(100.5);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFactoryLevel3Red5HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3 5HP.png"));
         unit.setFitWidth(100.5);
         unit.setFitHeight(67.0);
         return unit;
