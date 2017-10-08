@@ -10,7 +10,7 @@ import java.util.List;
 
 public final class Painter {
     public static void drawGraphic(BattleManager battleManager, Resource resource, Pane paneControlField){
-        System.out.println(paneControlField.getChildren().removeAll(paneControlField.getChildren()));
+        paneControlField.getChildren().removeAll(paneControlField.getChildren());
         try {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
