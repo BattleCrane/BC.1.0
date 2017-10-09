@@ -48,6 +48,8 @@ public final class ControllerMatchMaking implements Initializable {
     private Pane paneControlArmy;
     @FXML
     private Pane paneTriggerEnergy;
+    @FXML
+    private Pane paneControlSupport;
 
     //Глобальные кнопки:
     @FXML
@@ -60,6 +62,8 @@ public final class ControllerMatchMaking implements Initializable {
     private Button buttonBuild;
     @FXML
     private Button buttonEndTurn;
+    @FXML
+    private Button buttonSupport;
 
     //Создание построек:
     @FXML
@@ -118,7 +122,6 @@ public final class ControllerMatchMaking implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializeMessages();
         battleManager.initializeField();
         battleManager.getBattleField().toString();
         buttonCreateArmy.setVisible(false);
@@ -279,6 +282,11 @@ public final class ControllerMatchMaking implements Initializable {
             buttonBuild.setVisible(true);
             paneControlBuild.setVisible(false);
             paneControlArmy.setVisible(false);
+        });
+
+        //Выбрать поддержку:
+        buttonSupport.setOnMouseClicked(event -> {
+            paneControlSupport.setVisible(true);
         });
 
         //Выбрать строительство:

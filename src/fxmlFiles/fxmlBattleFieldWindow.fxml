@@ -138,7 +138,7 @@
             <Image url="@../Resources/Triggers/TriggerEnergy.png" />
          </image>
       </ImageView>
-      <Button layoutX="365.0" layoutY="820.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Вызвать поддержку">
+      <Button fx:id="buttonSupport" layoutX="365.0" layoutY="820.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Вызвать поддержку">
          <font>
             <Font size="16.0" />
          </font></Button>
@@ -147,5 +147,14 @@
             <Font size="16.0" />
          </font>
       </Button>
+      <Pane fx:id="paneControlSupport" prefHeight="700.0" prefWidth="700.0" visible="false" >
+              <children>
+                 <ImageView fx:id="imageSupport" fitHeight="565" fitWidth="565.0" layoutX="175.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                       <Image url="@../Resources/BattleFields/WindowSupport.png"/>
+                    </image>
+                 </ImageView>
+              </children>
+      </Pane>
    </children>
 </AnchorPane>

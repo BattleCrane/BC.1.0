@@ -68,6 +68,9 @@ public class BattleManager {
     private Unity gunner = new Unity(1, 1, "G", 1);
     private Unity tank = new Unity(1, 1, "T", 2);
 
+    //Бонусы:
+    private Unity obstacle = new Unity(1, 1, "o", 1);
+
     public BattleManager(BattleField battleField) {
         this.battleField = battleField;
     }
