@@ -23,36 +23,6 @@
       <Button fx:id="buttonMenu" layoutX="13.0" layoutY="10.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" text="Меню" />
       <Pane fx:id="paneControlField" layoutX="194.0" layoutY="193.0" prefHeight="536.0" prefWidth="536.0">
          <children>
-            <ImageView fx:id="imageMessageGenerator" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Triggers/TriggerGenerator.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageMessageBarracks" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="72.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Triggers/TriggerBarracks.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageMessageFactory" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="153.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Triggers/TriggerFactory.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageMessageWall" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="244.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Triggers/TriggerWall.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageMessageTurret" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="329.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Triggers/TriggerTurret.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageMessageUpgrade" fitHeight="144.0" fitWidth="344.0" layoutX="276.0" layoutY="401.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Triggers/TriggerUpgrade.png" />
-               </image>
-            </ImageView>
          </children></Pane>
       <Pane fx:id="paneControlBuild" layoutX="759.0" layoutY="217.0" visible="false">
          <children>
