@@ -1,5 +1,9 @@
 package Players;
 
+import Supports.Support;
+
+import java.util.List;
+
 /**
  * Класс Player реализует состояние игрока во время матча.
  * Каждый игрок обладает:
@@ -12,12 +16,21 @@ public class Player {
     private int turn;
     private int energy;
     private String colorType;
+    private List<Support> listOfBonuses;
 
     public Player(int turn, int energy, String colorType) {
         this.turn = turn;
         this.energy = energy;
         this.colorType = colorType;
     }
+
+    public Player(int turn, int energy, String colorType, List<Support> listOfBonuses) {
+        this.turn = turn;
+        this.energy = energy;
+        this.colorType = colorType;
+        this.listOfBonuses = listOfBonuses;
+    }
+
     public Player(String colorType) {
         this.colorType = colorType;
     }
@@ -44,5 +57,13 @@ public class Player {
 
     public void setColorType(String colorType) {
         this.colorType = colorType;
+    }
+
+    public List<Support> getListOfBonuses() {
+        return listOfBonuses;
+    }
+
+    public void setListOfBonuses(List<Support> listOfBonuses) {
+        this.listOfBonuses = listOfBonuses;
     }
 }

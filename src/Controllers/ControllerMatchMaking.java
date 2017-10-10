@@ -6,6 +6,7 @@ import BattleFields.*;
 import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
+import Supports.ControlSupportCollection;
 import Unities.Unity;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -25,6 +26,7 @@ import javafx.util.Duration;
 import org.jetbrains.annotations.Contract;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -100,7 +102,7 @@ public final class ControllerMatchMaking implements Initializable {
     private BattleManager battleManager = new BattleManager(new BattleField());
 
     //Графические ресурсы:
-    private Resource resource = new Resource();
+    private final Resource resource = new Resource();
 
     //Триггеры:
     private Boolean click = false; //Небольшая защелка для кликов мыши
@@ -108,7 +110,7 @@ public final class ControllerMatchMaking implements Initializable {
     private String labelUnit = ""; //Определитель действия
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         battleManager.initializeField();
         battleManager.getBattleField().toString();
         buttonCreateArmy.setVisible(false);

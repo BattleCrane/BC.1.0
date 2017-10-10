@@ -85,7 +85,6 @@ public final class AdjutantAttacker {
             final boolean distanceX = targetPoint.X() - attackerPoint.X() > 0;
             int pointerX = attackerPoint.X();
             int pointerY = attackerPoint.Y();
-            System.out.println("Start: " + pointerX + " " + pointerY);
             int count  = 0;
             while (pointerX != targetPoint.X() && pointerY != targetPoint.Y()) {
                 if (distanceY && distanceX) {
@@ -105,7 +104,6 @@ public final class AdjutantAttacker {
                     pointerY--;
                 }
                 count++;
-                System.out.println("i: " + pointerX + "    " + "j: " + pointerY);
                 String currentUnity = battleManager.getBattleField().getMatrix().get(pointerX).get(pointerY);
                 Matcher matcher = pattern.matcher(currentUnity);
                 if (count != 0 && count != Math.abs(targetPoint.X() - attackerPoint.X())&& matcher.find() &&
