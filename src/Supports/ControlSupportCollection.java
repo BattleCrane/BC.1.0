@@ -2,6 +2,8 @@ package Supports;
 
 import Controllers.ControllerMatchMaking;
 import Unities.Unity;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Класс ControlSupportCollection хранит в себе экземпляры класса Support и делегирует над ними
@@ -9,10 +11,26 @@ import Unities.Unity;
 public final class ControlSupportCollection {
 
     private final SupportInterface obstacle = new Support(1) {
+        private Unity obstacle = new Unity(1, 1, "o", 1);
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
 
+        }
+        public final ImageView getSprite() {
+            ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3.png"));
+            unit.setFitWidth(50);
+            unit.setFitHeight(50);
+            return unit;
+        }
+        public final ImageView getResourceObstacle() {
+            ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Factory\\Factory - Level 3.png"));
+            unit.setFitWidth(33.5);
+            unit.setFitHeight(33.5);
+            return unit;
+        }
+        public Unity getObstacle() {
+            return obstacle;
         }
     };
 

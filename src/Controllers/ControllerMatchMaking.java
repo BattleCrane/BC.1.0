@@ -9,6 +9,7 @@ import ResourceInit.Resource;
 import Unities.Unity;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +22,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.jetbrains.annotations.Contract;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -92,22 +95,6 @@ public final class ControllerMatchMaking implements Initializable {
     private Button buttonProductTank2;
     @FXML
     private Button buttonProductTank3;
-
-    //Сообщения:
-    @FXML
-    private ImageView imageMessageEnergy;
-    @FXML
-    private ImageView imageMessageGenerator;
-    @FXML
-    private ImageView imageMessageBarracks;
-    @FXML
-    private ImageView imageMessageFactory;
-    @FXML
-    private ImageView imageMessageWall;
-    @FXML
-    private ImageView imageMessageTurret;
-    @FXML
-    private ImageView imageMessageUpgrade;
 
     //Механизм внутренней игры:
     private BattleManager battleManager = new BattleManager(new BattleField());
@@ -417,5 +404,32 @@ public final class ControllerMatchMaking implements Initializable {
             }
         };
         paneControlField.setOnMouseClicked(eventHandler);
+    }
+
+    @Contract(pure = true)
+    public Boolean getClick() {
+        return click;
+    }
+
+    public void setClick(Boolean click) {
+        this.click = click;
+    }
+
+    @Contract(pure = true)
+    public Unity getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unity unit) {
+        this.unit = unit;
+    }
+
+    @Contract(pure = true)
+    public String getLabelUnit() {
+        return labelUnit;
+    }
+
+    public void setLabelUnit(String labelUnit) {
+        this.labelUnit = labelUnit;
     }
 }
