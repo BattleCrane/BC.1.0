@@ -2,7 +2,6 @@ package Graphics;
 
 import Players.Player;
 import Supports.Support;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
