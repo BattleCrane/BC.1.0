@@ -3,27 +3,24 @@ package Controllers;
 import Adjutants.AdjutantAttacker;
 import Adjutants.AdjutantSleeper;
 import BattleFields.*;
+import Bonuses.Bonus;
 import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
-import Supports.ControlSupportCollection;
+import Bonuses.ControllerBonusesCollection;
 import Unities.Unity;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
-import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.jetbrains.annotations.Contract;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -105,7 +102,8 @@ public final class ControllerMatchMaking implements Initializable {
     private final Resource resource = new Resource();
 
     //Триггеры:
-    private Boolean click = false; //Небольшая защелка для кликов мыши
+    private boolean click = false; //Небольшая защелка для кликов мыши
+    private boolean isClickButtonOfBonus = false;
     private Unity unit;
     private String labelUnit = ""; //Определитель действия
 
@@ -117,10 +115,16 @@ public final class ControllerMatchMaking implements Initializable {
         Painter.drawGraphic(battleManager, resource, paneControlField);
         initializeGameButtons();
         System.out.println(battleManager.getPlayer().getColorType());
+
+        initializeBonuses(battleManager);
+        ControllerBonusesCollection.showBonuses(battleManager.getPlayer(), paneControlSupport);
     }
 
     private void nextTurn() {
+        ControllerBonusesCollection.flush(paneControlSupport);
+
         battleManager.nextTurnOfCurrentPlayer();
+        ControllerBonusesCollection.showBonuses(battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
@@ -173,7 +177,15 @@ public final class ControllerMatchMaking implements Initializable {
 
         //Выбрать поддержку:
         buttonSupport.setOnMouseClicked(event -> {
-            paneControlSupport.setVisible(true);
+            if (!isClickButtonOfBonus){
+                paneControlSupport.setVisible(true);
+                isClickButtonOfBonus = true;
+                buttonSupport.toFront();
+            } else {
+                paneControlSupport.setVisible(false);
+                isClickButtonOfBonus = false;
+            }
+
         });
 
         //Выбрать строительство:
@@ -367,7 +379,7 @@ public final class ControllerMatchMaking implements Initializable {
                                             if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                                 Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                                 Matcher matcher = pattern.matcher(targetAttackUnity);
-                                                if (matcher.find()) {
+                                                if (matcher.find() && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                     for (int i = 0; i < 16; i++){
                                                         for (int j = 0; j < 16; j++){
                                                             String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
@@ -408,30 +420,19 @@ public final class ControllerMatchMaking implements Initializable {
         paneControlField.setOnMouseClicked(eventHandler);
     }
 
-    @Contract(pure = true)
-    public Boolean getClick() {
-        return click;
-    }
+    private void initializeBonuses(BattleManager battleManager){
+        battleManager.getPlayerBlue().setListOfBonuses(Arrays.asList(
+                ControllerBonusesCollection.getObstacle(),
+                ControllerBonusesCollection.getAmbulance(),
+                ControllerBonusesCollection.getHeavyShells()));
+        battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(ControllerBonusesCollection.getAmbulance()));
 
-    public void setClick(Boolean click) {
-        this.click = click;
-    }
 
-    @Contract(pure = true)
-    public Unity getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unity unit) {
-        this.unit = unit;
-    }
-
-    @Contract(pure = true)
-    public String getLabelUnit() {
-        return labelUnit;
-    }
-
-    public void setLabelUnit(String labelUnit) {
-        this.labelUnit = labelUnit;
+        for (Bonus bonus: battleManager.getPlayerBlue().getListOfBonuses()){
+            bonus.getSprite().setOnMouseClicked(event -> bonus.run(this));
+        }
+        for (Bonus bonus: battleManager.getPlayerRed().getListOfBonuses()){
+            bonus.getSprite().setOnMouseClicked(event -> bonus.run(this));
+        }
     }
 }

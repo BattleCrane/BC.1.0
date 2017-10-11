@@ -1,6 +1,6 @@
 package Players;
 
-import Supports.Support;
+import Bonuses.Bonus;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Player {
     private int turn;
     private int energy;
     private String colorType;
-    private List<Support> listOfBonuses;
+    private List<Bonus> listOfBonuses;
 
     public Player(int turn, int energy, String colorType) {
         this.turn = turn;
@@ -24,7 +24,7 @@ public class Player {
         this.colorType = colorType;
     }
 
-    public Player(int turn, int energy, String colorType, List<Support> listOfBonuses) {
+    public Player(int turn, int energy, String colorType, List<Bonus> listOfBonuses) {
         this.turn = turn;
         this.energy = energy;
         this.colorType = colorType;
@@ -59,11 +59,11 @@ public class Player {
         this.colorType = colorType;
     }
 
-    public List<Support> getListOfBonuses() {
+    public List<Bonus> getListOfBonuses() {
         return listOfBonuses;
     }
 
-    public void setListOfBonuses(List<Support> listOfBonuses) {
+    public void setListOfBonuses(List<Bonus> listOfBonuses) {
         this.listOfBonuses = listOfBonuses;
     }
 }

@@ -1,18 +1,34 @@
-package Supports;
+package Bonuses;
 
 import Controllers.ControllerMatchMaking;
+import Players.Player;
 import Unities.Unity;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Класс ControlSupportCollection хранит в себе экземпляры класса Support и делегирует над ними
+ * Класс ControllerBonusCollection хранит в себе экземпляры класса Support и управляет ими
  */
-public final class ControlSupportCollection {
+public final class ControllerBonusesCollection {
+
+    public static void showBonuses(Player player, Pane paneControlBonus){
+        int x = 40;
+        int y = 37;
+        for (Bonus bonus : player.getListOfBonuses()){
+            bonus.getSprite().setLayoutX(x);
+            bonus.getSprite().setLayoutY(y);
+            paneControlBonus.getChildren().add(bonus.getSprite());
+            x += 80;
+        }
+    }
+
+    public static void flush(Pane paneControlBonus){
+        paneControlBonus.getChildren().retainAll(paneControlBonus.getChildren().get(0));
+    }
 
 
     /**
@@ -24,181 +40,200 @@ public final class ControlSupportCollection {
      * На следующий ход уничтожается, и Вы получаете 1 ед. энергии.
      */
 
-    private static final Support obstacle = new Support(1,
+    private static final Bonus obstacle = new Bonus(1,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Sprite\\Obstacle.png" )),
             Arrays.asList(
                     new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\BlueUnity\\Obstacle.png" )),
                     new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\redUnity\\Obstacle.png" ))
             ), 33.5, 33.5) {
+
         private Unity obstacle = new Unity(1, 1, "o", 1);
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            System.out.println("Obstacle");
+        }
+        public Unity getObstacle() {
+            return obstacle;
         }
     };
 
-    private final Support combatReadiness = new Support(1) {
+    private final Bonus combatReadiness = new Bonus(1) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support ambulance = new Support(1) {
+    private static final Bonus ambulance = new Bonus(1,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Ambulance\\Sprite\\Ambulance.png" ))) {
+        @Override
+        public void run(ControllerMatchMaking controllerMatchMaking) {
+            System.out.println("Ambulance");
+        }
+    };
+
+    private static final Bonus heavyShells = new Bonus(1,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\Sprite\\HeavyShells.png" ))) {
+        @Override
+        public void run(ControllerMatchMaking controllerMatchMaking) {
+            System.out.println("HeavyShells");
+        }
+    };
+
+    private final Bonus energyBlock = new Bonus(1) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support heavyShells = new Support(1) {
+    private final Bonus explosive = new Bonus(2) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support energyBlock = new Support(1) {
+    private final Bonus fightingHeadquarters = new Bonus(2) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support explosive = new Support(2) {
+    private final Bonus clusterBomb = new Bonus(2) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support fightingHeadquarters = new Support(2) {
+    private final Bonus closeFight = new Bonus(2) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support clusterBomb = new Support(2) {
+    private final Bonus bear = new Bonus(2) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support closeFight = new Support(2) {
+    private final Bonus heavyTankHammer = new Bonus(3) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support bear = new Support(2) {
+    private final Bonus cloning = new Bonus(3) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support heavyTankHammer = new Support(3) {
+    private final Bonus superMortarTurret = new Bonus(3) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support cloning = new Support(3) {
+    private final Bonus attackOfTank = new Bonus(3) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support superMortarTurret = new Support(3) {
+    private final Bonus tankGenerator = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support attackOfTank = new Support(3) {
+    private final Bonus fort = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support tankGenerator = new Support(4) {
+    private final Bonus rocketCorsair = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support fort = new Support(4) {
+    private final Bonus tankBuffalo = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support rocketCorsair = new Support(4) {
+    private final Bonus intensiveProduction = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support tankBuffalo = new Support(4) {
+    private final Bonus diversion = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support intensiveProduction = new Support(4) {
+    private final Bonus doubleTraining = new Bonus(5) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support diversion = new Support(4) {
+    private final Bonus coupling = new Bonus(5) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support doubleTraining = new Support(5) {
+    private final Bonus airStrike = new Bonus(5) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support coupling = new Support(5) {
+    private final Bonus mobilization = new Bonus(5) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
         }
     };
 
-    private final Support airStrike = new Support(5) {
-        @Override
-        public void run(ControllerMatchMaking controllerMatchMaking) {
-
-        }
-    };
-
-    private final Support mobilization = new Support(5) {
-        @Override
-        public void run(ControllerMatchMaking controllerMatchMaking) {
-
-        }
-    };
-
+    //Getters
     @Contract(pure = true)
-    public static Support getObstacle() {
+    public static Bonus getObstacle() {
         return obstacle;
     }
+
+
+    @Contract(pure = true)
+    public static Bonus getAmbulance() {
+        return ambulance;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getHeavyShells() {
+        return heavyShells;
+    }
+
 }
