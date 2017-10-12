@@ -2,6 +2,7 @@ package ResourceInit;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Класс Resources загружает графические объекты и делегирует над ними.
@@ -29,6 +30,7 @@ public final class Resource {
     }
 
     //Штабы:
+    @NotNull
     public final ImageView getHeadquartersBlue() {
         return new ImageView(new Image("file:src\\Resources\\BlueUnity\\Buildings\\Headquarters\\Headquarters.png"));
     }
@@ -621,6 +623,12 @@ public final class Resource {
         unit.setFitHeight(33.5);
         return unit;
     }
+    public final ImageView getTankRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Tank\\Tank 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
 
     public final ImageView getTankReadyBlue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Army\\Tank\\TankReady.png"));
@@ -637,6 +645,13 @@ public final class Resource {
 
     public final ImageView getTankReadyRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Tank\\TankReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getTankReadyRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\RedUnity\\Army\\Tank\\TankReady 1HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;

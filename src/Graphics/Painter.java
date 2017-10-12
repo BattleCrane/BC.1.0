@@ -1,7 +1,9 @@
 package Graphics;
 
 import BattleFields.BattleManager;
+import Bonuses.ControllerBonusesCollection;
 import ResourceInit.Resource;
+import ResourceInit.ResourceOfBonuses;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -9,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Painter {
-    public static void drawGraphic(BattleManager battleManager, Resource resource, Pane paneControlField){
+    public static void drawGraphic(BattleManager battleManager, Resource resource, Pane paneControlField,
+                                   ResourceOfBonuses resourceOfBonuses){
         paneControlField.getChildren().removeAll(paneControlField.getChildren());
         try {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     boolean isReadyUnit = false;
+                    boolean isReadyBonusUnit = false;
                     String element = battleManager.getBattleField().getMatrix().get(i).get(j);
                     ImageView currentUnity = new ImageView();
                     switch (element){
@@ -31,16 +35,17 @@ public final class Painter {
                         case "2^!+T'":
                             currentUnity = resource.getTankReadyBlue();
                             isReadyUnit = true;
-                            System.out.println("Found");
                             break;
                         case "1^!+T'":
                             currentUnity = resource.getTankReadyBlue1HP();
                             isReadyUnit = true;
-                            System.out.println("Found");
                             break;
                         case "2^!-T'":
                             currentUnity = resource.getTankReadyRed();
-                            System.out.println("Found");
+                            isReadyUnit = true;
+                            break;
+                        case "1^!-T'":
+                            currentUnity = resource.getTankReadyRed1HP();
                             isReadyUnit = true;
                             break;
                     }
@@ -329,6 +334,9 @@ public final class Painter {
                             case "2^-T'":
                                 currentUnity = resource.getTankRed();
                                 break;
+                            case "1^-T'":
+                                currentUnity = resource.getTankRed1HP();
+                                break;
                             //Пустое поле:
                             case "    0":
                                 currentUnity = resource.getEmptyField();
@@ -337,6 +345,16 @@ public final class Painter {
                                 currentUnity = resource.getDestroyedField();
                                 break;
                         }
+                    }
+                    switch (element.substring(0, 2) + element.substring(3)) {
+                        //Штаб:
+                        case "1^+o'":
+                            currentUnity = resourceOfBonuses.getObstacleBlue();
+                            break;
+                        case "1^-o'":
+                            currentUnity = resourceOfBonuses.getObstacleRed();
+                            break;
+
                     }
                     currentUnity.setLayoutX(33.5 * j);
                     currentUnity.setLayoutY(33.5 * i);

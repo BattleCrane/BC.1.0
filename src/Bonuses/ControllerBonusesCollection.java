@@ -1,6 +1,8 @@
 package Bonuses;
 
+import BattleFields.Point;
 import Controllers.ControllerMatchMaking;
+import Graphics.Painter;
 import Players.Player;
 import Unities.Unity;
 import javafx.scene.image.Image;
@@ -41,18 +43,22 @@ public final class ControllerBonusesCollection {
      */
 
     private static final Bonus obstacle = new Bonus(1,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Sprite\\Obstacle.png" )),
-            Arrays.asList(
-                    new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\BlueUnity\\Obstacle.png" )),
-                    new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\redUnity\\Obstacle.png" ))
-            ), 33.5, 33.5) {
-
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Sprite\\Obstacle.png" ))) {
         private Unity obstacle = new Unity(1, 1, "o", 1);
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            System.out.println("Obstacle");
-        }
-        public Unity getObstacle() {
-            return obstacle;
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                if (controllerMatchMaking.isClick()){
+                    controllerMatchMaking.setClick(!controllerMatchMaking.isClick());
+                    controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
+                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), obstacle);
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    controllerMatchMaking.getBattleManager().getBattleField().toString();
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+
+            });
         }
     };
 

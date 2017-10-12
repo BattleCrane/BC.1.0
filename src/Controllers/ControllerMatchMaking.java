@@ -8,6 +8,7 @@ import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
 import Bonuses.ControllerBonusesCollection;
+import ResourceInit.ResourceOfBonuses;
 import Unities.Unity;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.jetbrains.annotations.Contract;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -100,6 +102,7 @@ public final class ControllerMatchMaking implements Initializable {
 
     //Графические ресурсы:
     private final Resource resource = new Resource();
+    private final ResourceOfBonuses resourceOfBonuses = new ResourceOfBonuses();
 
     //Триггеры:
     private boolean click = false; //Небольшая защелка для кликов мыши
@@ -107,22 +110,189 @@ public final class ControllerMatchMaking implements Initializable {
     private Unity unit;
     private String labelUnit = ""; //Определитель действия
 
+    //Управляющий базовыми событиями:
+    private EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
+        @Override
+        public void handle(MouseEvent event) {
+            {
+                try {
+                    if (click) {
+                        click = false;
+                        Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                        //Если строите бараки или стену:
+                        if (labelUnit.equals("building") && battleManager.getHowICanBuild() > 0) {
+                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+
+                            }
+                        }
+                        //Если строите завод:
+                        if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
+                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
+                            }
+                        }
+                        //Если строите генератор:
+                        if (labelUnit.equals("generator") && battleManager.getHowICanBuild() > 0 && battleManager.getHowICanBuild() <= 2 && !battleManager.isConstructedGenerator()) {
+                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+                                battleManager.setConstructedGenerator(true);
+                            }
+                        }
+                        //Если создаем стену:
+                        if (labelUnit.equals("wall") && battleManager.getHowICanBuild() > 0) {
+                            if (battleManager.checkConstructionOfBuilding(pointClick, battleManager.getBarracksHorizontal(), battleManager.getPlayer()) &&
+                                    battleManager.putDoubleWall(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+
+                            }
+                        }
+                        //Если создаем турель:
+                        if (labelUnit.equals("turret") && battleManager.getHowICanBuild() > 0) {
+                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+                                AdjutantAttacker.radiusAttack(battleManager, pointClick, 2, 1);
+
+                            }
+                        }
+
+                        //Если улучшаем строение:
+                        if (labelUnit.equals("upgradeBuilding") && battleManager.getHowICanBuild() > 0) {
+                            if (battleManager.upgradeBuilding(pointClick, battleManager.getPlayer())) { //Если удалось улучшить строение:
+                                battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+                            }
+                        }
+
+
+                        //Если создаете автоматчика:
+                        if (labelUnit.equals("gunner") && battleManager.getHowICanProductArmy() > 0) {
+                            if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
+                            }
+                        }
+
+                        //Если создаете танк:
+                        if (labelUnit.equals("tank") && battleManager.getHowICanProductTanks() > 0) {
+                            if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductTanks(battleManager.getHowICanProductTanks() - 1);
+                            }
+                        }
+                        //Если атакуем:
+                    } else {
+                        System.out.println("Выбрали юнита");
+                        Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                        String clickedUnit = battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y());
+                        System.out.println("Юнит: " + clickedUnit);
+                        if (clickedUnit.contains(battleManager.getPlayer().getColorType()) && clickedUnit.contains("!")) {
+                            switch (clickedUnit.substring(4, 5)) {
+                                case "G":
+                                    System.out.println("Это автоматчик: " + clickedUnit);
+                                    paneControlField.setOnMouseClicked(secondEvent -> {
+                                        Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                                        System.out.println("Второй клик: ");
+                                        String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
+                                            Pattern pattern = Pattern.compile("[hgbfwtGT]");
+                                            Matcher matcher = pattern.matcher(targetAttackUnity);
+                                            Pattern patternBonus = Pattern.compile("[o]");
+                                            Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
+                                            System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
+                                            System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
+                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                                for (int i = 0; i < 16; i++){
+                                                    for (int j = 0; j < 16; j++){
+                                                        String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
+                                                        String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                            battleManager.getBattleField().getMatrix().get(i).set(j,
+                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
+                                                        }
+                                                    }
+                                                }
+                                                System.out.println("ATTACK!");
+                                                battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
+                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                battleManager.getBattleField().toString();
+                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                battleManager.checkDestroyedUnities();
+                                                Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
+                                                paneControlField.setOnMouseClicked(this);
+
+                                            }
+                                        }
+                                        paneControlField.setOnMouseClicked(this);
+                                    });
+                                    break;
+                                case "T":
+                                    System.out.println("Это танк: " + clickedUnit);
+                                    paneControlField.setOnMouseClicked(secondEvent -> {
+                                        Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                                        System.out.println("Второй клик: ");
+                                        String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
+                                            Pattern pattern = Pattern.compile("[hgbfwtGT]");
+                                            Matcher matcher = pattern.matcher(targetAttackUnity);
+                                            Pattern patternBonus = Pattern.compile("[o]");
+                                            Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
+                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                                for (int i = 0; i < 16; i++){
+                                                    for (int j = 0; j < 16; j++){
+                                                        String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
+                                                        String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                            battleManager.getBattleField().getMatrix().get(i).set(j,
+                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
+                                                        }
+                                                    }
+                                                }
+                                                System.out.println("ATTACK!");
+                                                battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
+                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                battleManager.getBattleField().toString();
+                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                battleManager.checkDestroyedUnities();
+                                                Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
+                                                paneControlField.setOnMouseClicked(this);
+
+                                            }
+                                        }
+                                        paneControlField.setOnMouseClicked(this);
+                                    });
+                                    break;
+                            }
+                        }
+                    }
+                    //После события:
+                    Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
+                    battleManager.getBattleField().toString();
+                    battleManager.getIdentificationField().toString();
+                    System.out.println();
+                } catch (Exception ignored) {
+                }
+            }
+        }
+    };
+
+
+
     @Override
     public final void initialize(URL location, ResourceBundle resources) {
         battleManager.initializeField();
         battleManager.getBattleField().toString();
         buttonCreateArmy.setVisible(false);
-        Painter.drawGraphic(battleManager, resource, paneControlField);
+        Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
         initializeGameButtons();
         System.out.println(battleManager.getPlayer().getColorType());
-
         initializeBonuses(battleManager);
         ControllerBonusesCollection.showBonuses(battleManager.getPlayer(), paneControlSupport);
     }
 
     private void nextTurn() {
         ControllerBonusesCollection.flush(paneControlSupport);
-
         battleManager.nextTurnOfCurrentPlayer();
         ControllerBonusesCollection.showBonuses(battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
@@ -130,6 +300,7 @@ public final class ControllerMatchMaking implements Initializable {
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
         System.out.println("Осталось автоматчиков: " + battleManager.getHowICanProductArmy());
         System.out.println("Осталось танков: " + battleManager.getHowICanProductTanks());
+        System.out.println("Осталось энергии: " + battleManager.getPlayer().getEnergy());
     }
 
 
@@ -159,7 +330,7 @@ public final class ControllerMatchMaking implements Initializable {
         //Следующий ход:
         buttonEndTurn.setOnMouseClicked(event -> {
             nextTurn();
-            Painter.drawGraphic(battleManager, resource, paneControlField);
+            Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
             if (battleManager.getHowICanProductArmy() - battleManager.getHowICanProductTanks() > 0) {
                 buttonBuildFactory.setVisible(true);
             } else {
@@ -256,167 +427,6 @@ public final class ControllerMatchMaking implements Initializable {
         });
 
         //Инкапсуляция производства:
-        EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
-            @Override
-            public void handle(MouseEvent event) {
-                {
-                    try {
-                        if (click) {
-                            click = false;
-                            Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                            //Если строите бараки или стену:
-                            if (labelUnit.equals("building") && battleManager.getHowICanBuild() > 0) {
-                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
-                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
-
-                                }
-                            }
-                            //Если строите завод:
-                            if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
-                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
-                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
-                                }
-                            }
-                            //Если строите генератор:
-                            if (labelUnit.equals("generator") && battleManager.getHowICanBuild() > 0 && battleManager.getHowICanBuild() <= 2 && !battleManager.isConstructedGenerator()) {
-                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
-                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
-                                    battleManager.setConstructedGenerator(true);
-                                }
-                            }
-                            //Если создаем стену:
-                            if (labelUnit.equals("wall") && battleManager.getHowICanBuild() > 0) {
-                                if (battleManager.checkConstructionOfBuilding(pointClick, battleManager.getBarracksHorizontal(), battleManager.getPlayer()) &&
-                                        battleManager.putDoubleWall(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
-
-                                }
-                            }
-                            //Если создаем турель:
-                            if (labelUnit.equals("turret") && battleManager.getHowICanBuild() > 0) {
-                                if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
-                                        battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
-                                    AdjutantAttacker.radiusAttack(battleManager, pointClick, 2, 1);
-
-                                }
-                            }
-
-                            //Если улучшаем строение:
-                            if (labelUnit.equals("upgradeBuilding") && battleManager.getHowICanBuild() > 0) {
-                                if (battleManager.upgradeBuilding(pointClick, battleManager.getPlayer())) { //Если удалось улучшить строение:
-                                    battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
-                                }
-                            }
-
-
-                            //Если создаете автоматчика:
-                            if (labelUnit.equals("gunner") && battleManager.getHowICanProductArmy() > 0) {
-                                if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
-                                }
-                            }
-
-                            //Если создаете танк:
-                            if (labelUnit.equals("tank") && battleManager.getHowICanProductTanks() > 0) {
-                                if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                    battleManager.setHowICanProductTanks(battleManager.getHowICanProductTanks() - 1);
-                                }
-                            }
-                            //Если атакуем:
-                        } else {
-                            System.out.println("Выбрали юнита");
-                            Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                            String clickedUnit = battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y());
-                            System.out.println("Юнит: " + clickedUnit);
-                            if (clickedUnit.contains(battleManager.getPlayer().getColorType()) && clickedUnit.contains("!")) {
-                                switch (clickedUnit.substring(4, 5)) {
-                                    case "G":
-                                        System.out.println("Это автоматчик: " + clickedUnit);
-                                        paneControlField.setOnMouseClicked(secondEvent -> {
-                                            Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
-                                            System.out.println("Второй клик: ");
-                                            String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                            if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
-                                                Pattern pattern = Pattern.compile("[hgbfwtGT]");
-                                                Matcher matcher = pattern.matcher(targetAttackUnity);
-                                                System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
-                                                System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
-                                                if (matcher.find() && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                    for (int i = 0; i < 16; i++){
-                                                        for (int j = 0; j < 16; j++){
-                                                            String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
-                                                            String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                            if (attackerUnitID.equals(targetUnitID)){
-                                                                battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                        AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
-                                                            }
-                                                        }
-                                                    }
-                                                    System.out.println("ATTACK!");
-                                                    battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                            AdjutantSleeper.sleepUnity(clickedUnit));
-                                                    battleManager.getBattleField().toString();
-                                                    System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
-                                                    battleManager.checkDestroyedUnities();
-                                                    Painter.drawGraphic(battleManager, resource, paneControlField);
-                                                    paneControlField.setOnMouseClicked(this);
-
-                                                }
-                                            }
-                                            paneControlField.setOnMouseClicked(this);
-                                        });
-                                        break;
-                                    case "T":
-                                        System.out.println("Это танк: " + clickedUnit);
-                                        paneControlField.setOnMouseClicked(secondEvent -> {
-                                            Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
-                                            System.out.println("Второй клик: ");
-                                            String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                            if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
-                                                Pattern pattern = Pattern.compile("[hgbfwtGT]");
-                                                Matcher matcher = pattern.matcher(targetAttackUnity);
-                                                if (matcher.find() && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                    for (int i = 0; i < 16; i++){
-                                                        for (int j = 0; j < 16; j++){
-                                                            String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
-                                                            String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                            if (attackerUnitID.equals(targetUnitID)){
-                                                                battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                        AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
-                                                            }
-                                                        }
-                                                    }
-                                                    System.out.println("ATTACK!");
-                                                    battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                            AdjutantSleeper.sleepUnity(clickedUnit));
-                                                    battleManager.getBattleField().toString();
-                                                    System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
-                                                    battleManager.checkDestroyedUnities();
-                                                    Painter.drawGraphic(battleManager, resource, paneControlField);
-                                                    paneControlField.setOnMouseClicked(this);
-
-                                                }
-                                            }
-                                            paneControlField.setOnMouseClicked(this);
-                                        });
-                                        break;
-                                }
-                            }
-                        }
-                        //После события:
-                        Painter.drawGraphic(battleManager, resource, paneControlField);
-                        battleManager.getBattleField().toString();
-                        battleManager.getIdentificationField().toString();
-                        System.out.println();
-                    } catch (Exception ignored) {
-                    }
-                }
-            }
-        };
         paneControlField.setOnMouseClicked(eventHandler);
     }
 
@@ -429,10 +439,51 @@ public final class ControllerMatchMaking implements Initializable {
 
 
         for (Bonus bonus: battleManager.getPlayerBlue().getListOfBonuses()){
-            bonus.getSprite().setOnMouseClicked(event -> bonus.run(this));
+            bonus.getSprite().setOnMouseClicked(event -> {
+                bonus.run(this);
+                click = !click;
+            });
         }
         for (Bonus bonus: battleManager.getPlayerRed().getListOfBonuses()){
             bonus.getSprite().setOnMouseClicked(event -> bonus.run(this));
         }
     }
+
+
+
+    @Contract(pure = true)
+    public Pane getPaneControlField() {
+        return paneControlField;
+    }
+
+    @Contract(pure = true)
+    public BattleManager getBattleManager() {
+        return battleManager;
+    }
+
+    @Contract(pure = true)
+    public EventHandler<? super MouseEvent> getEventHandler() {
+        return eventHandler;
+    }
+
+    @Contract(pure = true)
+    public Resource getResource() {
+        return resource;
+    }
+
+    @Contract(pure = true)
+    public ResourceOfBonuses getResourceOfBonuses() {
+        return resourceOfBonuses;
+    }
+
+    @Contract(pure = true)
+    public boolean isClick() {
+        return click;
+    }
+
+    public void setClick(boolean click) {
+        this.click = click;
+    }
+
+
 }

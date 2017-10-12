@@ -38,7 +38,7 @@ public class BattleManager {
     private int turn = 1;
 
     //Игроки:
-    private Player playerBlue = new Player(0, 0, "+");
+    private Player playerBlue = new Player(0, 1, "+");
     private Player playerRed = new Player(1, 1, "-");
     private Player player;
     private Player opponentPlayer;
@@ -277,6 +277,7 @@ public class BattleManager {
         whatIsTurn();
         AdjutantWakeUpper.wakeUpUnities(this);
         AdjutantReporter.getReportAboutUnities(this);
+        player.setEnergy(player.getEnergy() + 1);
         isConstructedGenerator = false;
     }
 
