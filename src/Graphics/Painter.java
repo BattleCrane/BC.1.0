@@ -174,14 +174,23 @@ public final class Painter {
                             case "4>-b'":
                                 currentUnity = resource.getBarracksLevel3Red();
                                 break;
+                            case "3>-b'":
+                                currentUnity = resource.getBarracksLevel3Red3HP();
+                                break;
                             case "3>+b'":
                                 currentUnity = resource.getBarracksLevel3Blue3HP();
                                 break;
                             case "2>+b'":
                                 currentUnity = resource.getBarracksLevel3Blue2HP();
                                 break;
+                            case "2>-b'":
+                                currentUnity = resource.getBarracksLevel3Red2HP();
+                                break;
                             case "1>+b'":
                                 currentUnity = resource.getBarracksLevel3Blue1HP();
+                                break;
+                            case "1>-b'":
+                                currentUnity = resource.getBarracksLevel3Red1HP();
                                 break;
                             //Завод:
                             //--Уровень 1:

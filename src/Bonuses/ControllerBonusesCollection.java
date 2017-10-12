@@ -1,5 +1,7 @@
 package Bonuses;
 
+import Adjutants.AdjutantAttacker;
+import BattleFields.BattleManager;
 import BattleFields.Point;
 import Controllers.ControllerMatchMaking;
 import Graphics.Painter;
@@ -17,12 +19,15 @@ import java.util.Arrays;
  */
 public final class ControllerBonusesCollection {
 
-    public static void showBonuses(Player player, Pane paneControlBonus){
+    public static void showBonuses(BattleManager battleManager, Player player, Pane paneControlBonus){
         int x = 40;
         int y = 37;
         for (Bonus bonus : player.getListOfBonuses()){
             bonus.getSprite().setLayoutX(x);
             bonus.getSprite().setLayoutY(y);
+            if (bonus.equals(obstacle)) {
+                returnEnergy(battleManager);
+            }
             paneControlBonus.getChildren().add(bonus.getSprite());
             x += 80;
         }
@@ -45,9 +50,10 @@ public final class ControllerBonusesCollection {
     private static final Bonus obstacle = new Bonus(1,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Sprite\\Obstacle.png" ))) {
         private Unity obstacle = new Unity(1, 1, "o", 1);
+
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
-                if (controllerMatchMaking.isClick()){
+                if (controllerMatchMaking.isClick() && controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0){
                     controllerMatchMaking.setClick(!controllerMatchMaking.isClick());
                     controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
                             new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), obstacle);
@@ -57,10 +63,26 @@ public final class ControllerBonusesCollection {
                     controllerMatchMaking.getBattleManager().getBattleField().toString();
                 }
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
-
             });
         }
     };
+
+    private static void returnEnergy(BattleManager battleManager){
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(4,5).equals("o") &&
+                        battleManager.getPlayer().getColorType().equals(battleManager.getBattleField().getMatrix()
+                                .get(i).get(j).substring(3,4))){
+                    System.out.println("!!!");
+                    battleManager.getPlayer().setEnergy(battleManager.getPlayer().getEnergy() + 1);
+                    battleManager.getBattleField().getMatrix().get(i).set(j,
+                            AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
+                    System.out.println("Obstacle: " + battleManager.getBattleField().getMatrix().get(i).get(j));
+                    battleManager.checkDestroyedUnities();
+                }
+            }
+        }
+    }
 
     private final Bonus combatReadiness = new Bonus(1) {
         @Override

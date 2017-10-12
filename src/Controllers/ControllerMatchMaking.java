@@ -288,13 +288,13 @@ public final class ControllerMatchMaking implements Initializable {
         initializeGameButtons();
         System.out.println(battleManager.getPlayer().getColorType());
         initializeBonuses(battleManager);
-        ControllerBonusesCollection.showBonuses(battleManager.getPlayer(), paneControlSupport);
+        ControllerBonusesCollection.showBonuses(battleManager, battleManager.getPlayer(), paneControlSupport);
     }
 
     private void nextTurn() {
         ControllerBonusesCollection.flush(paneControlSupport);
         battleManager.nextTurnOfCurrentPlayer();
-        ControllerBonusesCollection.showBonuses(battleManager.getPlayer(), paneControlSupport);
+        ControllerBonusesCollection.showBonuses(battleManager, battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());

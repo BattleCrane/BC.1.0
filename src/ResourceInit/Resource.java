@@ -324,6 +324,27 @@ public final class Resource {
         return barracksLevel3Blue;
     }
 
+    public final ImageView getBarracksLevel3Red1HP() {
+        ImageView barracksLevel3Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 3 1HP.png"));
+        barracksLevel3Blue.setFitWidth(67.0);
+        barracksLevel3Blue.setFitHeight(33.5);
+        return barracksLevel3Blue;
+    }
+
+    public final ImageView getBarracksLevel3Red2HP() {
+        ImageView barracksLevel3Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 3 2HP.png"));
+        barracksLevel3Blue.setFitWidth(67.0);
+        barracksLevel3Blue.setFitHeight(33.5);
+        return barracksLevel3Blue;
+    }
+
+    public final ImageView getBarracksLevel3Red3HP() {
+        ImageView barracksLevel3Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 3 3HP.png"));
+        barracksLevel3Blue.setFitWidth(67.0);
+        barracksLevel3Blue.setFitHeight(33.5);
+        return barracksLevel3Blue;
+    }
+
     public final ImageView getBarracksLevel3Red() {
         ImageView barracksLevel3Blue = new ImageView(new Image("file:src\\Resources\\RedUnity\\Buildings\\Barracks\\Barracks - Level 3.png"));
         barracksLevel3Blue.setFitWidth(67.0);

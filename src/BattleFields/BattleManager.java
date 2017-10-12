@@ -38,7 +38,7 @@ public class BattleManager {
     private int turn = 1;
 
     //Игроки:
-    private Player playerBlue = new Player(0, 1, "+");
+    private Player playerBlue = new Player(0, 0, "+");
     private Player playerRed = new Player(1, 1, "-");
     private Player player;
     private Player opponentPlayer;
