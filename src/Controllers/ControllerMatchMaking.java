@@ -434,7 +434,8 @@ public final class ControllerMatchMaking implements Initializable {
         battleManager.getPlayerBlue().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
                 ControllerBonusesCollection.getAmbulance(),
-                ControllerBonusesCollection.getCombatReadiness()
+                ControllerBonusesCollection.getCombatReadiness(),
+                ControllerBonusesCollection.getHeavyShells()
         ));
         battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
