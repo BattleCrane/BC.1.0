@@ -1,6 +1,7 @@
 package Bonuses;
 
 import Adjutants.AdjutantAttacker;
+import Adjutants.AdjutantWakeUpper;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Controllers.ControllerMatchMaking;
@@ -13,6 +14,8 @@ import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Класс ControllerBonusCollection хранит в себе экземпляры класса Support и управляет ими
@@ -39,7 +42,7 @@ public final class ControllerBonusesCollection {
 
 
     /**
-     * Бонус: "Боевая преграда"
+     * Бонус: "Легкая преграда"
      * Стоимость: 1 ед. энергии;
      * Устанавливается на вашей и нейтральной территории;
      * Тип: "Сооружение" (не является ни строением ни армией);
@@ -84,18 +87,61 @@ public final class ControllerBonusesCollection {
         }
     }
 
-    private final Bonus combatReadiness = new Bonus(1) {
+    /**
+     * Бонус: "Боевая готовность"
+     * Стоимость: 1 ед. энергии;
+     * Ваш выбранный пехотинец становиться активным
+     */
+
+    private static final Bonus combatReadiness = new Bonus(1,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1CombatReadiness\\Sprite\\CombatReadiness.png" ))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                Pattern pattern = Pattern.compile("[G]");
+                Matcher matcher = pattern.matcher(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5)));
+                if (controllerMatchMaking.isClick() && controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0 && matcher.find() &&
+                        !controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5)).contains("!")){
+                    controllerMatchMaking.setClick(!controllerMatchMaking.isClick());
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), (int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    controllerMatchMaking.getBattleManager().getBattleField().toString();
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
+
+    /**
+     * Бонус: "Скорая помощь"
+     * Стоимость: 1 ед. энергии;
+     * Все ваши автоматчики улучшаются до бронированных автоматчиков и получают +1 к здоровью;
+     * Восстанавливает здоровье всем бронированным автоматчикам;
+     */
 
     private static final Bonus ambulance = new Bonus(1,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\1Ambulance\\Sprite\\Ambulance.png" ))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             System.out.println("Ambulance");
+            if (controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0){
+                for (int i = 0; i < 16; i++){
+                    for (int j  = 0; j < 16; j++){
+                        String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).get(j);
+                        if (currentUnity.substring(3,4).equals(controllerMatchMaking.getBattleManager().getPlayer().getColorType()) &&
+                                currentUnity.substring(4,5).equals("G") && !currentUnity.substring(0,2).equals("2A")){
+                            currentUnity = controllerMatchMaking.getBattleManager().increaseHitPoints(currentUnity, 1); //Здесь конечно можно вызвать AdjutantAttacker и положить -1...
+                            currentUnity = currentUnity.substring(0, 1) + "A" + currentUnity.substring(2);
+                            controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).set(j, currentUnity);
+                        }
+                    }
+                }
+                Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                        controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                controllerMatchMaking.getBattleManager().getBattleField().toString();
+            }
         }
     };
 
@@ -263,5 +309,11 @@ public final class ControllerBonusesCollection {
     public static Bonus getHeavyShells() {
         return heavyShells;
     }
+
+    @Contract(pure = true)
+    public static Bonus getCombatReadiness() {
+        return combatReadiness;
+    }
+
 
 }

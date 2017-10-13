@@ -355,16 +355,52 @@ public final class Painter {
                                 break;
                         }
                     }
-                    switch (element.substring(0, 2) + element.substring(3)) {
-                        //Штаб:
-                        case "1^+o'":
-                            currentUnity = resourceOfBonuses.getObstacleBlue();
-                            break;
-                        case "1^-o'":
-                            currentUnity = resourceOfBonuses.getObstacleRed();
-                            break;
 
+                    //Бонусы:
+                    switch (element){
+                        case "2A!+G'":
+                            currentUnity = resourceOfBonuses.getArmoredGunnerBlueReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1A!+G'":
+                            currentUnity = resourceOfBonuses.getArmoredGunnerBlueReady1HP();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "2A!-G'":
+                            currentUnity = resourceOfBonuses.getArmoredGunnerRedReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1A!-G'":
+                            currentUnity = resourceOfBonuses.getArmoredGunnerRedReady1HP();
+                            isReadyBonusUnit = true;
+                            break;
                     }
+                    if (!isReadyBonusUnit){
+                        switch (element.substring(0, 2) + element.substring(3)) {
+                            //Заграждение:
+                            case "1^+o'":
+                                currentUnity = resourceOfBonuses.getObstacleBlue();
+                                break;
+                            case "1^-o'":
+                                currentUnity = resourceOfBonuses.getObstacleRed();
+                                break;
+                            //Скорая помощь:
+                            case "2A+G'":
+                                currentUnity = resourceOfBonuses.getArmoredGunnerBlue();
+                                break;
+                            case "1A+G'":
+                                currentUnity = resourceOfBonuses.getArmoredGunnerBlue1HP();
+                                break;
+                            case "2A-G'":
+                                currentUnity = resourceOfBonuses.getArmoredGunnerRed();
+                                break;
+                            case "1A-G'":
+                                currentUnity = resourceOfBonuses.getArmoredGunnerRed1HP();
+                                break;
+
+                        }
+                    }
+
                     currentUnity.setLayoutX(33.5 * j);
                     currentUnity.setLayoutY(33.5 * i);
                     paneControlField.getChildren().add(currentUnity);

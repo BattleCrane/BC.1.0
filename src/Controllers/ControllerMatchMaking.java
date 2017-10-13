@@ -434,8 +434,13 @@ public final class ControllerMatchMaking implements Initializable {
         battleManager.getPlayerBlue().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
                 ControllerBonusesCollection.getAmbulance(),
-                ControllerBonusesCollection.getHeavyShells()));
-        battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(ControllerBonusesCollection.getAmbulance()));
+                ControllerBonusesCollection.getCombatReadiness()
+        ));
+        battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
+                ControllerBonusesCollection.getObstacle(),
+                ControllerBonusesCollection.getAmbulance(),
+                ControllerBonusesCollection.getCombatReadiness()
+        ));
 
 
         for (Bonus bonus: battleManager.getPlayerBlue().getListOfBonuses()){
@@ -445,7 +450,10 @@ public final class ControllerMatchMaking implements Initializable {
             });
         }
         for (Bonus bonus: battleManager.getPlayerRed().getListOfBonuses()){
-            bonus.getSprite().setOnMouseClicked(event -> bonus.run(this));
+            bonus.getSprite().setOnMouseClicked(event -> {
+                bonus.run(this);
+                click = !click;
+            });
         }
     }
 

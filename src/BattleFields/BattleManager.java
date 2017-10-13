@@ -238,7 +238,7 @@ public class BattleManager {
     }
 
     @NotNull
-    private String increaseHitPoints(String unityBuild, int quantity) {
+    public String increaseHitPoints(String unityBuild, int quantity) {
         int upgradedHitPoints = Integer.parseInt(unityBuild.substring(0, 1)) + quantity;
         return upgradedHitPoints + unityBuild.substring(1);
     }
