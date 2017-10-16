@@ -37,8 +37,8 @@ public final class AdjutantWakeUpper {
         }
     }
 
-    public static String wakeUpExactly(BattleManager battleManager, int x, int y){
-        return battleManager.getBattleField().getMatrix().get(x).set(y,
+    public static void wakeUpExactly(BattleManager battleManager, int x, int y){
+        battleManager.getBattleField().getMatrix().get(x).set(y,
                 battleManager.getBattleField().getMatrix().get(x).get(y).substring(0, 2) + "!" +
         battleManager.getBattleField().getMatrix().get(x).get(y).substring(3));
     }

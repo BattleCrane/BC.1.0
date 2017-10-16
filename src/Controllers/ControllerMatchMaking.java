@@ -269,7 +269,6 @@ public final class ControllerMatchMaking implements Initializable {
                     //После события:
                     Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                     battleManager.getBattleField().toString();
-                    battleManager.getIdentificationField().toString();
                     System.out.println();
                 } catch (Exception ignored) {
                 }
@@ -293,6 +292,7 @@ public final class ControllerMatchMaking implements Initializable {
 
     private void nextTurn() {
         ControllerBonusesCollection.flush(paneControlSupport);
+        battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
         ControllerBonusesCollection.showBonuses(battleManager, battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";

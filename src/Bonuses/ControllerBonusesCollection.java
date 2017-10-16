@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,11 +57,12 @@ public final class ControllerBonusesCollection {
 
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
-                if (controllerMatchMaking.isClick() && controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0){
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
                     controllerMatchMaking.setClick(!controllerMatchMaking.isClick());
                     controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
                             new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), obstacle);
-                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy());
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                             controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                     controllerMatchMaking.getBattleManager().getBattleField().toString();
@@ -76,11 +78,9 @@ public final class ControllerBonusesCollection {
                 if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(4,5).equals("o") &&
                         battleManager.getPlayer().getColorType().equals(battleManager.getBattleField().getMatrix()
                                 .get(i).get(j).substring(3,4))){
-                    System.out.println("!!!");
                     battleManager.getPlayer().setEnergy(battleManager.getPlayer().getEnergy() + 1);
                     battleManager.getBattleField().getMatrix().get(i).set(j,
                             AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
-                    System.out.println("Obstacle: " + battleManager.getBattleField().getMatrix().get(i).get(j));
                     battleManager.checkDestroyedUnities();
                 }
             }
@@ -88,9 +88,9 @@ public final class ControllerBonusesCollection {
     }
 
     /**
-     * Бонус: "Боевая готовность"
+     * Бонус: "Реактивная готовность"
      * Стоимость: 1 ед. энергии;
-     * Ваш выбранный пехотинец становиться активным
+     * Ваш выбранный пехотинец становиться активным, после чего теряет 1 ед. здоровья
      */
 
     private static final Bonus combatReadiness = new Bonus(1,
@@ -99,12 +99,16 @@ public final class ControllerBonusesCollection {
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 Pattern pattern = Pattern.compile("[G]");
-                Matcher matcher = pattern.matcher(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5)));
-                if (controllerMatchMaking.isClick() && controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0 && matcher.find() &&
-                        !controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5)).contains("!")){
-                    controllerMatchMaking.setClick(!controllerMatchMaking.isClick());
+                String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5));
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                Matcher matcher = pattern.matcher(currentUnit);
+                if (currentEnergy - this.getEnergy()>= 0 && matcher.find() &&
+                        !currentUnit.contains("!")){
+                    controllerMatchMaking.setClick(false);
                     AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), (int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
-                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy());
+                    controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).set((int) (event.getX() / 33.5),
+                            AdjutantAttacker.attack(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5)), 1));
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                             controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                     controllerMatchMaking.getBattleManager().getBattleField().toString();
@@ -142,6 +146,7 @@ public final class ControllerBonusesCollection {
                         controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                 controllerMatchMaking.getBattleManager().getBattleField().toString();
             }
+            controllerMatchMaking.setClick(false);
         }
     };
 

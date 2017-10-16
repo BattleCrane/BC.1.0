@@ -397,7 +397,18 @@ public final class Painter {
                             case "1A-G'":
                                 currentUnity = resourceOfBonuses.getArmoredGunnerRed1HP();
                                 break;
-
+                            case "0^+G'":
+                                currentUnity = resource.getGunnerReadyBlue();
+                                break;
+                            case "0^-G'":
+                                currentUnity = resource.getGunnerReadyRed();
+                                break;
+                            case "0A+G'":
+                                currentUnity = resourceOfBonuses.getArmoredGunnerBlueReady1HP();
+                                break;
+                            case "0A-G'":
+                                currentUnity = resourceOfBonuses.getArmoredGunnerRedReady1HP();
+                                break;
                         }
                     }
 
