@@ -1,5 +1,8 @@
 package BattleFields;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +25,7 @@ public final class BattleField {
         }
     }
 
+    @NotNull
     @Override
     public final String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -39,6 +43,7 @@ public final class BattleField {
         return stringBuilder.toString();
     }
 
+    @Contract(pure = true)
     public final List<List<String>> getMatrix() {
         return matrix;
     }

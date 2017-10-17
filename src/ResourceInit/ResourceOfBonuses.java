@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 /**
  * Created by мсиайнина on 12.10.2017.
  */
-public class ResourceOfBonuses {
+public final class ResourceOfBonuses {
     // Бонус "Преграда"
     public final ImageView getObstacleBlue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\BlueUnity\\Obstacle.png" ));
@@ -72,8 +72,40 @@ public class ResourceOfBonuses {
         unit.setFitHeight(33.5);
         return unit;
     }
+
     public final ImageView getArmoredGunnerRed1HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1Ambulance\\RedUnity\\ArmoredGunner 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    //Бонус "Тяжелые снаряды"
+    //Синие:
+    public final ImageView getHeavyGunnerBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\BlueUnity\\HeavyGunner.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getHeavyGunnerBlueReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\BlueUnity\\HeavyGunnerReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    //Красные:
+    public final ImageView getHeavyGunnerRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\RedUnity\\HeavyGunner.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getHeavyGunnerRedReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\RedUnity\\HeavyGunnerReady.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;

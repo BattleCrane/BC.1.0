@@ -1,6 +1,7 @@
 package BattleFields;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public final class IdentificationField {
         }
     }
 
+    @NotNull
     @Override
     public final String toString() {
         StringBuilder stringBuilder = new StringBuilder();

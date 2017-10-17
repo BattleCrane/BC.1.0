@@ -99,10 +99,12 @@ public final class ControllerBonusesCollection {
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 Pattern pattern = Pattern.compile("[G]");
+                Pattern patternBonuses = Pattern.compile("[H]");
                 String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5));
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 Matcher matcher = pattern.matcher(currentUnit);
-                if (currentEnergy - this.getEnergy()>= 0 && matcher.find() &&
+                Matcher matcherBonuses = patternBonuses.matcher(currentUnit);
+                if (currentEnergy - this.getEnergy()>= 0 && (matcher.find() || matcherBonuses.find()) &&
                         !currentUnit.contains("!")){
                     controllerMatchMaking.setClick(false);
                     AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), (int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
@@ -121,7 +123,7 @@ public final class ControllerBonusesCollection {
     /**
      * Бонус: "Скорая помощь"
      * Стоимость: 1 ед. энергии;
-     * Все ваши автоматчики улучшаются до бронированных автоматчиков и получают +1 к здоровью;
+     * Все ваши обыкновенные автоматчики улучшаются до бронированных автоматчиков и получают +1 к здоровью;
      * Восстанавливает здоровье всем бронированным автоматчикам;
      */
 
@@ -155,6 +157,20 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             System.out.println("HeavyShells");
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5));
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (currentEnergy - this.getEnergy()>= 0 && currentUnit.substring(1, 2).equals("^") && currentUnit.substring(4, 5).equals("G")){
+                    controllerMatchMaking.setClick(false);
+                    controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).set((int) (event.getX() / 33.5),
+                            currentUnit.substring(0, 4) + "H" + currentUnit.substring(5));
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    controllerMatchMaking.getBattleManager().getBattleField().toString();
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
 

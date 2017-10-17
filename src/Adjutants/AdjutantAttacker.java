@@ -60,11 +60,13 @@ public final class AdjutantAttacker {
 
     public static boolean checkTarget(BattleManager battleManager, Point attackerPoint, Point targetPoint) {
         Pattern pattern = Pattern.compile("[hgbfwt]");
+        Pattern patternBonuses = Pattern.compile("[o]");
         if (attackerPoint.X() == targetPoint.X()) {
             for (int j = min(attackerPoint.Y(), targetPoint.Y()) + 1; j < max(attackerPoint.Y(), targetPoint.Y()); j++) {
                 String currentUnity = battleManager.getBattleField().getMatrix().get(attackerPoint.X()).get(j);
                 Matcher matcher = pattern.matcher(currentUnity);
-                if (matcher.find() && !currentUnity.contains(battleManager.getPlayer().getColorType())) {
+                Matcher matcherBonuses = patternBonuses.matcher(currentUnity);
+                if ((matcher.find() || matcherBonuses.find()) && !currentUnity.contains(battleManager.getPlayer().getColorType())) {
                     return false;
                 }
             }
@@ -74,7 +76,8 @@ public final class AdjutantAttacker {
             for (int i = min(attackerPoint.X(), targetPoint.X()) + 1; i < max(attackerPoint.X(), targetPoint.X()); i++) {
                 String currentUnity = battleManager.getBattleField().getMatrix().get(i).get(attackerPoint.Y());
                 Matcher matcher = pattern.matcher(currentUnity);
-                if (matcher.find() && !currentUnity.contains(battleManager.getPlayer().getColorType())) {
+                Matcher matcherBonuses = patternBonuses.matcher(currentUnity);
+                if ((matcher.find() || matcherBonuses.find()) && !currentUnity.contains(battleManager.getPlayer().getColorType())) {
                     return false;
                 }
             }
@@ -106,7 +109,8 @@ public final class AdjutantAttacker {
                 count++;
                 String currentUnity = battleManager.getBattleField().getMatrix().get(pointerX).get(pointerY);
                 Matcher matcher = pattern.matcher(currentUnity);
-                if (count != 0 && count != Math.abs(targetPoint.X() - attackerPoint.X())&& matcher.find() &&
+                Matcher matcherBonuses = patternBonuses.matcher(currentUnity);
+                if (count != 0 && count != Math.abs(targetPoint.X() - attackerPoint.X()) && (matcher.find() || matcherBonuses.find()) &&
                         !currentUnity.contains(battleManager.getPlayer().getColorType())){
                     return false;
                 }

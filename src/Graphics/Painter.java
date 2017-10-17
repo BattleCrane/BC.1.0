@@ -374,6 +374,14 @@ public final class Painter {
                             currentUnity = resourceOfBonuses.getArmoredGunnerRedReady1HP();
                             isReadyBonusUnit = true;
                             break;
+                        case "1^!+H'":
+                            currentUnity = resourceOfBonuses.getHeavyGunnerBlueReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1^!-H'":
+                            currentUnity = resourceOfBonuses.getHeavyGunnerRedReady();
+                            isReadyBonusUnit = true;
+                            break;
                     }
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {
@@ -408,6 +416,19 @@ public final class Painter {
                                 break;
                             case "0A-G'":
                                 currentUnity = resourceOfBonuses.getArmoredGunnerRedReady1HP();
+                                break;
+                            //Тяжелые снаряды:
+                            case "1^+H'":
+                                currentUnity = resourceOfBonuses.getHeavyGunnerBlue();
+                                break;
+                            case "1^-H'":
+                                currentUnity = resourceOfBonuses.getHeavyGunnerRed();
+                                break;
+                            case "0^+H'":
+                                currentUnity = resourceOfBonuses.getHeavyGunnerBlueReady();
+                                break;
+                            case "0^-H'":
+                                currentUnity = resourceOfBonuses.getHeavyGunnerRedReady();
                                 break;
                         }
                     }

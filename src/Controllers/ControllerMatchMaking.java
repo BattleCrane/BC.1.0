@@ -198,7 +198,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[o]");
+                                            Pattern patternBonus = Pattern.compile("[oH]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
                                             System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
@@ -236,7 +236,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[o]");
+                                            Pattern patternBonus = Pattern.compile("[oH]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++){
@@ -246,6 +246,42 @@ public final class ControllerMatchMaking implements Initializable {
                                                         if (attackerUnitID.equals(targetUnitID)){
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
+                                                        }
+                                                    }
+                                                }
+                                                System.out.println("ATTACK!");
+                                                battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
+                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                battleManager.getBattleField().toString();
+                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                battleManager.checkDestroyedUnities();
+                                                Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
+                                                paneControlField.setOnMouseClicked(this);
+
+                                            }
+                                        }
+                                        paneControlField.setOnMouseClicked(this);
+                                    });
+                                    break;
+                                case "H":
+                                    System.out.println("Это тяжелый автоматчик: " + clickedUnit);
+                                    paneControlField.setOnMouseClicked(secondEvent -> {
+                                        Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                                        System.out.println("Второй клик: ");
+                                        String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
+                                            Pattern pattern = Pattern.compile("[hgbfwtGT]");
+                                            Matcher matcher = pattern.matcher(targetAttackUnity);
+                                            Pattern patternBonus = Pattern.compile("[oH]");
+                                            Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
+                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                                for (int i = 0; i < 16; i++){
+                                                    for (int j = 0; j < 16; j++){
+                                                        String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
+                                                        String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                            battleManager.getBattleField().getMatrix().get(i).set(j,
+                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
                                                         }
                                                     }
                                                 }
