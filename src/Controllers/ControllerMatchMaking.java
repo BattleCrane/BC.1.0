@@ -323,14 +323,14 @@ public final class ControllerMatchMaking implements Initializable {
         initializeGameButtons();
         System.out.println(battleManager.getPlayer().getColorType());
         initializeBonuses(battleManager);
-        ControllerBonusesCollection.showBonuses(battleManager, battleManager.getPlayer(), paneControlSupport);
+        ControllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
     }
 
     private void nextTurn() {
         ControllerBonusesCollection.flush(paneControlSupport);
         battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
-        ControllerBonusesCollection.showBonuses(battleManager, battleManager.getPlayer(), paneControlSupport);
+        ControllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
@@ -472,14 +472,16 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getAmbulance(),
                 ControllerBonusesCollection.getCombatReadiness(),
                 ControllerBonusesCollection.getHeavyShells(),
-                ControllerBonusesCollection.getEnergyBattery()
+                ControllerBonusesCollection.getEnergyBattery(),
+                ControllerBonusesCollection.getExplosive()
         ));
         battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
                 ControllerBonusesCollection.getAmbulance(),
                 ControllerBonusesCollection.getCombatReadiness(),
                 ControllerBonusesCollection.getHeavyShells(),
-                ControllerBonusesCollection.getEnergyBattery()
+                ControllerBonusesCollection.getEnergyBattery(),
+                ControllerBonusesCollection.getExplosive()
         ));
 
 
@@ -498,6 +500,11 @@ public final class ControllerMatchMaking implements Initializable {
     }
 
 
+
+    @Contract(pure = true)
+    public AnchorPane getPaneGlobal() {
+        return paneGlobal;
+    }
 
     @Contract(pure = true)
     public Pane getPaneControlField() {

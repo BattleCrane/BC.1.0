@@ -179,18 +179,7 @@ public class BattleManager {
                     if (identificationField.getMatrix().get(i).get(j).equals(String.valueOf(getIdentification(point)))) {
                         try {
                             switch (unityBuild.substring(4, 5)) { //Смотрим строение:
-                                case "g": //Улучшение генератора:
-                                    if (!unityBuild.contains(">")) {
-                                        unityBuild = levelUp(unityBuild);
-                                        if (unityBuild != null && unityBuild.contains("<")) {
-                                            unityBuild = increaseHitPoints(unityBuild, 1);
-                                        }
-                                        if (unityBuild != null && unityBuild.contains(">")) {
-                                            unityBuild = increaseHitPoints(unityBuild, 2);
-                                        }
-                                        isUpgraded = true;
-                                    }
-                                    break;
+                                case "g": //Улучшение генератора: -> Опускаемся в бараки:
                                 case "b": //Улучшение бараков:
                                     if (!unityBuild.contains(">")) {
                                         unityBuild = levelUp(unityBuild);
@@ -266,11 +255,6 @@ public class BattleManager {
         }
     }
 
-    private void removeFromPaneControlField(Pane paneControlField, Point point){
-        int id = Integer.parseInt(identificationField.getMatrix().get(point.X()).get(point.Y()));
-        paneControlField.getChildren().set(id, null);
-    }
-
     //Следующий ход:
     public void nextTurnOfCurrentPlayer() {
         turn = (turn + 1) % 2;
@@ -300,16 +284,8 @@ public class BattleManager {
         return battleField;
     }
 
-    public void setBattleField(BattleField battleField) {
-        this.battleField = battleField;
-    }
-
     public Pane getPaneBattle() {
         return paneBattle;
-    }
-
-    public void setPaneBattle(Pane paneBattle) {
-        this.paneBattle = paneBattle;
     }
 
     public int getTurn() {
@@ -324,16 +300,8 @@ public class BattleManager {
         return playerBlue;
     }
 
-    public void setPlayerBlue(Player playerBlue) {
-        this.playerBlue = playerBlue;
-    }
-
     public Player getPlayerRed() {
         return playerRed;
-    }
-
-    public void setPlayerRed(Player playerRed) {
-        this.playerRed = playerRed;
     }
 
     public Player getPlayer() {
@@ -348,88 +316,44 @@ public class BattleManager {
         return opponentPlayer;
     }
 
-    public void setOpponentPlayer(Player opponentPlayer) {
-        this.opponentPlayer = opponentPlayer;
-    }
-
     public Unity getHeadquarters() {
         return headquarters;
-    }
-
-    public void setHeadquarters(Unity headquarters) {
-        this.headquarters = headquarters;
     }
 
     public Unity getBarracksVertical() {
         return barracksVertical;
     }
 
-    public void setBarracksVertical(Unity barracksVertical) {
-        this.barracksVertical = barracksVertical;
-    }
-
     public Unity getBarracksHorizontal() {
         return barracksHorizontal;
-    }
-
-    public void setBarracksHorizontal(Unity barracksHorizontal) {
-        this.barracksHorizontal = barracksHorizontal;
     }
 
     public Unity getGenerator() {
         return generator;
     }
 
-    public void setGenerator(Unity generator) {
-        this.generator = generator;
-    }
-
     public Unity getFactoryVertical() {
         return factoryVertical;
-    }
-
-    public void setFactoryVertical(Unity factoryVertical) {
-        this.factoryVertical = factoryVertical;
     }
 
     public Unity getFactoryHorizontal() {
         return factoryHorizontal;
     }
 
-    public void setFactoryHorizontal(Unity factoryHorizontal) {
-        this.factoryHorizontal = factoryHorizontal;
-    }
-
     public Unity getTurret() {
         return turret;
-    }
-
-    public void setTurret(Unity turret) {
-        this.turret = turret;
     }
 
     public Unity getWall() {
         return wall;
     }
 
-    public void setWall(Unity wall) {
-        this.wall = wall;
-    }
-
     public Unity getGunner() {
         return gunner;
     }
 
-    public void setGunner(Unity gunner) {
-        this.gunner = gunner;
-    }
-
     public Unity getTank() {
         return tank;
-    }
-
-    public void setTank(Unity tank) {
-        this.tank = tank;
     }
 
     public int getHowICanBuild() {
