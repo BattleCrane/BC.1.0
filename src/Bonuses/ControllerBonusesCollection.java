@@ -2,6 +2,7 @@ package Bonuses;
 
 import Adjutants.AdjutantAttacker;
 import Adjutants.AdjutantWakeUpper;
+import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Controllers.ControllerMatchMaking;
@@ -29,6 +30,25 @@ public final class ControllerBonusesCollection {
             bonus.getSprite().setLayoutY(y);
             if (bonus.equals(obstacle)) {
                 returnEnergyFromObstacle(battleManager);
+            }
+            if (bonus.equals(energyBattery)){
+                int collectedEnergy = 0;
+                for (int i = 0; i < 16; i++){
+                    for (int j = 0; j < 16; j++){
+                        if (battleManager.getBattleField().getMatrix().get(i).get(j).contains(battleManager.getPlayer().getColorType() + "e")){
+                            collectedEnergy += returnEnergyFromEnergyBattery(battleManager.getBattleField(), new Point(i, j),
+                                    new Unity(1, 1, "e", 1), battleManager.getPlayer());
+                            battleManager.getBattleField().getMatrix().get(i).set(j,
+                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
+                            battleManager.checkDestroyedUnities();
+
+                        }
+                    }
+                }
+                battleManager.getPlayer().setEnergy(battleManager.getPlayer().getEnergy() + collectedEnergy);
+                System.out.println("CollectedEnergy" + collectedEnergy);
+
+
             }
             paneControlBonus.getChildren().add(bonus.getSprite());
             x += 80;
@@ -194,8 +214,20 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private void returnEnergyFromEnergyBattery(BattleManager battleManager){
-
+    private static int returnEnergyFromEnergyBattery(BattleField battleField, Point point, Unity unity, Player player) {
+        int returnedEnergy = 0;
+        int startX = point.X() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей координат)
+        int startY = point.Y() - 1;
+        for (int i = startX; i <= startX + unity.getWidth() + 1; i++) {
+            for (int j = startY; j <= startY + unity.getHeight() + 1; j++) {
+                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                    if (battleField.getMatrix().get(i).get(j).contains(player.getColorType() + "b'")) {
+                        returnedEnergy++;
+                    }
+                }
+            }
+        }
+        return returnedEnergy;
     }
 
     private final Bonus explosive = new Bonus(2) {

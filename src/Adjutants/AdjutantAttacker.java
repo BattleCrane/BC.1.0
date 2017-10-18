@@ -28,15 +28,16 @@ public final class AdjutantAttacker {
         int y = middle.Y();
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
         Pattern pattern = Pattern.compile("[hgbfwtGT]");
-        Pattern patternBonuses; //Continue...
+        Pattern patternBonuses = Pattern.compile("[eoH]");
         for (int i = x - radius; i < x + radius + 1; i++) {
             for (int j = y - countShift; j < y + 1 + countShift; j++) {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
                 if (inBounds) {
                     String currentUnity = battleManager.getBattleField().getMatrix().get(i).get(j);
                     Matcher matcher = pattern.matcher(currentUnity);
+                    Matcher matcherBonus = patternBonuses.matcher(currentUnity);
                     boolean isSame = currentUnity.equals(battleManager.getBattleField().getMatrix().get(x).get(y));
-                    if (matcher.find() && !isSame) {
+                    if ((matcher.find() || matcherBonus.find()) && !isSame) {
                         for (int q = 0; q < 16; q++) {
                             for (int w = 0; w < 16; w++) {
                                 String otherUnity = battleManager.getBattleField().getMatrix().get(q).get(w);

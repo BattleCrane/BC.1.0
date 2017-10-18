@@ -91,7 +91,6 @@ public class Tests {
         battleManagerTest1.putUnity(new Player("-"), new Point(4, 10), battleManagerTest1.getGenerator());
         assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(1, 14)));
         battleManagerTest1.getBattleField().toString();
-
     }
 
 }

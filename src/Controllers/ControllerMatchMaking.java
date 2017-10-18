@@ -198,7 +198,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oH]");
+                                            Pattern patternBonus = Pattern.compile("[oHe]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
                                             System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
@@ -236,7 +236,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oH]");
+                                            Pattern patternBonus = Pattern.compile("[oHe]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++){
@@ -272,7 +272,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oH]");
+                                            Pattern patternBonus = Pattern.compile("[oHe]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++){
