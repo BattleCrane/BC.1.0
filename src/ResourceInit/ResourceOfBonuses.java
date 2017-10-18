@@ -110,4 +110,21 @@ public final class ResourceOfBonuses {
         unit.setFitHeight(33.5);
         return unit;
     }
+
+    //Бонус "Энергетическая батарея"
+    //Синие:
+    public final ImageView getEnergyBatteryBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1EnergyBlock\\BlueUnity\\EnergyBlock.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    //Красные:
+    public final ImageView getEnergyBatteryRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\1EnergyBlock\\RedUnity\\EnergyBlock.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
 }

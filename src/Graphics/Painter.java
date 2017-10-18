@@ -1,14 +1,10 @@
 package Graphics;
 
 import BattleFields.BattleManager;
-import Bonuses.ControllerBonusesCollection;
 import ResourceInit.Resource;
 import ResourceInit.ResourceOfBonuses;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public final class Painter {
     public static void drawGraphic(BattleManager battleManager, Resource resource, Pane paneControlField,
@@ -429,6 +425,14 @@ public final class Painter {
                                 break;
                             case "0^-H'":
                                 currentUnity = resourceOfBonuses.getHeavyGunnerRedReady();
+                                break;
+                            //Енергетическая батарея:
+                            case "1^+e'":
+                                currentUnity = resourceOfBonuses.getEnergyBatteryBlue();
+                                System.out.println("TRUE");
+                                break;
+                            case "1^-e'":
+                                currentUnity = resourceOfBonuses.getEnergyBatteryRed();
                                 break;
                         }
                     }

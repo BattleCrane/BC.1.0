@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +28,7 @@ public final class ControllerBonusesCollection {
             bonus.getSprite().setLayoutX(x);
             bonus.getSprite().setLayoutY(y);
             if (bonus.equals(obstacle)) {
-                returnEnergy(battleManager);
+                returnEnergyFromObstacle(battleManager);
             }
             paneControlBonus.getChildren().add(bonus.getSprite());
             x += 80;
@@ -59,7 +57,7 @@ public final class ControllerBonusesCollection {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
-                    controllerMatchMaking.setClick(!controllerMatchMaking.isClick());
+                    controllerMatchMaking.setClick(false);
                     controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
                             new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), obstacle);
                     controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
@@ -72,7 +70,7 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private static void returnEnergy(BattleManager battleManager){
+    private static void returnEnergyFromObstacle(BattleManager battleManager){
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(4,5).equals("o") &&
@@ -174,12 +172,31 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus energyBlock = new Bonus(1) {
+
+    private static final Bonus energyBattery = new Bonus(1,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1EnergyBlock\\Sprite\\EnergyBlock.png" ))) {
+        private Unity energyBattery = new Unity(1, 1, "e", 1);
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
+                    controllerMatchMaking.setClick(false);
+                    controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
+                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), energyBattery);
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    controllerMatchMaking.getBattleManager().getBattleField().toString();
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
+
+    private void returnEnergyFromEnergyBattery(BattleManager battleManager){
+
+    }
 
     private final Bonus explosive = new Bonus(2) {
         @Override
@@ -335,6 +352,12 @@ public final class ControllerBonusesCollection {
     public static Bonus getCombatReadiness() {
         return combatReadiness;
     }
+
+    @Contract(pure = true)
+    public static Bonus getEnergyBattery() {
+        return energyBattery;
+    }
+
 
 
 }
