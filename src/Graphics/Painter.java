@@ -403,6 +403,39 @@ public final class Painter {
                         case "1^!-w'":
                             currentUnity = resourceOfBonuses.getExplosiveWallRed1HP();
                             break;
+                        //Боевой штаб:
+                        case "8^!+h'":
+                        case "8^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters();
+                            break;
+                        case "7^!+h'":
+                        case "7^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters7HP();
+                            break;
+                        case "6^!+h'":
+                        case "6^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters6HP();
+                            break;
+                        case "5^!+h'":
+                        case "5^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters5HP();
+                            break;
+                        case "4^!+h'":
+                        case "4^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters4HP();
+                            break;
+                        case "3^!+h'":
+                        case "3^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters3HP();
+                            break;
+                        case "2^!+h'":
+                        case "2^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters2HP();
+                            break;
+                        case "1^!+h'":
+                        case "1^!-h'":
+                            currentUnity = resourceOfBonuses.getFightingHeadquarters1HP();
+                            break;
                     }
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {

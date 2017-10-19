@@ -1,6 +1,7 @@
 package Bonuses;
 
 import Adjutants.AdjutantAttacker;
+import Adjutants.AdjutantSleeper;
 import Adjutants.AdjutantWakeUpper;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
@@ -76,8 +77,24 @@ public final class ControllerBonusesCollection {
         }
     }
 
-    public static void flush(Pane paneControlBonus){
+    public static void flush(Pane paneControlBonus, BattleManager battleManager){
         paneControlBonus.getChildren().retainAll(paneControlBonus.getChildren().get(0));
+        battleManager.getBattleField().getMatrix().get(0).set(0,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
+        battleManager.getBattleField().getMatrix().get(0).set(1,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
+        battleManager.getBattleField().getMatrix().get(1).set(0,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
+        battleManager.getBattleField().getMatrix().get(1).set(1,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
+        battleManager.getBattleField().getMatrix().get(14).set(14,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
+        battleManager.getBattleField().getMatrix().get(14).set(15,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
+        battleManager.getBattleField().getMatrix().get(15).set(14,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
+        battleManager.getBattleField().getMatrix().get(15).set(15,
+                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
     }
 
 
@@ -297,9 +314,32 @@ public final class ControllerBonusesCollection {
             new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Sprite\\FightingHeadquarters.png" ))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0){
+                if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("+")){
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 14 , 14 );
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 14 , 15 );
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 15 , 14 );
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 15 , 15 );
+                }
+                if (controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0 &&
+                        controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("-")){
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 1 , 1 );
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 1 , 0 );
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 0 , 1 );
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 0 , 0 );
+                }
+                countShortsForHeadquarters = 2;
+                controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                        controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                controllerMatchMaking.setClick(true);
+            }
 
         }
     };
+
+    private static int countShortsForHeadquarters = 0;
 
     private final Bonus clusterBomb = new Bonus(2) {
         @Override
@@ -475,6 +515,15 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getFightingHeadquarters() {
         return fightingHeadquarters;
+    }
+
+    @Contract(pure = true)
+    public static int getCountShortsForHeadquarters() {
+        return countShortsForHeadquarters;
+    }
+
+    public static void setCountShortsForHeadquarters(int countShortsForHeadquarters) {
+        ControllerBonusesCollection.countShortsForHeadquarters = countShortsForHeadquarters;
     }
 
 

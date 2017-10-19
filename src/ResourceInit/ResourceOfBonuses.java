@@ -196,4 +196,55 @@ public final class ResourceOfBonuses {
         unit.setFitHeight(33.5);
         return unit;
     }
+
+    //Бонус "Боевой штаб"
+    public final ImageView getFightingHeadquarters() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters8HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters7HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters7HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters6HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters6HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters5HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters5HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters4HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters4HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters3HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters2HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+    public final ImageView getFightingHeadquarters1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Unity\\FightingHeadquarters1HP.png"));
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
+        return unit;
+    }
+
 }
