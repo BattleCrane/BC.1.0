@@ -52,9 +52,19 @@ public final class ControllerBonusesCollection {
                     }
                 }
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(controllerMatchMaking.getBattleManager().getPlayer().getEnergy() + collectedEnergy);
-                System.out.println("CollectedEnergy" + collectedEnergy);
-
-
+            }
+            if (bonus.equals(explosive)){
+                for (int i = 0; i < 16; i++){
+                    for (int j = 0; j < 16; j++){
+                        String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).get(j);
+                        if (currentUnity.contains("!" +controllerMatchMaking.getBattleManager().getOpponentPlayer().getColorType() +  "w")){
+                            controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).set(j,
+                                    AdjutantAttacker.attack(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).get(j), 4));
+                            controllerMatchMaking.getBattleManager().checkDestroyedUnities();
+                            System.out.println("Destroyed");
+                        }
+                    }
+                }
             }
             paneControlBonus.getChildren().add(bonus.getSprite());
             if (x + 80 > 450){
@@ -252,13 +262,17 @@ public final class ControllerBonusesCollection {
         return returnedEnergy;
     }
 
+    /**
+     * Бонус: "Взрывчатка"
+     * Стоимость: 2 ед. энергии;
+     * Устанавливается на любой вражеской стене;
+     * На следующий ход уничтожает вражескую стену.
+     */
+
     private static final Bonus explosive = new Bonus(2,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\Sprite\\Explosive.png" ))) {
-        ImageView explosivePicture;
-
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            System.out.println("EXPLOSIVE");
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 int x = (int) (event.getX() / 33.5);
@@ -267,27 +281,20 @@ public final class ControllerBonusesCollection {
                         controllerMatchMaking.getBattleManager().getBattleField().getMatrix().
                                 get(x).get(y).contains(controllerMatchMaking.getBattleManager().getOpponentPlayer().getColorType() + "w'")){
                     controllerMatchMaking.setClick(false);
-                    System.out.println("That's wall");
-                    if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("+")){
-                        explosivePicture = new ResourceOfBonuses().getExplosiveBlue();
-                        System.out.println("Blue");
-                    } else {
-                        explosivePicture = new ResourceOfBonuses().getExplosiveRed();
-                        System.out.println("Red");
+                    if (!controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x).contains("!")){
+                        AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), y, x);
+                        controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                        Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                                controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                     }
-                    explosivePicture.setLayoutY(33.5 * y);
-                    explosivePicture.setLayoutX(33 * x);
-                    System.out.println(controllerMatchMaking.getPaneControlField().getChildren().add(explosivePicture));
-                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
-                } else {
-                    System.out.println("No");
                 }
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
             });
         }
     };
 
-    private final Bonus fightingHeadquarters = new Bonus(2) {
+    private static final Bonus fightingHeadquarters = new Bonus(2,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Sprite\\FightingHeadquarters.png" ))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
@@ -463,6 +470,11 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getExplosive() {
         return explosive;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getFightingHeadquarters() {
+        return fightingHeadquarters;
     }
 
 

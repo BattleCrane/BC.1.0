@@ -378,6 +378,31 @@ public final class Painter {
                             currentUnity = resourceOfBonuses.getHeavyGunnerRedReady();
                             isReadyBonusUnit = true;
                             break;
+                        //Взрывчатка:
+                        case "4^!+w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallBlue();
+                            break;
+                        case "3^!+w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallBlue3HP();
+                            break;
+                        case "2^!+w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallBlue2HP();
+                            break;
+                        case "1^!+w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallBlue1HP();
+                            break;
+                        case "4^!-w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallRed();
+                            break;
+                        case "3^!-w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallRed3HP();
+                            break;
+                        case "2^!-w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallRed2HP();
+                            break;
+                        case "1^!-w'":
+                            currentUnity = resourceOfBonuses.getExplosiveWallRed1HP();
+                            break;
                     }
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {
@@ -429,14 +454,12 @@ public final class Painter {
                             //Енергетическая батарея:
                             case "1^+e'":
                                 currentUnity = resourceOfBonuses.getEnergyBatteryBlue();
-                                System.out.println("TRUE");
                                 break;
                             case "1^-e'":
                                 currentUnity = resourceOfBonuses.getEnergyBatteryRed();
                                 break;
                         }
                     }
-
                     currentUnity.setLayoutX(33.5 * j);
                     currentUnity.setLayoutY(33.5 * i);
                     paneControlField.getChildren().add(currentUnity);

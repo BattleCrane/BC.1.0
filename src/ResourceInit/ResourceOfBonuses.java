@@ -137,9 +137,61 @@ public final class ResourceOfBonuses {
         return unit;
     }
 
+    public final ImageView getExplosiveWallBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\BlueUnity\\Wall4HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getExplosiveWallBlue3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\BlueUnity\\Wall3HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getExplosiveWallBlue2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\BlueUnity\\Wall2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getExplosiveWallBlue1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\BlueUnity\\Wall1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
     //Красные:
     public final ImageView getExplosiveRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Explosive.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getExplosiveWallRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Wall4HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getExplosiveWallRed3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Wall3HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getExplosiveWallRed2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Wall2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getExplosiveWallRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Wall1HP.png"));
         unit.setFitWidth(33.5);
         unit.setFitHeight(33.5);
         return unit;

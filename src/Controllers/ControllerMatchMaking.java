@@ -473,7 +473,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getCombatReadiness(),
                 ControllerBonusesCollection.getHeavyShells(),
                 ControllerBonusesCollection.getEnergyBattery(),
-                ControllerBonusesCollection.getExplosive()
+                ControllerBonusesCollection.getExplosive(),
+                ControllerBonusesCollection.getFightingHeadquarters()
+
         ));
         battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
@@ -481,7 +483,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getCombatReadiness(),
                 ControllerBonusesCollection.getHeavyShells(),
                 ControllerBonusesCollection.getEnergyBattery(),
-                ControllerBonusesCollection.getExplosive()
+                ControllerBonusesCollection.getExplosive(),
+                ControllerBonusesCollection.getFightingHeadquarters()
+
         ));
 
 
