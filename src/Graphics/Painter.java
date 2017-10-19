@@ -436,6 +436,15 @@ public final class Painter {
                         case "1^!-h'":
                             currentUnity = resourceOfBonuses.getFightingHeadquarters1HP();
                             break;
+                        //Кластерный автоматчик:
+                        case "1^!+C'":
+                            currentUnity = resourceOfBonuses.getClusterArcherBlueReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1^!-C'":
+                            currentUnity = resourceOfBonuses.getClusterArcherRedReady();
+                            isReadyBonusUnit = true;
+                            break;
                     }
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {
@@ -490,6 +499,20 @@ public final class Painter {
                                 break;
                             case "1^-e'":
                                 currentUnity = resourceOfBonuses.getEnergyBatteryRed();
+                                break;
+                            //Кластерный автоматчик:
+                            case "1^+C'":
+                                currentUnity = resourceOfBonuses.getClusterArcherBlue();
+                                System.out.println("ddd");
+                                break;
+                            case "1^-C'":
+                                currentUnity = resourceOfBonuses.getClusterArcherRed();
+                                break;
+                            case "0^+C'":
+                                currentUnity = resourceOfBonuses.getClusterArcherBlueReady();
+                                break;
+                            case "0^-C'":
+                                currentUnity = resourceOfBonuses.getClusterArcherRedReady();
                                 break;
                         }
                     }

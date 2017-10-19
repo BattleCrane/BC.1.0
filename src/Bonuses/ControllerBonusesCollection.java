@@ -156,7 +156,7 @@ public final class ControllerBonusesCollection {
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 Pattern pattern = Pattern.compile("[G]");
-                Pattern patternBonuses = Pattern.compile("[H]");
+                Pattern patternBonuses = Pattern.compile("[HC]");
                 String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5));
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 Matcher matcher = pattern.matcher(currentUnit);
@@ -338,17 +338,29 @@ public final class ControllerBonusesCollection {
 
         }
     };
-
     private static int countShortsForHeadquarters = 0;
 
-    private final Bonus clusterBomb = new Bonus(2) {
+    private static final Bonus clusterArrow = new Bonus(2,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\Sprite\\ClusterArrow.png" ))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5));
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (currentEnergy - this.getEnergy()>= 0 && currentUnit.substring(1, 2).equals("^") && currentUnit.substring(4, 5).equals("G")){
+                    controllerMatchMaking.setClick(false);
+                    controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).set((int) (event.getX() / 33.5),
+                            currentUnit.substring(0, 4) + "C" + currentUnit.substring(5));
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
 
-    private final Bonus closeFight = new Bonus(2) {
+    private final Bonus cleanup = new Bonus(2) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
@@ -524,6 +536,11 @@ public final class ControllerBonusesCollection {
 
     public static void setCountShortsForHeadquarters(int countShortsForHeadquarters) {
         ControllerBonusesCollection.countShortsForHeadquarters = countShortsForHeadquarters;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getClusterArrow() {
+        return clusterArrow;
     }
 
 

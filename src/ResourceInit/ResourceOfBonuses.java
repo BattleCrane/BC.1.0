@@ -247,4 +247,30 @@ public final class ResourceOfBonuses {
         return unit;
     }
 
+    //Бонус "Кластерный автоматчик"
+    public final ImageView getClusterArcherBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\BlueUnity\\Archer.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getClusterArcherBlueReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\BlueUnity\\ArcherReady.png" ));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getClusterArcherRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\RedUnity\\Archer.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getClusterArcherRedReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\RedUnity\\ArcherReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
 }
