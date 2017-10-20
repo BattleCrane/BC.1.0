@@ -209,7 +209,7 @@ public final class ControllerBonusesCollection {
     /**
      * Бонус: "Тяжелые снаряды"
      * Стоимость: 1 ед. энергии;
-     * Все ваши обыкновенные автоматчики улучшаются до тяжелых автоматчиков и получают +2 к атаке до конца матча;
+     * Ваш выбранный автоматчик улучшается до тяжелого автоматчика и получает +2 к атаке до конца матча;
      */
 
     private static final Bonus heavyShells = new Bonus(1,
@@ -310,6 +310,12 @@ public final class ControllerBonusesCollection {
         }
     };
 
+    /**
+     * Бонус: "Боевой штаб"
+     * Стоимость: 2 ед. энергии;
+     * Ваш штаб получает три выстела по 1 ед. урона до конца хода ;
+     */
+
     private static final Bonus fightingHeadquarters = new Bonus(2,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Sprite\\FightingHeadquarters.png" ))) {
         @Override
@@ -329,7 +335,7 @@ public final class ControllerBonusesCollection {
                     AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 0 , 1 );
                     AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), 0 , 0 );
                 }
-                countShortsForHeadquarters = 2;
+                countShortsForHeadquarters = 3;
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                 Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                         controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
@@ -339,6 +345,14 @@ public final class ControllerBonusesCollection {
         }
     };
     private static int countShortsForHeadquarters = 0;
+
+
+    /**
+     * Бонус: "Кластерные стрелы"
+     * Стоимость: 2 ед. энергии;
+     *Ваш выбранный автоматчик улучшается до кластерного автоматчика и наносит ТОЛЬКО СТРОЕНИЯМ урон, равный их площади до конца матча;
+     */
+
 
     private static final Bonus clusterArrow = new Bonus(2,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\Sprite\\ClusterArrow.png" ))) {
@@ -360,14 +374,43 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus cleanup = new Bonus(2) {
+
+    /**
+     * Бонус: "Генеральная уборка"
+     * Стоимость: 2 ед. энергии;
+     *Очищает битые клетки площадью 2х2 от заданного левого верхнего угла;
+     */
+
+    private static final Bonus cleanup = new Bonus(2,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Cleanup\\Sprite\\Cleanup.png"))) {
+        String field = "     0";
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                int x = (int) (event.getX() / 33.5);
+                int y = (int) (event.getY() / 33.5);
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
+                    controllerMatchMaking.setClick(false);
+                    for (int i = x; i < x + 2; i++) {
+                        for (int j = y; j < y + 2 ; j++) {
+                            if (i >= 0 && i < 16 && j >= 0 && j < 16 &&
+                                    controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i).equals("XXXXXX")){
+                                controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, field);
+                            }
+                        }
+                    }
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
 
-    private final Bonus bear = new Bonus(2) {
+    private final Bonus bear = new Bonus(2,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\Sprite\\Bear.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
@@ -541,6 +584,11 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getClusterArrow() {
         return clusterArrow;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getCleanup() {
+        return cleanup;
     }
 
 
