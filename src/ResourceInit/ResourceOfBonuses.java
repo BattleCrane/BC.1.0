@@ -273,4 +273,64 @@ public final class ResourceOfBonuses {
         return unit;
     }
 
+    //Бонус "БМП 'Медведь'"
+    //Синие:
+    public final ImageView getBearBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\BlueUnity\\Bear.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getBearBlue1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\BlueUnity\\Bear 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getBearBlueReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\BlueUnity\\BearReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getBearBlueReady1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\BlueUnity\\BearReady 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    //Красные:
+    public final ImageView getBearRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\RedUnity\\Bear.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getBearRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\RedUnity\\Bear 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getBearRedReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\RedUnity\\BearReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getBearRedReady1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\RedUnity\\BearReady 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+
 }

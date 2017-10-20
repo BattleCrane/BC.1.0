@@ -445,6 +445,23 @@ public final class Painter {
                             currentUnity = resourceOfBonuses.getClusterArcherRedReady();
                             isReadyBonusUnit = true;
                             break;
+                        //БМП "'Медведь':
+                        case "2^!+B'":
+                            currentUnity = resourceOfBonuses.getBearBlueReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "2^!-B'":
+                            currentUnity = resourceOfBonuses.getBearRedReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1^!+B'":
+                            currentUnity = resourceOfBonuses.getBearBlueReady1HP();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1^!-B'":
+                            currentUnity = resourceOfBonuses.getBearRedReady1HP();
+                            isReadyBonusUnit = true;
+                            break;
                     }
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {
@@ -513,6 +530,19 @@ public final class Painter {
                                 break;
                             case "0^-C'":
                                 currentUnity = resourceOfBonuses.getClusterArcherRedReady();
+                                break;
+                            //БМП "'Медведь':
+                            case "2^+B'":
+                                currentUnity = resourceOfBonuses.getBearBlue();
+                                break;
+                            case "2^-B'":
+                                currentUnity = resourceOfBonuses.getBearRed();
+                                break;
+                            case "1^+B'":
+                                currentUnity = resourceOfBonuses.getBearBlue1HP();
+                                break;
+                            case "1^-B'":
+                                currentUnity = resourceOfBonuses.getBearRed1HP();
                                 break;
                         }
                     }

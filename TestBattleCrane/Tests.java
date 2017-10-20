@@ -93,4 +93,5 @@ public class Tests {
         battleManagerTest1.getBattleField().toString();
     }
 
+
 }

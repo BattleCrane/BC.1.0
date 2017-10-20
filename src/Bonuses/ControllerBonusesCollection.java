@@ -409,13 +409,40 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus bear = new Bonus(2,
+    private static final Bonus bear = new Bonus(2,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\Sprite\\Bear.png"))) {
+        Unity bear = new Unity(1, 1, "B", 2);
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
+                    controllerMatchMaking.setClick(false);
+                    controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
+                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), bear);
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
+
+
+    @Contract(pure = true)
+    public static int getBearDamage(BattleManager battleManager){
+        int bearsDamage = 0;
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (battleManager.getBattleField().getMatrix().get(i).get(j).contains(
+                        battleManager.getPlayer().getColorType() + "b'")){
+                    bearsDamage++;
+                }
+            }
+        }
+        return bearsDamage;
+    }
 
     private final Bonus heavyTankHammer = new Bonus(3) {
         @Override
@@ -589,6 +616,11 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getCleanup() {
         return cleanup;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getBear() {
+        return bear;
     }
 
 
