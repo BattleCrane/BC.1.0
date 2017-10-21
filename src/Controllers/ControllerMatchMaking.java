@@ -646,7 +646,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getClusterArrow(),
                 ControllerBonusesCollection.getCleanup(),
                 ControllerBonusesCollection.getBear(),
-                ControllerBonusesCollection.getHeavyTankHammer()
+                ControllerBonusesCollection.getHeavyTankHammer(),
+                ControllerBonusesCollection.getRocketCorsair()
+
 
         ));
         battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
@@ -660,7 +662,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getClusterArrow(),
                 ControllerBonusesCollection.getCleanup(),
                 ControllerBonusesCollection.getBear(),
-                ControllerBonusesCollection.getHeavyTankHammer()
+                ControllerBonusesCollection.getHeavyTankHammer(),
+                ControllerBonusesCollection.getRocketCorsair()
 
         ));
 
@@ -679,12 +682,6 @@ public final class ControllerMatchMaking implements Initializable {
         }
     }
 
-
-
-    @Contract(pure = true)
-    public AnchorPane getPaneGlobal() {
-        return paneGlobal;
-    }
 
     @Contract(pure = true)
     public Pane getPaneControlField() {

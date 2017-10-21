@@ -334,6 +334,79 @@ public final class ResourceOfBonuses {
 
     //Бонус "Тяжелый танк 'Молот'"
     //Синие:
+    public final ImageView getHammerBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\BlueUnity\\HeavyTankHammer.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerBlue2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\BlueUnity\\HeavyTankHammer 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerBlue1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\BlueUnity\\HeavyTankHammer 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerBlueReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\BlueUnity\\HeavyTankHammerReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerBlueReady2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\BlueUnity\\HeavyTankHammerReady 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerBlueReady1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\BlueUnity\\HeavyTankHammerReady 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    //Красные:
+    public final ImageView getHammerRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\RedUnity\\HeavyTankHammer.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerRed2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\RedUnity\\HeavyTankHammer 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\RedUnity\\HeavyTankHammer 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerRedReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\RedUnity\\HeavyTankHammerReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerRedReady2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\RedUnity\\HeavyTankHammerReady 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getHammerRedReady1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\RedUnity\\HeavyTankHammerReady 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
 
 
 }

@@ -462,6 +462,31 @@ public final class Painter {
                             currentUnity = resourceOfBonuses.getBearRedReady1HP();
                             isReadyBonusUnit = true;
                             break;
+                        //Тяжелый танк "'Молот':
+                        case "3^!+E'":
+                            currentUnity = resourceOfBonuses.getHammerBlueReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "3^!-E'":
+                            currentUnity = resourceOfBonuses.getHammerRedReady();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "2^!+E'":
+                            currentUnity = resourceOfBonuses.getHammerBlueReady2HP();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "2^!-E'":
+                            currentUnity = resourceOfBonuses.getHammerRedReady2HP();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1^!+E'":
+                            currentUnity = resourceOfBonuses.getHammerBlueReady1HP();
+                            isReadyBonusUnit = true;
+                            break;
+                        case "1^!-E'":
+                            currentUnity = resourceOfBonuses.getHammerRedReady1HP();
+                            isReadyBonusUnit = true;
+                            break;
                     }
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {
@@ -543,6 +568,25 @@ public final class Painter {
                                 break;
                             case "1^-B'":
                                 currentUnity = resourceOfBonuses.getBearRed1HP();
+                                break;
+                            //Тяжелый танк "'Молот':
+                            case "3^+E'":
+                                currentUnity = resourceOfBonuses.getHammerBlue();
+                                break;
+                            case "3^-E'":
+                                currentUnity = resourceOfBonuses.getHammerRed();
+                                break;
+                            case "2^+E'":
+                                currentUnity = resourceOfBonuses.getHammerBlue2HP();
+                                break;
+                            case "2^-E'":
+                                currentUnity = resourceOfBonuses.getHammerRed2HP();
+                                break;
+                            case "1^+E'":
+                                currentUnity = resourceOfBonuses.getHammerBlue1HP();
+                                break;
+                            case "1^-E'":
+                                currentUnity = resourceOfBonuses.getHammerRed1HP();
                                 break;
                         }
                     }
