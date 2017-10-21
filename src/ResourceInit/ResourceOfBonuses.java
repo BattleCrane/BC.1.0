@@ -332,5 +332,8 @@ public final class ResourceOfBonuses {
         return unit;
     }
 
+    //Бонус "Тяжелый танк 'Молот'"
+    //Синие:
+
 
 }

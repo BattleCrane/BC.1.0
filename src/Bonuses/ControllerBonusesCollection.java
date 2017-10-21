@@ -118,11 +118,12 @@ public final class ControllerBonusesCollection {
                 int currentEnergy = battleManager.getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
                     controllerMatchMaking.setClick(false);
-                    battleManager.putUnity(battleManager.getPlayer(),
-                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), obstacle);
-                    battleManager.getPlayer().setEnergy(currentEnergy - this.getEnergy());
-                    Painter.drawGraphic(battleManager, controllerMatchMaking.getResource(),
-                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    if (battleManager.putUnity(battleManager.getPlayer(),
+                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), obstacle)){
+                        battleManager.getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                        Painter.drawGraphic(battleManager, controllerMatchMaking.getResource(),
+                                controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    }
                 }
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
             });
@@ -409,6 +410,16 @@ public final class ControllerBonusesCollection {
         }
     };
 
+    /**
+     * Бонус: "БМП Медведь"
+     * Стоимость: 2 ед. энергии;
+     * Устанавливается на вашей или нейтральной территории;
+     * Тип: "Техника"
+     * Запас прочности 2;
+     * Требуется завод;
+     * Наносит кол-во урона, равное кол-ву ваших казарм на поле боя.
+     */
+
     private static final Bonus bear = new Bonus(2,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\Sprite\\Bear.png"))) {
         Unity bear = new Unity(1, 1, "B", 2);
@@ -418,9 +429,12 @@ public final class ControllerBonusesCollection {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0){
                     controllerMatchMaking.setClick(false);
-                    controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
-                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), bear);
-                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanks() > 0);
+                    if (controllerMatchMaking.getBattleManager().getHowICanProductTanks() > 0 && controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
+                            new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), bear) ){
+                        controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                        controllerMatchMaking.getBattleManager().setHowICanProductTanks(controllerMatchMaking.getBattleManager().getHowICanProductTanks() - 1);
+                    }
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                             controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                 }
@@ -444,10 +458,33 @@ public final class ControllerBonusesCollection {
         return bearsDamage;
     }
 
-    private final Bonus heavyTankHammer = new Bonus(3) {
+    private static final Bonus heavyTankHammer = new Bonus(3,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\Sprite\\HeavyTankHammer.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                int x = (int) (event.getX() / 33.5);
+                int y = (int) (event.getY() / 33.5);
+                Pattern pattern = Pattern.compile("[T]");
+                Pattern patternBonuses = Pattern.compile("[/]");
+                String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get((int) (event.getY() / 33.5)).get((int) (event.getX() / 33.5));
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                Matcher matcher = pattern.matcher(currentUnit);
+                Matcher matcherBonuses = patternBonuses.matcher(currentUnit);
+                if (currentEnergy - this.getEnergy()>= 0 && (matcher.find() || matcherBonuses.find()) &&
+                        currentUnit.substring(3,5).equals(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "T")){
+                    controllerMatchMaking.setClick(false);
+                    currentUnit = controllerMatchMaking.getBattleManager().increaseHitPoints(currentUnit, 1);
+                    currentUnit = currentUnit.substring(0, 4) + "E" + currentUnit.substring(5);
+                    controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).set(x, currentUnit);
+                    AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), y, x);
+                    controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
 
@@ -623,6 +660,10 @@ public final class ControllerBonusesCollection {
         return bear;
     }
 
+    @Contract(pure = true)
+    public static Bonus getHeavyTankHammer() {
+        return heavyTankHammer;
+    }
 
 
 }
