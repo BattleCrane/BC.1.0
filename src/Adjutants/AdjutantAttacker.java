@@ -28,7 +28,7 @@ public final class AdjutantAttacker {
         int y = middle.Y();
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
         Pattern pattern = Pattern.compile("[hgbfwtGT]");
-        Pattern patternBonuses = Pattern.compile("[eoH]");
+        Pattern patternBonuses = Pattern.compile("[oHeCBE]");
         for (int i = x - radius; i < x + radius + 1; i++) {
             for (int j = y - countShift; j < y + 1 + countShift; j++) {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
