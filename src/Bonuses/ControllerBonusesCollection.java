@@ -522,7 +522,8 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus attackOfTank = new Bonus(3) {
+    private final Bonus attackOfTank = new Bonus(3,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3CapturingOfTank\\Sprite\\CapturingOfTank.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
