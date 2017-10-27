@@ -656,7 +656,7 @@ public final class ControllerBonusesCollection {
     /**
      * Бонус: "Интенсивная выработка"
      * Стоимость: 4 ед. энергии;
-     * Удваивает вырабатываемую энергию за ход
+     * Удваивает вырабатываемую энергию за ход до конца матча.
      */
 
     private static final Bonus intensiveProduction = new Bonus(4,
@@ -688,28 +688,61 @@ public final class ControllerBonusesCollection {
         }
     };
 
+    /**
+     * Бонус: "Удвоенная подготовка"
+     * Стоимость: 5 ед. энергии;
+     * Удваивает число обучаемых автоматчиков и танков до конца хода.
+     */
+
     private static final Bonus doubleTraining = new Bonus(5,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\5DoubleTraining\\Sprite\\DoubleTraining.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            controllerMatchMaking.getBattleManager().setHowICanProductTanks(controllerMatchMaking.getBattleManager().getHowICanProductTanks() * 2);
-            controllerMatchMaking.getBattleManager().setHowICanProductArmy(controllerMatchMaking.getBattleManager().getHowICanProductArmy() * 2);
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanks());
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductArmy());
+                controllerMatchMaking.getBattleManager().setHowICanProductTanks(controllerMatchMaking.getBattleManager().getHowICanProductTanks() * 2);
+                controllerMatchMaking.getBattleManager().setHowICanProductArmy(controllerMatchMaking.getBattleManager().getHowICanProductArmy() * 2);
+                controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanks());
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductArmy());
+            }
+            controllerMatchMaking.setClick(true);
         }
     };
 
+    /**
+     * Бонус: "Супер краны"
+     * Стоимость: 5 ед. энергии;
+     * Удваивает число возможных построек до конца хода.
+     */
 
-
-    private static final Bonus superCranes = new Bonus(5) {
+    private static final Bonus superCranes = new Bonus(5,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5SuperCranes\\Sprite\\SuperCranes.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() * 2);
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
+                controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() * 2);
+                controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+            }
+            controllerMatchMaking.setClick(true);
         }
     };
 
-    private final Bonus airStrike = new Bonus(5) {
+    /**
+     * Бонус: "Авиаудар"
+     * Стоимость: 5 ед. энергии;
+     * Наносит всем постройкам противника 1 ед. урона.
+     */
+
+    private static final Bonus airStrike = new Bonus(5,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5AirStrike\\Sprite\\AirStrike.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            if (controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0) {
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
                 Pattern pattern = Pattern.compile("[hgbfwt]");
                 Pattern patternBonus = Pattern.compile("[/]");
                 for (int i = 0; i < 16; i++) {
@@ -721,6 +754,7 @@ public final class ControllerBonusesCollection {
                                 (matcher.find() || matcherBonus.find())) {
                             currentUnity = AdjutantAttacker.attack(currentUnity, 1);
                             controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).set(j, currentUnity);
+                            controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                         }
                     }
                 }
@@ -730,7 +764,6 @@ public final class ControllerBonusesCollection {
                 controllerMatchMaking.getBattleManager().getBattleField().toString();
             }
             controllerMatchMaking.setClick(false);
-
         }
     };
 
@@ -835,5 +868,10 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getSuperCranes() {
         return superCranes;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getAirStrike() {
+        return airStrike;
     }
 }
