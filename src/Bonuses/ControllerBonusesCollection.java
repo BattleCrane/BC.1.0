@@ -10,16 +10,12 @@ import BattleFields.Point;
 import Controllers.ControllerMatchMaking;
 import Graphics.Painter;
 import Players.Player;
-import ResourceInit.ResourceOfBonuses;
 import Unities.Unity;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
-
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -522,15 +518,22 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus attackOfTank = new Bonus(3,
+    /**
+     * Бонус: "Засада"
+     * Стоимость: 3 ед. энергии;
+     * Окружает выбранный вами танк противника автоматчиками.
+     */
+
+    private static final Bonus attackOfTank = new Bonus(3,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\3CapturingOfTank\\Sprite\\CapturingOfTank.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            System.out.println(currentEnergy - this.getEnergy() >= 0);
             if (currentEnergy - this.getEnergy() >= 0) {
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
-                    int x = (int) (event.getX() / 33.5) - 1;
-                    int y = (int) (event.getY() / 33.5) - 1;
+                    int x = (int) (event.getX() / 33.5);
+                    int y = (int) (event.getY() / 33.5);
                     Pattern pattern = Pattern.compile("[T]");
                     Pattern patternBonuses = Pattern.compile("[E]");
                     Matcher matcher = pattern.matcher(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x));
@@ -541,22 +544,29 @@ public final class ControllerBonusesCollection {
                             for (int j = y - 1; j <= y + 1; j++) {
                                 if (i >= 0 && i < 16 && j >= 0 && j < 16) {
                                     controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
-                                            new Point(x, y), controllerMatchMaking.getBattleManager().getGunner());
+                                            new Point(j, i), controllerMatchMaking.getBattleManager().getGunner());
                                 }
                             }
                         }
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                     }
+                    controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                 });
             }
-            controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
-            Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
-                    controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
         }
     };
 
+    /**
+     * Бонус: "Танковая перегрузка"
+     * Стоимость: 4 ед. энергии;
+     * Вы получаете по 1 ед. энергии за каждый  ваш танк.
+     * Все ваши танки наносят противникам по 2 ед. урона в радиусе 2 и уничтожаются.
+     */
 
-    private final Bonus tankGenerator = new Bonus(4) {
+    private static final Bonus tankCharge = new Bonus(4,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankGenerator\\Sprite\\TankGenerator.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -566,17 +576,20 @@ public final class ControllerBonusesCollection {
                 Pattern patternBonuses = Pattern.compile("[E]");
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
-                        String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).get(j);
+                        String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
                         Matcher matcher = pattern.matcher(currentUnit);
                         Matcher matcherOfBonus = patternBonuses.matcher(currentUnit);
                         if ((matcher.find() || matcherOfBonus.find()) && currentUnit.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType())) {
                             additionalEnergy++;
+                            AdjutantAttacker.radiusAttack(controllerMatchMaking.getBattleManager(), new Point (j ,i), 2, 2);
+                            controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).
+                                    set(i, "XXXXXX");
                         }
                     }
                 }
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy() + additionalEnergy);
             }
-            controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            controllerMatchMaking.setClick(true);
             Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                     controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
         }
@@ -588,6 +601,12 @@ public final class ControllerBonusesCollection {
 
         }
     };
+
+    /**
+     * Бонус: "Ракета 'Корсар'"
+     * Стоимость: 4 ед. энергии;
+     * Наносит 2 ед. урона в любую точку.
+     */
 
     private static final Bonus rocketCorsair = new Bonus(4,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\4RocketCorsair\\Sprite\\RocketCorsair.png"))) {
@@ -789,5 +808,16 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getIntensiveProduction() {
         return intensiveProduction;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getAttackOfTank() {
+        return attackOfTank;
+    }
+
+
+    @Contract(pure = true)
+    public static Bonus getTankCharge() {
+        return tankCharge;
     }
 }

@@ -1,8 +1,15 @@
 import Adjutants.AdjutantAttacker;
 import Adjutants.AdjutantSleeper;
 import BattleFields.*;
+import Bonuses.Bonus;
+import Bonuses.ControllerBonusesCollection;
+import Controllers.ControllerMatchMaking;
 import Players.Player;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -92,6 +99,24 @@ public class Tests {
         assertFalse(AdjutantAttacker.checkTarget(battleManagerTest1, new Point(15, 0), new Point(1, 14)));
         battleManagerTest1.getBattleField().toString();
     }
+
+//    @Test
+//    public void bonusTankGenerator(){
+//        //Test №1:
+//        System.out.println("Test №1:");
+//        ControllerMatchMaking controllerMatchMaking = new ControllerMatchMaking();
+//        BattleManager battleManagerTest = new BattleManager(new BattleField());
+//        Player player = new Player(1, 4, "+");
+//        battleManagerTest.setPlayer(player);
+//        battleManagerTest.putUnity(new Player("+"), new Point(8, 4), battleManagerTest.getTank());
+//        battleManagerTest.putUnity(new Player("+"), new Point(0, 12), battleManagerTest.getTank());
+//        battleManagerTest.putUnity(new Player("+"), new Point(5, 10), battleManagerTest.getTank());
+//        battleManagerTest.putUnity(new Player("+"), new Point(11, 12), battleManagerTest.getTank());
+//        Bonus bonus = ControllerBonusesCollection.getTankCharge();
+//        controllerMatchMaking.setBattleManager(battleManagerTest);
+//        bonus.run(controllerMatchMaking);
+//        battleManagerTest.getBattleField().toString();
+//    }
 
 
 }

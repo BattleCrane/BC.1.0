@@ -12,7 +12,7 @@ import java.util.List;
  * 3.) Цветом;
  */
 
-public class Player {
+public final class Player {
     private int turn;
     private int energy;
     private String colorType;

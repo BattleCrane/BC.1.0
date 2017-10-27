@@ -647,7 +647,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getCleanup(),
                 ControllerBonusesCollection.getBear(),
                 ControllerBonusesCollection.getHeavyTankHammer(),
-                ControllerBonusesCollection.getRocketCorsair()
+                ControllerBonusesCollection.getRocketCorsair(),
+                ControllerBonusesCollection.getAttackOfTank(),
+                ControllerBonusesCollection.getTankCharge()
 
 
         ));
@@ -663,7 +665,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getCleanup(),
                 ControllerBonusesCollection.getBear(),
                 ControllerBonusesCollection.getHeavyTankHammer(),
-                ControllerBonusesCollection.getRocketCorsair()
+                ControllerBonusesCollection.getRocketCorsair(),
+                ControllerBonusesCollection.getAttackOfTank(),
+                ControllerBonusesCollection.getTankCharge()
 
         ));
 
@@ -717,5 +721,8 @@ public final class ControllerMatchMaking implements Initializable {
         this.click = click;
     }
 
+    public void setBattleManager(BattleManager battleManager) {
+        this.battleManager = battleManager;
+    }
 
 }
