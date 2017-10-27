@@ -66,13 +66,11 @@ public final class ControllerBonusesCollection {
 
             if (bonus.equals(intensiveProduction)) {
                 if (player.getColorType().equals("+")) {
-                    player.setEnergy(player.getEnergy() * additionalEnergyBlue);
+                    player.setEnergy(player.getEnergy() - 1 + additionalEnergyBlue);
                 }
                 if (player.getColorType().equals("-")) {
-                    player.setEnergy(player.getEnergy() * additionalEnergyRed);
+                    player.setEnergy(player.getEnergy() - 1 + additionalEnergyRed);
                 }
-                additionalEnergyBlue = 1;
-                additionalEnergyRed = 1;
             }
             paneControlBonus.getChildren().add(bonus.getSprite());
             if (x + 80 > 450) {
@@ -658,19 +656,24 @@ public final class ControllerBonusesCollection {
     /**
      * Бонус: "Интенсивная выработка"
      * Стоимость: 4 ед. энергии;
-     * Уваивает вырабатываемую энергию за ход
+     * Удваивает вырабатываемую энергию за ход
      */
 
-    private static final Bonus intensiveProduction = new Bonus(4) {
+    private static final Bonus intensiveProduction = new Bonus(4,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4IntensiveProduction\\Sprite\\IntensiveProduction.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("+")) {
-                additionalEnergyBlue++;
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
+                if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("+")) {
+                    additionalEnergyBlue *= 2;
+                }
+                if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("-")) {
+                    additionalEnergyRed *= 2;
+                }
+                controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
             }
-            if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("-")) {
-                additionalEnergyRed++;
-            }
-
+            controllerMatchMaking.setClick(true);
         }
     };
 
@@ -685,7 +688,8 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus doubleTraining = new Bonus(5) {
+    private static final Bonus doubleTraining = new Bonus(5,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5DoubleTraining\\Sprite\\DoubleTraining.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getBattleManager().setHowICanProductTanks(controllerMatchMaking.getBattleManager().getHowICanProductTanks() * 2);
@@ -693,7 +697,9 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus coupling = new Bonus(5) {
+
+
+    private static final Bonus superCranes = new Bonus(5) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() * 2);
@@ -819,5 +825,15 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getTankCharge() {
         return tankCharge;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getDoubleTraining() {
+        return doubleTraining;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getSuperCranes() {
+        return superCranes;
     }
 }

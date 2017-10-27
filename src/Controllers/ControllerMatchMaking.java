@@ -649,7 +649,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getHeavyTankHammer(),
                 ControllerBonusesCollection.getRocketCorsair(),
                 ControllerBonusesCollection.getAttackOfTank(),
-                ControllerBonusesCollection.getTankCharge()
+                ControllerBonusesCollection.getTankCharge(),
+                ControllerBonusesCollection.getIntensiveProduction()
 
 
         ));
@@ -667,7 +668,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getHeavyTankHammer(),
                 ControllerBonusesCollection.getRocketCorsair(),
                 ControllerBonusesCollection.getAttackOfTank(),
-                ControllerBonusesCollection.getTankCharge()
+                ControllerBonusesCollection.getTankCharge(),
+                ControllerBonusesCollection.getIntensiveProduction()
 
         ));
 
