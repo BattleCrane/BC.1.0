@@ -64,6 +64,17 @@ public final class ControllerBonusesCollection {
                 }
             }
 
+            if (bonus.equals(superMortarTurret)){
+                for (int i = 0; i < 16; i++){
+                    for (int j = 0; j < 16; j++){
+                        String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
+                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "u")){
+                            AdjutantAttacker.radiusAttack(controllerMatchMaking.getBattleManager(), new Point(j, i), 5, 1);
+                        }
+                    }
+                }
+            }
+
             if (bonus.equals(intensiveProduction)) {
                 if (player.getColorType().equals("+")) {
                     player.setEnergy(player.getEnergy() - 1 + additionalEnergyBlue);
@@ -437,7 +448,6 @@ public final class ControllerBonusesCollection {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0) {
                     controllerMatchMaking.setClick(false);
-                    System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanks() > 0);
                     if (controllerMatchMaking.getBattleManager().getHowICanProductTanks() > 0 && controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
                             new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), bear)) {
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
@@ -506,13 +516,35 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
 
+
         }
     };
 
-    private final Bonus superMortarTurret = new Bonus(3) {
+    /**
+     * Бонус: "Супер турель"
+     * Стоимость: 3 ед. энергии;
+     * Увеличивате радиус дальности вашей турели равен 5.
+     */
+
+    private static final Bonus superMortarTurret = new Bonus(3) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0){
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                    int x = (int) (event.getX() / 33.5);
+                    int y = (int) (event.getY() / 33.5);
+                    String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
+                    if (currentUnit.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "t")){
+                        currentUnit = currentUnit.substring(0, 4) + "u'";
+                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).set(x, currentUnit);
+                        controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                        Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                                controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                    }
+                    controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+                });
+            }
         }
     };
 
@@ -527,7 +559,6 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
-            System.out.println(currentEnergy - this.getEnergy() >= 0);
             if (currentEnergy - this.getEnergy() >= 0) {
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                     int x = (int) (event.getX() / 33.5);
@@ -840,6 +871,16 @@ public final class ControllerBonusesCollection {
     }
 
     @Contract(pure = true)
+    public static Bonus getSuperMortarTurret() {
+        return superMortarTurret;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getAttackOfTank() {
+        return attackOfTank;
+    }
+
+    @Contract(pure = true)
     public static Bonus getRocketCorsair() {
         return rocketCorsair;
     }
@@ -849,10 +890,7 @@ public final class ControllerBonusesCollection {
         return intensiveProduction;
     }
 
-    @Contract(pure = true)
-    public static Bonus getAttackOfTank() {
-        return attackOfTank;
-    }
+
 
 
     @Contract(pure = true)
