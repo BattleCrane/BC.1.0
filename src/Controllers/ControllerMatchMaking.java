@@ -467,6 +467,57 @@ public final class ControllerMatchMaking implements Initializable {
                                         paneControlField.setOnMouseClicked(this);
                                     });
                                     break;
+                                case "Q":
+                                    System.out.println("Это танк 'Буффало': " + clickedUnit);
+                                    paneControlField.setOnMouseClicked(secondEvent -> {
+                                        Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                                        System.out.println("Второй клик: ");
+                                        String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())){
+                                            Pattern pattern = Pattern.compile("[hgbfwtGT]");
+                                            Matcher matcher = pattern.matcher(targetAttackUnity);
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
+                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                                for (int i = 0; i < 16; i++){
+                                                    for (int j = 0; j < 16; j++){
+                                                        String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
+                                                        String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                            battleManager.getBattleField().getMatrix().get(i).set(j,
+                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
+                                                        }
+                                                    }
+                                                }
+                                                ControllerBonusesCollection.setCountShortsForHeadquarters(ControllerBonusesCollection.getCountShortsForHeadquarters() - 1);
+                                                System.out.println("ATTACK!");
+                                                if (ControllerBonusesCollection.getCountShortsForHeadquarters() == 0){
+                                                    battleManager.getBattleField().getMatrix().get(0).set(0,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
+                                                    battleManager.getBattleField().getMatrix().get(0).set(1,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
+                                                    battleManager.getBattleField().getMatrix().get(1).set(0,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
+                                                    battleManager.getBattleField().getMatrix().get(1).set(1,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
+                                                    battleManager.getBattleField().getMatrix().get(14).set(14,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
+                                                    battleManager.getBattleField().getMatrix().get(14).set(15,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
+                                                    battleManager.getBattleField().getMatrix().get(15).set(14,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
+                                                    battleManager.getBattleField().getMatrix().get(15).set(15,
+                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
+                                                }
+                                                battleManager.getBattleField().toString();
+                                                battleManager.checkDestroyedUnities();
+                                                Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
+                                                paneControlField.setOnMouseClicked(this);
+                                            }
+                                        }
+                                        paneControlField.setOnMouseClicked(this);
+                                    });
+                                    break;
                             }
                         }
                     }
