@@ -710,7 +710,7 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus tankBuffalo = new Bonus(4) {
+    private static final Bonus tankBuffalo = new Bonus(4) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
