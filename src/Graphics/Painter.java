@@ -588,6 +588,19 @@ public final class Painter {
                             case "1^-E'":
                                 currentUnity = resourceOfBonuses.getHammerRed1HP();
                                 break;
+                            //SuperMortar:
+                            case "2^+u'":
+                                currentUnity = resourceOfBonuses.getSuperMortarBlue();
+                                break;
+                            case "1^+u'":
+                                currentUnity = resourceOfBonuses.getSuperMortarBlue1HP();
+                                break;
+                            case "2^-u'":
+                                currentUnity = resourceOfBonuses.getSuperMortarRed();
+                                break;
+                            case "1^-u'":
+                                currentUnity = resourceOfBonuses.getSuperMortarRed1HP();
+                                break;
                         }
                     }
                     currentUnity.setLayoutX(33.5 * j);

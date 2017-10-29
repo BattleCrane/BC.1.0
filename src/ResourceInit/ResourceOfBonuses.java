@@ -408,5 +408,35 @@ public final class ResourceOfBonuses {
         return unit;
     }
 
+    //SuperMortar:
+    //Blue:
+    public final ImageView getSuperMortarBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\BlueUnity\\SuperMortar.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getSuperMortarBlue1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\BlueUnity\\SuperMortar 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    //Red:
+    public final ImageView getSuperMortarRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\RedUnity\\SuperMortar.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
+    public final ImageView getSuperMortarRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\RedUnity\\SuperMortar 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+
 
 }

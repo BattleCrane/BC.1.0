@@ -704,7 +704,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getIntensiveProduction(),
                 ControllerBonusesCollection.getDoubleTraining(),
                 ControllerBonusesCollection.getSuperCranes(),
-                ControllerBonusesCollection.getAirStrike()
+                ControllerBonusesCollection.getAirStrike(),
+                ControllerBonusesCollection.getCloning(),
+                ControllerBonusesCollection.getSuperMortarTurret()
 
 
         ));
@@ -726,7 +728,9 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getIntensiveProduction(),
                 ControllerBonusesCollection.getDoubleTraining(),
                 ControllerBonusesCollection.getSuperCranes(),
-                ControllerBonusesCollection.getAirStrike()
+                ControllerBonusesCollection.getAirStrike(),
+                ControllerBonusesCollection.getCloning(),
+                ControllerBonusesCollection.getSuperMortarTurret()
 
         ));
 

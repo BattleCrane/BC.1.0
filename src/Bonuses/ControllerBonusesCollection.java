@@ -518,7 +518,8 @@ public final class ControllerBonusesCollection {
      * Клонирует выбранный танк или выбранного автоматчика, и эта боевая единица становится активной.
      */
 
-    private final Bonus cloning = new Bonus(3) {
+    private static final Bonus cloning = new Bonus(3,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3Cloning\\Sprite\\Cloning.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -527,16 +528,19 @@ public final class ControllerBonusesCollection {
                     int x = (int) (eventChoiceOfUnit.getX() / 33.5);
                     int y = (int) (eventChoiceOfUnit.getY() / 33.5);
                     String currentUnitOfChoice = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
-                    Pattern patternGunnersAndTanks = Pattern.compile("[GT]");
+                    System.out.println(currentUnitOfChoice);
+                    Pattern patternGunnersAndTanks = Pattern.compile("[GTAHCBE]");
                     Pattern patternBonuses = Pattern.compile("[AHCBE]");
                     Matcher matcherOfBasicArmy = patternGunnersAndTanks.matcher(currentUnitOfChoice);
                     Matcher matcherOfBonuses = patternBonuses.matcher(currentUnitOfChoice);
-                    if (matcherOfBasicArmy.find() || matcherOfBonuses.find()){
+                    if (matcherOfBasicArmy.find()){
                         controllerMatchMaking.getPaneControlField().setOnMouseClicked(eventOfTarget -> {
                             Point targetPoint = new Point((int) (eventOfTarget.getY() / 33.5), (int) (eventOfTarget.getX() / 33.5));
                             Unity cloneUnit = new Unity(1, 1, currentUnitOfChoice.substring(4, 5), Integer.parseInt(currentUnitOfChoice.substring(0, 1)));
+                            System.out.println(controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(), targetPoint, cloneUnit));
                             controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(), targetPoint, cloneUnit);
-                            AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), targetPoint.Y(), targetPoint.X());
+
+                            AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), targetPoint.X(), targetPoint.Y());
                             controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                             Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                                     controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
@@ -555,10 +559,12 @@ public final class ControllerBonusesCollection {
     /**
      * Бонус: "Супер турель"
      * Стоимость: 3 ед. энергии;
-     * Увеличивате радиус дальности вашей турели равен 5.
+     * Улучшает вашу турель. Её радиус равен 5, а запас прочности равен 2
      */
 
-    private static final Bonus superMortarTurret = new Bonus(3) {
+
+    private static final Bonus superMortarTurret = new Bonus(3,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\Sprite\\SuperMortar.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -659,9 +665,26 @@ public final class ControllerBonusesCollection {
     };
 
     private final Bonus fort = new Bonus(4) {
+
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            Unity fort = new Unity(2, 2, "i", 2);
+            controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
+                int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+                if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0) {
+                    controllerMatchMaking.setClick(false);
+                    Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
+                    if (controllerMatchMaking.getBattleManager().getHowICanBuild() > 0 &&
+                            controllerMatchMaking.getBattleManager().checkConstructionOfBuilding(pointClick, fort, controllerMatchMaking.getBattleManager().getPlayer()) &&
+                            controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(), pointClick, fort)) {
+                        controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                        controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() - 1);
+                    }
+                    Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                            controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                }
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+            });
         }
     };
 
@@ -930,7 +953,7 @@ public final class ControllerBonusesCollection {
     }
 
     @Contract(pure = true)
-    public Bonus getCloning() {
+    public static Bonus getCloning() {
         return cloning;
     }
 
