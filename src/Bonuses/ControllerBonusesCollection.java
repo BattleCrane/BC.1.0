@@ -562,7 +562,6 @@ public final class ControllerBonusesCollection {
      * Улучшает вашу турель. Её радиус равен 5, а запас прочности равен 2
      */
 
-
     private static final Bonus superMortarTurret = new Bonus(3,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\Sprite\\SuperMortar.png"))) {
         @Override
@@ -664,7 +663,9 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus fort = new Bonus(4) {
+
+    private static final Bonus fort = new Bonus(4,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\Sprite\\Fort.png"))) {
 
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
@@ -974,6 +975,10 @@ public final class ControllerBonusesCollection {
 
 
 
+    @Contract(pure = true)
+    public static Bonus getFort() {
+        return fort;
+    }
 
     @Contract(pure = true)
     public static Bonus getTankCharge() {
