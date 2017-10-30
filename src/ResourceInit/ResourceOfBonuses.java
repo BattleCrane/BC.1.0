@@ -442,101 +442,101 @@ public final class ResourceOfBonuses {
     //Blue:
     public final ImageView getFortBlue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\Fort.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortBlue3HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\Fort 3HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortBlue2HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\Fort 2HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortBlue1HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\Fort 1HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     //BlueReady:
     public final ImageView getFortBlueReady() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\FortReady.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortBlueReady3HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\FortReady 3HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortBlueReady2HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\FortReady 2HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortBlueReady1HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\BlueUnity\\FortReady 1HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     //Red:
     public final ImageView getFortRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\Fort.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortRed3HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\Fort 3HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortRed2HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\Fort 2HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortRed1HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\Fort 1HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     //RedReady:
     public final ImageView getFortRedReady() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\FortReady.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortRedReady3HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\FortReady 3HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortRedReady2HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\FortReady 2HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
     public final ImageView getFortRedReady1HP() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\RedUnity\\FortReady 1HP.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
+        unit.setFitWidth(67.0);
+        unit.setFitHeight(67.0);
         return unit;
     }
 
