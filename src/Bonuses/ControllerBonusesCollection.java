@@ -641,12 +641,12 @@ public final class ControllerBonusesCollection {
 
     /**
      * Бонус: "Танковая перегрузка"
-     * Стоимость: 4 ед. энергии;
+     * Стоимость: 3 ед. энергии;
      * Вы получаете по 1 ед. энергии за каждый  ваш танк.
      * Все ваши танки наносят противникам по 2 ед. урона в радиусе 2 и уничтожаются.
      */
 
-    private static final Bonus tankCharge = new Bonus(4,
+    private static final Bonus tankCharge = new Bonus(3,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankGenerator\\Sprite\\TankGenerator.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
