@@ -488,6 +488,7 @@ public final class Painter {
                             isReadyBonusUnit = true;
                             break;
                     }
+
                     if (!isReadyBonusUnit){
                         switch (element.substring(0, 2) + element.substring(3)) {
                             //Заграждение:
@@ -602,6 +603,73 @@ public final class Painter {
                                 currentUnity = resourceOfBonuses.getSuperMortarRed1HP();
                                 break;
                         }
+                        //Fort:
+                        boolean isFortReady = false;
+
+                        switch (element.substring(0, 1) + element.substring(2)){
+                            case "4!+i'":
+                                currentUnity = resourceOfBonuses.getFortBlueReady();
+                                isFortReady = true;
+                                break;
+                            case "3!+i'":
+                                currentUnity = resourceOfBonuses.getFortBlueReady3HP();
+                                isFortReady = true;
+                                break;
+                            case "2!+i'":
+                                currentUnity = resourceOfBonuses.getFortBlueReady2HP();
+                                isFortReady = true;
+                                break;
+                            case "1!+i'":
+                                currentUnity = resourceOfBonuses.getFortBlueReady1HP();
+                                isFortReady = true;
+                                break;
+                            case "4!-i'":
+                                currentUnity = resourceOfBonuses.getFortRedReady();
+                                isFortReady = true;
+                                break;
+                            case "3!-i'":
+                                currentUnity = resourceOfBonuses.getFortRedReady3HP();
+                                isFortReady = true;
+                                break;
+                            case "2!-i'":
+                                currentUnity = resourceOfBonuses.getFortRedReady2HP();
+                                isFortReady = true;
+                                break;
+                            case "1!-i'":
+                                currentUnity = resourceOfBonuses.getFortRedReady1HP();
+                                isFortReady = true;
+                                break;
+                        }
+
+                        if (!isFortReady){
+                            switch (element.substring(0, 1) + element.substring(3)){
+                                case "4+i'":
+                                    currentUnity = resourceOfBonuses.getFortBlue();
+                                    break;
+                                case "3+i'":
+                                    currentUnity = resourceOfBonuses.getFortBlue3HP();
+                                    break;
+                                case "2+i'":
+                                    currentUnity = resourceOfBonuses.getFortBlue2HP();
+                                    break;
+                                case "1+i'":
+                                    currentUnity = resourceOfBonuses.getFortBlue1HP();
+                                    break;
+                                case "4-i'":
+                                    currentUnity = resourceOfBonuses.getFortRed();
+                                    break;
+                                case "3-i'":
+                                    currentUnity = resourceOfBonuses.getFortRed3HP();
+                                    break;
+                                case "2-i'":
+                                    currentUnity = resourceOfBonuses.getFortRed2HP();
+                                    break;
+                                case "1-i'":
+                                    currentUnity = resourceOfBonuses.getFortRed1HP();
+                                    break;
+                            }
+                        }
+
                     }
                     currentUnity.setLayoutX(33.5 * j);
                     currentUnity.setLayoutY(33.5 * i);

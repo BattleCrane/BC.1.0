@@ -83,6 +83,19 @@ public final class ControllerBonusesCollection {
                     player.setEnergy(player.getEnergy() - 1 + additionalEnergyRed);
                 }
             }
+
+            if (bonus.equals(fort)){
+                for (int i = 0; i < 16; i++){
+                    for (int j = 0; j < 16; j++){
+                        String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
+                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "i")){
+                            currentUnity = currentUnity.substring(0, 1) + currentUnity.substring(0, 1) + currentUnity.substring(2);
+                            controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, currentUnity);
+                            AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), j, i);
+                        }
+                    }
+                }
+            }
             paneControlBonus.getChildren().add(bonus.getSprite());
             if (x + 80 > 450) {
                 x = 42;
@@ -663,13 +676,21 @@ public final class ControllerBonusesCollection {
         }
     };
 
+    /**
+     * Бонус: Форт"
+     * Стоимость: 4 ед. энергии;
+     * Тип: "Строение";
+     * Запас прочности 4;
+     * Кол-во выстрелов равно кол-ву ед. прочности;
+     * Наносит 1 ед. урона.
+     */
 
     private static final Bonus fort = new Bonus(4,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\Sprite\\Fort.png"))) {
 
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-            Unity fort = new Unity(2, 2, "i", 2);
+            Unity fort = new Unity(2, 2, "i", 4);
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0) {
@@ -678,6 +699,9 @@ public final class ControllerBonusesCollection {
                     if (controllerMatchMaking.getBattleManager().getHowICanBuild() > 0 &&
                             controllerMatchMaking.getBattleManager().checkConstructionOfBuilding(pointClick, fort, controllerMatchMaking.getBattleManager().getPlayer()) &&
                             controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(), pointClick, fort)) {
+                        String fortStr = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y());
+                        fortStr = fortStr.substring(0, 1) + 4 + fortStr.substring(2);
+                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), fortStr);
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                         controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() - 1);
                     }

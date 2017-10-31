@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public final class AdjutantWakeUpper {
     public static void wakeUpUnities(BattleManager battleManager){
-        Pattern patternBarracksAndFactories = Pattern.compile("[bf]'");
+        Pattern patternBarracksAndFactories = Pattern.compile("[bfi]'");
         Pattern patternGunnersAndTanks = Pattern.compile("[GTt]");
         Pattern patternBonuses = Pattern.compile("[AHCBE]");
         for (int i = 0; i < 16; i++) {

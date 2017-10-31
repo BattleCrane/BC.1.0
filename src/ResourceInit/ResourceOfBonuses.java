@@ -130,13 +130,6 @@ public final class ResourceOfBonuses {
 
     //Бонус "Взрывчатка"
     //Синие:
-    public final ImageView getExplosiveBlue() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\BlueUnity\\Explosive.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
-        return unit;
-    }
-
     public final ImageView getExplosiveWallBlue() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\BlueUnity\\Wall4HP.png"));
         unit.setFitWidth(33.5);
@@ -164,13 +157,6 @@ public final class ResourceOfBonuses {
     }
 
     //Красные:
-    public final ImageView getExplosiveRed() {
-        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Explosive.png"));
-        unit.setFitWidth(33.5);
-        unit.setFitHeight(33.5);
-        return unit;
-    }
-
     public final ImageView getExplosiveWallRed() {
         ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\RedUnity\\Wall4HP.png"));
         unit.setFitWidth(33.5);

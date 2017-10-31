@@ -62,7 +62,7 @@ public final class AdjutantAttacker {
 
     public static boolean checkTarget(BattleManager battleManager, Point attackerPoint, Point targetPoint) {
         Pattern pattern = Pattern.compile("[hgbfwt]");
-        Pattern patternBonuses = Pattern.compile("[o]");
+        Pattern patternBonuses = Pattern.compile("[oiu]");
         if (attackerPoint.X() == targetPoint.X()) {
             for (int j = min(attackerPoint.Y(), targetPoint.Y()) + 1; j < max(attackerPoint.Y(), targetPoint.Y()); j++) {
                 String currentUnity = battleManager.getBattleField().getMatrix().get(attackerPoint.X()).get(j);
