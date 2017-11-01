@@ -603,46 +603,99 @@ public final class Painter {
                                 currentUnity = resourceOfBonuses.getSuperMortarRed1HP();
                                 break;
                         }
-                        //Fort:
-                        boolean isFortReady = false;
+
+                        boolean isSuperMultiUnitReady = false;
 
                         switch (element.substring(0, 1) + element.substring(2)){
+                            //Fort:
                             case "4!+i'":
                                 currentUnity = resourceOfBonuses.getFortBlueReady();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "3!+i'":
                                 currentUnity = resourceOfBonuses.getFortBlueReady3HP();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "2!+i'":
                                 currentUnity = resourceOfBonuses.getFortBlueReady2HP();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "1!+i'":
                                 currentUnity = resourceOfBonuses.getFortBlueReady1HP();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "4!-i'":
                                 currentUnity = resourceOfBonuses.getFortRedReady();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "3!-i'":
                                 currentUnity = resourceOfBonuses.getFortRedReady3HP();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "2!-i'":
                                 currentUnity = resourceOfBonuses.getFortRedReady2HP();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
                                 break;
                             case "1!-i'":
                                 currentUnity = resourceOfBonuses.getFortRedReady1HP();
-                                isFortReady = true;
+                                isSuperMultiUnitReady = true;
+                                break;
+                            //TankBuffalo:
+                            //Blue:
+                            case "6!+Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloBlueReady();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "5!+Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloBlueReady5HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "4!+Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloBlueReady4HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "3!+Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloBlueReady3HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "2!+Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloBlueReady2HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "1!+Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloBlueReady1HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            //Red:
+                            case "6!-Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloRedReady();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "5!-Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloRedReady5HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "4!-Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloRedReady4HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "3!-Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloRedReady3HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "2!-Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloRedReady2HP();
+                                isSuperMultiUnitReady = true;
+                                break;
+                            case "1!-Q'":
+                                currentUnity = resourceOfBonuses.getTankBuffaloRedReady1HP();
+                                isSuperMultiUnitReady = true;
                                 break;
                         }
 
-                        if (!isFortReady){
+                        if (!isSuperMultiUnitReady){
                             switch (element.substring(0, 1) + element.substring(3)){
+                                //Fort:
                                 case "4+i'":
                                     currentUnity = resourceOfBonuses.getFortBlue();
                                     break;
@@ -666,6 +719,45 @@ public final class Painter {
                                     break;
                                 case "1-i'":
                                     currentUnity = resourceOfBonuses.getFortRed1HP();
+                                    break;
+                                //TankBuffalo:
+                                //Blue:
+                                case "6+Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady();
+                                    break;
+                                case "5+Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady5HP();
+                                    break;
+                                case "4+Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady4HP();
+                                    break;
+                                case "3+Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady3HP();
+                                    break;
+                                case "2+Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady2HP();
+                                    break;
+                                case "1+Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady1HP();
+                                    break;
+                                //Red:
+                                case "6-Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady();
+                                    break;
+                                case "5-Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady5HP();
+                                    break;
+                                case "4-Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady4HP();
+                                    break;
+                                case "3-Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady3HP();
+                                    break;
+                                case "2-Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady2HP();
+                                    break;
+                                case "1-Q'":
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady1HP();
                                     break;
                             }
                         }

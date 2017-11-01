@@ -526,5 +526,154 @@ public final class ResourceOfBonuses {
         return unit;
     }
 
+    //TankBuffalo:
+    //Blue:
+    public final ImageView getTankBuffaloBlue() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffalo.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlue1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffalo 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlue2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffalo 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlue3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffalo 3HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlue4HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffalo 4HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlue5HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffalo 5HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    //Blue:
+    public final ImageView getTankBuffaloBlueReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffaloReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlueReady1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffaloReady 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlueReady2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffaloReady 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlueReady3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffaloReady 3HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlueReady4HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffaloReady 4HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloBlueReady5HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\BlueUnity\\TankBuffaloReady 5HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    //Red:
+    public final ImageView getTankBuffaloRed() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffalo.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRed1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffalo 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRed2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffalo 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRed3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffalo 3HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRed4HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffalo 4HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRed5HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffalo 5HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    //Red:
+    public final ImageView getTankBuffaloRedReady() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffaloReady.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRedReady1HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffaloReady 1HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRedReady2HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffaloReady 2HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRedReady3HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffaloReady 3HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRedReady4HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffaloReady 4HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
+    public final ImageView getTankBuffaloRedReady5HP() {
+        ImageView unit = new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\RedUnity\\TankBuffaloReady 5HP.png"));
+        unit.setFitWidth(33.5);
+        unit.setFitHeight(33.5);
+        return unit;
+    }
 
 }
