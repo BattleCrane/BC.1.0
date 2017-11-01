@@ -758,7 +758,8 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private static final Bonus tankBuffalo = new Bonus(4) {
+    private static final Bonus tankBuffalo = new Bonus(4,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\Sprite\\TankBuffalo.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
@@ -784,6 +785,20 @@ public final class ControllerBonusesCollection {
 
         }
     };
+
+    @Contract(pure = true)
+    public static int getBuffaloDamage(BattleManager battleManager) {
+        int bearsDamage = 0;
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (battleManager.getBattleField().getMatrix().get(i).get(j).contains(
+                        battleManager.getPlayer().getColorType() + "f'")) {
+                    bearsDamage++;
+                }
+            }
+        }
+        return bearsDamage;
+    }
 
 
     /**
