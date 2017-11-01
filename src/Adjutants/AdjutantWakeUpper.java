@@ -13,7 +13,7 @@ public final class AdjutantWakeUpper {
     public static void wakeUpUnities(BattleManager battleManager){
         Pattern patternBarracksAndFactories = Pattern.compile("[bfi]'");
         Pattern patternGunnersAndTanks = Pattern.compile("[GTt]");
-        Pattern patternBonuses = Pattern.compile("[AHCBE]");
+        Pattern patternBonuses = Pattern.compile("[AHCBEQ]");
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 List<String> list = battleManager.getBattleField().getMatrix().get(i);

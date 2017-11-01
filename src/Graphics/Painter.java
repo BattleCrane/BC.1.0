@@ -723,41 +723,41 @@ public final class Painter {
                                 //TankBuffalo:
                                 //Blue:
                                 case "6+Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlue();
                                     break;
                                 case "5+Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady5HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlue5HP();
                                     break;
                                 case "4+Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady4HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlue4HP();
                                     break;
                                 case "3+Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady3HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlue3HP();
                                     break;
                                 case "2+Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady2HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlue2HP();
                                     break;
                                 case "1+Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloBlueReady1HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloBlue1HP();
                                     break;
                                 //Red:
                                 case "6-Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRed();
                                     break;
                                 case "5-Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady5HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRed5HP();
                                     break;
                                 case "4-Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady4HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRed4HP();
                                     break;
                                 case "3-Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady3HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRed3HP();
                                     break;
                                 case "2-Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady2HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRed2HP();
                                     break;
                                 case "1-Q'":
-                                    currentUnity = resourceOfBonuses.getTankBuffaloRedReady1HP();
+                                    currentUnity = resourceOfBonuses.getTankBuffaloRed1HP();
                                     break;
                             }
                         }

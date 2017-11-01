@@ -96,6 +96,18 @@ public final class ControllerBonusesCollection {
                     }
                 }
             }
+            if (bonus.equals(tankBuffalo)){
+                for (int i = 0; i < 16; i++){
+                    for (int j = 0; j < 16; j++){
+                        String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
+                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "Q")){
+                            currentUnity = currentUnity.substring(0, 1) + getBuffaloDamage(controllerMatchMaking.getBattleManager()) + currentUnity.substring(2);
+                            controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, currentUnity);
+                        }
+                    }
+                }
+            }
+
             paneControlBonus.getChildren().add(bonus.getSprite());
             if (x + 80 > 450) {
                 x = 42;
@@ -492,7 +504,7 @@ public final class ControllerBonusesCollection {
     /**
      * Бонус: "Тяжелый танк 'Молот'"
      * Стоимость: 3 ед. энергии;
-     * Улучшает ваш обыкновенный танк до танка "Молот", становится активным и получает +1 к прочности
+     * Улучшает ваш обыкновенный танк до танка "Молот", становится активным и его запас прочности равен 3
      */
 
     private static final Bonus heavyTankHammer = new Bonus(3,
@@ -503,7 +515,7 @@ public final class ControllerBonusesCollection {
                 int x = (int) (event.getX() / 33.5);
                 int y = (int) (event.getY() / 33.5);
                 Pattern pattern = Pattern.compile("[T]");
-                Pattern patternBonuses = Pattern.compile("[/]");
+                Pattern patternBonuses = Pattern.compile("[Q]");
                 String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 Matcher matcher = pattern.matcher(currentUnit);
@@ -542,8 +554,8 @@ public final class ControllerBonusesCollection {
                     int y = (int) (eventChoiceOfUnit.getY() / 33.5);
                     String currentUnitOfChoice = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
                     System.out.println(currentUnitOfChoice);
-                    Pattern patternGunnersAndTanks = Pattern.compile("[GTAHCBE]");
-                    Pattern patternBonuses = Pattern.compile("[AHCBE]");
+                    Pattern patternGunnersAndTanks = Pattern.compile("[GTAHCBEQ]");
+                    Pattern patternBonuses = Pattern.compile("[AHCBEQ]");
                     Matcher matcherOfBasicArmy = patternGunnersAndTanks.matcher(currentUnitOfChoice);
                     Matcher matcherOfBonuses = patternBonuses.matcher(currentUnitOfChoice);
                     if (matcherOfBasicArmy.find()){
@@ -616,7 +628,7 @@ public final class ControllerBonusesCollection {
                     int x = (int) (event.getX() / 33.5);
                     int y = (int) (event.getY() / 33.5);
                     Pattern pattern = Pattern.compile("[T]");
-                    Pattern patternBonuses = Pattern.compile("[E]");
+                    Pattern patternBonuses = Pattern.compile("[EQ]");
                     Matcher matcher = pattern.matcher(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x));
                     Matcher matcherOfBonuses = patternBonuses.matcher(controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x));
                     if (controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x).
@@ -647,14 +659,14 @@ public final class ControllerBonusesCollection {
      */
 
     private static final Bonus tankCharge = new Bonus(3,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankGenerator\\Sprite\\TankGenerator.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3TankGenerator\\Sprite\\TankGenerator.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
             if (currentEnergy - this.getEnergy() >= 0) {
                 int additionalEnergy = 0;
                 Pattern pattern = Pattern.compile("[T]");
-                Pattern patternBonuses = Pattern.compile("[E]");
+                Pattern patternBonuses = Pattern.compile("[EQ]");
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
@@ -758,6 +770,8 @@ public final class ControllerBonusesCollection {
         }
     };
 
+
+
     private static final Bonus tankBuffalo = new Bonus(4,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\Sprite\\TankBuffalo.png"))) {
         @Override
@@ -774,7 +788,7 @@ public final class ControllerBonusesCollection {
                 if (currentEnergy - this.getEnergy() >= 0 && (matcher.find() || matcherBonuses.find()) &&
                         currentUnit.substring(3, 4).equals(controllerMatchMaking.getBattleManager().getPlayer().getColorType())) {
                     controllerMatchMaking.setClick(false);
-                    currentUnit = "6" + currentUnit.substring(1, 4) + "Q" + currentUnit.substring(5);
+                    currentUnit = "6" + getBuffaloDamage(controllerMatchMaking.getBattleManager()) + currentUnit.substring(2, 4) + "Q" + currentUnit.substring(5);
                     controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).set(x, currentUnit);
                     controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
@@ -782,23 +796,24 @@ public final class ControllerBonusesCollection {
                 }
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
             });
-
         }
     };
 
     @Contract(pure = true)
-    public static int getBuffaloDamage(BattleManager battleManager) {
-        int bearsDamage = 0;
+    private static int getBuffaloDamage(BattleManager battleManager) {
+        int buffaloShorts = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 if (battleManager.getBattleField().getMatrix().get(i).get(j).contains(
                         battleManager.getPlayer().getColorType() + "f'")) {
-                    bearsDamage++;
+                    buffaloShorts++;
                 }
             }
         }
-        return bearsDamage;
+        return buffaloShorts;
     }
+
+
 
 
     /**
@@ -1012,6 +1027,10 @@ public final class ControllerBonusesCollection {
         return intensiveProduction;
     }
 
+    @Contract(pure = true)
+    public static Bonus getTankBuffalo() {
+        return tankBuffalo;
+    }
 
 
     @Contract(pure = true)

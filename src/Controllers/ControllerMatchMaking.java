@@ -134,6 +134,16 @@ public final class ControllerMatchMaking implements Initializable {
                             if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
+                                for (int i = 0; i < 16; i++) {
+                                    for (int j = 0; j < 16; j++) {
+                                        String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
+                                        if (currentUnity.contains(battleManager.getPlayer().getColorType() + "Q")) {
+                                            int temp = Integer.parseInt(currentUnity.substring(1, 2)) + 1;
+                                            currentUnity = currentUnity.substring(0, 1) + temp + currentUnity.substring(2);
+                                            battleManager.getBattleField().getMatrix().get(j).set(i, currentUnity);
+                                        }
+                                    }
+                                }
                             }
                         }
                         //Если строите генератор:
@@ -206,11 +216,11 @@ public final class ControllerMatchMaking implements Initializable {
                                             System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
                                             System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                         }
@@ -242,11 +252,11 @@ public final class ControllerMatchMaking implements Initializable {
                                             Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
                                                         }
@@ -278,11 +288,11 @@ public final class ControllerMatchMaking implements Initializable {
                                             Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
                                                         }
@@ -308,17 +318,17 @@ public final class ControllerMatchMaking implements Initializable {
                                         Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
                                         System.out.println("Второй клик: ");
                                         String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())){
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
                                             Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                         }
@@ -326,7 +336,7 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 ControllerBonusesCollection.setCountShortsForHeadquarters(ControllerBonusesCollection.getCountShortsForHeadquarters() - 1);
                                                 System.out.println("ATTACK!");
-                                                if (ControllerBonusesCollection.getCountShortsForHeadquarters() == 0){
+                                                if (ControllerBonusesCollection.getCountShortsForHeadquarters() == 0) {
                                                     battleManager.getBattleField().getMatrix().get(0).set(0,
                                                             AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
                                                     battleManager.getBattleField().getMatrix().get(0).set(1,
@@ -366,18 +376,18 @@ public final class ControllerMatchMaking implements Initializable {
                                                 List<Integer> listX = new ArrayList<>();
                                                 List<Integer> listY = new ArrayList<>();
                                                 int damage = 0;
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             listX.add(i);
                                                             listY.add(j);
                                                             damage++;
                                                         }
                                                     }
                                                 }
-                                                for (int i = 0; i < listX.size(); i++){
+                                                for (int i = 0; i < listX.size(); i++) {
                                                     battleManager.getBattleField().getMatrix().get(listX.get(i)).set(listY.get(i),
                                                             AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(listX.get(i)).get(listY.get(i)), damage));
                                                 }
@@ -406,11 +416,11 @@ public final class ControllerMatchMaking implements Initializable {
                                             Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j),
                                                                             ControllerBonusesCollection.getBearDamage(battleManager)));
@@ -444,11 +454,11 @@ public final class ControllerMatchMaking implements Initializable {
                                             Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
                                                         }
@@ -474,41 +484,32 @@ public final class ControllerMatchMaking implements Initializable {
                                         Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
                                         System.out.println("Второй клик: ");
                                         String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())){
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEiuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
                                                         }
                                                     }
                                                 }
-                                                ControllerBonusesCollection.setCountShortsForHeadquarters(ControllerBonusesCollection.getCountShortsForHeadquarters() - 1);
-                                                System.out.println("ATTACK!");
-                                                if (ControllerBonusesCollection.getCountShortsForHeadquarters() == 0){
-                                                    battleManager.getBattleField().getMatrix().get(0).set(0,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
-                                                    battleManager.getBattleField().getMatrix().get(0).set(1,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
-                                                    battleManager.getBattleField().getMatrix().get(1).set(0,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
-                                                    battleManager.getBattleField().getMatrix().get(1).set(1,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
-                                                    battleManager.getBattleField().getMatrix().get(14).set(14,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
-                                                    battleManager.getBattleField().getMatrix().get(14).set(15,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
-                                                    battleManager.getBattleField().getMatrix().get(15).set(14,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
-                                                    battleManager.getBattleField().getMatrix().get(15).set(15,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
+                                                if (!clickedUnit.substring(1, 2).equals("0")) {
+                                                    int shotsOfTankBuffalo = Integer.parseInt(clickedUnit.substring(1, 2)) - 1;
+                                                    String sameClickedUnit = clickedUnit;
+                                                    sameClickedUnit = sameClickedUnit.substring(0, 1) + shotsOfTankBuffalo + sameClickedUnit.substring(2);
+                                                    if (shotsOfTankBuffalo == 0) {
+                                                        battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), AdjutantSleeper.sleepUnity(sameClickedUnit));
+                                                    } else {
+                                                        battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), sameClickedUnit);
+                                                    }
+
                                                 }
                                                 battleManager.getBattleField().toString();
                                                 battleManager.checkDestroyedUnities();
@@ -525,30 +526,30 @@ public final class ControllerMatchMaking implements Initializable {
                                         Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
                                         System.out.println("Второй клик: ");
                                         String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())){
+                                        if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
                                             Pattern patternBonus = Pattern.compile("[oHeCBEiuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
                                             if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
-                                                for (int i = 0; i < 16; i++){
-                                                    for (int j = 0; j < 16; j++){
+                                                for (int i = 0; i < 16; i++) {
+                                                    for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
-                                                        if (attackerUnitID.equals(targetUnitID)){
+                                                        if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
                                                                     AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                         }
                                                     }
                                                 }
-                                                for (int a = 0; a < 16; a++){
-                                                    for(int b = 0; b < 16; b++){
+                                                for (int a = 0; a < 16; a++) {
+                                                    for (int b = 0; b < 16; b++) {
                                                         String currentFort = battleManager.getBattleField().getMatrix().get(b).get(a);
                                                         if (clickedUnitID.equals(battleManager.getIdentificationField().getMatrix().get(b).get(a)) &&
-                                                        !currentFort.substring(1, 2).equals("0")){
+                                                                !currentFort.substring(1, 2).equals("0")) {
                                                             int shotsOfFort = Integer.parseInt(currentFort.substring(1, 2)) - 1;
                                                             currentFort = currentFort.substring(0, 1) + shotsOfFort + currentFort.substring(2);
-                                                            if (shotsOfFort == 0){
+                                                            if (shotsOfFort == 0) {
                                                                 battleManager.getBattleField().getMatrix().get(b).set(a, AdjutantSleeper.sleepUnity(currentFort));
                                                             } else {
                                                                 battleManager.getBattleField().getMatrix().get(b).set(a, currentFort);
@@ -580,7 +581,6 @@ public final class ControllerMatchMaking implements Initializable {
             }
         }
     };
-
 
 
     @Override
@@ -653,7 +653,7 @@ public final class ControllerMatchMaking implements Initializable {
 
         //Выбрать поддержку:
         buttonSupport.setOnMouseClicked(event -> {
-            if (!isClickButtonOfBonus){
+            if (!isClickButtonOfBonus) {
                 paneControlSupport.setVisible(true);
                 isClickButtonOfBonus = true;
                 buttonSupport.toFront();
@@ -735,7 +735,7 @@ public final class ControllerMatchMaking implements Initializable {
         paneControlField.setOnMouseClicked(eventHandler);
     }
 
-    private void initializeBonuses(BattleManager battleManager){
+    private void initializeBonuses(BattleManager battleManager) {
         battleManager.getPlayerBlue().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
                 ControllerBonusesCollection.getAmbulance(),
@@ -757,7 +757,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getAirStrike(),
                 ControllerBonusesCollection.getCloning(),
                 ControllerBonusesCollection.getSuperMortarTurret(),
-                ControllerBonusesCollection.getFort()
+                ControllerBonusesCollection.getFort(),
+                ControllerBonusesCollection.getTankBuffalo()
 
 
         ));
@@ -782,18 +783,19 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getAirStrike(),
                 ControllerBonusesCollection.getCloning(),
                 ControllerBonusesCollection.getSuperMortarTurret(),
-                ControllerBonusesCollection.getFort()
+                ControllerBonusesCollection.getFort(),
+                ControllerBonusesCollection.getTankBuffalo()
 
         ));
 
 
-        for (Bonus bonus: battleManager.getPlayerBlue().getListOfBonuses()){
+        for (Bonus bonus : battleManager.getPlayerBlue().getListOfBonuses()) {
             bonus.getSprite().setOnMouseClicked(event -> {
                 bonus.run(this);
                 click = !click;
             });
         }
-        for (Bonus bonus: battleManager.getPlayerRed().getListOfBonuses()){
+        for (Bonus bonus : battleManager.getPlayerRed().getListOfBonuses()) {
             bonus.getSprite().setOnMouseClicked(event -> {
                 bonus.run(this);
                 click = !click;
