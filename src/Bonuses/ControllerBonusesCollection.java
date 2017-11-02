@@ -850,6 +850,13 @@ public final class ControllerBonusesCollection {
 
     private static int additionalEnergyRed = 1;
 
+    /**
+     * Бонус: "Диверсия"
+     * Стоимость: 4 ед. энергии;
+     * Уничтожает строение, которое имеет уровень,
+     * и увеличивает всем вашим строениям данного типа,
+     * если их уровень меньше уничтоженного.
+     */
 
     private static final Bonus diversion = new Bonus(4,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\4Diversion\\Sprite\\Diversion.png"))) {
