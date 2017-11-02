@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -64,11 +65,11 @@ public final class ControllerBonusesCollection {
                 }
             }
 
-            if (bonus.equals(superMortarTurret)){
-                for (int i = 0; i < 16; i++){
-                    for (int j = 0; j < 16; j++){
+            if (bonus.equals(superMortarTurret)) {
+                for (int i = 0; i < 16; i++) {
+                    for (int j = 0; j < 16; j++) {
                         String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
-                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "u")){
+                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "u")) {
                             AdjutantAttacker.radiusAttack(controllerMatchMaking.getBattleManager(), new Point(j, i), 5, 1);
                         }
                     }
@@ -84,11 +85,11 @@ public final class ControllerBonusesCollection {
                 }
             }
 
-            if (bonus.equals(fort)){
-                for (int i = 0; i < 16; i++){
-                    for (int j = 0; j < 16; j++){
+            if (bonus.equals(fort)) {
+                for (int i = 0; i < 16; i++) {
+                    for (int j = 0; j < 16; j++) {
                         String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
-                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "i")){
+                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "i")) {
                             currentUnity = currentUnity.substring(0, 1) + currentUnity.substring(0, 1) + currentUnity.substring(2);
                             controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, currentUnity);
                             AdjutantWakeUpper.wakeUpExactly(controllerMatchMaking.getBattleManager(), j, i);
@@ -96,11 +97,11 @@ public final class ControllerBonusesCollection {
                     }
                 }
             }
-            if (bonus.equals(tankBuffalo)){
-                for (int i = 0; i < 16; i++){
-                    for (int j = 0; j < 16; j++){
+            if (bonus.equals(tankBuffalo)) {
+                for (int i = 0; i < 16; i++) {
+                    for (int j = 0; j < 16; j++) {
                         String currentUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).get(i);
-                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "Q")){
+                        if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "Q")) {
                             currentUnity = currentUnity.substring(0, 1) + getBuffaloDamage(controllerMatchMaking.getBattleManager()) + currentUnity.substring(2);
                             controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, currentUnity);
                         }
@@ -515,13 +516,13 @@ public final class ControllerBonusesCollection {
                 int x = (int) (event.getX() / 33.5);
                 int y = (int) (event.getY() / 33.5);
                 Pattern pattern = Pattern.compile("[T]");
-                Pattern patternBonuses = Pattern.compile("[Q]");
+                Pattern patternBonuses = Pattern.compile("[EQ]");
                 String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 Matcher matcher = pattern.matcher(currentUnit);
                 Matcher matcherBonuses = patternBonuses.matcher(currentUnit);
                 if (currentEnergy - this.getEnergy() >= 0 && (matcher.find() || matcherBonuses.find()) &&
-                        currentUnit.substring(3, 5).equals(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "T")) {
+                        currentUnit.substring(3, 4).equals(controllerMatchMaking.getBattleManager().getPlayer().getColorType())) {
                     controllerMatchMaking.setClick(false);
                     currentUnit = controllerMatchMaking.getBattleManager().increaseHitPoints(currentUnit, 1);
                     currentUnit = currentUnit.substring(0, 4) + "E" + currentUnit.substring(5);
@@ -548,7 +549,7 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
-            if (currentEnergy <= this.getEnergy()){
+            if (currentEnergy <= this.getEnergy()) {
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(eventChoiceOfUnit -> {
                     int x = (int) (eventChoiceOfUnit.getX() / 33.5);
                     int y = (int) (eventChoiceOfUnit.getY() / 33.5);
@@ -558,7 +559,7 @@ public final class ControllerBonusesCollection {
                     Pattern patternBonuses = Pattern.compile("[AHCBEQ]");
                     Matcher matcherOfBasicArmy = patternGunnersAndTanks.matcher(currentUnitOfChoice);
                     Matcher matcherOfBonuses = patternBonuses.matcher(currentUnitOfChoice);
-                    if (matcherOfBasicArmy.find()){
+                    if (matcherOfBasicArmy.find()) {
                         controllerMatchMaking.getPaneControlField().setOnMouseClicked(eventOfTarget -> {
                             Point targetPoint = new Point((int) (eventOfTarget.getY() / 33.5), (int) (eventOfTarget.getX() / 33.5));
                             Unity cloneUnit = new Unity(1, 1, currentUnitOfChoice.substring(4, 5), Integer.parseInt(currentUnitOfChoice.substring(0, 1)));
@@ -592,12 +593,12 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
-            if (currentEnergy - this.getEnergy() >= 0){
+            if (currentEnergy - this.getEnergy() >= 0) {
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                     int x = (int) (event.getX() / 33.5);
                     int y = (int) (event.getY() / 33.5);
                     String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
-                    if (currentUnit.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "t")){
+                    if (currentUnit.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "t")) {
                         controllerMatchMaking.setClick(false);
                         currentUnit = currentUnit.substring(0, 4) + "u'";
                         controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).set(x, currentUnit);
@@ -674,7 +675,7 @@ public final class ControllerBonusesCollection {
                         Matcher matcherOfBonus = patternBonuses.matcher(currentUnit);
                         if ((matcher.find() || matcherOfBonus.find()) && currentUnit.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType())) {
                             additionalEnergy++;
-                            AdjutantAttacker.radiusAttack(controllerMatchMaking.getBattleManager(), new Point (j ,i), 2, 2);
+                            AdjutantAttacker.radiusAttack(controllerMatchMaking.getBattleManager(), new Point(j, i), 2, 2);
                             controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).
                                     set(i, "XXXXXX");
                         }
@@ -770,7 +771,14 @@ public final class ControllerBonusesCollection {
         }
     };
 
-
+    /**
+     * Бонус: "Танк Буффало"
+     * Стоимость: 4 ед. энергии;
+     * Улучшает ваш отанк до танка "Буффало";
+     * Кол-во выстрелов равно кол-ву заводов;
+     * Запас прочности равен 6.
+     * Урон 2.
+     */
 
     private static final Bonus tankBuffalo = new Bonus(4,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\Sprite\\TankBuffalo.png"))) {
@@ -814,8 +822,6 @@ public final class ControllerBonusesCollection {
     }
 
 
-
-
     /**
      * Бонус: "Интенсивная выработка"
      * Стоимость: 4 ед. энергии;
@@ -844,10 +850,56 @@ public final class ControllerBonusesCollection {
 
     private static int additionalEnergyRed = 1;
 
-    private final Bonus diversion = new Bonus(4) {
+
+    private static final Bonus diversion = new Bonus(4,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4Diversion\\Sprite\\Diversion.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
+                controllerMatchMaking.setClick(false);
+                controllerMatchMaking.getPaneControlField().setOnMouseClicked(secondEvent -> {
+                    Point pointSecondClick = new Point((int) (secondEvent.getY() / 33.5), (int) (secondEvent.getX() / 33.5));
+                    System.out.println("Второй клик: ");
+                    String targetAttackUnity = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                    if (!targetAttackUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType())) {
+                        Pattern pattern = Pattern.compile("[gbft]");
+                        Matcher matcher = pattern.matcher(targetAttackUnity);
+                        Pattern patternBonus = Pattern.compile("[/]");
+                        Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
+                        if ((matcher.find() || matcherBonus.find())) {
+                            String targetUnitID = controllerMatchMaking.getBattleManager().getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
+                            for (int i = 0; i < 16; i++) {
+                                for (int j = 0; j < 16; j++) {
+                                    String attackerUnitID = controllerMatchMaking.getBattleManager().getIdentificationField().getMatrix().get(i).get(j);
+                                    String currentUnit = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).get(j);
+                                    if (attackerUnitID.equals(targetUnitID)) {
+                                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(i).set(j, "XXXXXX");
+                                    }
+                                    if (currentUnit.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + targetAttackUnity.substring(4, 5))) {
+                                        if (targetAttackUnity.substring(1, 2).equals(">") && currentUnit.substring(1, 2).equals("<")) {
+                                            controllerMatchMaking.getBattleManager().upgradeBuilding(new Point(i, j), controllerMatchMaking.getBattleManager().getPlayer());
+                                        }
+                                        if (targetAttackUnity.substring(1, 2).equals(">") && currentUnit.substring(1, 2).equals("^")) {
+                                            controllerMatchMaking.getBattleManager().upgradeBuilding(new Point(i, j), controllerMatchMaking.getBattleManager().getPlayer());
+                                            controllerMatchMaking.getBattleManager().upgradeBuilding(new Point(i, j), controllerMatchMaking.getBattleManager().getPlayer());
+                                        }
 
+                                        if (targetAttackUnity.substring(1, 2).equals("<") && currentUnit.substring(1, 2).equals("^")) {
+                                            controllerMatchMaking.getBattleManager().upgradeBuilding(new Point(i, j), controllerMatchMaking.getBattleManager().getPlayer());
+                                        }
+                                    }
+                                }
+                            }
+                            controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                            controllerMatchMaking.getBattleManager().checkDestroyedUnities();
+                            Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                                    controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                        }
+                    }
+                    controllerMatchMaking.getPaneControlField().setOnMouseClicked(controllerMatchMaking.getEventHandler());
+                });
+            }
         }
     };
 
@@ -1018,6 +1070,11 @@ public final class ControllerBonusesCollection {
     }
 
     @Contract(pure = true)
+    public static Bonus getTankCharge() {
+        return tankCharge;
+    }
+
+    @Contract(pure = true)
     public static Bonus getRocketCorsair() {
         return rocketCorsair;
     }
@@ -1032,15 +1089,14 @@ public final class ControllerBonusesCollection {
         return tankBuffalo;
     }
 
-
     @Contract(pure = true)
     public static Bonus getFort() {
         return fort;
     }
 
     @Contract(pure = true)
-    public static Bonus getTankCharge() {
-        return tankCharge;
+    public static Bonus getDiversion() {
+        return diversion;
     }
 
     @Contract(pure = true)

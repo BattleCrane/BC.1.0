@@ -758,7 +758,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getCloning(),
                 ControllerBonusesCollection.getSuperMortarTurret(),
                 ControllerBonusesCollection.getFort(),
-                ControllerBonusesCollection.getTankBuffalo()
+                ControllerBonusesCollection.getTankBuffalo(),
+                ControllerBonusesCollection.getDiversion()
 
 
         ));
@@ -784,7 +785,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getCloning(),
                 ControllerBonusesCollection.getSuperMortarTurret(),
                 ControllerBonusesCollection.getFort(),
-                ControllerBonusesCollection.getTankBuffalo()
+                ControllerBonusesCollection.getTankBuffalo(),
+                ControllerBonusesCollection.getDiversion()
 
         ));
 
