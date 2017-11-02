@@ -759,7 +759,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getSuperMortarTurret(),
                 ControllerBonusesCollection.getFort(),
                 ControllerBonusesCollection.getTankBuffalo(),
-                ControllerBonusesCollection.getDiversion()
+                ControllerBonusesCollection.getDiversion(),
+                ControllerBonusesCollection.getMerge()
 
 
         ));
@@ -786,7 +787,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getSuperMortarTurret(),
                 ControllerBonusesCollection.getFort(),
                 ControllerBonusesCollection.getTankBuffalo(),
-                ControllerBonusesCollection.getDiversion()
+                ControllerBonusesCollection.getDiversion(),
+                ControllerBonusesCollection.getMerge()
 
         ));
 
@@ -842,6 +844,31 @@ public final class ControllerMatchMaking implements Initializable {
 
     public void setBattleManager(BattleManager battleManager) {
         this.battleManager = battleManager;
+    }
+
+    @Contract(pure = true)
+    public Button getButtonCreateArmy() {
+        return buttonCreateArmy;
+    }
+
+    @Contract(pure = true)
+    public Button getButtonBuild() {
+        return buttonBuild;
+    }
+
+    @Contract(pure = true)
+    public AnchorPane getPaneGlobal() {
+        return paneGlobal;
+    }
+
+    @Contract(pure = true)
+    public Pane getPaneControlBuild() {
+        return paneControlBuild;
+    }
+
+    @Contract(pure = true)
+    public Pane getPaneControlArmy() {
+        return paneControlArmy;
     }
 
 }

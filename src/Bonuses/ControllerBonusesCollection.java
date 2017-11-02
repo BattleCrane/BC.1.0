@@ -11,12 +11,14 @@ import Controllers.ControllerMatchMaking;
 import Graphics.Painter;
 import Players.Player;
 import Unities.Unity;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -108,7 +110,6 @@ public final class ControllerBonusesCollection {
                     }
                 }
             }
-
             paneControlBonus.getChildren().add(bonus.getSprite());
             if (x + 80 > 450) {
                 x = 42;
@@ -934,6 +935,8 @@ public final class ControllerBonusesCollection {
         }
     };
 
+
+
     /**
      * Бонус: "Супер краны"
      * Стоимость: 5 ед. энергии;
@@ -950,6 +953,23 @@ public final class ControllerBonusesCollection {
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
             }
             controllerMatchMaking.setClick(true);
+        }
+    };
+
+
+    private static final Bonus merge = new Bonus(5,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5Merge\\Sprite\\Merge.png"))) {
+        @Override
+        public void run(ControllerMatchMaking controllerMatchMaking) {
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
+                controllerMatchMaking.getPaneControlBuild().setVisible(true);
+                controllerMatchMaking.getPaneControlArmy().setVisible(true);
+                controllerMatchMaking.getButtonBuild().setVisible(false);
+                controllerMatchMaking.getButtonCreateArmy().setVisible(false);
+                controllerMatchMaking.setClick(true);
+                controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+            }
         }
     };
 
@@ -1114,6 +1134,11 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getSuperCranes() {
         return superCranes;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getMerge() {
+        return merge;
     }
 
     @Contract(pure = true)
