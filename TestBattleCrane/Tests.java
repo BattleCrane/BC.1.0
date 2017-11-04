@@ -1,4 +1,5 @@
 import Adjutants.AdjutantAttacker;
+import Adjutants.AdjutantFielder;
 import Adjutants.AdjutantSleeper;
 import BattleFields.*;
 import Bonuses.Bonus;
@@ -101,8 +102,12 @@ public class Tests {
     }
 
     @Test
-    public void searchCloseTerritories(){
+    public void fillZones(){
         BattleManager battleManager = new BattleManager();
+        battleManager.initializeField();
+        AdjutantFielder adjutantFielder = new AdjutantFielder();
+        adjutantFielder.fillZones(battleManager);
+        battleManager.getBattleField().toString();
 
     }
 

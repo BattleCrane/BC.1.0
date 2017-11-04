@@ -1,6 +1,7 @@
 package Controllers;
 
 import Adjutants.AdjutantAttacker;
+import Adjutants.AdjutantFielder;
 import Adjutants.AdjutantSleeper;
 import BattleFields.*;
 import Bonuses.Bonus;
@@ -111,6 +112,8 @@ public final class ControllerMatchMaking implements Initializable {
     private boolean isClickButtonOfBonus = false;
     private Unity unit;
     private String labelUnit = ""; //Определитель действия
+
+    private AdjutantFielder adjutantFielder = new AdjutantFielder();
 
     //Управляющий базовыми событиями:
     private EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
@@ -674,6 +677,8 @@ public final class ControllerMatchMaking implements Initializable {
         buttonCreateArmy.setOnMouseClicked(event -> {
             paneControlArmy.setVisible(true);
             buttonBuild.setVisible(false);
+            adjutantFielder.fillZones(battleManager);
+            battleManager.getBattleField().toString();
         });
 
         //Постройка генератора:
@@ -688,6 +693,7 @@ public final class ControllerMatchMaking implements Initializable {
             click = !click;
             unit = battleManager.getBarracksHorizontal();
             labelUnit = "building";
+
         });
 
         //Постройка завода:

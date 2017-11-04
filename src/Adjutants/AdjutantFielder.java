@@ -33,6 +33,19 @@ public class AdjutantFielder {
     private List<Point> listPassed = new ArrayList<>();
     private ZoneOfPlayer currentZoneOfPlayer = new ZoneOfPlayer(new ArrayList<>(), 0);
 
+    public void fillZones(BattleManager battleManager){
+        List<ZoneOfPlayer> listOfZones = searchZones(battleManager);
+        for (ZoneOfPlayer zone: listOfZones){
+            if (zone.getColorID() != 0){
+                String colorID = zone.getColorID() == 1 ? "+" : "-";
+                for (Point point: zone.getArea()){
+                    String currentUnity  = battleManager.getBattleField().getMatrix().get(point.Y()).get(point.X());
+                    currentUnity = colorID + currentUnity.substring(1);
+                    battleManager.getBattleField().getMatrix().get(point.Y()).set(point.X(), currentUnity);
+                }
+            }
+        }
+    }
 
     private List<ZoneOfPlayer> searchZones(BattleManager battleManager){
         List<ZoneOfPlayer> listOfZones = new ArrayList<>();
@@ -87,6 +100,7 @@ public class AdjutantFielder {
             }
         }
     }
+
     private void checkRoad(BattleManager battleManager, Point point, List<Point> closestPoints){
         boolean inBounds = point.X() >= 0 && point.X() < 16 && point.Y() >= 0 && point.Y() < 16;
         boolean isExactlyMediumZone = false;
