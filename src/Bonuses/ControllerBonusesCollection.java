@@ -550,12 +550,12 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
-            if (currentEnergy <= this.getEnergy()) {
+            if (currentEnergy - this.getEnergy() >= 0) {
                 controllerMatchMaking.getPaneControlField().setOnMouseClicked(eventChoiceOfUnit -> {
                     int x = (int) (eventChoiceOfUnit.getX() / 33.5);
                     int y = (int) (eventChoiceOfUnit.getY() / 33.5);
                     String currentUnitOfChoice = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(y).get(x);
-                    System.out.println(currentUnitOfChoice);
+                    System.out.println("!!!!!!!!!" + currentUnitOfChoice);
                     Pattern patternGunnersAndTanks = Pattern.compile("[GTAHCBEQ]");
                     Pattern patternBonuses = Pattern.compile("[AHCBEQ]");
                     Matcher matcherOfBasicArmy = patternGunnersAndTanks.matcher(currentUnitOfChoice);

@@ -100,23 +100,10 @@ public class Tests {
         battleManagerTest1.getBattleField().toString();
     }
 
-//    @Test
-//    public void bonusTankGenerator(){
-//        //Test №1:
-//        System.out.println("Test №1:");
-//        ControllerMatchMaking controllerMatchMaking = new ControllerMatchMaking();
-//        BattleManager battleManagerTest = new BattleManager(new BattleField());
-//        Player player = new Player(1, 4, "+");
-//        battleManagerTest.setPlayer(player);
-//        battleManagerTest.putUnity(new Player("+"), new Point(8, 4), battleManagerTest.getTank());
-//        battleManagerTest.putUnity(new Player("+"), new Point(0, 12), battleManagerTest.getTank());
-//        battleManagerTest.putUnity(new Player("+"), new Point(5, 10), battleManagerTest.getTank());
-//        battleManagerTest.putUnity(new Player("+"), new Point(11, 12), battleManagerTest.getTank());
-//        Bonus bonus = ControllerBonusesCollection.getTankCharge();
-//        controllerMatchMaking.setBattleManager(battleManagerTest);
-//        bonus.run(controllerMatchMaking);
-//        battleManagerTest.getBattleField().toString();
-//    }
+    @Test
+    public void searchCloseTerritories(){
+        BattleManager battleManager = new BattleManager();
 
+    }
 
 }
