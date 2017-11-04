@@ -373,7 +373,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         System.out.println("Второй клик: ");
                                         String targetAttackUnity = battleManager.getBattleField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
-                                            Pattern pattern = Pattern.compile("[hgbfwt]");
+                                            Pattern pattern = Pattern.compile("[hgbfwtiu]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
                                             if (matcher.find() && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 List<Integer> listX = new ArrayList<>();
@@ -576,6 +576,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                     }
                     //После события:
+                    adjutantFielder.fillZones(battleManager);
                     Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                     battleManager.getBattleField().toString();
                     System.out.println();
@@ -591,6 +592,7 @@ public final class ControllerMatchMaking implements Initializable {
         battleManager.initializeField();
         battleManager.getBattleField().toString();
         buttonCreateArmy.setVisible(false);
+        adjutantFielder.fillZones(battleManager);
         Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
         initializeGameButtons();
         System.out.println(battleManager.getPlayer().getColorType());
@@ -677,8 +679,6 @@ public final class ControllerMatchMaking implements Initializable {
         buttonCreateArmy.setOnMouseClicked(event -> {
             paneControlArmy.setVisible(true);
             buttonBuild.setVisible(false);
-            adjutantFielder.fillZones(battleManager);
-            battleManager.getBattleField().toString();
         });
 
         //Постройка генератора:

@@ -1,6 +1,7 @@
 package Bonuses;
 
 import Adjutants.AdjutantAttacker;
+import Adjutants.AdjutantFielder;
 import Adjutants.AdjutantSleeper;
 import Adjutants.AdjutantWakeUpper;
 import BattleFields.BattleField;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
  * Класс ControllerBonusCollection хранит в себе экземпляры класса Support и управляет ими
  */
 public final class ControllerBonusesCollection {
+
 
     public static void showBonuses(ControllerMatchMaking controllerMatchMaking, Player player, Pane paneControlBonus) {
         int x = 42;
@@ -705,6 +707,7 @@ public final class ControllerBonusesCollection {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             Unity fort = new Unity(2, 2, "i", 4);
+            AdjutantFielder adjutantFielder = new AdjutantFielder();
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0) {
@@ -719,6 +722,7 @@ public final class ControllerBonusesCollection {
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                         controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() - 1);
                     }
+                    adjutantFielder.fillZones(controllerMatchMaking.getBattleManager());
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                             controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
                 }

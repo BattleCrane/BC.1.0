@@ -21,6 +21,18 @@ public final class Resource {
         field.setFitHeight(33.5);
         return field;
     }
+    public final ImageView getEmptyFieldBlue() {
+        ImageView field = new ImageView(new Image("file:src\\Resources\\BlueUnity\\Cell\\Cell.png"));
+        field.setFitWidth(33.5);
+        field.setFitHeight(33.5);
+        return field;
+    }
+    public final ImageView getEmptyFieldRed() {
+        ImageView field = new ImageView(new Image("file:src\\Resources\\RedUnity\\Cell\\Cell.png"));
+        field.setFitWidth(33.5);
+        field.setFitHeight(33.5);
+        return field;
+    }
 
     public final ImageView getDestroyedField(){
         ImageView field = new ImageView(new Image("file:src\\Resources\\BattleFields\\DestroyedField.png"));

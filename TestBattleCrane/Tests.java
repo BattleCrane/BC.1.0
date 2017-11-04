@@ -105,6 +105,12 @@ public class Tests {
     public void fillZones(){
         BattleManager battleManager = new BattleManager();
         battleManager.initializeField();
+        Player blue =  battleManager.getPlayerBlue();
+        battleManager.putUnity(blue, new Point(9, 13), battleManager.getGenerator());
+        battleManager.putUnity(blue, new Point(7, 13), battleManager.getGenerator());
+        battleManager.putUnity(blue, new Point(8, 11), battleManager.getGenerator());
+        battleManager.putUnity(blue, new Point(8, 9), battleManager.getGenerator());
+        battleManager.putUnity(blue, new Point(11, 9), battleManager.getGenerator());
         AdjutantFielder adjutantFielder = new AdjutantFielder();
         adjutantFielder.fillZones(battleManager);
         battleManager.getBattleField().toString();

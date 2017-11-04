@@ -346,6 +346,12 @@ public final class Painter {
                             case "    0":
                                 currentUnity = resource.getEmptyField();
                                 break;
+                            case "+   0":
+                                currentUnity = resource.getEmptyFieldBlue();
+                                break;
+                            case "-   0":
+                                currentUnity = resource.getEmptyFieldRed();
+                                break;
                             case "XXXXX":
                                 currentUnity = resource.getDestroyedField();
                                 break;
