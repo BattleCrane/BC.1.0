@@ -36,6 +36,16 @@ public final class AdjutantFielder {
     private ZoneOfPlayer currentZoneOfPlayer = new ZoneOfPlayer(new ArrayList<>(), 0);
     private boolean isExactlyMediumZone = false;
 
+    public void flush(BattleManager battleManager){
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                if (battleManager.getBattleField().getMatrix().get(j).get(i).equals("+    0") ||
+                        battleManager.getBattleField().getMatrix().get(j).get(i).equals("-    0")){
+                    battleManager.getBattleField().getMatrix().get(j).set(i, "     0");
+                }
+            }
+        }
+    }
     public void fillZones(BattleManager battleManager){
         List<ZoneOfPlayer> listOfZones = searchZones(battleManager);
         for (ZoneOfPlayer zone: listOfZones){
@@ -43,8 +53,10 @@ public final class AdjutantFielder {
                 String colorID = zone.getColorID() == 1 ? "+" : "-";
                 for (Point point: zone.getArea()){
                     String currentUnity  = battleManager.getBattleField().getMatrix().get(point.X()).get(point.Y());
-                    currentUnity = colorID + currentUnity.substring(1);
-                    battleManager.getBattleField().getMatrix().get(point.X()).set(point.Y(), currentUnity);
+                    if (currentUnity.equals("     0")){
+                        currentUnity = colorID + currentUnity.substring(1);
+                        battleManager.getBattleField().getMatrix().get(point.X()).set(point.Y(), currentUnity);
+                    }
                 }
             }
         }
@@ -92,10 +104,10 @@ public final class AdjutantFielder {
             checkRoad(battleManager, pointLeft, closestPoints);
             checkRoad(battleManager, pointUpLeft, closestPoints);
             if (closestPoints.size() != 0){
-                for (int i = 0; i < closestPoints.size(); i++){
-                    currentZoneOfPlayer.getArea().add(closestPoints.get(i));
-                    listPassed.add(closestPoints.get(i));
-                    step(battleManager, closestPoints.get(i));
+                for (Point closestPoint : closestPoints) {
+                    currentZoneOfPlayer.getArea().add(closestPoint);
+                    listPassed.add(closestPoint);
+                    step(battleManager, closestPoint);
                 }
             }
     }
@@ -103,29 +115,30 @@ public final class AdjutantFielder {
     private void checkRoad(BattleManager battleManager, Point point, List<Point> closestPoints){
         boolean inBounds = point.X() >= 0 && point.X() < 16 && point.Y() >= 0 && point.Y() < 16;
 
+
         if (inBounds && !listPassed.contains(point)){
             String currentUnity = battleManager.getBattleField().getMatrix().get(point.X()).get(point.Y());
             Pattern pattern = Pattern.compile("[hgbfwtiu]");
-            Matcher matcher = pattern.matcher(currentUnity);
+            Matcher matcher = pattern.matcher(currentUnity.substring(4, 5));
 
 
-            if ((currentUnity.contains("+") && currentZoneOfPlayer.getColorID() == -1) ||
-                    (currentUnity.contains("-") && currentZoneOfPlayer.getColorID() == 1)){
+            if ((currentUnity.contains("+") && matcher.matches() && currentZoneOfPlayer.getColorID() == -1) ||
+                    (currentUnity.contains("-") && matcher.matches() && currentZoneOfPlayer.getColorID() == 1)){
 
                 currentZoneOfPlayer.setColorID(0);
                 isExactlyMediumZone = true;
             }
 
             if (!isExactlyMediumZone){
-                if (currentUnity.contains("+") && currentZoneOfPlayer.getColorID() == 0){
+                if (currentUnity.contains("+") && matcher.matches() && currentZoneOfPlayer.getColorID() == 0){
                     currentZoneOfPlayer.setColorID(1);
                 }
-                if (currentUnity.contains("-") && currentZoneOfPlayer.getColorID() == 0){
+                if (currentUnity.contains("-") && matcher.matches() && currentZoneOfPlayer.getColorID() == 0){
                     currentZoneOfPlayer.setColorID(-1);
                 }
             }
 
-            if (currentUnity.equals("     0") || currentUnity.equals("XXXXXX")){
+            if (!matcher.matches()){
                 closestPoints.add(point);
             }
         }

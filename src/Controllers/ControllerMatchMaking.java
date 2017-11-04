@@ -576,6 +576,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                     }
                     //После события:
+                    adjutantFielder.flush(battleManager);
                     adjutantFielder.fillZones(battleManager);
                     Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                     battleManager.getBattleField().toString();
@@ -766,9 +767,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getFort(),
                 ControllerBonusesCollection.getTankBuffalo(),
                 ControllerBonusesCollection.getDiversion(),
-                ControllerBonusesCollection.getMerge()
-
-
+                ControllerBonusesCollection.getMerge(),
+                ControllerBonusesCollection.getMobilization()
         ));
         battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
                 ControllerBonusesCollection.getObstacle(),
@@ -794,8 +794,8 @@ public final class ControllerMatchMaking implements Initializable {
                 ControllerBonusesCollection.getFort(),
                 ControllerBonusesCollection.getTankBuffalo(),
                 ControllerBonusesCollection.getDiversion(),
-                ControllerBonusesCollection.getMerge()
-
+                ControllerBonusesCollection.getMerge(),
+                ControllerBonusesCollection.getMobilization()
         ));
 
 
@@ -846,10 +846,6 @@ public final class ControllerMatchMaking implements Initializable {
 
     public void setClick(boolean click) {
         this.click = click;
-    }
-
-    public void setBattleManager(BattleManager battleManager) {
-        this.battleManager = battleManager;
     }
 
     @Contract(pure = true)

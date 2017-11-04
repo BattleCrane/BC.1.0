@@ -8,6 +8,7 @@ import Unities.Unity;
 import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,7 +73,9 @@ public class BattleManager {
     public BattleManager(BattleField battleField) {
         this.battleField = battleField;
     }
-    public BattleManager() {}
+
+    public BattleManager() {
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void initializeField() {
@@ -144,7 +147,9 @@ public class BattleManager {
         }
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                if (!this.battleField.getMatrix().get(i).get(j).equals("     0")) {
+                if (!battleField.getMatrix().get(i).get(j).equals("     0") &&
+                        !battleField.getMatrix().get(i).get(j).equals("+    0") &&
+                        !battleField.getMatrix().get(i).get(j).equals("-    0")) {
                     return false;
                 }
             }
@@ -277,6 +282,7 @@ public class BattleManager {
             opponentPlayer = playerBlue;
         }
     }
+
     public int getHowCanBuildFactories() {
         return howICanProductArmy - howICanProductTanks;
     }

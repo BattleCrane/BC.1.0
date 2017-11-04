@@ -722,6 +722,7 @@ public final class ControllerBonusesCollection {
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                         controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() - 1);
                     }
+                    adjutantFielder.flush(controllerMatchMaking.getBattleManager());
                     adjutantFielder.fillZones(controllerMatchMaking.getBattleManager());
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                             controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
@@ -1013,10 +1014,33 @@ public final class ControllerBonusesCollection {
         }
     };
 
-    private final Bonus mobilization = new Bonus(5) {
+
+
+    private static final Bonus mobilization = new Bonus(5,
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5Mobilization\\Sprite\\Mobilization.png"))) {
+        AdjutantFielder adjutantFielder = new AdjutantFielder();
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
-
+            int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
+            if (currentEnergy - this.getEnergy() >= 0) {
+                BattleManager battleManager = controllerMatchMaking.getBattleManager();
+                Player currentPlayer = battleManager.getPlayer();
+                adjutantFielder.flush(battleManager);
+                adjutantFielder.fillZones(battleManager);
+                for (int i = 0; i < 16; i++){
+                    for (int j = 0; j < 16; j++){
+                        String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
+                        if (currentUnity.equals(currentPlayer.getColorType() + "    0")){
+                            battleManager.putUnity(currentPlayer, new Point(j, i), battleManager.getGunner());
+                        }
+                    }
+                }
+                controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
+                Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
+                        controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
+                controllerMatchMaking.getBattleManager().getBattleField().toString();
+            }
+            controllerMatchMaking.setClick(false);
         }
     };
 
@@ -1148,5 +1172,10 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public static Bonus getAirStrike() {
         return airStrike;
+    }
+
+    @Contract(pure = true)
+    public static Bonus getMobilization() {
+        return mobilization;
     }
 }

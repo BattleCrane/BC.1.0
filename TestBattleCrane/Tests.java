@@ -106,6 +106,7 @@ public class Tests {
         BattleManager battleManager = new BattleManager();
         battleManager.initializeField();
         Player blue =  battleManager.getPlayerBlue();
+        battleManager.getBattleField().getMatrix().get(7).set(15, "XXXXXX");
         battleManager.putUnity(blue, new Point(9, 13), battleManager.getGenerator());
         battleManager.putUnity(blue, new Point(7, 13), battleManager.getGenerator());
         battleManager.putUnity(blue, new Point(8, 11), battleManager.getGenerator());
