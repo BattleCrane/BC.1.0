@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
  * Класс AdjutantWakeUpper с помощью метода wakeUpUnities активирует ваших юнитов в начале хода.
  */
 public final class AdjutantWakeUpper {
-    public static void wakeUpUnities(BattleManager battleManager){
+    AdjutantAttacker adjutantAttacker = new AdjutantAttacker();
+    public void wakeUpUnities(BattleManager battleManager){
         Pattern patternBarracksAndFactories = Pattern.compile("[bfi]'");
         Pattern patternGunnersAndTanks = Pattern.compile("[GTt]");
         Pattern patternBonuses = Pattern.compile("[AHCBEQ]");
@@ -26,10 +27,10 @@ public final class AdjutantWakeUpper {
                    battleManager.getBattleField().getMatrix().get(i).set(j, readyUnity);
                    if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("t")){
                        if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("^")){
-                           AdjutantAttacker.radiusAttack(battleManager, new Point(i, j), 2, 1);
+                           adjutantAttacker.radiusAttack(battleManager, new Point(i, j), 2, 1);
                        }
                        if (battleManager.getBattleField().getMatrix().get(i).get(j).contains("<")){
-                           AdjutantAttacker.radiusAttack(battleManager, new Point(i, j), 3, 1);
+                           adjutantAttacker.radiusAttack(battleManager, new Point(i, j), 3, 1);
                        }
                    }
                 }
@@ -37,7 +38,7 @@ public final class AdjutantWakeUpper {
         }
     }
 
-    public static void wakeUpExactly(BattleManager battleManager, int x, int y){
+    public void wakeUpExactly(BattleManager battleManager, int x, int y){
         battleManager.getBattleField().getMatrix().get(x).set(y,
                 battleManager.getBattleField().getMatrix().get(x).get(y).substring(0, 2) + "!" +
         battleManager.getBattleField().getMatrix().get(x).get(y).substring(3));

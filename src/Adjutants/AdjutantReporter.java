@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Класс AdjutantReporter с помощью метода getReportAboutUnities рапортует о том, какие юниты и сколько их вы можете сделать.
  */
 public final class AdjutantReporter {
-    public static void getReportAboutUnities(BattleManager battleManager){
+    public void getReportAboutUnities(BattleManager battleManager){
         Pattern patternBarracks = Pattern.compile("[!?][+-]b'"); //Шаблон бараков
         Pattern patternGenerators = Pattern.compile("g'"); //Шаблон генераторов
         Pattern patternFactories = Pattern.compile("[!?][+-]f'"); //Шаблон заводов

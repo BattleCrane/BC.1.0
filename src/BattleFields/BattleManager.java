@@ -1,11 +1,9 @@
 package BattleFields;
 
 
-import Adjutants.AdjutantReporter;
-import Adjutants.AdjutantWakeUpper;
+import Adjutants.*;
 import Players.Player;
 import Unities.Unity;
-import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +31,12 @@ import java.util.regex.Pattern;
 public class BattleManager {
 
     //Основные переменные:
-    private Pane paneBattle;
+    private AdjutantWakeUpper adjutantWakeUpper = new AdjutantWakeUpper();
+    private AdjutantReporter adjutantReporter = new AdjutantReporter();
+    private AdjutantAttacker adjutantAttacker = new AdjutantAttacker();
+    private AdjutantSleeper adjutantSleeper = new AdjutantSleeper();
+    private AdjutantFielder adjutantFielder = new AdjutantFielder();
+
     private BattleField battleField = new BattleField();
     private IdentificationField identificationField = new IdentificationField();
     private int turn = 1;
@@ -50,7 +53,6 @@ public class BattleManager {
     //Штаб:
     private Unity headquarters = new Unity(2, 2, "h", 8);
     //Бараки:
-    private Unity barracksVertical = new Unity(2, 1, "b", 1);
     private Unity barracksHorizontal = new Unity(1, 2, "b", 1);
     //Генератор:
     private Unity generator = new Unity(2, 2, "g", 1);
@@ -266,8 +268,8 @@ public class BattleManager {
     public void nextTurnOfCurrentPlayer() {
         turn = (turn + 1) % 2;
         whatIsTurn();
-        AdjutantWakeUpper.wakeUpUnities(this);
-        AdjutantReporter.getReportAboutUnities(this);
+        adjutantWakeUpper.wakeUpUnities(this);
+        adjutantReporter.getReportAboutUnities(this);
         player.setEnergy(player.getEnergy() + 1);
         isConstructedGenerator = false;
     }
@@ -292,18 +294,6 @@ public class BattleManager {
         return battleField;
     }
 
-    public Pane getPaneBattle() {
-        return paneBattle;
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
     public Player getPlayerBlue() {
         return playerBlue;
     }
@@ -326,10 +316,6 @@ public class BattleManager {
 
     public Unity getHeadquarters() {
         return headquarters;
-    }
-
-    public Unity getBarracksVertical() {
-        return barracksVertical;
     }
 
     public Unity getBarracksHorizontal() {
@@ -398,5 +384,17 @@ public class BattleManager {
 
     public IdentificationField getIdentificationField() {
         return identificationField;
+    }
+
+    public AdjutantWakeUpper getAdjutantWakeUpper() {
+        return adjutantWakeUpper;
+    }
+
+    public AdjutantReporter getAdjutantReporter() {
+        return adjutantReporter;
+    }
+
+    public AdjutantAttacker getAdjutantAttacker() {
+        return adjutantAttacker;
     }
 }

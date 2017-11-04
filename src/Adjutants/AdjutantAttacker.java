@@ -12,8 +12,10 @@ import java.util.regex.Pattern;
  * Класс AdjutantAttacker реализует методы атак:
  */
 public final class AdjutantAttacker {
+
+
     @NotNull
-    public static String attack(String targetUnity, int damage) {
+    public String attack(String targetUnity, int damage) {
         int newHitPoints = Integer.parseInt(targetUnity.substring(0, 1));
         if (newHitPoints - damage >= 0) {
             newHitPoints = newHitPoints - damage;
@@ -23,12 +25,13 @@ public final class AdjutantAttacker {
         return newHitPoints + targetUnity.substring(1);
     }
 
-    public static void radiusAttack(BattleManager battleManager, Point middle, int radius, int damage) {
+    public void radiusAttack(BattleManager battleManager, Point middle, int radius, int damage) {
+        AdjutantFielder adjutantFielder = new AdjutantFielder();
         int x = middle.X();
         int y = middle.Y();
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
         Pattern pattern = Pattern.compile("[hgbfwtGT]");
-        Pattern patternBonuses = Pattern.compile("[oHeCBE]");
+        Pattern patternBonuses = Pattern.compile("[oHeCBEi]");
         for (int i = x - radius; i < x + radius + 1; i++) {
             for (int j = y - countShift; j < y + 1 + countShift; j++) {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
@@ -57,10 +60,12 @@ public final class AdjutantAttacker {
                 countShift = countShift - 2; //Перетягивание countShift--
             }
         }
+        adjutantFielder.flush(battleManager);
+        adjutantFielder.fillZones(battleManager);
         battleManager.checkDestroyedUnities();
     }
 
-    public static boolean checkTarget(BattleManager battleManager, Point attackerPoint, Point targetPoint) {
+    public boolean checkTarget(BattleManager battleManager, Point attackerPoint, Point targetPoint) {
         Pattern pattern = Pattern.compile("[hgbfwt]");
         Pattern patternBonuses = Pattern.compile("[oiu]");
         if (attackerPoint.X() == targetPoint.X()) {
@@ -124,7 +129,7 @@ public final class AdjutantAttacker {
 
 
     @Contract(pure = true)
-    private static int min(int a, int b) {
+    private int min(int a, int b) {
         if (a <= b) {
             return a;
         } else {
@@ -134,7 +139,7 @@ public final class AdjutantAttacker {
 
 
     @Contract(pure = true)
-    private static int max(int a, int b) {
+    private int max(int a, int b) {
         if (a <= b) {
             return b;
         } else {

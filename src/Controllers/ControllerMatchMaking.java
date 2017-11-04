@@ -102,6 +102,7 @@ public final class ControllerMatchMaking implements Initializable {
 
     //Механизм внутренней игры:
     private BattleManager battleManager = new BattleManager(new BattleField());
+    private AdjutantAttacker adjutantAttacker = new AdjutantAttacker();
 
     //Графические ресурсы:
     private final Resource resource = new Resource();
@@ -114,6 +115,7 @@ public final class ControllerMatchMaking implements Initializable {
     private String labelUnit = ""; //Определитель действия
 
     private AdjutantFielder adjutantFielder = new AdjutantFielder();
+    private ControllerBonusesCollection controllerBonusesCollection = new ControllerBonusesCollection();
 
     //Управляющий базовыми событиями:
     private EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
@@ -170,7 +172,7 @@ public final class ControllerMatchMaking implements Initializable {
                             if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
-                                AdjutantAttacker.radiusAttack(battleManager, pointClick, 2, 1);
+                                adjutantAttacker.radiusAttack(battleManager, pointClick, 2, 1);
 
                             }
                         }
@@ -214,18 +216,18 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQi]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            System.out.println(AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
+                                            System.out.println(adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick));
                                             System.out.println("X" + pointSecondClick.X() + " " + "Y" + pointSecondClick.Y());
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                         }
                                                     }
                                                 }
@@ -252,16 +254,16 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQi]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
                                                         }
                                                     }
                                                 }
@@ -288,16 +290,16 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQi]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
                                                         }
                                                     }
                                                 }
@@ -324,22 +326,22 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQi]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                         }
                                                     }
                                                 }
-                                                ControllerBonusesCollection.setCountShortsForHeadquarters(ControllerBonusesCollection.getCountShortsForHeadquarters() - 1);
+                                                controllerBonusesCollection.setCountShortsForHeadquarters(controllerBonusesCollection.getCountShortsForHeadquarters() - 1);
                                                 System.out.println("ATTACK!");
-                                                if (ControllerBonusesCollection.getCountShortsForHeadquarters() == 0) {
+                                                if (controllerBonusesCollection.getCountShortsForHeadquarters() == 0) {
                                                     battleManager.getBattleField().getMatrix().get(0).set(0,
                                                             AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
                                                     battleManager.getBattleField().getMatrix().get(0).set(1,
@@ -375,7 +377,7 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtiu]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            if (matcher.find() && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if (matcher.find() && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 List<Integer> listX = new ArrayList<>();
                                                 List<Integer> listY = new ArrayList<>();
                                                 int damage = 0;
@@ -392,7 +394,7 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 for (int i = 0; i < listX.size(); i++) {
                                                     battleManager.getBattleField().getMatrix().get(listX.get(i)).set(listY.get(i),
-                                                            AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(listX.get(i)).get(listY.get(i)), damage));
+                                                            adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(listX.get(i)).get(listY.get(i)), damage));
                                                 }
                                                 System.out.println("ATTACK! " + damage);
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
@@ -416,18 +418,18 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQi]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j),
-                                                                            ControllerBonusesCollection.getBearDamage(battleManager)));
-                                                            System.out.println(ControllerBonusesCollection.getBearDamage(battleManager));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j),
+                                                                            controllerBonusesCollection.getBearDamage(battleManager)));
+                                                            System.out.println(controllerBonusesCollection.getBearDamage(battleManager));
                                                         }
                                                     }
                                                 }
@@ -454,16 +456,16 @@ public final class ControllerMatchMaking implements Initializable {
                                         if (!targetAttackUnity.contains(battleManager.getPlayer().getColorType())) {
                                             Pattern pattern = Pattern.compile("[hgbfwtGT]");
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
-                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQ]");
+                                            Pattern patternBonus = Pattern.compile("[oHeCBEuQi]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 3));
                                                         }
                                                     }
                                                 }
@@ -492,14 +494,14 @@ public final class ControllerMatchMaking implements Initializable {
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
                                             Pattern patternBonus = Pattern.compile("[oHeCBEiuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 2));
                                                         }
                                                     }
                                                 }
@@ -534,14 +536,14 @@ public final class ControllerMatchMaking implements Initializable {
                                             Matcher matcher = pattern.matcher(targetAttackUnity);
                                             Pattern patternBonus = Pattern.compile("[oHeCBEiuQ]");
                                             Matcher matcherBonus = patternBonus.matcher(targetAttackUnity);
-                                            if ((matcher.find() || matcherBonus.find()) && AdjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
+                                            if ((matcher.find() || matcherBonus.find()) && adjutantAttacker.checkTarget(battleManager, pointClick, pointSecondClick)) {
                                                 for (int i = 0; i < 16; i++) {
                                                     for (int j = 0; j < 16; j++) {
                                                         String attackerUnitID = battleManager.getIdentificationField().getMatrix().get(i).get(j);
                                                         String targetUnitID = battleManager.getIdentificationField().getMatrix().get(pointSecondClick.X()).get(pointSecondClick.Y());
                                                         if (attackerUnitID.equals(targetUnitID)) {
                                                             battleManager.getBattleField().getMatrix().get(i).set(j,
-                                                                    AdjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
+                                                                    adjutantAttacker.attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                                                         }
                                                     }
                                                 }
@@ -598,14 +600,14 @@ public final class ControllerMatchMaking implements Initializable {
         initializeGameButtons();
         System.out.println(battleManager.getPlayer().getColorType());
         initializeBonuses(battleManager);
-        ControllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
+        controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
     }
 
     private void nextTurn() {
-        ControllerBonusesCollection.flush(paneControlSupport, battleManager);
+        controllerBonusesCollection.flush(paneControlSupport, battleManager);
         battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
-        ControllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
+        controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
@@ -744,58 +746,58 @@ public final class ControllerMatchMaking implements Initializable {
 
     private void initializeBonuses(BattleManager battleManager) {
         battleManager.getPlayerBlue().setListOfBonuses(Arrays.asList(
-                ControllerBonusesCollection.getObstacle(),
-                ControllerBonusesCollection.getAmbulance(),
-                ControllerBonusesCollection.getCombatReadiness(),
-                ControllerBonusesCollection.getHeavyShells(),
-                ControllerBonusesCollection.getEnergyBattery(),
-                ControllerBonusesCollection.getExplosive(),
-                ControllerBonusesCollection.getFightingHeadquarters(),
-                ControllerBonusesCollection.getClusterArrow(),
-                ControllerBonusesCollection.getCleanup(),
-                ControllerBonusesCollection.getBear(),
-                ControllerBonusesCollection.getHeavyTankHammer(),
-                ControllerBonusesCollection.getRocketCorsair(),
-                ControllerBonusesCollection.getAttackOfTank(),
-                ControllerBonusesCollection.getTankCharge(),
-                ControllerBonusesCollection.getIntensiveProduction(),
-                ControllerBonusesCollection.getDoubleTraining(),
-                ControllerBonusesCollection.getSuperCranes(),
-                ControllerBonusesCollection.getAirStrike(),
-                ControllerBonusesCollection.getCloning(),
-                ControllerBonusesCollection.getSuperMortarTurret(),
-                ControllerBonusesCollection.getFort(),
-                ControllerBonusesCollection.getTankBuffalo(),
-                ControllerBonusesCollection.getDiversion(),
-                ControllerBonusesCollection.getMerge(),
-                ControllerBonusesCollection.getMobilization()
+                controllerBonusesCollection.getObstacle(),
+                controllerBonusesCollection.getAmbulance(),
+                controllerBonusesCollection.getCombatReadiness(),
+                controllerBonusesCollection.getHeavyShells(),
+                controllerBonusesCollection.getEnergyBattery(),
+                controllerBonusesCollection.getExplosive(),
+                controllerBonusesCollection.getFightingHeadquarters(),
+                controllerBonusesCollection.getClusterArrow(),
+                controllerBonusesCollection.getCleanup(),
+                controllerBonusesCollection.getBear(),
+                controllerBonusesCollection.getHeavyTankHammer(),
+                controllerBonusesCollection.getRocketCorsair(),
+                controllerBonusesCollection.getAttackOfTank(),
+                controllerBonusesCollection.getTankCharge(),
+                controllerBonusesCollection.getIntensiveProduction(),
+                controllerBonusesCollection.getDoubleTraining(),
+                controllerBonusesCollection.getSuperCranes(),
+                controllerBonusesCollection.getAirStrike(),
+                controllerBonusesCollection.getCloning(),
+                controllerBonusesCollection.getSuperMortarTurret(),
+                controllerBonusesCollection.getFort(),
+                controllerBonusesCollection.getTankBuffalo(),
+                controllerBonusesCollection.getDiversion(),
+                controllerBonusesCollection.getMerge(),
+                controllerBonusesCollection.getMobilization()
         ));
         battleManager.getPlayerRed().setListOfBonuses(Arrays.asList(
-                ControllerBonusesCollection.getObstacle(),
-                ControllerBonusesCollection.getAmbulance(),
-                ControllerBonusesCollection.getCombatReadiness(),
-                ControllerBonusesCollection.getHeavyShells(),
-                ControllerBonusesCollection.getEnergyBattery(),
-                ControllerBonusesCollection.getExplosive(),
-                ControllerBonusesCollection.getFightingHeadquarters(),
-                ControllerBonusesCollection.getClusterArrow(),
-                ControllerBonusesCollection.getCleanup(),
-                ControllerBonusesCollection.getBear(),
-                ControllerBonusesCollection.getHeavyTankHammer(),
-                ControllerBonusesCollection.getRocketCorsair(),
-                ControllerBonusesCollection.getAttackOfTank(),
-                ControllerBonusesCollection.getTankCharge(),
-                ControllerBonusesCollection.getIntensiveProduction(),
-                ControllerBonusesCollection.getDoubleTraining(),
-                ControllerBonusesCollection.getSuperCranes(),
-                ControllerBonusesCollection.getAirStrike(),
-                ControllerBonusesCollection.getCloning(),
-                ControllerBonusesCollection.getSuperMortarTurret(),
-                ControllerBonusesCollection.getFort(),
-                ControllerBonusesCollection.getTankBuffalo(),
-                ControllerBonusesCollection.getDiversion(),
-                ControllerBonusesCollection.getMerge(),
-                ControllerBonusesCollection.getMobilization()
+                controllerBonusesCollection.getObstacle(),
+                controllerBonusesCollection.getAmbulance(),
+                controllerBonusesCollection.getCombatReadiness(),
+                controllerBonusesCollection.getHeavyShells(),
+                controllerBonusesCollection.getEnergyBattery(),
+                controllerBonusesCollection.getExplosive(),
+                controllerBonusesCollection.getFightingHeadquarters(),
+                controllerBonusesCollection.getClusterArrow(),
+                controllerBonusesCollection.getCleanup(),
+                controllerBonusesCollection.getBear(),
+                controllerBonusesCollection.getHeavyTankHammer(),
+                controllerBonusesCollection.getRocketCorsair(),
+                controllerBonusesCollection.getAttackOfTank(),
+                controllerBonusesCollection.getTankCharge(),
+                controllerBonusesCollection.getIntensiveProduction(),
+                controllerBonusesCollection.getDoubleTraining(),
+                controllerBonusesCollection.getSuperCranes(),
+                controllerBonusesCollection.getAirStrike(),
+                controllerBonusesCollection.getCloning(),
+                controllerBonusesCollection.getSuperMortarTurret(),
+                controllerBonusesCollection.getFort(),
+                controllerBonusesCollection.getTankBuffalo(),
+                controllerBonusesCollection.getDiversion(),
+                controllerBonusesCollection.getMerge(),
+                controllerBonusesCollection.getMobilization()
         ));
 
 
@@ -856,11 +858,6 @@ public final class ControllerMatchMaking implements Initializable {
     @Contract(pure = true)
     public Button getButtonBuild() {
         return buttonBuild;
-    }
-
-    @Contract(pure = true)
-    public AnchorPane getPaneGlobal() {
-        return paneGlobal;
     }
 
     @Contract(pure = true)
