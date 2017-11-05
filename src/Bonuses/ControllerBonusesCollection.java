@@ -22,10 +22,6 @@ import java.util.regex.Pattern;
  * Класс ControllerBonusCollection хранит в себе экземпляры класса Support и управляет ими
  */
 public final class ControllerBonusesCollection {
-
-
-
-
     public void showBonuses(ControllerMatchMaking controllerMatchMaking, Player player, Pane paneControlBonus) {
         int x = 42;
         int y = 37;
@@ -105,7 +101,7 @@ public final class ControllerBonusesCollection {
                         if (currentUnity.contains(controllerMatchMaking.getBattleManager().getPlayer().getColorType() + "Q")) {
                             currentUnity = currentUnity.substring(0, 1) + getBuffaloDamage(controllerMatchMaking.getBattleManager()) + currentUnity.substring(2);
                             controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, currentUnity);
-                            if (getBuffaloDamage(controllerMatchMaking.getBattleManager()) == 0){
+                            if (getBuffaloDamage(controllerMatchMaking.getBattleManager()) == 0) {
                                 controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, battleManager.getAdjutantWakeUpper().sleepUnity(currentUnity));
                             }
                         }
@@ -122,24 +118,9 @@ public final class ControllerBonusesCollection {
         }
     }
 
-    public static void flush(Pane paneControlBonus, BattleManager battleManager) {
+    public void flush(Pane paneControlBonus, BattleManager battleManager) {
         paneControlBonus.getChildren().retainAll(paneControlBonus.getChildren().get(0));
-        battleManager.getBattleField().getMatrix().get(0).set(0,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
-        battleManager.getBattleField().getMatrix().get(0).set(1,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
-        battleManager.getBattleField().getMatrix().get(1).set(0,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
-        battleManager.getBattleField().getMatrix().get(1).set(1,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
-        battleManager.getBattleField().getMatrix().get(14).set(14,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
-        battleManager.getBattleField().getMatrix().get(14).set(15,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
-        battleManager.getBattleField().getMatrix().get(15).set(14,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
-        battleManager.getBattleField().getMatrix().get(15).set(15,
-                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
+        battleManager.getAdjutantWakeUpper().sleepHeadquarters(battleManager);
     }
 
 
@@ -370,20 +351,8 @@ public final class ControllerBonusesCollection {
             BattleManager battleManager = controllerMatchMaking.getBattleManager();
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
             if (currentEnergy - this.getEnergy() >= 0) {
-                if (controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("+")) {
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 14, 14);
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 14, 15);
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 15, 14);
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 15, 15);
-                }
-                if (controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0 &&
-                        controllerMatchMaking.getBattleManager().getPlayer().getColorType().equals("-")) {
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 1, 1);
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 1, 0);
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 0, 1);
-                    battleManager.getAdjutantWakeUpper().wakeUpExactly(controllerMatchMaking.getBattleManager(), 0, 0);
-                }
-                countShortsForHeadquarters = 3;
+                battleManager.getAdjutantWakeUpper().wakeUpHeadquarters(battleManager);
+                battleManager.getAdjutantAttacker().setCountShortsForHeadquarters(3);
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                 Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                         controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
@@ -392,8 +361,6 @@ public final class ControllerBonusesCollection {
 
         }
     };
-
-    private int countShortsForHeadquarters = 0;
 
 
     /**
@@ -949,7 +916,6 @@ public final class ControllerBonusesCollection {
     };
 
 
-
     /**
      * Бонус: "Супер краны"
      * Стоимость: 5 ед. энергии;
@@ -1023,10 +989,10 @@ public final class ControllerBonusesCollection {
     };
 
 
-
     private final Bonus mobilization = new Bonus(5,
             new ImageView(new Image("file:src\\Resources\\Bonuses\\5Mobilization\\Sprite\\Mobilization.png"))) {
         AdjutantFielder adjutantFielder = new AdjutantFielder();
+
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -1035,10 +1001,10 @@ public final class ControllerBonusesCollection {
                 Player currentPlayer = battleManager.getPlayer();
                 adjutantFielder.flush(battleManager);
                 adjutantFielder.fillZones(battleManager);
-                for (int i = 0; i < 16; i++){
-                    for (int j = 0; j < 16; j++){
+                for (int i = 0; i < 16; i++) {
+                    for (int j = 0; j < 16; j++) {
                         String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
-                        if (currentUnity.equals(currentPlayer.getColorType() + "    0")){
+                        if (currentUnity.equals(currentPlayer.getColorType() + "    0")) {
                             battleManager.putUnity(currentPlayer, new Point(j, i), battleManager.getGunner());
                         }
                     }
@@ -1085,15 +1051,6 @@ public final class ControllerBonusesCollection {
     @Contract(pure = true)
     public Bonus getFightingHeadquarters() {
         return fightingHeadquarters;
-    }
-
-    @Contract(pure = true)
-    public int getCountShortsForHeadquarters() {
-        return countShortsForHeadquarters;
-    }
-
-    public void setCountShortsForHeadquarters(int countShortsForHeadquarters) {
-        this.countShortsForHeadquarters = countShortsForHeadquarters;
     }
 
     @Contract(pure = true)

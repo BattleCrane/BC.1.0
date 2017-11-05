@@ -338,25 +338,10 @@ public final class ControllerMatchMaking implements Initializable {
                                                         }
                                                     }
                                                 }
-                                                controllerBonusesCollection.setCountShortsForHeadquarters(controllerBonusesCollection.getCountShortsForHeadquarters() - 1);
+                                                battleManager.getAdjutantAttacker().setCountShortsForHeadquarters(battleManager.getAdjutantAttacker().getCountShortsForHeadquarters() - 1);
                                                 System.out.println("ATTACK!");
-                                                if (controllerBonusesCollection.getCountShortsForHeadquarters() == 0) {
-                                                    battleManager.getBattleField().getMatrix().get(0).set(0,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
-                                                    battleManager.getBattleField().getMatrix().get(0).set(1,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
-                                                    battleManager.getBattleField().getMatrix().get(1).set(0,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
-                                                    battleManager.getBattleField().getMatrix().get(1).set(1,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
-                                                    battleManager.getBattleField().getMatrix().get(14).set(14,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
-                                                    battleManager.getBattleField().getMatrix().get(14).set(15,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
-                                                    battleManager.getBattleField().getMatrix().get(15).set(14,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
-                                                    battleManager.getBattleField().getMatrix().get(15).set(15,
-                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
+                                                if (battleManager.getAdjutantAttacker().getCountShortsForHeadquarters() == 0) {
+                                                    battleManager.getAdjutantWakeUpper().sleepHeadquarters(battleManager);
                                                 }
                                                 battleManager.getBattleField().toString();
                                                 battleManager.checkDestroyedUnities();
@@ -607,6 +592,7 @@ public final class ControllerMatchMaking implements Initializable {
         battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
         controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
+        battleManager.getPlayer().setSupplyEnergy(battleManager.getPlayer().getEnergy());
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());

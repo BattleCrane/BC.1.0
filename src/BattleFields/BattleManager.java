@@ -41,8 +41,8 @@ public class BattleManager {
     private int turn = 1;
 
     //Игроки:
-    private Player playerBlue = new Player(0, 0, "+");
-    private Player playerRed = new Player(1, 1, "-");
+    private Player playerBlue = new Player(0, 0, 0 ,"+");
+    private Player playerRed = new Player(1, 1, 1, "-");
     private Player player;
     private Player opponentPlayer;
 
@@ -261,7 +261,6 @@ public class BattleManager {
             for (int j = 0; j < 16; j++) {
                 if (battleField.getMatrix().get(i).get(j).substring(0, 1).equals("0")) {
                     battleField.getMatrix().get(i).set(j, "XXXXXX");
-
                 }
             }
         }
@@ -273,7 +272,11 @@ public class BattleManager {
         whatIsTurn();
         adjutantWakeUpper.wakeUpUnities(this);
         adjutantReporter.getReportAboutUnities(this);
-        player.setEnergy(player.getEnergy() + 1);
+        if (player.getSupplyEnergy() <= 20){
+            player.setEnergy(player.getEnergy() + 1);
+        } else {
+
+        }
         isConstructedGenerator = false;
     }
 

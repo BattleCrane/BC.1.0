@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
  * Класс AdjutantAttacker реализует методы атак:
  */
 public final class AdjutantAttacker {
+    private int countShortsForHeadquarters = 0;
 
 
     @NotNull
@@ -145,6 +146,15 @@ public final class AdjutantAttacker {
         } else {
             return a;
         }
+    }
+
+    @Contract(pure = true)
+    public int getCountShortsForHeadquarters() {
+        return countShortsForHeadquarters;
+    }
+
+    public void setCountShortsForHeadquarters(int countShortsForHeadquarters) {
+        this.countShortsForHeadquarters = countShortsForHeadquarters;
     }
 }
 

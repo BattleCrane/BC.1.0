@@ -20,9 +20,10 @@ public final class Player {
     private String colorType;
     private List<Bonus> listOfBonuses;
 
-    public Player(int turn, int energy, String colorType) {
+    public Player(int turn, int energy, int supplyEnergy, String colorType) {
         this.turn = turn;
         this.energy = energy;
+        this.supplyEnergy = supplyEnergy;
         this.colorType = colorType;
     }
 
@@ -73,4 +74,14 @@ public final class Player {
     public void setListOfBonuses(List<Bonus> listOfBonuses) {
         this.listOfBonuses = listOfBonuses;
     }
+
+    @Contract(pure = true)
+    public int getSupplyEnergy() {
+        return supplyEnergy;
+    }
+
+    public void setSupplyEnergy(int supplyEnergy) {
+        this.supplyEnergy = supplyEnergy;
+    }
+
 }
