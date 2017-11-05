@@ -1,6 +1,7 @@
 package Players;
 
 import Bonuses.Bonus;
+import Bots.Bot;
 import org.jetbrains.annotations.Contract;
 
 import java.util.List;
@@ -17,8 +18,18 @@ public final class Player {
     private int turn;
     private int energy;
     private int supplyEnergy; //не превышает 20
+    private Bot bot;
     private String colorType;
     private List<Bonus> listOfBonuses;
+
+    public Player(int turn, int energy, int supplyEnergy,  String colorType, List<Bonus> listOfBonuses, Bot bot) {
+        this.turn = turn;
+        this.energy = energy;
+        this.supplyEnergy = supplyEnergy;
+        this.colorType = colorType;
+        this.listOfBonuses = listOfBonuses;
+        this.bot = bot;
+    }
 
     public Player(int turn, int energy, int supplyEnergy, String colorType) {
         this.turn = turn;
