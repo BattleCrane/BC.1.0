@@ -34,7 +34,6 @@ public class BattleManager {
     private AdjutantWakeUpper adjutantWakeUpper = new AdjutantWakeUpper();
     private AdjutantReporter adjutantReporter = new AdjutantReporter();
     private AdjutantAttacker adjutantAttacker = new AdjutantAttacker();
-    private AdjutantSleeper adjutantSleeper = new AdjutantSleeper();
     private AdjutantFielder adjutantFielder = new AdjutantFielder();
 
     private BattleField battleField = new BattleField();
@@ -53,21 +52,25 @@ public class BattleManager {
     //Штаб:
     private Unity headquarters = new Unity(2, 2, "h", 8);
     //Бараки:
-    private Unity barracksHorizontal = new Unity(1, 2, "b", 1);
+    private Unity barracks = new Unity(1, 2, "b", 1);
     //Генератор:
     private Unity generator = new Unity(2, 2, "g", 1);
     private boolean isConstructedGenerator;
     //Завод:
-    private Unity factoryVertical = new Unity(3, 2, "f", 1);
-    private Unity factoryHorizontal = new Unity(2, 3, "f", 1);
+    private Unity factory = new Unity(2, 3, "f", 1);
     //Турель:
     private Unity turret = new Unity(1, 1, "t", 2);
     //Стена:
     private Unity wall = new Unity(1, 1, "w", 4);
 
     //Армия:
-    private int howICanProductArmy;
-    private int howICanProductTanks;
+    private int howICanProductArmyLevel1;
+    private int howICanProductTanksLevel1;
+
+    private int howICanProductArmyLevel2;
+    private int howICanProductTanksLevel2;
+    private int howICanProductArmyLevel3;
+    private int howICanProductTanksLevel3;
     private Unity gunner = new Unity(1, 1, "G", 1);
     private Unity tank = new Unity(1, 1, "T", 2);
 
@@ -286,7 +289,7 @@ public class BattleManager {
     }
 
     public int getHowCanBuildFactories() {
-        return howICanProductArmy - howICanProductTanks;
+        return howICanProductArmyLevel1 - howICanProductTanksLevel1;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -318,20 +321,16 @@ public class BattleManager {
         return headquarters;
     }
 
-    public Unity getBarracksHorizontal() {
-        return barracksHorizontal;
+    public Unity getBarracks() {
+        return barracks;
     }
 
     public Unity getGenerator() {
         return generator;
     }
 
-    public Unity getFactoryVertical() {
-        return factoryVertical;
-    }
-
-    public Unity getFactoryHorizontal() {
-        return factoryHorizontal;
+    public Unity getFactory() {
+        return factory;
     }
 
     public Unity getTurret() {
@@ -358,21 +357,54 @@ public class BattleManager {
         this.howICanBuild = howICanBuild;
     }
 
-    public int getHowICanProductArmy() {
-        return howICanProductArmy;
+    public int getHowICanProductArmyLevel1() {
+        return howICanProductArmyLevel1;
     }
 
-    public void setHowICanProductArmy(int howICanProductArmy) {
-        this.howICanProductArmy = howICanProductArmy;
+    public void setHowICanProductArmyLevel1(int howICanProductArmyLevel1) {
+        this.howICanProductArmyLevel1 = howICanProductArmyLevel1;
     }
 
-    public int getHowICanProductTanks() {
-        return howICanProductTanks;
+    public int getHowICanProductTanksLevel1() {
+        return howICanProductTanksLevel1;
     }
 
-    public void setHowICanProductTanks(int howICanProductTanks) {
-        this.howICanProductTanks = howICanProductTanks;
+    public void setHowICanProductTanksLevel1(int howICanProductTanksLevel1) {
+        this.howICanProductTanksLevel1 = howICanProductTanksLevel1;
     }
+
+    public int getHowICanProductArmyLevel2() {
+        return howICanProductArmyLevel2;
+    }
+
+    public void setHowICanProductArmyLevel2(int howICanProductArmyLevel2) {
+        this.howICanProductArmyLevel2 = howICanProductArmyLevel2;
+    }
+
+    public int getHowICanProductTanksLevel2() {
+        return howICanProductTanksLevel2;
+    }
+
+    public void setHowICanProductTanksLevel2(int howICanProductTanksLevel2) {
+        this.howICanProductTanksLevel2 = howICanProductTanksLevel2;
+    }
+
+    public int getHowICanProductArmyLevel3() {
+        return howICanProductArmyLevel3;
+    }
+
+    public void setHowICanProductArmyLevel3(int howICanProductArmyLevel3) {
+        this.howICanProductArmyLevel3 = howICanProductArmyLevel3;
+    }
+
+    public int getHowICanProductTanksLevel3() {
+        return howICanProductTanksLevel3;
+    }
+
+    public void setHowICanProductTanksLevel3(int howICanProductTanksLevel3) {
+        this.howICanProductTanksLevel3 = howICanProductTanksLevel3;
+    }
+
 
     public boolean isConstructedGenerator() {
         return isConstructedGenerator;
@@ -388,10 +420,6 @@ public class BattleManager {
 
     public AdjutantWakeUpper getAdjutantWakeUpper() {
         return adjutantWakeUpper;
-    }
-
-    public AdjutantReporter getAdjutantReporter() {
-        return adjutantReporter;
     }
 
     public AdjutantAttacker getAdjutantAttacker() {

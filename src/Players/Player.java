@@ -1,6 +1,7 @@
 package Players;
 
 import Bonuses.Bonus;
+import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public final class Player {
     private int turn;
     private int energy;
+    private int supplyEnergy; //не превышает 20
     private String colorType;
     private List<Bonus> listOfBonuses;
 
@@ -24,9 +26,10 @@ public final class Player {
         this.colorType = colorType;
     }
 
-    public Player(int turn, int energy, String colorType, List<Bonus> listOfBonuses) {
+    public Player(int turn, int energy, int supplyEnergy, String colorType, List<Bonus> listOfBonuses) {
         this.turn = turn;
         this.energy = energy;
+        this.supplyEnergy = supplyEnergy;
         this.colorType = colorType;
         this.listOfBonuses = listOfBonuses;
     }
@@ -35,6 +38,7 @@ public final class Player {
         this.colorType = colorType;
     }
 
+    @Contract(pure = true)
     public int getTurn() {
         return turn;
     }
@@ -43,6 +47,7 @@ public final class Player {
         this.turn = turn;
     }
 
+    @Contract(pure = true)
     public int getEnergy() {
         return energy;
     }
@@ -51,6 +56,7 @@ public final class Player {
         this.energy = energy;
     }
 
+    @Contract(pure = true)
     public String getColorType() {
         return colorType;
     }
@@ -59,6 +65,7 @@ public final class Player {
         this.colorType = colorType;
     }
 
+    @Contract(pure = true)
     public List<Bonus> getListOfBonuses() {
         return listOfBonuses;
     }

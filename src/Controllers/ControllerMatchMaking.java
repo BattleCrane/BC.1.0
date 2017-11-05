@@ -2,7 +2,6 @@ package Controllers;
 
 import Adjutants.AdjutantAttacker;
 import Adjutants.AdjutantFielder;
-import Adjutants.AdjutantSleeper;
 import BattleFields.*;
 import Bonuses.Bonus;
 import Graphics.Painter;
@@ -138,7 +137,7 @@ public final class ControllerMatchMaking implements Initializable {
                         if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
                             if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
+                                battleManager.setHowICanProductArmyLevel1(battleManager.getHowICanProductArmyLevel1() - 1);
                                 for (int i = 0; i < 16; i++) {
                                     for (int j = 0; j < 16; j++) {
                                         String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
@@ -161,7 +160,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                         //Если создаем стену:
                         if (labelUnit.equals("wall") && battleManager.getHowICanBuild() > 0) {
-                            if (battleManager.checkConstructionOfBuilding(pointClick, battleManager.getBarracksHorizontal(), battleManager.getPlayer()) &&
+                            if (battleManager.checkConstructionOfBuilding(pointClick, battleManager.getBarracks(), battleManager.getPlayer()) &&
                                     battleManager.putDoubleWall(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
 
@@ -186,16 +185,16 @@ public final class ControllerMatchMaking implements Initializable {
 
 
                         //Если создаете автоматчика:
-                        if (labelUnit.equals("gunner") && battleManager.getHowICanProductArmy() > 0) {
+                        if (labelUnit.equals("gunner") && battleManager.getHowICanProductArmyLevel1() > 0) {
                             if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                battleManager.setHowICanProductArmy(battleManager.getHowICanProductArmy() - 1);
+                                battleManager.setHowICanProductArmyLevel1(battleManager.getHowICanProductArmyLevel1() - 1);
                             }
                         }
 
                         //Если создаете танк:
-                        if (labelUnit.equals("tank") && battleManager.getHowICanProductTanks() > 0) {
+                        if (labelUnit.equals("tank") && battleManager.getHowICanProductTanksLevel1() > 0) {
                             if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                battleManager.setHowICanProductTanks(battleManager.getHowICanProductTanks() - 1);
+                                battleManager.setHowICanProductTanksLevel1(battleManager.getHowICanProductTanksLevel1() - 1);
                             }
                         }
                         //Если атакуем:
@@ -233,9 +232,9 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 System.out.println("ATTACK!");
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                        battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.getBattleField().toString();
-                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                System.out.println("ZZZ: " + battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.checkDestroyedUnities();
                                                 Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                                                 paneControlField.setOnMouseClicked(this);
@@ -269,9 +268,9 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 System.out.println("ATTACK!");
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                        battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.getBattleField().toString();
-                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                System.out.println("ZZZ: " + battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.checkDestroyedUnities();
                                                 Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                                                 paneControlField.setOnMouseClicked(this);
@@ -305,9 +304,9 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 System.out.println("ATTACK!");
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                        battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.getBattleField().toString();
-                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                System.out.println("ZZZ: " + battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.checkDestroyedUnities();
                                                 Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                                                 paneControlField.setOnMouseClicked(this);
@@ -343,21 +342,21 @@ public final class ControllerMatchMaking implements Initializable {
                                                 System.out.println("ATTACK!");
                                                 if (controllerBonusesCollection.getCountShortsForHeadquarters() == 0) {
                                                     battleManager.getBattleField().getMatrix().get(0).set(0,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
                                                     battleManager.getBattleField().getMatrix().get(0).set(1,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
                                                     battleManager.getBattleField().getMatrix().get(1).set(0,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
                                                     battleManager.getBattleField().getMatrix().get(1).set(1,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
                                                     battleManager.getBattleField().getMatrix().get(14).set(14,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
                                                     battleManager.getBattleField().getMatrix().get(14).set(15,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
                                                     battleManager.getBattleField().getMatrix().get(15).set(14,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
                                                     battleManager.getBattleField().getMatrix().get(15).set(15,
-                                                            AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
+                                                            battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
                                                 }
                                                 battleManager.getBattleField().toString();
                                                 battleManager.checkDestroyedUnities();
@@ -398,9 +397,9 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 System.out.println("ATTACK! " + damage);
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                        battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.getBattleField().toString();
-                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                System.out.println("ZZZ: " + battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.checkDestroyedUnities();
                                                 Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                                                 paneControlField.setOnMouseClicked(this);
@@ -435,9 +434,9 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 System.out.println("ATTACK!");
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                        battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.getBattleField().toString();
-                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                System.out.println("ZZZ: " + battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.checkDestroyedUnities();
                                                 Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                                                 paneControlField.setOnMouseClicked(this);
@@ -471,9 +470,9 @@ public final class ControllerMatchMaking implements Initializable {
                                                 }
                                                 System.out.println("ATTACK!");
                                                 battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(),
-                                                        AdjutantSleeper.sleepUnity(clickedUnit));
+                                                        battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.getBattleField().toString();
-                                                System.out.println("ZZZ: " + AdjutantSleeper.sleepUnity(clickedUnit));
+                                                System.out.println("ZZZ: " + battleManager.getAdjutantWakeUpper().sleepUnity(clickedUnit));
                                                 battleManager.checkDestroyedUnities();
                                                 Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                                                 paneControlField.setOnMouseClicked(this);
@@ -510,7 +509,7 @@ public final class ControllerMatchMaking implements Initializable {
                                                     String sameClickedUnit = clickedUnit;
                                                     sameClickedUnit = sameClickedUnit.substring(0, 1) + shotsOfTankBuffalo + sameClickedUnit.substring(2);
                                                     if (shotsOfTankBuffalo == 0) {
-                                                        battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), AdjutantSleeper.sleepUnity(sameClickedUnit));
+                                                        battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), battleManager.getAdjutantWakeUpper().sleepUnity(sameClickedUnit));
                                                     } else {
                                                         battleManager.getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), sameClickedUnit);
                                                     }
@@ -555,7 +554,7 @@ public final class ControllerMatchMaking implements Initializable {
                                                             int shotsOfFort = Integer.parseInt(currentFort.substring(1, 2)) - 1;
                                                             currentFort = currentFort.substring(0, 1) + shotsOfFort + currentFort.substring(2);
                                                             if (shotsOfFort == 0) {
-                                                                battleManager.getBattleField().getMatrix().get(b).set(a, AdjutantSleeper.sleepUnity(currentFort));
+                                                                battleManager.getBattleField().getMatrix().get(b).set(a, battleManager.getAdjutantWakeUpper().sleepUnity(currentFort));
                                                             } else {
                                                                 battleManager.getBattleField().getMatrix().get(b).set(a, currentFort);
                                                             }
@@ -611,8 +610,8 @@ public final class ControllerMatchMaking implements Initializable {
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
-        System.out.println("Осталось автоматчиков: " + battleManager.getHowICanProductArmy());
-        System.out.println("Осталось танков: " + battleManager.getHowICanProductTanks());
+        System.out.println("Осталось автоматчиков: " + battleManager.getHowICanProductArmyLevel1());
+        System.out.println("Осталось танков: " + battleManager.getHowICanProductTanksLevel1());
         System.out.println("Осталось энергии: " + battleManager.getPlayer().getEnergy());
     }
 
@@ -644,12 +643,12 @@ public final class ControllerMatchMaking implements Initializable {
         buttonEndTurn.setOnMouseClicked(event -> {
             nextTurn();
             Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
-            if (battleManager.getHowICanProductArmy() - battleManager.getHowICanProductTanks() > 0) {
+            if (battleManager.getHowICanProductArmyLevel1() - battleManager.getHowICanProductTanksLevel1() > 0) {
                 buttonBuildFactory.setVisible(true);
             } else {
                 buttonBuildFactory.setVisible(false);
             }
-            if (battleManager.getHowICanProductTanks() > 0 || battleManager.getHowICanProductArmy() > 0) {
+            if (battleManager.getHowICanProductTanksLevel1() > 0 || battleManager.getHowICanProductArmyLevel1() > 0) {
                 buttonCreateArmy.setVisible(true);
             } else {
                 buttonCreateArmy.setVisible(false);
@@ -694,7 +693,7 @@ public final class ControllerMatchMaking implements Initializable {
         //Постройка бараков:
         buttonBuildBarracks.setOnMouseClicked(event -> {
             click = !click;
-            unit = battleManager.getBarracksHorizontal();
+            unit = battleManager.getBarracks();
             labelUnit = "building";
 
         });
@@ -702,7 +701,7 @@ public final class ControllerMatchMaking implements Initializable {
         //Постройка завода:
         buttonBuildFactory.setOnMouseClicked(event -> {
             click = !click;
-            unit = battleManager.getFactoryHorizontal();
+            unit = battleManager.getFactory();
             labelUnit = "factory";
         });
 

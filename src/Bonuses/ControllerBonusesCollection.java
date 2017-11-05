@@ -1,7 +1,6 @@
 package Bonuses;
 
 import Adjutants.AdjutantFielder;
-import Adjutants.AdjutantSleeper;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.IdentificationField;
@@ -107,7 +106,7 @@ public final class ControllerBonusesCollection {
                             currentUnity = currentUnity.substring(0, 1) + getBuffaloDamage(controllerMatchMaking.getBattleManager()) + currentUnity.substring(2);
                             controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, currentUnity);
                             if (getBuffaloDamage(controllerMatchMaking.getBattleManager()) == 0){
-                                controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, AdjutantSleeper.sleepUnity(currentUnity));
+                                controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(j).set(i, battleManager.getAdjutantWakeUpper().sleepUnity(currentUnity));
                             }
                         }
                     }
@@ -126,21 +125,21 @@ public final class ControllerBonusesCollection {
     public static void flush(Pane paneControlBonus, BattleManager battleManager) {
         paneControlBonus.getChildren().retainAll(paneControlBonus.getChildren().get(0));
         battleManager.getBattleField().getMatrix().get(0).set(0,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(0)));
         battleManager.getBattleField().getMatrix().get(0).set(1,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(0).get(1)));
         battleManager.getBattleField().getMatrix().get(1).set(0,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(0)));
         battleManager.getBattleField().getMatrix().get(1).set(1,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(1).get(1)));
         battleManager.getBattleField().getMatrix().get(14).set(14,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(14)));
         battleManager.getBattleField().getMatrix().get(14).set(15,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(14).get(15)));
         battleManager.getBattleField().getMatrix().get(15).set(14,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(14)));
         battleManager.getBattleField().getMatrix().get(15).set(15,
-                AdjutantSleeper.sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
+                battleManager.getAdjutantWakeUpper().sleepUnity(battleManager.getBattleField().getMatrix().get(15).get(15)));
     }
 
 
@@ -480,10 +479,10 @@ public final class ControllerBonusesCollection {
                 int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
                 if (controllerMatchMaking.isClick() && currentEnergy - this.getEnergy() >= 0) {
                     controllerMatchMaking.setClick(false);
-                    if (controllerMatchMaking.getBattleManager().getHowICanProductTanks() > 0 && controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
+                    if (controllerMatchMaking.getBattleManager().getHowICanProductTanksLevel1() > 0 && controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(),
                             new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5)), bear)) {
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
-                        controllerMatchMaking.getBattleManager().setHowICanProductTanks(controllerMatchMaking.getBattleManager().getHowICanProductTanks() - 1);
+                        controllerMatchMaking.getBattleManager().setHowICanProductTanksLevel1(controllerMatchMaking.getBattleManager().getHowICanProductTanksLevel1() - 1);
                     }
                     Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
                             controllerMatchMaking.getPaneControlField(), controllerMatchMaking.getResourceOfBonuses());
@@ -937,13 +936,13 @@ public final class ControllerBonusesCollection {
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
             if (currentEnergy - this.getEnergy() >= 0) {
-                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanks());
-                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductArmy());
-                controllerMatchMaking.getBattleManager().setHowICanProductTanks(controllerMatchMaking.getBattleManager().getHowICanProductTanks() * 2);
-                controllerMatchMaking.getBattleManager().setHowICanProductArmy(controllerMatchMaking.getBattleManager().getHowICanProductArmy() * 2);
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanksLevel1());
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductArmyLevel1());
+                controllerMatchMaking.getBattleManager().setHowICanProductTanksLevel1(controllerMatchMaking.getBattleManager().getHowICanProductTanksLevel1() * 2);
+                controllerMatchMaking.getBattleManager().setHowICanProductArmyLevel1(controllerMatchMaking.getBattleManager().getHowICanProductArmyLevel1() * 2);
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
-                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanks());
-                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductArmy());
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductTanksLevel1());
+                System.out.println(controllerMatchMaking.getBattleManager().getHowICanProductArmyLevel1());
             }
             controllerMatchMaking.setClick(true);
         }

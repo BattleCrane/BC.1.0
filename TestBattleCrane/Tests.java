@@ -1,6 +1,4 @@
-import Adjutants.AdjutantAttacker;
 import Adjutants.AdjutantFielder;
-import Adjutants.AdjutantSleeper;
 import BattleFields.*;
 import Players.Player;
 import org.junit.Test;
@@ -26,12 +24,13 @@ public class Tests {
     @Test
     public void sleepUnity(){
         //Тест на бараки:
+        BattleManager battleManager = new BattleManager();
         String barracksFistLevel = "1^!+b'";
         String someUnityTest1 = "3<!+z'";
         String someUnityTest2 = "5>?+r'";
-        assertEquals("1^?+b'", AdjutantSleeper.sleepUnity(barracksFistLevel));
-        assertEquals("3<?+z'", AdjutantSleeper.sleepUnity(someUnityTest1));
-        assertEquals("5>?+r'", AdjutantSleeper.sleepUnity(someUnityTest2));
+        assertEquals("1^?+b'", battleManager.getAdjutantWakeUpper().sleepUnity(barracksFistLevel));
+        assertEquals("3<?+z'", battleManager.getAdjutantWakeUpper().sleepUnity(someUnityTest1));
+        assertEquals("5>?+r'", battleManager.getAdjutantWakeUpper().sleepUnity(someUnityTest2));
     }
 
     @Test
@@ -40,8 +39,8 @@ public class Tests {
         System.out.println("Test №1:");
         BattleManager battleManagerTest1 = new BattleManager(new BattleField());
         battleManagerTest1.setPlayer(new Player("-"));
-        battleManagerTest1.putUnity(new Player("+"), new Point(8, 10), battleManagerTest1.getFactoryVertical());
-        battleManagerTest1.putUnity(new Player("+"), new Point(10, 12), battleManagerTest1.getBarracksHorizontal());
+        battleManagerTest1.putUnity(new Player("+"), new Point(8, 10), battleManagerTest1.getFactory());
+        battleManagerTest1.putUnity(new Player("+"), new Point(10, 12), battleManagerTest1.getBarracks());
         battleManagerTest1.putUnity(new Player("+"), new Point(11, 10), battleManagerTest1.getHeadquarters());
         battleManagerTest1.putUnity(new Player("-"), new Point(11, 12), battleManagerTest1.getTurret());
         battleManagerTest1.getAdjutantAttacker().radiusAttack(battleManagerTest1, new Point(11, 12), 2, 1);

@@ -1,7 +1,6 @@
 package Adjutants;
 
 import BattleFields.BattleManager;
-import Players.Player;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,8 +15,12 @@ public final class AdjutantReporter {
         Pattern patternGenerators = Pattern.compile("g'"); //Шаблон генераторов
         Pattern patternFactories = Pattern.compile("[!?][+-]f'"); //Шаблон заводов
         int howICanBuild = 1;
-        int howICanProductArmy = 0;
-        int howICanProductTanks = 0;
+        int howICanProductArmyLvl1 = 0;
+        int howICanProductArmyLvl2 = 0;
+        int howICanProductArmyLvl3 = 0;
+        int howICanProductTanks1 = 0;
+        int howICanProductTanks2 = 0;
+        int howICanProductTanks3 = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 List<String> list = battleManager.getBattleField().getMatrix().get(i);
@@ -31,17 +34,38 @@ public final class AdjutantReporter {
                         howICanBuild++;
                     }
                     if (matcherBarracks.find() && list.get(j).contains(battleManager.getPlayer().getColorType())) {
-                        howICanProductArmy++;
+                        if (list.get(j).contains("^")){
+                            howICanProductArmyLvl1++;
+                        }
+                        if (list.get(j).contains("<")){
+                            howICanProductArmyLvl2++;
+                        }
+                        if (list.get(j).contains(">")){
+                            howICanProductArmyLvl3++;
+                        }
                     }
                     if (matcherFactories.find() && list.get(j).contains(battleManager.getPlayer().getColorType())) {
-                        howICanProductTanks++;
+                        if (list.get(j).contains("^")){
+                            howICanProductTanks1++;
+                        }
+                        if (list.get(j).contains("<")){
+                            howICanProductTanks2++;
+                        }
+                        if (list.get(j).contains(">")){
+                            howICanProductTanks3++;
+                        }
+
                     }
                 }
 
             }
         }
         battleManager.setHowICanBuild(howICanBuild);
-        battleManager.setHowICanProductArmy(howICanProductArmy);
-        battleManager.setHowICanProductTanks(howICanProductTanks);
+        battleManager.setHowICanProductArmyLevel1(howICanProductArmyLvl1);
+        battleManager.setHowICanProductArmyLevel2(howICanProductArmyLvl2);
+        battleManager.setHowICanProductArmyLevel3(howICanProductArmyLvl3);
+        battleManager.setHowICanProductTanksLevel1(howICanProductTanks1);
+        battleManager.setHowICanProductTanksLevel2(howICanProductTanks2);
+        battleManager.setHowICanProductTanksLevel3(howICanProductTanks3);
     }
 }
