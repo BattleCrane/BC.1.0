@@ -137,7 +137,11 @@ public final class ControllerMatchMaking implements Initializable {
                         if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
                             if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                battleManager.setHowICanProductArmyLevel1(battleManager.getHowICanProductArmyLevel1() - 1);
+                                battleManager.setHowIcanBuildFactories(battleManager.getHowCanBuildFactories() - 1);
+                                battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
+                                if (battleManager.getHowCanBuildFactories() == 0){
+                                    buttonBuildFactory.setVisible(false);
+                                }
                                 for (int i = 0; i < 16; i++) {
                                     for (int j = 0; j < 16; j++) {
                                         String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
@@ -185,16 +189,45 @@ public final class ControllerMatchMaking implements Initializable {
 
 
                         //Если создаете автоматчика:
-                        if (labelUnit.equals("gunner") && battleManager.getHowICanProductArmyLevel1() > 0) {
-                            if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                        if (labelUnit.equals("gunner1") && battleManager.getHowICanProductArmyLevel1() > 0) {
+                            if (battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y()).contains(battleManager.getPlayer().getColorType()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanProductArmyLevel1(battleManager.getHowICanProductArmyLevel1() - 1);
                             }
                         }
 
-                        //Если создаете танк:
-                        if (labelUnit.equals("tank") && battleManager.getHowICanProductTanksLevel1() > 0) {
+                        if (labelUnit.equals("gunner2") && battleManager.getHowICanProductArmyLevel2() > 0) {
+                            if (!battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y()).contains(battleManager.getOpponentPlayer().getColorType()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductArmyLevel2(battleManager.getHowICanProductArmyLevel2() - 1);
+                            }
+                        }
+
+                        if (labelUnit.equals("gunner3") && battleManager.getHowICanProductArmyLevel3() > 0) {
                             if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductArmyLevel3(battleManager.getHowICanProductArmyLevel3() - 1);
+                            }
+                        }
+
+                        //Если создаете танк:
+
+                        if (labelUnit.equals("tank1") && battleManager.getHowICanProductTanksLevel1() > 0) {
+                            if (battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y()).contains(battleManager.getPlayer().getColorType()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanProductTanksLevel1(battleManager.getHowICanProductTanksLevel1() - 1);
+                            }
+                        }
+
+                        if (labelUnit.equals("tank2") && battleManager.getHowICanProductTanksLevel2() > 0) {
+                            if (!battleManager.getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y()).contains(battleManager.getOpponentPlayer().getColorType()) &&
+                                    battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductTanksLevel2(battleManager.getHowICanProductTanksLevel2() - 1);
+                            }
+                        }
+
+                        if (labelUnit.equals("tank3") && battleManager.getHowICanProductTanksLevel3() > 0) {
+                            if (battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
+                                battleManager.setHowICanProductTanksLevel3(battleManager.getHowICanProductTanksLevel3() - 1);
                             }
                         }
                         //Если атакуем:
@@ -592,13 +625,17 @@ public final class ControllerMatchMaking implements Initializable {
         battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
         controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
-        battleManager.getPlayer().setSupplyEnergy(battleManager.getPlayer().getEnergy());
         labelUnit = "";
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
-        System.out.println("Осталось автоматчиков: " + battleManager.getHowICanProductArmyLevel1());
-        System.out.println("Осталось танков: " + battleManager.getHowICanProductTanksLevel1());
+        System.out.println("Осталось автоматчиков 1 Уровня: " + battleManager.getHowICanProductArmyLevel1());
+        System.out.println("Осталось автоматчиков 2 Уровня: " + battleManager.getHowICanProductArmyLevel2());
+        System.out.println("Осталось автоматчиков 3 Уровня: " + battleManager.getHowICanProductArmyLevel3());
+        System.out.println("Осталось танков 1 Уровня : " + battleManager.getHowICanProductTanksLevel1());
+        System.out.println("Осталось танков 2 Уровня : " + battleManager.getHowICanProductTanksLevel2());
+        System.out.println("Осталось танков 3 Уровня : " + battleManager.getHowICanProductTanksLevel3());
         System.out.println("Осталось энергии: " + battleManager.getPlayer().getEnergy());
+        System.out.println(battleManager.getPlayer().getSupplyEnergy() + "/20");
     }
 
 
@@ -629,12 +666,16 @@ public final class ControllerMatchMaking implements Initializable {
         buttonEndTurn.setOnMouseClicked(event -> {
             nextTurn();
             Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
-            if (battleManager.getHowICanProductArmyLevel1() - battleManager.getHowICanProductTanksLevel1() > 0) {
+            if (battleManager.getHowICanProductArmyLevel1() - battleManager.getHowICanProductTanksLevel1() > 0 ||
+                    battleManager.getHowICanProductArmyLevel2() - battleManager.getHowICanProductTanksLevel2() > 0 ||
+                    battleManager.getHowICanProductArmyLevel3() - battleManager.getHowICanProductTanksLevel3() > 0) {
                 buttonBuildFactory.setVisible(true);
             } else {
                 buttonBuildFactory.setVisible(false);
             }
-            if (battleManager.getHowICanProductTanksLevel1() > 0 || battleManager.getHowICanProductArmyLevel1() > 0) {
+            if (battleManager.getHowICanProductArmyLevel1() > 0 || battleManager.getHowICanProductTanksLevel1() > 0 ||
+                    battleManager.getHowICanProductArmyLevel2() > 0 || battleManager.getHowICanProductTanksLevel2() > 0 ||
+                    battleManager.getHowICanProductArmyLevel3() > 0 || battleManager.getHowICanProductTanksLevel3() > 0) {
                 buttonCreateArmy.setVisible(true);
             } else {
                 buttonCreateArmy.setVisible(false);
@@ -709,14 +750,39 @@ public final class ControllerMatchMaking implements Initializable {
         buttonProductGunner1.setOnMouseClicked(event -> {
             click = !click;
             unit = battleManager.getGunner();
-            labelUnit = "gunner";
+            labelUnit = "gunner1";
         });
+
+        buttonProductGunner2.setOnMouseClicked(event -> {
+            click = !click;
+            unit = battleManager.getGunner();
+            labelUnit = "gunner2";
+        });
+
+        buttonProductGunner3.setOnMouseClicked(event -> {
+            click = !click;
+            unit = battleManager.getGunner();
+            labelUnit = "gunner3";
+        });
+
 
         //Создание танка:
         buttonProductTank1.setOnMouseClicked(event -> {
             click = !click;
             unit = battleManager.getTank();
-            labelUnit = "tank";
+            labelUnit = "tank1";
+        });
+
+        buttonProductTank2.setOnMouseClicked(event -> {
+            click = !click;
+            unit = battleManager.getTank();
+            labelUnit = "tank2";
+        });
+
+        buttonProductTank3.setOnMouseClicked(event -> {
+            click = !click;
+            unit = battleManager.getTank();
+            labelUnit = "tank3";
         });
 
         //Улучшение строения:

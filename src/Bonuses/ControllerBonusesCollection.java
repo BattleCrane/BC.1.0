@@ -47,6 +47,7 @@ public final class ControllerBonusesCollection {
                     }
                 }
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(controllerMatchMaking.getBattleManager().getPlayer().getEnergy() + collectedEnergy);
+                controllerMatchMaking.getBattleManager().getPlayer().setSupplyEnergy(controllerMatchMaking.getBattleManager().getPlayer().getSupplyEnergy() + collectedEnergy);
             }
             if (bonus.equals(explosive)) {
                 for (int i = 0; i < 16; i++) {
@@ -76,9 +77,11 @@ public final class ControllerBonusesCollection {
             if (bonus.equals(intensiveProduction)) {
                 if (player.getColorType().equals("+")) {
                     player.setEnergy(player.getEnergy() - 1 + additionalEnergyBlue);
+                    player.setSupplyEnergy(player.getSupplyEnergy() - 1 + additionalEnergyBlue);
                 }
                 if (player.getColorType().equals("-")) {
                     player.setEnergy(player.getEnergy() - 1 + additionalEnergyRed);
+                    player.setSupplyEnergy(player.getSupplyEnergy() - 1 + additionalEnergyRed);
                 }
             }
 
@@ -163,6 +166,7 @@ public final class ControllerBonusesCollection {
                         battleManager.getPlayer().getColorType().equals(battleManager.getBattleField().getMatrix()
                                 .get(i).get(j).substring(3, 4))) {
                     battleManager.getPlayer().setEnergy(battleManager.getPlayer().getEnergy() + 1);
+                    battleManager.getPlayer().setSupplyEnergy(battleManager.getPlayer().getSupplyEnergy() + 1);
                     battleManager.getBattleField().getMatrix().get(i).set(j,
                             battleManager.getAdjutantAttacker().attack(battleManager.getBattleField().getMatrix().get(i).get(j), 1));
                     battleManager.checkDestroyedUnities();
@@ -659,6 +663,7 @@ public final class ControllerBonusesCollection {
                     }
                 }
                 controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy() + additionalEnergy);
+                controllerMatchMaking.getBattleManager().getPlayer().setSupplyEnergy(controllerMatchMaking.getBattleManager().getPlayer().getSupplyEnergy() + additionalEnergy);
             }
             controllerMatchMaking.setClick(true);
             Painter.drawGraphic(controllerMatchMaking.getBattleManager(), controllerMatchMaking.getResource(),
@@ -691,8 +696,17 @@ public final class ControllerBonusesCollection {
                             controllerMatchMaking.getBattleManager().checkConstructionOfBuilding(pointClick, fort, controllerMatchMaking.getBattleManager().getPlayer()) &&
                             controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(), pointClick, fort)) {
                         String fortStr = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y());
-                        fortStr = fortStr.substring(0, 1) + 4 + fortStr.substring(2);
-                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), fortStr);
+                        fortStr = fortStr.substring(0, 1) + 4 + "!" + fortStr.substring(3, 5);
+
+
+                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y(), fortStr + "'");
+                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X() + 1).set(pointClick.Y(), fortStr + ".");
+                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X() + 1).set(pointClick.Y() + 1, fortStr + ".");
+                        controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).set(pointClick.Y() + 1, fortStr + ".");
+
+
+
+
                         controllerMatchMaking.getBattleManager().getPlayer().setEnergy(currentEnergy - this.getEnergy());
                         controllerMatchMaking.getBattleManager().setHowICanBuild(controllerMatchMaking.getBattleManager().getHowICanBuild() - 1);
                     }

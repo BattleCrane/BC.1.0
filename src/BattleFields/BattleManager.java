@@ -71,6 +71,7 @@ public class BattleManager {
     private int howICanProductTanksLevel2;
     private int howICanProductArmyLevel3;
     private int howICanProductTanksLevel3;
+    private int howIcanBuildFactories;
     private Unity gunner = new Unity(1, 1, "G", 1);
     private Unity tank = new Unity(1, 1, "T", 2);
 
@@ -272,10 +273,12 @@ public class BattleManager {
         whatIsTurn();
         adjutantWakeUpper.wakeUpUnities(this);
         adjutantReporter.getReportAboutUnities(this);
+        howIcanBuildFactories = howICanProductArmyLevel1 + howICanProductArmyLevel2 + howICanProductArmyLevel3 - howICanProductTanksLevel1 - howICanProductTanksLevel2 - howICanProductTanksLevel3;
         if (player.getSupplyEnergy() <= 20){
             player.setEnergy(player.getEnergy() + 1);
+            player.setSupplyEnergy(player.getSupplyEnergy() + 1);
         } else {
-
+            getAdjutantWakeUpper().wakeUpHeadquarters(this);
         }
         isConstructedGenerator = false;
     }
@@ -291,9 +294,9 @@ public class BattleManager {
         }
     }
 
-    public int getHowCanBuildFactories() {
-        return howICanProductArmyLevel1 - howICanProductTanksLevel1;
-    }
+
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public BattleField getBattleField() {
@@ -350,6 +353,14 @@ public class BattleManager {
 
     public Unity getTank() {
         return tank;
+    }
+
+    public int getHowCanBuildFactories() {
+        return howIcanBuildFactories;
+    }
+
+    public void setHowIcanBuildFactories(int howIcanBuildFactories) {
+        this.howIcanBuildFactories = howIcanBuildFactories;
     }
 
     public int getHowICanBuild() {
