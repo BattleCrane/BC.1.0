@@ -274,11 +274,12 @@ public class BattleManager {
         adjutantWakeUpper.wakeUpUnities(this);
         adjutantReporter.getReportAboutUnities(this);
         howIcanBuildFactories = howICanProductArmyLevel1 + howICanProductArmyLevel2 + howICanProductArmyLevel3 - howICanProductTanksLevel1 - howICanProductTanksLevel2 - howICanProductTanksLevel3;
-        if (player.getSupplyEnergy() <= 20){
+        if (player.getSupplyEnergy() < 20){
             player.setEnergy(player.getEnergy() + 1);
             player.setSupplyEnergy(player.getSupplyEnergy() + 1);
         } else {
             getAdjutantWakeUpper().wakeUpHeadquarters(this);
+            adjutantAttacker.setCountShortsForHeadquarters(3);
         }
         isConstructedGenerator = false;
     }
