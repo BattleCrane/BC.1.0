@@ -137,7 +137,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus obstacle = new Bonus(1,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Sprite\\Obstacle.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Sprite\\Obstacle.png")),
+                    new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         private Unity obstacle = new Unity(1, 1, "o", 1);
 
         public void run(ControllerMatchMaking controllerMatchMaking) {
@@ -182,7 +183,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus combatReadiness = new Bonus(1,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\1CombatReadiness\\Sprite\\CombatReadiness.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1CombatReadiness\\Sprite\\CombatReadiness.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
@@ -215,7 +217,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus ambulance = new Bonus(1,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Ambulance\\Sprite\\Ambulance.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Ambulance\\Sprite\\Ambulance.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             if (controllerMatchMaking.getBattleManager().getPlayer().getEnergy() - this.getEnergy() >= 0) {
@@ -244,7 +247,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus heavyShells = new Bonus(1,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\Sprite\\HeavyShells.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1HeavyShells\\Sprite\\HeavyShells.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
@@ -273,7 +277,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus energyBattery = new Bonus(1,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\1EnergyBlock\\Sprite\\EnergyBlock.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1EnergyBlock\\Sprite\\EnergyBlock.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         private Unity energyBattery = new Unity(1, 1, "e", 1);
 
         @Override
@@ -319,7 +324,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus explosive = new Bonus(2,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\Sprite\\Explosive.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Explosive\\Sprite\\Explosive.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
@@ -349,7 +355,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus fightingHeadquarters = new Bonus(2,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Sprite\\FightingHeadquarters.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2FightingHeadquarters\\Sprite\\FightingHeadquarters.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             BattleManager battleManager = controllerMatchMaking.getBattleManager();
@@ -375,7 +382,8 @@ public final class ControllerBonusesCollection {
 
 
     private final Bonus clusterArrow = new Bonus(2,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\Sprite\\ClusterArrow.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2ClusterArrow\\Sprite\\ClusterArrow.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
@@ -402,7 +410,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus cleanup = new Bonus(2,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Cleanup\\Sprite\\Cleanup.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Cleanup\\Sprite\\Cleanup.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         String field = "     0";
 
         @Override
@@ -441,7 +450,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus bear = new Bonus(2,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\Sprite\\Bear.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\2Bear\\Sprite\\Bear.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         Unity bear = new Unity(1, 1, "B", 2);
 
         @Override
@@ -485,7 +495,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus heavyTankHammer = new Bonus(3,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\Sprite\\HeavyTankHammer.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3HeavyTankHammer\\Sprite\\HeavyTankHammer.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             BattleManager battleManager = controllerMatchMaking.getBattleManager();
@@ -522,7 +533,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus cloning = new Bonus(3,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\3Cloning\\Sprite\\Cloning.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3Cloning\\Sprite\\Cloning.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             BattleManager battleManager = controllerMatchMaking.getBattleManager();
@@ -566,7 +578,8 @@ public final class ControllerBonusesCollection {
      */
 
     private Bonus superMortarTurret = new Bonus(3,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\Sprite\\SuperMortar.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3SuperMortar\\Sprite\\SuperMortar.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             BattleManager battleManager = controllerMatchMaking.getBattleManager();
@@ -599,7 +612,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus attackOfTank = new Bonus(3,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\3CapturingOfTank\\Sprite\\CapturingOfTank.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3CapturingOfTank\\Sprite\\CapturingOfTank.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -640,7 +654,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus tankCharge = new Bonus(3,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\3TankGenerator\\Sprite\\TankGenerator.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\3TankGenerator\\Sprite\\TankGenerator.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -681,7 +696,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus fort = new Bonus(4,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\Sprite\\Fort.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4Fort\\Sprite\\Fort.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
 
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
@@ -727,7 +743,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus rocketCorsair = new Bonus(4,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\4RocketCorsair\\Sprite\\RocketCorsair.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4RocketCorsair\\Sprite\\RocketCorsair.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             BattleManager battleManager = controllerMatchMaking.getBattleManager();
@@ -776,7 +793,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus tankBuffalo = new Bonus(4,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\Sprite\\TankBuffalo.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4TankBuffalo\\Sprite\\TankBuffalo.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             controllerMatchMaking.getPaneControlField().setOnMouseClicked(event -> {
@@ -824,7 +842,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus intensiveProduction = new Bonus(4,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\4IntensiveProduction\\Sprite\\IntensiveProduction.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4IntensiveProduction\\Sprite\\IntensiveProduction.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -854,7 +873,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus diversion = new Bonus(4,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\4Diversion\\Sprite\\Diversion.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\4Diversion\\Sprite\\Diversion.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -912,7 +932,8 @@ public final class ControllerBonusesCollection {
      */
 
     private static final Bonus doubleTraining = new Bonus(5,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\5DoubleTraining\\Sprite\\DoubleTraining.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5DoubleTraining\\Sprite\\DoubleTraining.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -937,7 +958,8 @@ public final class ControllerBonusesCollection {
      */
 
     private static final Bonus superCranes = new Bonus(5,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\5SuperCranes\\Sprite\\SuperCranes.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5SuperCranes\\Sprite\\SuperCranes.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -951,7 +973,8 @@ public final class ControllerBonusesCollection {
 
 
     private static final Bonus merge = new Bonus(5,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\5Merge\\Sprite\\Merge.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5Merge\\Sprite\\Merge.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -973,7 +996,8 @@ public final class ControllerBonusesCollection {
      */
 
     private final Bonus airStrike = new Bonus(5,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\5AirStrike\\Sprite\\AirStrike.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5AirStrike\\Sprite\\AirStrike.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         @Override
         public void run(ControllerMatchMaking controllerMatchMaking) {
             int currentEnergy = controllerMatchMaking.getBattleManager().getPlayer().getEnergy();
@@ -1004,7 +1028,8 @@ public final class ControllerBonusesCollection {
 
 
     private final Bonus mobilization = new Bonus(5,
-            new ImageView(new Image("file:src\\Resources\\Bonuses\\5Mobilization\\Sprite\\Mobilization.png"))) {
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\5Mobilization\\Sprite\\Mobilization.png")),
+            new ImageView(new Image("file:src\\Resources\\Bonuses\\1Obstacle\\Description\\description.png"))) {
         AdjutantFielder adjutantFielder = new AdjutantFielder();
 
         @Override
