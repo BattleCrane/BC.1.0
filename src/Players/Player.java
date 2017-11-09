@@ -51,6 +51,12 @@ public final class Player {
     }
 
     @Contract(pure = true)
+    public Bot getBot() {
+        return bot;
+    }
+
+
+    @Contract(pure = true)
     public int getTurn() {
         return turn;
     }
