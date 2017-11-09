@@ -14,6 +14,8 @@ public interface Bot {
 
     int isGeneratorUnderDangerous(Player player);
 
+    Point probeAttack();
+
     List<Integer> probeDangerousFromBonuses(Player player);
 
 
