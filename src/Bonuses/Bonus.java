@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
  * У него есть единственный параметр - энергия, взамен на которую активируется бонус.
  */
 
-public abstract class Bonus {
+public abstract class Bonus extends Button{
     private int energy;
     private ImageView sprite;
     private ImageView description;
@@ -22,10 +22,14 @@ public abstract class Bonus {
         sprite.setFitWidth(75);
         sprite.setFitHeight(75);
         this.sprite = sprite;
-        this.description = description;
-        description.setOnMouseClicked(event -> {
 
-        });
+        //Описание
+        this.description=description;
+        this.description.setFitHeight(200);
+        this.description.setFitHeight(200);
+        this.description.setVisible(false);
+        setOnMouseEntered(event -> {this.description.setVisible(true);});
+        setOnMouseExited(event -> {this.description.setVisible(false);});
     }
 
     public abstract void run(ControllerMatchMaking controllerMatchMaking);
