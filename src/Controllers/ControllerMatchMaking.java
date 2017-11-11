@@ -4,6 +4,8 @@ import Adjutants.AdjutantAttacker;
 import Adjutants.AdjutantFielder;
 import BattleFields.*;
 import Bonuses.Bonus;
+import Bots.Bot;
+import Bots.Step;
 import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
@@ -621,40 +623,44 @@ public final class ControllerMatchMaking implements Initializable {
     }
 
     private void nextTurn() {
+        Timeline timeline = new Timeline();
         controllerBonusesCollection.flush(paneControlSupport, battleManager);
         battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
         controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
-//        System.out.println(battleManager.getPlayer().getColorType());
-//        System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
-//        System.out.println("Осталось автоматчиков 1 Уровня: " + battleManager.getHowICanProductArmyLevel1());
-//        System.out.println("Осталось автоматчиков 2 Уровня: " + battleManager.getHowICanProductArmyLevel2());
-//        System.out.println("Осталось автоматчиков 3 Уровня: " + battleManager.getHowICanProductArmyLevel3());
-//        System.out.println("Осталось танков 1 Уровня : " + battleManager.getHowICanProductTanksLevel1());
-//        System.out.println("Осталось танков 2 Уровня : " + battleManager.getHowICanProductTanksLevel2());
-//        System.out.println("Осталось танков 3 Уровня : " + battleManager.getHowICanProductTanksLevel3());
-//        System.out.println("Осталось энергии: " + battleManager.getPlayer().getEnergy());
-//        System.out.println(battleManager.getPlayer().getSupplyEnergy() + "/20");
-
-
-
-
+        System.out.println(battleManager.getPlayer().getColorType());
+        System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
+        System.out.println("Осталось автоматчиков 1 Уровня: " + battleManager.getHowICanProductArmyLevel1());
+        System.out.println("Осталось автоматчиков 2 Уровня: " + battleManager.getHowICanProductArmyLevel2());
+        System.out.println("Осталось автоматчиков 3 Уровня: " + battleManager.getHowICanProductArmyLevel3());
+        System.out.println("Осталось танков 1 Уровня : " + battleManager.getHowICanProductTanksLevel1());
+        System.out.println("Осталось танков 2 Уровня : " + battleManager.getHowICanProductTanksLevel2());
+        System.out.println("Осталось танков 3 Уровня : " + battleManager.getHowICanProductTanksLevel3());
+        System.out.println("Осталось энергии: " + battleManager.getPlayer().getEnergy());
+        System.out.println(battleManager.getPlayer().getSupplyEnergy() + "/20");
 
 
         if (battleManager.getPlayer().getBot() != null){
             buttonBuild.setDisable(true);
             buttonCreateArmy.setDisable(true);
             buttonEndTurn.setDisable(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-                if (battleManager.getPlayer().getBot().getStep() > 0){
-
+            Bot bot = battleManager.getPlayer().getBot();
+            List<Step> listOfStep = bot.loadSteps();
+            timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+                if (bot.getCountOfStep() < listOfStep.size()){
+                    listOfStep.get(bot.getCountOfStep()).run();
+                    bot.setCountOfStep(bot.getCountOfStep() + 1);
+                } else {
+                    nextTurn();
                 }
             }));
+            timeline.play();
         } else {
             buttonBuild.setDisable(false);
             buttonCreateArmy.setDisable(false);
             buttonEndTurn.setDisable(false);
+            timeline.stop();
         }
     }
 

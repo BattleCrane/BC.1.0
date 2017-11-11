@@ -1,5 +1,6 @@
 package Bots;
 
+import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bonuses.ControllerBonusesCollection;
 import Controllers.ControllerMatchMaking;
@@ -22,9 +23,17 @@ public interface Bot {
 
     List<Integer> probeDangerousFromBonuses(Player player);
 
-    int getStep();
+    int getCountOfStep();
+
+    void setCountOfStep(int countOfStep);
+
+    List<Step> loadSteps(BattleManager battleManager);
 
     void setStep(int step);
+
+
+
+
 
 
 }

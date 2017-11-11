@@ -1,15 +1,27 @@
 package PolyBot;
 
+import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Bot;
+import Bots.Step;
 import Controllers.ControllerMatchMaking;
 import Players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PolytechBot implements Bot{
     private int step;
 
+    PolytechBot (int step){
+        this.step = step;
+    }
+
+    @Override
+    public List<Step> loadSteps(BattleManager battleManager) {
+        List<Step> listOfStep = new ArrayList<>();
+        return listOfStep;
+    }
 
     @Override
     public void run(ControllerMatchMaking controllerMatchMaking) {
@@ -47,9 +59,16 @@ public class PolytechBot implements Bot{
     }
 
     @Override
-    public int getStep() {
-        return 0;
+    public int getCountOfStep() {
+        return this.step;
     }
+
+    @Override
+    public void setCountOfStep(int countOfStep) {
+
+    }
+
+
 
     @Override
     public void setStep(int step) {
