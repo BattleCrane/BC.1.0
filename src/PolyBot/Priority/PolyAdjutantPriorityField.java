@@ -1,4 +1,4 @@
-package PolyBot;
+package PolyBot.Priority;
 
 import BattleFields.BattleField;
 import BattleFields.BattleManager;

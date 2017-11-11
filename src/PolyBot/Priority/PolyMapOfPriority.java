@@ -1,4 +1,4 @@
-package PolyBot;
+package PolyBot.Priority;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,15 +30,12 @@ public class PolyMapOfPriority {
 
 
     PolyMapOfPriority() {
-        this.mapOfPriorityBasicUnits = mapOfPriorityBasicUnits;
-        this.mapOfPriorityBonusUnits = mapOfPriorityBonusUnits;
         mapOfPriorityUnits.putAll(mapOfPriorityBasicUnits);
         mapOfPriorityUnits.putAll(mapOfPriorityBonusUnits);
-        this.mapOfPriorityUnits = mapOfPriorityUnits;
 
     }
 
-    public Map<Character, Integer> getMapOfPriorityUnits() {
+    Map<Character, Integer> getMapOfPriorityUnits() {
         return mapOfPriorityUnits;
     }
 

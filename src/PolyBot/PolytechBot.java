@@ -1,66 +1,65 @@
 package PolyBot;
 
 import BattleFields.BattleManager;
-import BattleFields.Point;
 import Bots.Bot;
-import Bots.Step;
-import Controllers.ControllerMatchMaking;
-import Players.Player;
+import Bots.Steps.Step;
+import PolyBot.Priority.PolyMapOfPriority;
+import PolyBot.Priority.PolyPriorityUnit;
+import PolyBot.Steps.ArmyStep;
+import PolyBot.Steps.BonusStep;
+import PolyBot.Steps.BuildingStep;
+import PolyBot.Steps.TankStep;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PolytechBot implements Bot{
-    private int step;
 
-    PolytechBot (int step){
-        this.step = step;
-    }
+//    private List<PolyPriorityUnit> showActiveUnits(PolyMapOfPriority polyMapOfPriority){
+//
+//    }
 
-    @Override
-    public List<Step> loadSteps(BattleManager battleManager) {
-        List<Step> listOfStep = new ArrayList<>();
-        return listOfStep;
-    }
-
-    @Override
-    public void run(ControllerMatchMaking controllerMatchMaking) {
-
-    }
-
-    @Override
-    public boolean isWinnerTurn(Player player) {
+    private boolean isGoingToBuild(){
+        //
+        //
         return false;
     }
 
     @Override
-    public List<Point> probeSafePoints(Player player) {
-        return null;
-    }
+    public List<Step> loadSteps(BattleManager battleManager) {
+        List<Step> stepList = new ArrayList<>();
+        for (int i = 0; i < battleManager.getPlayer().getEnergy(); i++){
+            stepList.add(new BonusStep());
+        }
+//        for (int i = 0: i < showActiveUnits)
 
-    @Override
-    public int probeMaxStep(Player player) {
-        return 0;
-    }
 
-    @Override
-    public int isGeneratorUnderDangerous(Player player) {
-        return 0;
-    }
 
-    @Override
-    public Point probeAttack() {
-        return null;
-    }
 
-    @Override
-    public List<Integer> probeDangerousFromBonuses(Player player) {
-        return null;
+        if (isGoingToBuild()){
+            for (int i = 0; i < battleManager.getHowICanBuild(); i++){
+                stepList.add(new BuildingStep());
+            }
+        } else {
+            int countOfProductionTanks = battleManager.getHowICanProductTanksLevel1() + battleManager.getHowICanProductTanksLevel2() +
+                    battleManager.getHowICanProductTanksLevel3();
+            int countOfDraft = battleManager.getHowICanProductArmyLevel1() + battleManager.getHowICanProductArmyLevel1() +
+                    battleManager.getHowICanProductArmyLevel1();
+            for (int i = 0; i < countOfProductionTanks; i++){
+                stepList.add(new TankStep());
+            }
+            for (int i = 0; i < countOfDraft; i++){
+                stepList.add(new ArmyStep());
+            }
+        }
+
+
+        return stepList;
     }
 
     @Override
     public int getCountOfStep() {
-        return this.step;
+        return 0;
     }
 
     @Override
@@ -72,6 +71,6 @@ public class PolytechBot implements Bot{
 
     @Override
     public void setStep(int step) {
-        this.step = step;
+
     }
 }

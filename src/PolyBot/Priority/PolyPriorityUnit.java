@@ -1,4 +1,4 @@
-package PolyBot;
+package PolyBot.Priority;
 
 import Bots.PriorityUnit;
 

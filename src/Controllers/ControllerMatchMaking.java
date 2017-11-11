@@ -5,7 +5,7 @@ import Adjutants.AdjutantFielder;
 import BattleFields.*;
 import Bonuses.Bonus;
 import Bots.Bot;
-import Bots.Step;
+import Bots.Steps.Step;
 import Graphics.Painter;
 import Players.Player;
 import ResourceInit.Resource;
@@ -649,7 +649,7 @@ public final class ControllerMatchMaking implements Initializable {
             List<Step> listOfStep = bot.loadSteps(battleManager);
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
                 if (bot.getCountOfStep() < listOfStep.size()){
-                    listOfStep.get(bot.getCountOfStep()).run();
+                    listOfStep.get(bot.getCountOfStep()).run(battleManager);
                     bot.setCountOfStep(bot.getCountOfStep() + 1);
                 } else {
                     nextTurn();
