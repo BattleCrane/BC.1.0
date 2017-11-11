@@ -646,7 +646,7 @@ public final class ControllerMatchMaking implements Initializable {
             buttonCreateArmy.setDisable(true);
             buttonEndTurn.setDisable(true);
             Bot bot = battleManager.getPlayer().getBot();
-            List<Step> listOfStep = bot.loadSteps();
+            List<Step> listOfStep = bot.loadSteps(battleManager);
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
                 if (bot.getCountOfStep() < listOfStep.size()){
                     listOfStep.get(bot.getCountOfStep()).run();
