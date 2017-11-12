@@ -2,7 +2,9 @@ package PolyBot.Priority;
 
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
+import BattleFields.Point;
 import Bots.PriorityUnit;
+import Controllers.ControllerMatchMaking;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,15 +19,15 @@ import java.util.List;
  */
 
 public final class PolyAdjutantPriorityField {
-    PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
     private final List<List<PriorityUnit>> priorityMatrix = new ArrayList<>();
 
-    public void initPriority(BattleManager battleManager){
-         BattleField battleField = battleManager.getBattleField();
-        for (int i = 0; i < 16; i++){
-            for (int j = 0; j < 16; j++){
+    public PolyAdjutantPriorityField(BattleManager battleManager) {
+        BattleField battleField = battleManager.getBattleField();
+        PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
                 String unit = battleField.getMatrix().get(j).get(i);
-                PolyPriorityUnit polyPriorityUnit = new PolyPriorityUnit(unit, polyMapOfPriority.getMapOfPriorityUnits().get(unit.charAt(4)));
+                PolyPriorityUnit polyPriorityUnit = new PolyPriorityUnit(unit, polyMapOfPriority.getMapOfPriorityUnits().get(unit.charAt(4)), new Point(j, i));
                 priorityMatrix.get(j).set(i, polyPriorityUnit);
             }
         }

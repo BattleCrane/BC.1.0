@@ -1,17 +1,20 @@
 package Bots;
 
+import BattleFields.Point;
+
 public abstract class PriorityUnit {
     private String inputUnit;
     private int priority;
-
     private int hitPoints;
     private int level;
     private boolean isActive;
     private char color;
     private char name;
     private boolean isRoot;
+    private String type;
+    private Point point;
 
-    protected PriorityUnit(String inputUnit, int priority){
+    protected PriorityUnit(String inputUnit, int priority, Point point){
         this.inputUnit = inputUnit;
         this.hitPoints = inputUnit.charAt(0);
         this.level = inputUnit.charAt(1) == '^' ? 1 : inputUnit.charAt(1) == '<' ? 2 : 3;
@@ -20,6 +23,8 @@ public abstract class PriorityUnit {
         this.name = inputUnit.charAt(4);
         this.isRoot = inputUnit.charAt(5) != '.';
         this.priority = priority;
+        this.type = "unchecked";
+        this.point = point;
     }
 
 
@@ -85,5 +90,21 @@ public abstract class PriorityUnit {
 
     public void setRoot(boolean root) {
         isRoot = root;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }
