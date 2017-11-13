@@ -13,10 +13,8 @@ import java.util.List;
 
 
 /**
- * Класс BattleField реализует матрицу на основе ассоциативного массива.
- * Также для удобства переопределен метод toString.
- * Он вызывается в конце каждого хода и выводит на консоль состояние поля боя.
- */
+*
+*/
 
 public final class PolyAdjutantPriorityField {
     private final List<List<PriorityUnit>> priorityMatrix = new ArrayList<>();

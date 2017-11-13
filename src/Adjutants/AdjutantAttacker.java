@@ -130,7 +130,7 @@ public final class AdjutantAttacker {
 
 
     @Contract(pure = true)
-    private int min(int a, int b) {
+    public  static int min(int a, int b) {
         if (a <= b) {
             return a;
         } else {
@@ -140,7 +140,7 @@ public final class AdjutantAttacker {
 
 
     @Contract(pure = true)
-    private int max(int a, int b) {
+    public static int max(int a, int b) {
         if (a <= b) {
             return b;
         } else {

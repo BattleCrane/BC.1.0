@@ -17,22 +17,25 @@ import java.util.List;
 
 public class PolytechBot implements Bot {
 
-    private BattleManager battleManager;
+    private ControllerMatchMaking controllerMatchMaking;
 
     private boolean isGoingToBuild = false; //Буду строить;
 
     private boolean isGoingToDraft = false; //Буду делать армию;
 
-    private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(battleManager);
+    private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(controllerMatchMaking.getBattleManager());
 
     //Конструктор:
     public PolytechBot(ControllerMatchMaking controllerMatchMaking) {
-        this.battleManager = controllerMatchMaking.getBattleManager();
+        this.controllerMatchMaking = controllerMatchMaking;
     }
 
     //Определяет, что будет делать:
     private void chooseDevelopment() {
-
+        if (!controllerMatchMaking.getButtonCreateArmy().isVisible()){
+            isGoingToBuild = true;
+            isGoingToDraft = false;
+        }
     }
 
 

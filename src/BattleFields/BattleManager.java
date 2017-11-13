@@ -168,7 +168,7 @@ public class BattleManager {
         int startX = point.X() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей координат)
         int startY = point.Y() - 1;
         Pattern pattern = Pattern.compile("[hgbfwt]");
-        Pattern patternBonus = Pattern.compile("[u]");
+        Pattern patternBonus = Pattern.compile("[ui]");
         for (int i = startX; i <= startX + unity.getWidth() + 1; i++) {
             for (int j = startY; j <= startY + unity.getHeight() + 1; j++) {
                 if (i >= 0 && i < 16 && j >= 0 && j < 16) {
