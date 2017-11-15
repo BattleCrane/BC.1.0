@@ -25,7 +25,7 @@ public final class PolyAdjutantPriorityField {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 String unit = battleField.getMatrix().get(j).get(i);
-                PolyPriorityUnit polyPriorityUnit = new PolyPriorityUnit(unit, polyMapOfPriority.getMapOfPriorityUnits().get(unit.charAt(4)), new Point(j, i));
+                PolyPriorityUnit polyPriorityUnit = new PolyPriorityUnit(unit, polyMapOfPriority.getMapOfPriorityUnits().get(unit.charAt(4)), new Point(j, i), "unchecked");
                 priorityMatrix.get(j).set(i, polyPriorityUnit);
             }
         }
