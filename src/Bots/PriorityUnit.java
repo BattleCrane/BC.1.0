@@ -4,7 +4,7 @@ import BattleFields.Point;
 
 public abstract class PriorityUnit {
     private String inputUnit;
-    private int priority;
+    private double priority;
     private int hitPoints;
     private int level;
     private boolean isActive;
@@ -12,9 +12,18 @@ public abstract class PriorityUnit {
     private char name;
     private boolean isRoot;
     private String type;
+    private String typeOfAttack;
     private Point point;
 
-    protected PriorityUnit(String inputUnit, int priority, Point point){
+    protected PriorityUnit(double priority){
+        this.priority = priority;
+    }
+
+    protected PriorityUnit(char type, double priority, Point point){
+        this.priority = priority;
+    }
+
+    protected PriorityUnit(String inputUnit, double priority, Point point){
         this.inputUnit = inputUnit;
         this.hitPoints = inputUnit.charAt(0);
         this.level = inputUnit.charAt(1) == '^' ? 1 : inputUnit.charAt(1) == '<' ? 2 : 3;
@@ -24,6 +33,7 @@ public abstract class PriorityUnit {
         this.isRoot = inputUnit.charAt(5) != '.';
         this.priority = priority;
         this.type = "unchecked";
+        this.typeOfAttack = "unchecked";
         this.point = point;
     }
 
@@ -36,7 +46,7 @@ public abstract class PriorityUnit {
         this.inputUnit = inputUnit;
     }
 
-    public int getPriority() {
+    public double getPriority() {
         return priority;
     }
 
@@ -98,6 +108,18 @@ public abstract class PriorityUnit {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setPriority(double priority) {
+        this.priority = priority;
+    }
+
+    public String getTypeOfAttack() {
+        return typeOfAttack;
+    }
+
+    public void setTypeOfAttack(String typeOfAttack) {
+        this.typeOfAttack = typeOfAttack;
     }
 
     public Point getPoint() {
