@@ -2,10 +2,16 @@ package Bots.Statistics;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
+import Bonuses.Bonus;
+import Bots.PriorityUnit;
+import Controllers.ControllerMatchMaking;
 import Players.Player;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,6 +93,62 @@ public interface Probe {
             }
         }
     }
+
+    void probeEnemyBonus(ControllerMatchMaking controllerMatchMaking);
+
+    Random random = new Random(Calendar.getInstance().getTimeInMillis());
+
+    private static int partition(int[] elements, int min, int max) {
+        int x = elements[min + random.nextInt(max - min + 1)];
+        int left = min, right = max;
+        while (left <= right) {
+            while (elements[left] < x) {
+                left++;
+            }
+            while (elements[right] > x) {
+                right--;
+            }
+            if (left <= right) {
+                int temp = elements[left];
+                elements[left] = elements[right];
+                elements[right] = temp;
+                left++;
+                right--;
+            }
+        }
+        return right;
+    }
+
+    private static void quickSort(int[] elements, int min, int max) {
+        if (min < max) {
+            int border = partition(elements, min, max);
+            quickSort(elements, min, border);
+            quickSort(elements, border + 1, max);
+        }
+    }
+
+    public static void quickSort(int[] elements) {
+        quickSort(elements, 0, elements.length - 1);
+    }
+
+    @Contract(pure = true)
+    public static int[] countingSort(int[] elements, int limit) {
+        int[] count = new int[limit + 1];
+        for (int element: elements) {
+            count[element]++;
+        }
+        for (int j = 1; j <= limit; j++) {
+            count[j] += count[j - 1];
+        }
+        int[] out = new int[elements.length];
+        for (int j = elements.length - 1; j >= 0; j--) {
+            out[count[elements[j]] - 1] = elements[j];
+            count[elements[j]]--;
+        }
+        return out;
+    }
+}
+
 
 
 }

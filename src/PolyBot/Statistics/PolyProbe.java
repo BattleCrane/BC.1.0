@@ -237,6 +237,33 @@ public class PolyProbe implements Probe {
     }
 
 
+    @Override
+    public void probeEnemyBonus(ControllerMatchMaking controllerMatchMaking) {
+        if (controllerMatchMaking.getBattleManager().getOpponentPlayer().getEnergy() == 4)
+
+
+
+    }
+
+    @Contract(pure = true)
+    private int countSlackMainBuildings(BattleManager battleManager){
+        Pattern patternBuildings = Pattern.compile("[hgbft]");
+        int count = 0;
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
+                Matcher matcher = patternBuildings.matcher(currentUnity);
+//                if (matcher.find() && ())
+
+
+
+
+            }
+        }
+
+        return count;
+    }
+
 
 
 
