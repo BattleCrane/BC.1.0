@@ -14,7 +14,7 @@ public class PolyPriorityUnit extends PriorityUnit {
         super(type, priority, point);
     }
 
-    public PolyPriorityUnit(String inputUnit, double priority, Point point, String typeOfAttack) {
-        super(inputUnit, priority, point);
+    public PolyPriorityUnit(char inputUnit, double priority, Point point, String typeOfAttack) {
+        super(inputUnit, priority, point, typeOfAttack);
     }
 }

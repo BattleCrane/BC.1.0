@@ -27,6 +27,13 @@ public abstract class PriorityUnit {
         this.point = point;
     }
 
+    protected PriorityUnit(char name, double priority, Point point, String typeOfAttack) {
+        this.name = name;
+        this.priority = priority;
+        this.point = point;
+        this.typeOfAttack = typeOfAttack;
+    }
+
     protected PriorityUnit(String inputUnit, double priority, Point point, int width, int height){
         this.inputUnit = inputUnit;
         this.hitPoints = inputUnit.charAt(0);
