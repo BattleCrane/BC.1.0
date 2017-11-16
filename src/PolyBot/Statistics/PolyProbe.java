@@ -239,7 +239,7 @@ public class PolyProbe implements Probe {
 
     @Override
     public void probeEnemyBonus(ControllerMatchMaking controllerMatchMaking) {
-        if (controllerMatchMaking.getBattleManager().getOpponentPlayer().getEnergy() == 4)
+        if (controllerMatchMaking.getBattleManager().getOpponentPlayer().getEnergy() == 4){}
 
 
 
