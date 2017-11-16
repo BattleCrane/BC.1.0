@@ -64,13 +64,22 @@ public interface Probe {
     private void shift(Player currentPlayer, List<List<String>> matrix, List<Point> listDangerousZone, int dx, int dy, Point start) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
         String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx).substring(1);
-        Matcher matcher = patternBuildings.matcher(currentUnity);
-        if (!matcher.find() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
-            Point nextPoint = new Point(start.Y() + dy, start.X() + dx);
-            if (!listDangerousZone.contains(nextPoint)) {
-                listDangerousZone.add(nextPoint);
-            }
-            shift(currentPlayer, matrix, listDangerousZone, dx, dy, nextPoint);
+        Matcher matcher = patternBuildings.matcher(currentUnity.substring(4, 5));
+        while (start.X() > 0 && start.X() < 16 && start.Y() > 0 && start.Y() < 16) {
+            if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())){
+                Point nextPoint = new Point(start.Y() + dy, start.X() + dx);
+                if (!listDangerousZone.contains(nextPoint)) {
+                    listDangerousZone.add(nextPoint);
+                    System.out.println(nextPoint.X() + "          " + nextPoint.Y());
+                }
+//                System.out.println(start.X() + "        " + start.Y() );
+                currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
+                start.setX(start.X() + dx);
+                start.setY(start.Y() + dy);
+            } else break;
+
+
+
         }
     }
 
@@ -127,14 +136,14 @@ public interface Probe {
         }
     }
 
-    public static void quickSort(int[] elements) {
+    static void quickSort(int[] elements) {
         quickSort(elements, 0, elements.length - 1);
     }
 
     @Contract(pure = true)
-    public static int[] countingSort(int[] elements, int limit) {
+    static int[] countingSort(int[] elements, int limit) {
         int[] count = new int[limit + 1];
-        for (int element: elements) {
+        for (int element : elements) {
             count[element]++;
         }
         for (int j = 1; j <= limit; j++) {
