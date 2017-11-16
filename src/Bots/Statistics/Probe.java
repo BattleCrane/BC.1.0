@@ -57,9 +57,9 @@ public interface Probe {
     //Определение опасных точек от автоматчиков, танков
     private void shift(Player currentPlayer, List<List<String>> matrix, List<Point> listDangerousZone, int dx, int dy, Point start) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
-        String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx);
+        String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx).substring(1);
         Matcher matcher = patternBuildings.matcher(currentUnity);
-        if (!matcher.find() && !currentUnity.substring(3, 4).equals(currentPlayer.getColorType())) {
+        if (!matcher.find() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
             Point nextPoint = new Point(start.Y() + dy, start.X() + dx);
             if (!listDangerousZone.contains(nextPoint)) {
                 listDangerousZone.add(nextPoint);

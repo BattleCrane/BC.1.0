@@ -114,13 +114,13 @@ public class PolyProbe implements Probe {
 
     private void valuationOfBallisticPosition(Player currentPlayer, List<List<String>> matrix, int dx, int dy, Point start, boolean isSecondaryPurpose, double inputValue) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
-        String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx);
+        String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx).substring(1);
         Matcher matcher = patternBuildings.matcher(currentUnity);
         boolean inBounds = start.Y() + dy >= 0 && start.Y() + dy < 16 && start.X() + dx >= 0 && start.X() + dx < 16;
-        boolean isNotOpponentBuilding = !matcher.find() && !currentUnity.substring(3, 4).equals(currentPlayer.getColorType());
+        boolean isNotOpponentBuilding = !matcher.find() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
         if (inBounds){
             Point nextPoint = new Point(start.Y() + dy, start.X() + dx);
-            if (isNotOpponentBuilding){
+            if (!isNotOpponentBuilding){
                 if (!isSecondaryPurpose){
                     inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(4)) * 0.5;
                     isSecondaryPurpose = true;
@@ -138,12 +138,57 @@ public class PolyProbe implements Probe {
     //TurretUnits:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private int probeValiuationOfRadiusAttackUnit(Unity unity, Point point){
+    private double probeValiuationOfRadiusAttackUnit(Unity unity, Point point){
         double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
-
-
-
-
+        if (listDangerousZone.contains(point)){
+            value = -value;
+        }
+        valuationOfRadiusPosition(controllerMatchMaking.getBattleManager().getPlayer(), controllerMatchMaking.getBattleManager().getBattleField().getMatrix(), point, value);
+        return value;
     }
+
+    private void valuationOfRadiusPosition(Player currentPlayer, List<List<String>> matrix, Point start, double inputValue){
+        int x = start.X();
+        int y = start.Y();
+        int radius = 0;
+        String current = matrix.get(y).get(x);
+        switch (current.substring(1, 2) + current.substring(4, 5)) {
+            case "^t":
+                radius = 2;
+                break;
+            case "<t":
+                radius = 3;
+                break;
+            case "^u":
+            case "<u":
+                radius = 5;
+        }
+        int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
+        for (int i = x - radius; i < x + radius + 1; i++) {
+            for (int j = y - countShift; j < y + 1 + countShift; j++) {
+                boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
+                if (inBounds && !current.substring(1).equals("    0") &&
+                        current.charAt(3) != currentPlayer.getColorType().charAt(0)) {
+                    inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(current.charAt(4));
+                }
+            }
+            countShift++;
+            if (i >= x) {
+                countShift = countShift - 2; //Перетягивание countShift--
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Building:
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 
 }
