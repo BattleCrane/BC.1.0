@@ -14,16 +14,20 @@ public abstract class PriorityUnit {
     private String type;
     private String typeOfAttack;
     private Point point;
+    private int width;
+    private int height;
 
     protected PriorityUnit(double priority){
         this.priority = priority;
     }
 
-    protected PriorityUnit(char type, double priority, Point point){
+    protected PriorityUnit(char name, double priority, Point point) {
+        this.name = name;
         this.priority = priority;
+        this.point = point;
     }
 
-    protected PriorityUnit(String inputUnit, double priority, Point point){
+    protected PriorityUnit(String inputUnit, double priority, Point point, int width, int height){
         this.inputUnit = inputUnit;
         this.hitPoints = inputUnit.charAt(0);
         this.level = inputUnit.charAt(1) == '^' ? 1 : inputUnit.charAt(1) == '<' ? 2 : 3;
@@ -35,6 +39,8 @@ public abstract class PriorityUnit {
         this.type = "unchecked";
         this.typeOfAttack = "unchecked";
         this.point = point;
+        this.width = width;
+        this.height = height;
     }
 
 
@@ -128,5 +134,21 @@ public abstract class PriorityUnit {
 
     public void setPoint(Point point) {
         this.point = point;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }
