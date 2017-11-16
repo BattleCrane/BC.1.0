@@ -40,6 +40,9 @@ public class PolyProbe implements Probe {
         return mostPriorityUnit;
     }
 
+    //BallisticUnits
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @NotNull
     @Contract(pure = true)
     private PriorityUnit probeValuationOfBallisticUnit(Unity unity, Point point) {
@@ -48,7 +51,8 @@ public class PolyProbe implements Probe {
         if (listDangerousZone.contains(point)){
             value = -value;
         }
-        value += findClosestEnemy(controllerMatchMaking.getBattleManager(), point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
+        value += findClosestEnemy(controllerMatchMaking.getBattleManager(), point, unity.getWidth(), unity.getHeight()) *
+                0.1 * startValue;
 
         Player currentPlayer = controllerMatchMaking.getBattleManager().getPlayer();
         List<List<String>> matrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
@@ -61,11 +65,6 @@ public class PolyProbe implements Probe {
         valuationOfBallisticPosition(currentPlayer, matrix, -1, 1, point, false, value);
         valuationOfBallisticPosition(currentPlayer, matrix, 1, -1, point, false, value);
         valuationOfBallisticPosition(currentPlayer, matrix,  1, 1, point, false, value);
-
-
-
-
-
 
         return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
     }
@@ -132,4 +131,19 @@ public class PolyProbe implements Probe {
             valuationOfBallisticPosition(currentPlayer, matrix, dx, dy, nextPoint, isSecondaryPurpose, inputValue);
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //TurretUnits:
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private int probeValiuationOfRadiusAttackUnit(Unity unity, Point point){
+        double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
+
+
+
+
+    }
+
 }
