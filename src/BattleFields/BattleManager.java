@@ -440,4 +440,8 @@ public class BattleManager {
     public AdjutantAttacker getAdjutantAttacker() {
         return adjutantAttacker;
     }
+
+    public void setBattleField(BattleField battleField) {
+        this.battleField = battleField;
+    }
 }

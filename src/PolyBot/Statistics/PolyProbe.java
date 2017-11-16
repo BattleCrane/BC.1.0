@@ -1,5 +1,7 @@
 package PolyBot.Statistics;
 
+import Adjutants.AdjutantFielder;
+import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.PriorityUnit;
@@ -13,6 +15,7 @@ import Unities.Unity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +26,7 @@ public class PolyProbe implements Probe {
     private List<Point> listDangerousZone = probeDangerousZone(controllerMatchMaking.getBattleManager());
 
 
-    public PriorityUnit probeBalisticUnit(PolyAdjutantPriorityField polyAdjutantPriorityField) {
+    public PriorityUnit probeUnit(PolyAdjutantPriorityField polyAdjutantPriorityField) {
         PriorityUnit mostPriorityUnit = new PolyPriorityUnit(0);
         List<List<PriorityUnit>> priorityMatrix = polyAdjutantPriorityField.getMatrix();
         List<List<String>> basicMatrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
@@ -31,7 +34,7 @@ public class PolyProbe implements Probe {
             for (int j = 0; j < 16; j++) {
                 String currentUnity = basicMatrix.get(j).get(i);
                 if (currentUnity.substring(1).equals("    0")) {
-
+//                    for (...)
                 }
             }
         }
@@ -45,7 +48,7 @@ public class PolyProbe implements Probe {
 
     @NotNull
     @Contract(pure = true)
-    private PriorityUnit probeValuationOfBallisticUnit(Unity unity, Point point) {
+    private PriorityUnit probeBallisticUnit(Unity unity, Point point) {
         double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
         double value = startValue;
         if (listDangerousZone.contains(point)){
@@ -57,14 +60,14 @@ public class PolyProbe implements Probe {
         Player currentPlayer = controllerMatchMaking.getBattleManager().getPlayer();
         List<List<String>> matrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
 
-        valuationOfBallisticPosition(currentPlayer, matrix, -1,0, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix, 0, -1, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix, 1, 0, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix,0, 1, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix,  -1, -1, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix, -1, 1, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix, 1, -1, point, false, value);
-        valuationOfBallisticPosition(currentPlayer, matrix,  1, 1, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix, -1,0, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix, 0, -1, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix, 1, 0, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix,0, 1, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix,  -1, -1, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix, -1, 1, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix, 1, -1, point, false, value);
+        collectValOfBallisticUnit(currentPlayer, matrix,  1, 1, point, false, value);
 
         return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
     }
@@ -112,7 +115,7 @@ public class PolyProbe implements Probe {
         return distance;
     }
 
-    private void valuationOfBallisticPosition(Player currentPlayer, List<List<String>> matrix, int dx, int dy, Point start, boolean isSecondaryPurpose, double inputValue) {
+    private void collectValOfBallisticUnit(Player currentPlayer, List<List<String>> matrix, int dx, int dy, Point start, boolean isSecondaryPurpose, double inputValue) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
         String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx).substring(1);
         Matcher matcher = patternBuildings.matcher(currentUnity);
@@ -128,7 +131,7 @@ public class PolyProbe implements Probe {
                     inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(4)) * 0.2;
                 }
             }
-            valuationOfBallisticPosition(currentPlayer, matrix, dx, dy, nextPoint, isSecondaryPurpose, inputValue);
+            collectValOfBallisticUnit(currentPlayer, matrix, dx, dy, nextPoint, isSecondaryPurpose, inputValue);
         }
     }
 
@@ -138,16 +141,17 @@ public class PolyProbe implements Probe {
     //TurretUnits:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private double probeValiuationOfRadiusAttackUnit(Unity unity, Point point){
+    @NotNull
+    private PriorityUnit probeRadiusUnit(Unity unity, Point point){
         double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
         if (listDangerousZone.contains(point)){
             value = -value;
         }
-        valuationOfRadiusPosition(controllerMatchMaking.getBattleManager().getPlayer(), controllerMatchMaking.getBattleManager().getBattleField().getMatrix(), point, value);
-        return value;
+        collectValOfRadius(controllerMatchMaking.getBattleManager().getPlayer(), controllerMatchMaking.getBattleManager().getBattleField().getMatrix(), point, value);
+        return new PolyPriorityUnit(value);
     }
 
-    private void valuationOfRadiusPosition(Player currentPlayer, List<List<String>> matrix, Point start, double inputValue){
+    private void collectValOfRadius(Player currentPlayer, List<List<String>> matrix, Point start, double inputValue){
         int x = start.X();
         int y = start.Y();
         int radius = 0;
@@ -178,11 +182,59 @@ public class PolyProbe implements Probe {
             }
         }
     }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Building:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @NotNull
+    private PriorityUnit probeBuilding(Unity unity, Point point){
+        double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
+        if (listDangerousZone.contains(point)){
+            value = -value;
+        }
+        value += probeForLock(controllerMatchMaking.getBattleManager(), unity, point);
+
+        return new PolyPriorityUnit(value);
+    }
+
+    private int probeForLock(BattleManager battleManager, Unity unity, Point point){
+        BattleManager cloneBattleManager = new BattleManager();
+        List<List<String>> probedList = new ArrayList<>();
+        for (int i = 0; i < 16; i++){
+            probedList.add(battleManager.getBattleField().getMatrix().get(i));
+            for (int j = 0; j < 16;  j++){
+                probedList.get(i).add(battleManager.getBattleField().getMatrix().get(i).get(j));
+            }
+        }
+        BattleField battleField = new BattleField();
+        battleField.setMatrix(probedList);
+        cloneBattleManager.setBattleField(battleField);
+        if (cloneBattleManager.putUnity(controllerMatchMaking.getBattleManager().getPlayer(), point, unity)){
+            new AdjutantFielder().fillZones(cloneBattleManager);
+        }
+        return countValOfNewLockedCells(battleField.getMatrix(), probedList);
+    }
+
+    private int countValOfNewLockedCells(List<List<String>> matrix, List<List<String>> probedMatrix){
+        String playerColorType = controllerMatchMaking.getBattleManager().getPlayer().getColorType();
+        int value = 0;
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                if (probedMatrix.get(j).get(i).equals(playerColorType + "    0") && !matrix.get(j).get(i).equals(playerColorType + "    0")){
+                    value += 30;
+                }
+                if (!probedMatrix.get(j).get(i).equals(playerColorType + "    0") && matrix.get(j).get(i).equals(playerColorType + "    0")){
+                    value -= 30;
+                }
+            }
+        }
+        return value;
+    }
+
+    @Contract(pure = true)
+    private double probeUpgrade(double inputValue){
+        return inputValue * 2;
+    }
 
 
 

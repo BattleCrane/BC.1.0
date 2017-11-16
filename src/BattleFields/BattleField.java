@@ -15,8 +15,7 @@ import java.util.List;
  */
 
 public final class BattleField {
-
-    private final List<List<String>> matrix = new ArrayList<>();
+    private List<List<String>> matrix = new ArrayList<>();
 
     public BattleField() {
         for (int i = 0; i < 16; i++) {
@@ -46,5 +45,9 @@ public final class BattleField {
     @Contract(pure = true)
     public final List<List<String>> getMatrix() {
         return matrix;
+    }
+
+    public void setMatrix(List<List<String>> matrix) {
+        this.matrix = matrix;
     }
 }
