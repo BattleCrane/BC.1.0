@@ -131,6 +131,5 @@ public class PolyProbe implements Probe {
             }
             valuationOfBallisticPosition(currentPlayer, matrix, dx, dy, nextPoint, isSecondaryPurpose, inputValue);
         }
-
     }
 }
