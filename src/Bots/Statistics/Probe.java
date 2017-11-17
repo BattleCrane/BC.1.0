@@ -63,24 +63,20 @@ public interface Probe {
     //Определение опасных точек от автоматчиков, танков
     private void shift(Player currentPlayer, List<List<String>> matrix, List<Point> listDangerousZone, int dx, int dy, Point start) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
-        String currentUnity = matrix.get(start.Y() + dy).get(start.X() + dx).substring(1);
-        Matcher matcher = patternBuildings.matcher(currentUnity.substring(4, 5));
-        while (start.X() > 0 && start.X() < 16 && start.Y() > 0 && start.Y() < 16) {
-            if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())){
-                Point nextPoint = new Point(start.Y() + dy, start.X() + dx);
-                if (!listDangerousZone.contains(nextPoint)) {
-                    listDangerousZone.add(nextPoint);
-                    System.out.println(nextPoint.X() + "          " + nextPoint.Y());
-                }
-//                System.out.println(start.X() + "        " + start.Y() );
-                currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
+            while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
                 start.setX(start.X() + dx);
                 start.setY(start.Y() + dy);
-            } else break;
+                String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
+                Matcher matcher = patternBuildings.matcher(currentUnity.substring(4, 5));
 
+                if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
+                    Point next = new Point(start.Y(), start.X());
+                    if (!listDangerousZone.contains(next)) {
+                        listDangerousZone.add(next);
+                    }
+                } else break;
 
-
-        }
+            }
     }
 
 
