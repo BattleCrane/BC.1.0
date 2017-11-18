@@ -1,7 +1,7 @@
 package PolyBot.Steps;
 
 import BattleFields.BattleManager;
-import Bots.PriorityUnit;
+import Bots.Priority.PriorityUnit;
 import Bots.Steps.Step;
 
 public class AttackStep extends Step {

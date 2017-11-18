@@ -4,7 +4,7 @@ import Adjutants.AdjutantFielder;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import Bots.PriorityUnit;
+import Bots.Priority.PriorityUnit;
 import Bots.Statistics.Probe;
 import Controllers.ControllerMatchMaking;
 import Players.Player;
@@ -21,10 +21,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PolyProbe implements Probe {
-    ControllerMatchMaking controllerMatchMaking;
+    private ControllerMatchMaking controllerMatchMaking;
     private PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
-    private List<Point> listDangerousZone = probeDangerousZone(controllerMatchMaking.getBattleManager());
+    private List<Point> listDangerousZone = new ArrayList<>();
 
+//            probeDangerousZone(controllerMatchMaking.getBattleManager()) == null ? new ArrayList<>()
+//            : probeDangerousZone(controllerMatchMaking.getBattleManager());
+
+    public PolyProbe() {}
+
+    public PolyProbe(ControllerMatchMaking controllerMatchMaking) {
+        this.controllerMatchMaking = controllerMatchMaking;
+    }
 
     public PriorityUnit probeUnit(PolyAdjutantPriorityField polyAdjutantPriorityField) {
         PriorityUnit mostPriorityUnit = new PolyPriorityUnit(0);
@@ -72,6 +80,10 @@ public class PolyProbe implements Probe {
         return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
     }
 
+    public int findClosestEnemyTest(BattleManager battleManager, Point startPoint, int width, int height){
+        return findClosestEnemy(battleManager, startPoint, width, height);
+    }
+
     private int findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height){
         boolean isNotFind = true;
         int startX = startPoint.X();
@@ -81,31 +93,44 @@ public class PolyProbe implements Probe {
         int dy = 1;
         while (isNotFind){
             int i;
-            int j;
+            int j = startY - dy;
             for (i = startX - dx; i < startX + width + dx; i++){
-                String currentUnity = battleManager.getBattleField().getMatrix().get(height).get(i);
-                if (i >= 0 && i < 16 && height >= 0 && height < 16 && currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
-                    isNotFind = false;
+                if (i >= 0 && i < 16 && j >= 0 && j < 16){
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
+                        isNotFind = false;
+                    }
+                    System.out.println(i + "  a  " + j);
                 }
             }
-            for (j = startY - dy; i < startY + height + dy; j++){
-                String currentUnity = battleManager.getBattleField().getMatrix().get(i).get(width);
-                if (j >= 0 && j < 16 && width >= 0 && width < 16 && currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
-                    isNotFind = false;
+            i--;
+            for (j = startY - dy + 1; j < startY + height + dy; j++){
+                if (i >= 0 && i < 16 && j >= 0 && j < 16){
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
+                        isNotFind = false;
+                    }
+                    System.out.println(i + "  b  " + j);
+                }
+            }
+            j--;
+            for (i = startX + width + dx - 2; i > startX - dx; i--){
+                if (i >= 0 && i < 16 && j >= 0 && j < 16){
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
+                        isNotFind = false;
+                    }
+                    System.out.println(i + "  c  " + j);
                 }
             }
 
-            for (i = startX + width + dx; i > startX - dx; i--){
-                String currentUnity = battleManager.getBattleField().getMatrix().get(height).get(i);
-                if (i >= 0 && i < 16 && height >= 0 && height < 16 && currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
-                    isNotFind = false;
-                }
-            }
-
-            for (j = startY + dy; j > startX + width - dy; j++){
-                String currentUnity = battleManager.getBattleField().getMatrix().get(height).get(i);
-                if (j >= 0 && j < 16 && width >= 0 && width < 16 && currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
-                    isNotFind = false;
+            for (j = startY + dy; j > startX + height - dy; j--){
+                if (i >= 0 && i < 16 && j >= 0 && j < 16){
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())){
+                        isNotFind = false;
+                    }
+                    System.out.println(i + "  d  " + j);
                 }
             }
             distance++;
@@ -237,7 +262,6 @@ public class PolyProbe implements Probe {
     }
 
 
-    @Override
     public void probeEnemyBonus(ControllerMatchMaking controllerMatchMaking) {
         if (controllerMatchMaking.getBattleManager().getOpponentPlayer().getEnergy() == 4){}
 
@@ -263,8 +287,6 @@ public class PolyProbe implements Probe {
 
         return count;
     }
-
-
 
 
 

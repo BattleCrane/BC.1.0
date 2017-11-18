@@ -2,26 +2,26 @@ package PolyBot;
 
 import BattleFields.BattleManager;
 import Bots.Bot;
-import Bots.PriorityUnit;
+import Bots.Priority.PriorityUnit;
+import Bots.Statistics.Probe;
 import Bots.Steps.Step;
 import Controllers.ControllerMatchMaking;
-import Players.Player;
 import PolyBot.Priority.PolyAdjutantPriorityField;
-import PolyBot.Priority.PolyMapOfPriority;
-import PolyBot.Priority.PolyPriorityUnit;
+import PolyBot.Statistics.PolyProbe;
 import PolyBot.Steps.*;
-import org.jetbrains.annotations.Contract;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class PolytechBot implements Bot {
+
 
     private ControllerMatchMaking controllerMatchMaking;
 
     private boolean isGoingToBuild = false; //Буду строить;
 
     private boolean isGoingToDraft = false; //Буду делать армию;
+
+    private Probe probe = new PolyProbe(controllerMatchMaking); //Зонд
 
     private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(controllerMatchMaking.getBattleManager());
 
@@ -47,7 +47,7 @@ public class PolytechBot implements Bot {
             stepList.add(new BonusStep());
         }
         //Загрузка ходов атакующих юнитов:
-        List<PriorityUnit> priorityUnitList = showActiveUnits(polyAdjutantPriorityField, battleManager.getPlayer());
+        List<PriorityUnit> priorityUnitList = probe.showActiveUnits(polyAdjutantPriorityField.getMatrix(), battleManager.getPlayer());
         for (PriorityUnit aPriorityUnitList : priorityUnitList) {
             stepList.add(new AttackStep(aPriorityUnitList));
         }
@@ -90,20 +90,7 @@ public class PolytechBot implements Bot {
     }
 
     //Показать активных юнитов:
-    @Contract(pure = true)
-    private List<PriorityUnit> showActiveUnits(PolyAdjutantPriorityField polyAdjutantPriorityField, Player player) {
-        List<PriorityUnit> listOfPriorityUnit = new ArrayList<>();
-        List<List<PriorityUnit>> matrix = polyAdjutantPriorityField.getMatrix();
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                PriorityUnit priorityUnit = matrix.get(j).get(i);
-                if (priorityUnit.getColor() == player.getColorType().charAt(0) && priorityUnit.isActive()) {
-                    listOfPriorityUnit.add(priorityUnit);
-                }
-            }
-        }
-        return listOfPriorityUnit;
-    }
+
 
     public boolean isGoingToBuild() {
         return isGoingToBuild;

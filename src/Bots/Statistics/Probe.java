@@ -2,9 +2,7 @@ package Bots.Statistics;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import Bonuses.Bonus;
-import Bots.PriorityUnit;
-import Controllers.ControllerMatchMaking;
+import Bots.Priority.PriorityUnit;
 import Players.Player;
 import org.jetbrains.annotations.Contract;
 
@@ -15,12 +13,24 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Интерфейс Probe - это классический интерфейс, который содержит в себе
+ * стандартный набор методов по умолчанию для реализации классов-исследователей.
+ * Например, имплементируясь от interface Probe, класс уже может выполнять следующее:
+ * 1.) Исследование опасных зон на карте;
+ * 2.) Определение активных юнитов;
+ * 3.) Сортировать юнитов на поле боя по приоритетам используя алгоритм quickSort
+ */
+
+
 public interface Probe {
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     default List<Point> probeDangerousZone(BattleManager battleManager) {
         List<Point> listDangerousZone = new ArrayList<>();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         Pattern pattern = Pattern.compile("[GT]");
+        Pattern patternTurret = Pattern.compile("[tu]");
         Pattern patternBonus = Pattern.compile("[HCBEiQ]");
         Player currentPlayer = battleManager.getPlayer();
         for (int i = 0; i < 16; i++) {
@@ -39,21 +49,24 @@ public interface Probe {
                         shift(currentPlayer, matrix, listDangerousZone, 1, -1, new Point(j, i));
                         shift(currentPlayer, matrix, listDangerousZone, 1, 1, new Point(j, i));
                     }
-
+                    Matcher matcherTurret = patternTurret.matcher(current);
                     //Если это вражеская турель:
-                    int radius = 0;
-                    switch (current.substring(1, 2) + current.substring(4, 5)) {
-                        case "^t":
-                            radius = 2;
-                            break;
-                        case "<t":
-                            radius = 3;
-                            break;
-                        case "^u":
-                        case "<u":
-                            radius = 5;
+                    if (matcherTurret.find()){
+                        int radius = 0;
+                        switch (current.substring(1, 2) + current.substring(4, 5)) {
+                            case "^t":
+                                radius = 2;
+                                break;
+                            case "<t":
+                                radius = 3;
+                                break;
+                            case "^u":
+                            case "<u":
+                                radius = 5;
+                        }
+                        radiusMark(matrix, listDangerousZone, radius, new Point(j, i));
                     }
-                    radiusMark(matrix, listDangerousZone, radius, new Point(j, i));
+
                 }
             }
         }
@@ -88,7 +101,7 @@ public interface Probe {
         for (int i = x - radius; i < x + radius + 1; i++) {
             for (int j = y - countShift; j < y + 1 + countShift; j++) {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
-                if (inBounds && listDangerousZone.contains(new Point(j, i))) {
+                if (inBounds && !listDangerousZone.contains(new Point(j, i))) {
                     listDangerousZone.add(new Point(j, i));
                 }
             }
@@ -99,8 +112,37 @@ public interface Probe {
         }
     }
 
-    void probeEnemyBonus(ControllerMatchMaking controllerMatchMaking);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Contract(pure = true)
+    default List<PriorityUnit> showActiveUnits(List<List<PriorityUnit>> matrix, Player player) {
+        List<PriorityUnit> listOfActivePriorityUnit = new ArrayList<>();
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                PriorityUnit priorityUnit = matrix.get(j).get(i);
+                if (priorityUnit.getColor() == player.getColorType().charAt(0) && priorityUnit.isActive()) {
+                    listOfActivePriorityUnit.add(priorityUnit);
+                }
+            }
+        }
+        return listOfActivePriorityUnit;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    //QuickSort:
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Random random = new Random(Calendar.getInstance().getTimeInMillis());
 
     private static int partition(int[] elements, int min, int max) {
@@ -132,7 +174,7 @@ public interface Probe {
         }
     }
 
-    static void quickSort(int[] elements) {
+    default void quickSortPriority(int[] elements) {
         quickSort(elements, 0, elements.length - 1);
     }
 
@@ -152,6 +194,8 @@ public interface Probe {
         }
         return out;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 

@@ -1,4 +1,4 @@
-package Bots;
+package Bots.Priority;
 
 import BattleFields.Point;
 
@@ -16,6 +16,10 @@ public abstract class PriorityUnit {
     private Point point;
     private int width;
     private int height;
+
+    protected PriorityUnit(String inputUnit){
+        this.inputUnit = inputUnit;
+    }
 
     protected PriorityUnit(double priority){
         this.priority = priority;

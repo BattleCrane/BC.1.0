@@ -3,8 +3,7 @@ package PolyBot.Priority;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import Bots.PriorityUnit;
-import Controllers.ControllerMatchMaking;
+import Bots.Priority.PriorityUnit;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
