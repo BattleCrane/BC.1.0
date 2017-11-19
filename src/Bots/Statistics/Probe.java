@@ -88,7 +88,6 @@ public interface Probe {
                         listDangerousZone.add(next);
                     }
                 } else break;
-
             }
     }
 
