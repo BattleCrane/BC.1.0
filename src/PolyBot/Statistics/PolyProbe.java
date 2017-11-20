@@ -69,15 +69,7 @@ public class PolyProbe implements Probe {
         Player currentPlayer = controllerMatchMaking.getBattleManager().getPlayer();
         List<List<String>> matrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
 
-//        collectValOfBallisticUnit(currentPlayer, matrix, -1, 0, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, 0, -1, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, 1, 0, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, 0, 1, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, -1, -1, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, -1, 1, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, 1, -1, point, false, value);
-//        collectValOfBallisticUnit(currentPlayer, matrix, 1, 1, point, false, value);
-
+        value += collectValOfBallisticUnit(currentPlayer,matrix, point);
         return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
     }
 
@@ -101,7 +93,6 @@ public class PolyProbe implements Probe {
                     if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
                         isNotFind = false;
                     }
-                    System.out.println(i + "  a  " + j);
                 }
             }
             i--;
@@ -111,7 +102,6 @@ public class PolyProbe implements Probe {
                     if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
                         isNotFind = false;
                     }
-                    System.out.println(i + "  b  " + j);
                 }
             }
             j--;
@@ -121,7 +111,6 @@ public class PolyProbe implements Probe {
                     if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
                         isNotFind = false;
                     }
-                    System.out.println(i + "  c  " + j);
                 }
             }
 
@@ -131,7 +120,6 @@ public class PolyProbe implements Probe {
                     if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
                         isNotFind = false;
                     }
-                    System.out.println(i + "  d  " + j);
                 }
             }
             distance++;
@@ -140,46 +128,48 @@ public class PolyProbe implements Probe {
         }
         return distance;
     }
-    public double collectValOfBallisticUnitTest(Player currentPlayer, List<List<String>> matrix, int dx, int dy, Point start, int inputValue){
-        return collectValOfBallisticUnit(currentPlayer, matrix, dx, dy, start, inputValue);
+    public double collectValOfBallisticUnitTest(Player currentPlayer, List<List<String>> matrix, Point start){
+        return collectValOfBallisticUnit(currentPlayer, matrix, start);
     }
 
-    private double collectValOfBallisticUnit(Player currentPlayer, List<List<String>> matrix, int dx, int dy, Point point, int inputValue) {
-        Point start = new Point(point.X(), point.Y());
-        PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
-        Pattern patternNotBlockedUnits = Pattern.compile("[GTQoHeCBE]");
-        Pattern patternBuildings = Pattern.compile("[hgbfwtiu]");
-        boolean isSecondaryPurpose = false;
-        while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
-            start.setX(start.X() + dx);
-            start.setY(start.Y() + dy);
-//            System.out.println(start.X() + "  " + start.Y());
-            String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
-            Matcher matcher = patternBuildings.matcher(currentUnity.substring(3, 4));
-            Matcher matcherNotBlockedUnits = patternNotBlockedUnits.matcher(currentUnity.substring(3, 4));
-            boolean OpponentBuilding = matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
-            boolean OpponentOtherUnit = matcherNotBlockedUnits.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
-            if (OpponentBuilding) {
-                if (!isSecondaryPurpose) {
-                    inputValue +=  polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.5;
-                    isSecondaryPurpose = true;
-//                    System.out.println(inputValue + "!!!!!!!");
-                } else {
-                    inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.2;
-//                    System.out.println(inputValue + "?????");
-                }
-            }
-            if (OpponentOtherUnit) {
-                if (!isSecondaryPurpose) {
-                    inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.5;
-//                    System.out.println(inputValue + "rrrrrrrrr");
-                } else {
-                    inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.2;
-//                    System.out.println(inputValue + "---------");
+    private double collectValOfBallisticUnit(Player currentPlayer, List<List<String>> matrix, Point point){
+        double value = 0;
+        for (int dx = -1; dx <= 1; dx++){
+            for (int dy = -1; dy <= 1; dy++){
+                if (dx != 0 && dy != 0){
+                    Point start = new Point(point.X(), point.Y());
+                    PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
+                    Pattern patternNotBlockedUnits = Pattern.compile("[GTQoHeCBE]");
+                    Pattern patternBuildings = Pattern.compile("[hgbfwtiu]");
+                    boolean isSecondaryPurpose = false;
+                    while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
+                        start.setX(start.X() + dx);
+                        start.setY(start.Y() + dy);
+                        String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
+                        Matcher matcher = patternBuildings.matcher(currentUnity.substring(3, 4));
+                        Matcher matcherNotBlockedUnits = patternNotBlockedUnits.matcher(currentUnity.substring(3, 4));
+                        boolean OpponentBuilding = matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
+                        boolean OpponentOtherUnit = matcherNotBlockedUnits.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
+                        if (OpponentBuilding) {
+                            if (!isSecondaryPurpose) {
+                                value +=  polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.5;
+                                isSecondaryPurpose = true;
+                            } else {
+                                value += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.2;
+                            }
+                        }
+                        if (OpponentOtherUnit) {
+                            if (!isSecondaryPurpose) {
+                                value += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.5;
+                            } else {
+                                value += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.2;
+                            }
+                        }
+                    }
                 }
             }
         }
-        return inputValue;
+        return value;
     }
 
 
@@ -202,19 +192,8 @@ public class PolyProbe implements Probe {
     private void collectValOfRadius(Player currentPlayer, List<List<String>> matrix, Point start, double inputValue) {
         int x = start.X();
         int y = start.Y();
-        int radius = 0;
         String current = matrix.get(y).get(x);
-        switch (current.substring(1, 2) + current.substring(4, 5)) {
-            case "^t":
-                radius = 2;
-                break;
-            case "<t":
-                radius = 3;
-                break;
-            case "^u":
-            case "<u":
-                radius = 5;
-        }
+        int radius = getRadius(current);
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
         for (int i = x - radius; i < x + radius + 1; i++) {
             for (int j = y - countShift; j < y + 1 + countShift; j++) {
@@ -241,7 +220,6 @@ public class PolyProbe implements Probe {
             value = -value;
         }
         value += probeForLock(controllerMatchMaking.getBattleManager(), unity, point);
-
         return new PolyPriorityUnit(value);
     }
 

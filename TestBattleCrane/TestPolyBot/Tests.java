@@ -29,34 +29,16 @@ public class Tests {
 
     @Test
     public void collectValOfBallisticUnits() {
-        BattleManager battleManagerTest1 = new BattleManager(new BattleField());
-        battleManagerTest1.initializeField();
-        battleManagerTest1.setPlayer(battleManagerTest1.getPlayerBlue());
+        BattleManager battleManagerTest = new BattleManager(new BattleField());
+        battleManagerTest.initializeField();
+        battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
         Point pointSpawnTest1 = new Point(7, 7);
-        battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), pointSpawnTest1, battleManagerTest1.getGunner());
+        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest1, battleManagerTest.getGunner());
+        battleManagerTest.getBattleField().toString();
+        assertTrue(165.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest1));
 
-        assertTrue(165.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest1.getPlayer(), battleManagerTest1.getBattleField().getMatrix(),
-                -1, -1, pointSpawnTest1, 0));
-
-
-        BattleManager battleManagerTest2 = new BattleManager(new BattleField());
-        battleManagerTest2.initializeField();
-        battleManagerTest2.setPlayer(battleManagerTest2.getPlayerBlue());
         Point pointSpawnTest2 = new Point(2, 2);
-        battleManagerTest2.putUnity(battleManagerTest2.getPlayer(), pointSpawnTest2, battleManagerTest2.getTank());
-        assertTrue(5.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                0, 1, pointSpawnTest2, 0));
-        assertTrue(280.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                -1, -1, pointSpawnTest2, 0));
-        assertTrue(5.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                1, 0, pointSpawnTest2, 0));
-        assertTrue(5.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                1, 0, pointSpawnTest2, 0));
-        assertTrue(0.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                0, -1, pointSpawnTest2, 0));
-        assertTrue(0.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                -1, 0, pointSpawnTest2, 0));
-        assertTrue(5.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest2.getPlayer(), battleManagerTest2.getBattleField().getMatrix(),
-                1, 1, pointSpawnTest2, 0));
+        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest2, battleManagerTest.getTank());
+        assertTrue(295.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest2));
     }
 }

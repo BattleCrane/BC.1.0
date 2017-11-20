@@ -51,44 +51,50 @@ public interface Probe {
                     }
                     Matcher matcherTurret = patternTurret.matcher(current);
                     //Если это вражеская турель:
-                    if (matcherTurret.find()){
-                        int radius = 0;
-                        switch (current.substring(1, 2) + current.substring(4, 5)) {
-                            case "^t":
-                                radius = 2;
-                                break;
-                            case "<t":
-                                radius = 3;
-                                break;
-                            case "^u":
-                            case "<u":
-                                radius = 5;
-                        }
-                        radiusMark(matrix, listDangerousZone, radius, new Point(j, i));
+                    if (matcherTurret.find()) {
+                        radiusMark(matrix, listDangerousZone, getRadius(current), new Point(j, i));
                     }
-
                 }
             }
         }
         return listDangerousZone;
     }
 
+    default int getRadius(String current) {
+        int radius;
+        switch (current.substring(1, 2) + current.substring(4, 5)) {
+            case "^t":
+                radius = 2;
+                break;
+            case "<t":
+                radius = 3;
+                break;
+            case "^u":
+            case "<u":
+                radius = 5;
+                break;
+            default:
+                radius = 0;
+        }
+        return radius;
+    }
+
     //Определение опасных точек от автоматчиков, танков
     private void shift(Player currentPlayer, List<List<String>> matrix, List<Point> listDangerousZone, int dx, int dy, Point start) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
-            while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
-                start.setX(start.X() + dx);
-                start.setY(start.Y() + dy);
-                String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
-                Matcher matcher = patternBuildings.matcher(currentUnity.substring(4, 5));
+        while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
+            start.setX(start.X() + dx);
+            start.setY(start.Y() + dy);
+            String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
+            Matcher matcher = patternBuildings.matcher(currentUnity.substring(4, 5));
 
-                if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
-                    Point next = new Point(start.Y(), start.X());
-                    if (!listDangerousZone.contains(next)) {
-                        listDangerousZone.add(next);
-                    }
-                } else break;
-            }
+            if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
+                Point next = new Point(start.Y(), start.X());
+                if (!listDangerousZone.contains(next)) {
+                    listDangerousZone.add(next);
+                }
+            } else break;
+        }
     }
 
 
@@ -114,10 +120,6 @@ public interface Probe {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Contract(pure = true)
@@ -135,9 +137,6 @@ public interface Probe {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
     //QuickSort:
