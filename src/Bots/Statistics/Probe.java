@@ -35,7 +35,7 @@ public interface Probe {
         Player currentPlayer = battleManager.getPlayer();
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                String current = matrix.get(j).get(i);
+                String current = matrix.get(i).get(j);
                 if (current.substring(3, 4).equals(battleManager.getOpponentPlayer().getColorType())) { //Если это точка противника
                     Matcher matcher = pattern.matcher(current);
                     Matcher matcherBonus = patternBonus.matcher(current);
@@ -85,15 +85,21 @@ public interface Probe {
         while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
             start.setX(start.X() + dx);
             start.setY(start.Y() + dy);
-            String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
-            Matcher matcher = patternBuildings.matcher(currentUnity.substring(4, 5));
+            String currentUnity = matrix.get(start.X()).get(start.Y()).substring(1);
+            Matcher matcher = patternBuildings.matcher(currentUnity.substring(3, 4));
 
-            if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
-                Point next = new Point(start.Y(), start.X());
+            if (matcher.matches() && currentUnity.substring(2, 3).equals(currentPlayer.getColorType())){
+                break;
+            } else {
+                Point next = new Point(start.X(), start.Y());
                 if (!listDangerousZone.contains(next)) {
                     listDangerousZone.add(next);
                 }
-            } else break;
+            }
+
+//            if (!matcher.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType())) {
+//
+//            } else break;
         }
     }
 

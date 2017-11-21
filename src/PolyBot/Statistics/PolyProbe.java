@@ -62,12 +62,8 @@ public class PolyProbe implements Probe {
     @Contract(pure = true)
     public PriorityUnit probeBallisticUnit(BattleManager battleManager, Unity unity, Point point) {
         double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
-
-        System.out.println(listDangerousZone.size());
-
-
         double value = startValue;
-        if (listDangerousZone.contains(point)) {
+        if (listDangerousZone.contains(point.invariant())) {
             value = -value;
         }
         System.out.println("1 " + value);
@@ -144,7 +140,9 @@ public class PolyProbe implements Probe {
         double value = 0;
         for (int dx = -1; dx <= 1; dx++){
             for (int dy = -1; dy <= 1; dy++){
-                if (dx != 0 && dy != 0){
+                if (dx == 0 && dy == 0){
+                    continue;
+                } else {
                     Point start = new Point(point.X(), point.Y());
                     PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
                     Pattern patternNotBlockedUnits = Pattern.compile("[GTQoHeCBE]");
@@ -209,6 +207,7 @@ public class PolyProbe implements Probe {
                 if (inBounds && !current.substring(1).equals("    0") &&
                         current.charAt(3) != currentPlayer.getColorType().charAt(0)) {
                     inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(current.charAt(4));
+                    System.out.println("!!!!!!!!!!!!!!!!11");
                 }
             }
             countShift++;

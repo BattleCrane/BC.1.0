@@ -9,6 +9,8 @@ import PolyBot.Statistics.PolyProbe;
 import Unities.Unity;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -36,13 +38,18 @@ public class Tests {
         battleManagerTest.initializeField();
         battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
         Point pointSpawnTest1 = new Point(7, 7);
+        Point pointSpawnTest3 = new Point(7,3);
         battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest1, battleManagerTest.getGunner());
+        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest3, battleManagerTest.getGunner());
+        Point pointSpawnTest2 = new Point(2, 2);
+
+        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest2, battleManagerTest.getTank());
         battleManagerTest.getBattleField().toString();
         assertTrue(165.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest1));
 
-        Point pointSpawnTest2 = new Point(2, 2);
-        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest2, battleManagerTest.getTank());
-        assertTrue(295.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest2));
+
+        assertTrue(305.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest2));
+        assertTrue(10.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest3));
     }
 
     @Test
@@ -58,8 +65,8 @@ public class Tests {
         PolyProbe polyProbe = new PolyProbe();
         polyProbe.setListDangerousZone(polyProbe.probeDangerousZone(battleManagerTest));
         PriorityUnit priorityGunner = polyProbe.probeBallisticUnit(battleManagerTest, unityGunner, pointTest1);
-        System.out.println(priorityGunner.getPriority());
 
+        System.out.println(priorityGunner.getPriority());
 
 
     }

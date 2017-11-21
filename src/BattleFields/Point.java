@@ -1,5 +1,6 @@
 package BattleFields;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Класс Point реализует координаты объектов на оси XoY
@@ -42,6 +43,11 @@ public final class Point {
 
         if (x != point.x) return false;
         return y == point.y;
+    }
+
+    @NotNull
+    public Point invariant(){
+        return new Point(y, x);
     }
 
     @Contract(pure = true)
