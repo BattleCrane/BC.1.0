@@ -17,28 +17,28 @@ public abstract class PriorityUnit {
     private int width;
     private int height;
 
-    protected PriorityUnit(String inputUnit){
+    public PriorityUnit(String inputUnit){
         this.inputUnit = inputUnit;
     }
 
-    protected PriorityUnit(double priority){
+    public PriorityUnit(double priority){
         this.priority = priority;
     }
 
-    protected PriorityUnit(char name, double priority, Point point) {
+    public PriorityUnit(char name, double priority, Point point) {
         this.name = name;
         this.priority = priority;
         this.point = point;
     }
 
-    protected PriorityUnit(char name, double priority, Point point, String typeOfAttack) {
+    public PriorityUnit(char name, double priority, Point point, String typeOfAttack) {
         this.name = name;
         this.priority = priority;
         this.point = point;
         this.typeOfAttack = typeOfAttack;
     }
 
-    protected PriorityUnit(String inputUnit, double priority, Point point, int width, int height){
+    public PriorityUnit(String inputUnit, double priority, Point point, int width, int height){
         this.inputUnit = inputUnit;
         this.hitPoints = inputUnit.charAt(0);
         this.level = inputUnit.charAt(1) == '^' ? 1 : inputUnit.charAt(1) == '<' ? 2 : 3;

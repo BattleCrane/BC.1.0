@@ -14,11 +14,12 @@ public class Tests {
         BattleManager battleManager = new BattleManager(new BattleField());
         Probe probe = new TemplateProbe();
 
-        battleManager.setPlayer(battleManager.getPlayerBlue());
-        battleManager.putUnity(battleManager.getPlayerRed(), new Point(12, 10), battleManager.getGunner());
-        battleManager.putUnity(battleManager.getPlayerRed(), new Point(7, 0), battleManager.getTank());
-        battleManager.putUnity(battleManager.getPlayerRed(), new Point(9, 3), battleManager.getTurret());
-        battleManager.putUnity(battleManager.getPlayerRed(), new Point(0, 15), battleManager.getTurret());
+//        battleManager.setPlayer(battleManager.getPlayerBlue());
+//        battleManager.putUnity(battleManager.getPlayerRed(), new Point(12, 10), battleManager.getGunner());
+//        battleManager.putUnity(battleManager.getPlayerRed(), new Point(7, 0), battleManager.getTank());
+//        battleManager.putUnity(battleManager.getPlayerRed(), new Point(9, 3), battleManager.getTurret());
+//        battleManager.putUnity(battleManager.getPlayerRed(), new Point(0, 15), battleManager.getTurret());
+        battleManager.putUnity(battleManager.getPlayerRed(), new Point(7, 8), battleManager.getTank());
         battleManager.initializeField();
         List<Point> listOfDangerousZone = probe.probeDangerousZone(battleManager);
         for (Point point : listOfDangerousZone) {

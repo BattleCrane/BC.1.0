@@ -3,7 +3,10 @@ package TestPolyBot;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
+import Bots.Priority.PriorityUnit;
+import Bots.Priority.TemplatePriorityUnit;
 import PolyBot.Statistics.PolyProbe;
+import Unities.Unity;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -40,5 +43,24 @@ public class Tests {
         Point pointSpawnTest2 = new Point(2, 2);
         battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest2, battleManagerTest.getTank());
         assertTrue(295.0 == new PolyProbe().collectValOfBallisticUnitTest(battleManagerTest.getPlayer(), battleManagerTest.getBattleField().getMatrix(), pointSpawnTest2));
+    }
+
+    @Test
+    public void probeBallisticUnit(){
+        BattleManager battleManagerTest  = new BattleManager(new BattleField());
+        battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
+        battleManagerTest.initializeField();
+        Point pointTest1 = new Point(7, 3);
+        Unity unityGunner = battleManagerTest.getGunner();
+        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointTest1, unityGunner);
+        battleManagerTest.putUnity(battleManagerTest.getPlayerRed(), new Point(7, 8), battleManagerTest.getTank());
+        battleManagerTest.getBattleField().toString();
+        PolyProbe polyProbe = new PolyProbe();
+        polyProbe.setListDangerousZone(polyProbe.probeDangerousZone(battleManagerTest));
+        PriorityUnit priorityGunner = polyProbe.probeBallisticUnit(battleManagerTest, unityGunner, pointTest1);
+        System.out.println(priorityGunner.getPriority());
+
+
+
     }
 }

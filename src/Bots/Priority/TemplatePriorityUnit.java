@@ -2,7 +2,7 @@ package Bots.Priority;
 
 import BattleFields.Point;
 public class TemplatePriorityUnit extends PriorityUnit {
-    protected TemplatePriorityUnit(double priority) {
+    public TemplatePriorityUnit(double priority) {
         super(priority);
     }
 

@@ -23,6 +23,9 @@ import java.util.regex.Pattern;
 public class PolyProbe implements Probe {
     private ControllerMatchMaking controllerMatchMaking;
     private PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
+
+
+
     private List<Point> listDangerousZone = new ArrayList<>();
 
 //            probeDangerousZone(controllerMatchMaking.getBattleManager()) == null ? new ArrayList<>()
@@ -57,19 +60,24 @@ public class PolyProbe implements Probe {
 
     @NotNull
     @Contract(pure = true)
-    private PriorityUnit probeBallisticUnit(Unity unity, Point point) {
+    public PriorityUnit probeBallisticUnit(BattleManager battleManager, Unity unity, Point point) {
         double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
+
+        System.out.println(listDangerousZone.size());
+
+
         double value = startValue;
         if (listDangerousZone.contains(point)) {
             value = -value;
         }
-        value += findClosestEnemy(controllerMatchMaking.getBattleManager(), point, unity.getWidth(), unity.getHeight()) *
+        System.out.println("1 " + value);
+        value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) *
                 0.1 * startValue;
-
-        Player currentPlayer = controllerMatchMaking.getBattleManager().getPlayer();
-        List<List<String>> matrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
-
+        System.out.println("2 " + value);
+        Player currentPlayer = battleManager.getPlayer();
+        List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         value += collectValOfBallisticUnit(currentPlayer,matrix, point);
+        System.out.println("3 " +  value);
         return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
     }
 
@@ -288,4 +296,11 @@ public class PolyProbe implements Probe {
     }
 
 
+    public List<Point> getListDangerousZone() {
+        return listDangerousZone;
+    }
+
+    public void setListDangerousZone(List<Point> listDangerousZone) {
+        this.listDangerousZone = listDangerousZone;
+    }
 }
