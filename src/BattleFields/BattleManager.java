@@ -147,7 +147,7 @@ public class BattleManager {
     }
 
     @NotNull
-    private Boolean isEmptyTerritory(Point point, Unity unity) {
+    public Boolean isEmptyTerritory(Point point, Unity unity) {
         if (point.X() + unity.getWidth() > 16 || point.Y() + unity.getHeight() > 16) {
             return false;
         }
