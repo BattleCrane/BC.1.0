@@ -185,29 +185,38 @@ public class PolyProbe implements Probe {
     //TurretUnits:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public PriorityUnit probeRadiusUnitTest(BattleManager battleManager, Unity unity, Point start){
+        return probeRadiusUnit(battleManager, unity, start);
+    }
+
     @NotNull
-    private PriorityUnit probeRadiusUnit(Unity unity, Point point) {
-        double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
+    private PriorityUnit probeRadiusUnit(BattleManager battleManager, Unity unity, Point point) {
+        double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
+        double value = startValue;
         if (listDangerousZone.contains(point)) {
             value = -value;
         }
-        collectValOfRadius(controllerMatchMaking.getBattleManager().getPlayer(), controllerMatchMaking.getBattleManager().getBattleField().getMatrix(), point, value);
+        System.out.println("1: " + value);
+        value += (8.0 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
+        System.out.println("2: " + value);
+        value += collectValOfRadius(battleManager.getPlayer(), battleManager.getBattleField().getMatrix(), point) * 0.5;
         return new PolyPriorityUnit(value);
     }
 
-    private void collectValOfRadius(Player currentPlayer, List<List<String>> matrix, Point start, double inputValue) {
+    private double collectValOfRadius(Player currentPlayer, List<List<String>> matrix, Point start) {
+        double value = 0;
         int x = start.X();
         int y = start.Y();
-        String current = matrix.get(y).get(x);
+        String current = matrix.get(x).get(y);
         int radius = getRadius(current);
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
         for (int i = x - radius; i < x + radius + 1; i++) {
             for (int j = y - countShift; j < y + 1 + countShift; j++) {
+                String otherUnit = matrix.get(j).get(i);
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
-                if (inBounds && !current.substring(1).equals("    0") &&
-                        current.charAt(3) != currentPlayer.getColorType().charAt(0)) {
-                    inputValue += polyMapOfPriority.getMapOfPriorityUnits().get(current.charAt(4));
-                    System.out.println("!!!!!!!!!!!!!!!!11");
+                if (inBounds && !otherUnit.substring(1).equals("    0") &&
+                        otherUnit.charAt(3) != currentPlayer.getColorType().charAt(0)) {
+                    value += polyMapOfPriority.getMapOfPriorityUnits().get(otherUnit.charAt(4));
                 }
             }
             countShift++;
@@ -215,6 +224,7 @@ public class PolyProbe implements Probe {
                 countShift = countShift - 2; //Перетягивание countShift--
             }
         }
+        return value;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

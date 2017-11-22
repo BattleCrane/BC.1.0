@@ -59,15 +59,34 @@ public class Tests {
         battleManagerTest.initializeField();
         Point pointTest1 = new Point(7, 3);
         Unity unityGunner = battleManagerTest.getGunner();
+        Unity unityTank = battleManagerTest.getTank();
         battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointTest1, unityGunner);
-        battleManagerTest.putUnity(battleManagerTest.getPlayerRed(), new Point(7, 8), battleManagerTest.getTank());
+        battleManagerTest.putUnity(battleManagerTest.getPlayerRed(), new Point(7, 8), unityTank);
         battleManagerTest.getBattleField().toString();
         PolyProbe polyProbe = new PolyProbe();
         polyProbe.setListDangerousZone(polyProbe.probeDangerousZone(battleManagerTest));
         PriorityUnit priorityGunner = polyProbe.probeBallisticUnit(battleManagerTest, unityGunner, pointTest1);
+        PriorityUnit priorityTank = polyProbe.probeBallisticUnit(battleManagerTest, unityTank, new Point (7,8));
+        //Рассматривается точка относительно синего игрока:
+        assertTrue(-25.0 == priorityGunner.getPriority());
+        assertTrue(149.0 == priorityTank.getPriority()); //Танк сам не попадает в опасную зону,  издесь всё верно
+    }
 
-        System.out.println(priorityGunner.getPriority());
-
-
+    @Test
+    public void probeRadiusUnitTest(){
+        BattleManager battleManager = new BattleManager(new BattleField());
+        battleManager.initializeField();
+        battleManager.setPlayer(battleManager.getPlayerBlue());
+        battleManager.putUnity(battleManager.getPlayerBlue(), new Point (7,7), battleManager.getTurret());
+        battleManager.putUnity(battleManager.getPlayerBlue(), new Point (4,5), battleManager.getTurret());
+        battleManager.putUnity(battleManager.getPlayerBlue(), new Point(2,2), battleManager.getTurret());
+        battleManager.getBattleField().toString();
+        PolyProbe polyProbe = new PolyProbe();
+        PriorityUnit priorityTurretTest1 = polyProbe.probeRadiusUnitTest(battleManager, battleManager.getTurret(), new Point(7,7));
+        PriorityUnit priorityTurretTest2 = polyProbe.probeRadiusUnitTest(battleManager, battleManager.getTurret(), new Point(4, 5));
+        PriorityUnit priorityTurretTest3 = polyProbe.probeRadiusUnitTest(battleManager, battleManager.getTurret(), new Point (2, 2));
+        assertTrue(37.5 == priorityTurretTest1.getPriority());
+        assertTrue(57.5 == priorityTurretTest2.getPriority());
+        assertTrue(252.5 == priorityTurretTest3.getPriority());
     }
 }
