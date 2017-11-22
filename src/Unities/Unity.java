@@ -14,7 +14,6 @@ package Unities;
  */
 
 public final class Unity {
-
     private int width;
     private int height;
     private String id;
@@ -61,5 +60,9 @@ public final class Unity {
 
     public int getHitPoints() {
         return hitPoints;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 }

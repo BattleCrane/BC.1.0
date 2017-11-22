@@ -1,7 +1,6 @@
 package PolyBot.Statistics;
 
 import Adjutants.AdjutantFielder;
-import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
@@ -23,11 +22,8 @@ import java.util.regex.Pattern;
 public class PolyProbe implements Probe {
     private ControllerMatchMaking controllerMatchMaking;
     private PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
-
-
-
     private List<Point> listDangerousZone = new ArrayList<>();
-
+    private AdjutantFielder adjutantFielder = new AdjutantFielder();
 //            probeDangerousZone(controllerMatchMaking.getBattleManager()) == null ? new ArrayList<>()
 //            : probeDangerousZone(controllerMatchMaking.getBattleManager());
 
@@ -40,13 +36,25 @@ public class PolyProbe implements Probe {
 
     public PriorityUnit probeUnit(PolyAdjutantPriorityField polyAdjutantPriorityField) {
         PriorityUnit mostPriorityUnit = new PolyPriorityUnit(0);
-        List<List<PriorityUnit>> priorityMatrix = polyAdjutantPriorityField.getMatrix();
         List<List<String>> basicMatrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 String currentUnity = basicMatrix.get(j).get(i);
                 if (currentUnity.substring(1).equals("    0")) {
-//                    for (...)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }
             }
         }
@@ -72,8 +80,8 @@ public class PolyProbe implements Probe {
         System.out.println("2 " + value);
         Player currentPlayer = battleManager.getPlayer();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
-        value += collectValOfBallisticUnit(currentPlayer,matrix, point);
-        System.out.println("3 " +  value);
+        value += collectValOfBallisticUnit(currentPlayer, matrix, point);
+        System.out.println("3 " + value);
         return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
     }
 
@@ -132,15 +140,16 @@ public class PolyProbe implements Probe {
         }
         return distance;
     }
-    public double collectValOfBallisticUnitTest(Player currentPlayer, List<List<String>> matrix, Point start){
+
+    public double collectValOfBallisticUnitTest(Player currentPlayer, List<List<String>> matrix, Point start) {
         return collectValOfBallisticUnit(currentPlayer, matrix, start);
     }
 
-    private double collectValOfBallisticUnit(Player currentPlayer, List<List<String>> matrix, Point point){
+    private double collectValOfBallisticUnit(Player currentPlayer, List<List<String>> matrix, Point point) {
         double value = 0;
-        for (int dx = -1; dx <= 1; dx++){
-            for (int dy = -1; dy <= 1; dy++){
-                if (dx == 0 && dy == 0){
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (dx == 0 && dy == 0) {
                     continue;
                 } else {
                     Point start = new Point(point.X(), point.Y());
@@ -158,7 +167,7 @@ public class PolyProbe implements Probe {
                         boolean OpponentOtherUnit = matcherNotBlockedUnits.matches() && !currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
                         if (OpponentBuilding) {
                             if (!isSecondaryPurpose) {
-                                value +=  polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.5;
+                                value += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.5;
                                 isSecondaryPurpose = true;
                             } else {
                                 value += polyMapOfPriority.getMapOfPriorityUnits().get(currentUnity.charAt(3)) * 0.2;
@@ -185,7 +194,7 @@ public class PolyProbe implements Probe {
     //TurretUnits:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public PriorityUnit probeRadiusUnitTest(BattleManager battleManager, Unity unity, Point start){
+    public PriorityUnit probeRadiusUnitTest(BattleManager battleManager, Unity unity, Point start) {
         return probeRadiusUnit(battleManager, unity, start);
     }
 
@@ -230,61 +239,96 @@ public class PolyProbe implements Probe {
 
     //Building:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public PriorityUnit probeBuildingTest(BattleManager battleManager, Unity unity, Point point) {
+        return probeBuilding(battleManager, unity, point);
+    }
+
     @NotNull
-    private PriorityUnit probeBuilding(Unity unity, Point point) {
+    private PriorityUnit probeBuilding(BattleManager battleManager, Unity unity, Point point) {
         double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
-        if (listDangerousZone.contains(point)) {
-            value = -value;
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
+                System.out.println(i + "     " + j);
+                if (listDangerousZone.contains(new Point(j, i))) {
+                    value = -value;
+                    break;
+                }
+            }
         }
-        value += probeForLock(controllerMatchMaking.getBattleManager(), unity, point);
+        if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))){
+            value -= 10;
+        }
+
+        value += probeForLock(battleManager, unity, point);
         return new PolyPriorityUnit(value);
     }
 
-    private int probeForLock(BattleManager battleManager, Unity unity, Point point) {
-        BattleManager cloneBattleManager = new BattleManager();
-        List<List<String>> probedList = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
-            probedList.add(battleManager.getBattleField().getMatrix().get(i));
-            for (int j = 0; j < 16; j++) {
-                probedList.get(i).add(battleManager.getBattleField().getMatrix().get(i).get(j));
-            }
-        }
-        BattleField battleField = new BattleField();
-        battleField.setMatrix(probedList);
-        cloneBattleManager.setBattleField(battleField);
-        if (cloneBattleManager.putUnity(controllerMatchMaking.getBattleManager().getPlayer(), point, unity)) {
-            new AdjutantFielder().fillZones(cloneBattleManager);
-        }
-        return countValOfNewLockedCells(battleField.getMatrix(), probedList);
+    public int probeForLockTest(BattleManager battleManager, Unity unity, Point start) {
+        return probeForLock(battleManager, unity, start);
     }
 
-    private int countValOfNewLockedCells(List<List<String>> matrix, List<List<String>> probedMatrix) {
-        String playerColorType = controllerMatchMaking.getBattleManager().getPlayer().getColorType();
-        int value = 0;
+    private int probeForLock(BattleManager battleManager, Unity unity, Point point) {
+        System.out.println("StartBattleField");
+        battleManager.getBattleField().toString();
+        int currentPoints = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (probedMatrix.get(j).get(i).equals(playerColorType + "    0") && !matrix.get(j).get(i).equals(playerColorType + "    0")) {
-                    value += 30;
-                }
-                if (!probedMatrix.get(j).get(i).equals(playerColorType + "    0") && matrix.get(j).get(i).equals(playerColorType + "    0")) {
-                    value -= 30;
+                if (battleManager.getBattleField().getMatrix().get(j).get(i).charAt(0) ==
+                        battleManager.getPlayer().getColorType().charAt(0)) {
+                    currentPoints++;
                 }
             }
         }
-        return value;
+        System.out.println("CurrentPoints: " + currentPoints);
+        int futurePoints = 0;
+        String field = battleManager.getBattleField().getMatrix().get(point.X()).get(point.Y());
+        if (unity.getId().equals("w")){
+            battleManager.putDoubleWall(battleManager.getPlayer(), point, unity);
+        } else {
+            battleManager.putUnity(battleManager.getPlayer(), point, unity);
+        }
+        
+        adjutantFielder.fillZones(battleManager);
+        System.out.println("ModifiedBattleField");
+        battleManager.getBattleField().toString();
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (battleManager.getBattleField().getMatrix().get(j).get(i).charAt(0) ==
+                        battleManager.getPlayer().getColorType().charAt(0)) {
+                    futurePoints++;
+                }
+            }
+        }
+        System.out.println("FuturePoints: " + futurePoints);
+        int QuantityBuildings = 1; //Существуют постройки, которые строятся по 2
+        if (unity.getId().equals("w")){//Пример стена
+            QuantityBuildings *= 2;
+        } 
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight() * QuantityBuildings; j++) {
+                battleManager.getIdentificationField().getMatrix().get(i).set(j, "  0");
+                battleManager.getBattleField().getMatrix().get(i).set(j, field);
+            }
+        }
+        adjutantFielder.flush(battleManager);
+        adjutantFielder.fillZones(battleManager);
+        System.out.println("StartBattleField");
+        battleManager.getBattleField().toString();
+        return (futurePoints - currentPoints) * 30;
     }
+
 
     @Contract(pure = true)
     private double probeUpgrade(double inputValue) {
-        return inputValue * 2;
+        return inputValue;
     }
 
 
     public void probeEnemyBonus(ControllerMatchMaking controllerMatchMaking) {
         if (controllerMatchMaking.getBattleManager().getOpponentPlayer().getEnergy() == 4) {
+
+
         }
-
-
     }
 
     @Contract(pure = true)
