@@ -129,7 +129,7 @@ public final class ControllerMatchMaking implements Initializable {
                         Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
                         //Если строите бараки или стену:
                         if (labelUnit.equals("building") && battleManager.getHowICanBuild() > 0) {
-                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                            if (battleManager.canConstructBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
 
@@ -137,7 +137,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                         //Если строите завод:
                         if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
-                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                            if (battleManager.canConstructBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowIcanBuildFactories(battleManager.getHowCanBuildFactories() - 1);
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
@@ -158,7 +158,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                         //Если строите генератор:
                         if (labelUnit.equals("generator") && battleManager.getHowICanBuild() > 0 && battleManager.getHowICanBuild() <= 2 && !battleManager.isConstructedGenerator()) {
-                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                            if (battleManager.canConstructBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
                                 battleManager.setConstructedGenerator(true);
@@ -166,7 +166,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                         //Если создаем стену:
                         if (labelUnit.equals("wall") && battleManager.getHowICanBuild() > 0) {
-                            if (battleManager.checkConstructionOfBuilding(pointClick, battleManager.getBarracks(), battleManager.getPlayer()) &&
+                            if (battleManager.canConstructBuilding(pointClick, battleManager.getBarracks(), battleManager.getPlayer()) &&
                                     battleManager.putDoubleWall(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
 
@@ -174,7 +174,7 @@ public final class ControllerMatchMaking implements Initializable {
                         }
                         //Если создаем турель:
                         if (labelUnit.equals("turret") && battleManager.getHowICanBuild() > 0) {
-                            if (battleManager.checkConstructionOfBuilding(pointClick, unit, battleManager.getPlayer()) &&
+                            if (battleManager.canConstructBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
                                 adjutantAttacker.radiusAttack(battleManager, pointClick, 2, 1);

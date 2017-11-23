@@ -164,7 +164,7 @@ public class BattleManager {
     }
 
     //Проверка расположения рядом строения:
-    public boolean checkConstructionOfBuilding(Point point, Unity unity, Player player) {
+    public boolean canConstructBuilding(Point point, Unity unity, Player player) {
         int startX = point.X() - 1; //Сдвигаем начальную точку в левый верхний угол (Тут ошибка в проектировании осей координат)
         int startY = point.Y() - 1;
         Pattern pattern = Pattern.compile("[hgbfwt]");

@@ -709,7 +709,7 @@ public final class ControllerBonusesCollection {
                     controllerMatchMaking.setClick(false);
                     Point pointClick = new Point((int) (event.getY() / 33.5), (int) (event.getX() / 33.5));
                     if (controllerMatchMaking.getBattleManager().getHowICanBuild() > 0 &&
-                            controllerMatchMaking.getBattleManager().checkConstructionOfBuilding(pointClick, fort, controllerMatchMaking.getBattleManager().getPlayer()) &&
+                            controllerMatchMaking.getBattleManager().canConstructBuilding(pointClick, fort, controllerMatchMaking.getBattleManager().getPlayer()) &&
                             controllerMatchMaking.getBattleManager().putUnity(controllerMatchMaking.getBattleManager().getPlayer(), pointClick, fort)) {
                         String fortStr = controllerMatchMaking.getBattleManager().getBattleField().getMatrix().get(pointClick.X()).get(pointClick.Y());
                         fortStr = fortStr.substring(0, 1) + 4 + "!" + fortStr.substring(3, 5);
