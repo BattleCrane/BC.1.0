@@ -649,7 +649,7 @@ public final class ControllerMatchMaking implements Initializable {
             List<Step> listOfStep = bot.loadSteps(battleManager);
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
                 if (bot.getCountOfStep() < listOfStep.size()){
-                    listOfStep.get(bot.getCountOfStep()).run(battleManager);
+                    listOfStep.get(bot.getCountOfStep()).run();
                     bot.setCountOfStep(bot.getCountOfStep() + 1);
                 } else {
                     nextTurn();

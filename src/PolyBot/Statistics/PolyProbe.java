@@ -55,7 +55,6 @@ public class PolyProbe implements Probe {
     }
 
     public List<PriorityUnit> probeAccomodationOfUnits(BattleManager battleManager) {
-        Pair listOfTheBestPriorityTurn = new Pair(new ArrayList<>(), 0);
         Pair listOfBestPriorityBallistic = new Pair(new ArrayList<>(), 0);
         Pair listOfBestPriorityBuilding = new Pair(new ArrayList<>(), 0);
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
@@ -578,6 +577,10 @@ public class PolyProbe implements Probe {
     }
 
 
+    public PriorityUnit probeUpgradeTest(BattleManager battleManager, Unity unity, Point point) {
+        return probeUpgrade(battleManager, unity, point);
+    }
+
     @NotNull
     @Contract(pure = true)
     private PriorityUnit probeUpgrade(BattleManager battleManager, Unity unity, Point point) {
@@ -589,7 +592,7 @@ public class PolyProbe implements Probe {
                         if (i == point.X() && j == point.Y()) {
                             battleManager.getBattleField().getMatrix().get(i).set(j, currentUnity);
                         } else {
-                            battleManager.getBattleField().getMatrix().get(i).set(j, currentUnity.substring(5) + ".");
+                            battleManager.getBattleField().getMatrix().get(i).set(j, currentUnity.substring(0, 5) + ".");
                         }
                     }
                 }

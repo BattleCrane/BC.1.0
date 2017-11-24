@@ -130,4 +130,18 @@ public class Tests {
         assertTrue(30.0 == priorityBarracks.getPriority());
         assertTrue(180.0 == priorityWall.getPriority());
     }
+
+    @Test
+    public void probeUpgradeTest(){
+        BattleManager battleManagerTest  = new BattleManager(new BattleField());
+        battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
+        battleManagerTest.initializeField();
+        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(9, 9), battleManagerTest.getGenerator());
+        PolyProbe polyProbe = new PolyProbe();
+        PriorityUnit priorityGenerator = polyProbe.probeUpgradeTest(battleManagerTest, battleManagerTest.getGenerator(), new Point (9,9));
+        PriorityUnit priorityEmpty = polyProbe.probeUpgradeTest(battleManagerTest, battleManagerTest.getGenerator(), new Point (10,10));
+        assertTrue(300.0 == priorityGenerator.getPriority());
+        assertTrue(0.0 == priorityEmpty.getPriority());
+        battleManagerTest.getBattleField().toString();
+    }
 }
