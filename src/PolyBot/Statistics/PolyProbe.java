@@ -5,11 +5,14 @@ import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import Bots.Statistics.Probe;
+import Bots.Steps.Step;
 import Controllers.ControllerMatchMaking;
 import Players.Player;
 import PolyBot.Priority.PolyMapOfPriority;
 import PolyBot.Priority.PolyPriorityUnit;
+import PolyBot.Steps.ProductionStep;
 import Unities.Unity;
+import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +26,7 @@ public class PolyProbe implements Probe {
     private PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
     private List<Point> listDangerousZone = new ArrayList<>();
     private AdjutantFielder adjutantFielder = new AdjutantFielder();
+    private List<Step> listOfStep = new ArrayList<>();
 //            probeDangerousZone(controllerMatchMaking.getBattleManager()) == null ? new ArrayList<>()
 //            : probeDangerousZone(controllerMatchMaking.getBattleManager());
 
@@ -51,7 +55,9 @@ public class PolyProbe implements Probe {
     }
 
     public List<PriorityUnit> probeAccomodationOfUnits(BattleManager battleManager) {
+        Pair listOfTheBestPriorityTurn = new Pair(new ArrayList<>(), 0);
         Pair listOfBestPriorityBallistic = new Pair(new ArrayList<>(), 0);
+        Pair listOfBestPriorityBuilding = new Pair(new ArrayList<>(), 0);
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
 
         int howICanProductArmyLevel1 = battleManager.getHowICanProductArmyLevel1();
@@ -71,10 +77,10 @@ public class PolyProbe implements Probe {
         Unity wall = battleManager.getWall();
         Unity turret = battleManager.getGenerator();
 
+        PriorityUnit mostPriorityBallistic = new PolyPriorityUnit(Double.MIN_VALUE);
+        PriorityUnit mostPriorityBuilding = new PolyPriorityUnit(Double.MIN_VALUE);
         while (howICanProductArmyLevel1 > 0 || howICanProductTanksLevel1 > 0 || howICanProductArmyLevel2 > 0 ||
-                howICanProductTanksLevel2 > 0 || howICanProductArmyLevel3 > 0 || howICanProductTanksLevel3 > 0) {
-            PriorityUnit mostPriorityBallistic = new PolyPriorityUnit(Double.MIN_VALUE);
-            PriorityUnit mostPriorityBuilding = new PolyPriorityUnit(Double.MIN_VALUE);
+                howICanProductTanksLevel2 > 0 || howICanProductArmyLevel3 > 0 || howICanProductTanksLevel3 > 0 || howICanBuild > 0) {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     Point currentPoint = new Point(i, j);
@@ -255,7 +261,6 @@ public class PolyProbe implements Probe {
                             }
                         }
 
-
                     } else {
                         if (howICanBuild > 0) {
 
@@ -306,14 +311,16 @@ public class PolyProbe implements Probe {
                             howICanBuild--;
                             break;
                     }
-
-
+                    listOfBestPriorityBuilding.add(mostPriorityBuilding);
                 }
             }
         }
 
-
-        return new ArrayList<>();
+        if (listOfBestPriorityBallistic.sum > listOfBestPriorityBuilding.sum){
+            return listOfBestPriorityBallistic.priorityUnitList;
+        } else {
+            return listOfBestPriorityBuilding.priorityUnitList;
+        }
     }
 
     //BallisticUnits

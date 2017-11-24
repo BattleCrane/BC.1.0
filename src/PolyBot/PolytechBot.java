@@ -43,33 +43,33 @@ public class PolytechBot implements Bot {
     public List<Step> loadSteps(BattleManager battleManager) {
         //Загрузка бонусных ходов:
         List<Step> stepList = new ArrayList<>();
-        for (int i = 0; i < battleManager.getPlayer().getEnergy(); i++) {
-            stepList.add(new BonusStep());
-        }
-        //Загрузка ходов атакующих юнитов:
-        List<PriorityUnit> priorityUnitList = probe.showActiveUnits(polyAdjutantPriorityField.getMatrix(), battleManager.getPlayer());
-        for (PriorityUnit aPriorityUnitList : priorityUnitList) {
-            stepList.add(new AttackStep(aPriorityUnitList));
-        }
-        //Выбор развития:
-        chooseDevelopment();
-        if (isGoingToBuild) { //Если строим ->
-            for (int i = 0; i < battleManager.getHowICanBuild(); i++) {
-                stepList.add(new BuildingStep());
-            }
-        }
-        if (isGoingToDraft) { //Если делаем армию ->
-            int countOfProductionTanks = battleManager.getHowICanProductTanksLevel1() + battleManager.getHowICanProductTanksLevel2() +
-                    battleManager.getHowICanProductTanksLevel3();
-            int countOfDraft = battleManager.getHowICanProductArmyLevel1() + battleManager.getHowICanProductArmyLevel1() +
-                    battleManager.getHowICanProductArmyLevel1();
-            for (int i = 0; i < countOfProductionTanks; i++) {
-                stepList.add(new TankStep());
-            }
-            for (int i = 0; i < countOfDraft; i++) {
-                stepList.add(new ArmyStep());
-            }
-        }
+//        for (int i = 0; i < battleManager.getPlayer().getEnergy(); i++) {
+//            stepList.add(new BonusStep());
+//        }
+//        //Загрузка ходов атакующих юнитов:
+//        List<PriorityUnit> priorityUnitList = probe.showActiveUnits(polyAdjutantPriorityField.getMatrix(), battleManager.getPlayer());
+//        for (PriorityUnit aPriorityUnitList : priorityUnitList) {
+//            stepList.add(new AttackStep(aPriorityUnitList));
+//        }
+//        //Выбор развития:
+//        chooseDevelopment();
+//        if (isGoingToBuild) { //Если строим ->
+//            for (int i = 0; i < battleManager.getHowICanBuild(); i++) {
+//                stepList.add(new ProductionStep());
+//            }
+//        }
+//        if (isGoingToDraft) { //Если делаем армию ->
+//            int countOfProductionTanks = battleManager.getHowICanProductTanksLevel1() + battleManager.getHowICanProductTanksLevel2() +
+//                    battleManager.getHowICanProductTanksLevel3();
+//            int countOfDraft = battleManager.getHowICanProductArmyLevel1() + battleManager.getHowICanProductArmyLevel1() +
+//                    battleManager.getHowICanProductArmyLevel1();
+//            for (int i = 0; i < countOfProductionTanks; i++) {
+//                stepList.add(new TankStep());
+//            }
+//            for (int i = 0; i < countOfDraft; i++) {
+//                stepList.add(new ArmyStep());
+//            }
+//        }
         return stepList;
     }
 
