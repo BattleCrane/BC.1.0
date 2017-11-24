@@ -1,9 +1,11 @@
 package Bots.Priority;
 
 import BattleFields.Point;
+import Unities.Unity;
 
 public abstract class PriorityUnit {
     private String inputUnit;
+    private Unity unity;
     private double priority;
     private int hitPoints;
     private int level;
@@ -25,11 +27,25 @@ public abstract class PriorityUnit {
         this.priority = priority;
     }
 
+    public PriorityUnit(String inputUnit, double priority, Point point){
+        this.inputUnit = inputUnit;
+        this.priority = priority;
+        this.point = point;
+    }
+
+    public PriorityUnit(double priority, Point point, Unity unity){
+        this.priority = priority;
+        this.point = point;
+        this.unity = unity;
+    }
+
     public PriorityUnit(char name, double priority, Point point) {
         this.name = name;
         this.priority = priority;
         this.point = point;
     }
+
+
 
     public PriorityUnit(char name, double priority, Point point, String typeOfAttack) {
         this.name = name;
@@ -161,5 +177,66 @@ public abstract class PriorityUnit {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PriorityUnit that = (PriorityUnit) o;
+
+        if (Double.compare(that.priority, priority) != 0) return false;
+        if (hitPoints != that.hitPoints) return false;
+        if (level != that.level) return false;
+        if (isActive != that.isActive) return false;
+        if (color != that.color) return false;
+        if (name != that.name) return false;
+        if (isRoot != that.isRoot) return false;
+        if (width != that.width) return false;
+        if (height != that.height) return false;
+        if (inputUnit != null ? !inputUnit.equals(that.inputUnit) : that.inputUnit != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (typeOfAttack != null ? !typeOfAttack.equals(that.typeOfAttack) : that.typeOfAttack != null) return false;
+        return point != null ? point.equals(that.point) : that.point == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = inputUnit != null ? inputUnit.hashCode() : 0;
+        temp = Double.doubleToLongBits(priority);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + hitPoints;
+        result = 31 * result + level;
+        result = 31 * result + (isActive ? 1 : 0);
+        result = 31 * result + (int) color;
+        result = 31 * result + (int) name;
+        result = 31 * result + (isRoot ? 1 : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (typeOfAttack != null ? typeOfAttack.hashCode() : 0);
+        result = 31 * result + (point != null ? point.hashCode() : 0);
+        result = 31 * result + width;
+        result = 31 * result + height;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PriorityUnit{" +
+                "unity='" + unity.getId()+ '\'' +
+                ", priority=" + priority +
+                ", point=" + point +
+                '}';
+    }
+
+    public Unity getUnity() {
+        return unity;
+    }
+
+    public void setUnity(Unity unity) {
+        this.unity = unity;
     }
 }

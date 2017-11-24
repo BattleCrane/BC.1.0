@@ -48,14 +48,14 @@ public class BattleManager {
 
     //Юниты:
     //Строения:
-    private int howICanBuild;
+    private int howICanBuild = 1;
     //Штаб:
     private Unity headquarters = new Unity(2, 2, "h", 8);
     //Бараки:
     private Unity barracks = new Unity(1, 2, "b", 1);
     //Генератор:
     private Unity generator = new Unity(2, 2, "g", 1);
-    private boolean isConstructedGenerator;
+    private boolean isConstructedGenerator = false;
     //Завод:
     private Unity factory = new Unity(2, 3, "f", 1);
     //Турель:
@@ -64,14 +64,14 @@ public class BattleManager {
     private Unity wall = new Unity(1, 1, "w", 4);
 
     //Армия:
-    private int howICanProductArmyLevel1;
-    private int howICanProductTanksLevel1;
+    private int howICanProductArmyLevel1 = 0;
+    private int howICanProductTanksLevel1 = 0;
 
-    private int howICanProductArmyLevel2;
-    private int howICanProductTanksLevel2;
-    private int howICanProductArmyLevel3;
-    private int howICanProductTanksLevel3;
-    private int howIcanBuildFactories;
+    private int howICanProductArmyLevel2 = 0;
+    private int howICanProductTanksLevel2 = 0;
+    private int howICanProductArmyLevel3 = 0;
+    private int howICanProductTanksLevel3 = 0;
+    private int howICanBuildFactories = 0;
     private Unity gunner = new Unity(1, 1, "G", 1);
     private Unity tank = new Unity(1, 1, "T", 2);
 
@@ -273,7 +273,7 @@ public class BattleManager {
         whatIsTurn();
         adjutantWakeUpper.wakeUpUnities(this);
         adjutantReporter.getReportAboutUnities(this);
-        howIcanBuildFactories = howICanProductArmyLevel1 + howICanProductArmyLevel2 + howICanProductArmyLevel3 - howICanProductTanksLevel1 - howICanProductTanksLevel2 - howICanProductTanksLevel3;
+        howICanBuildFactories = howICanProductArmyLevel1 + howICanProductArmyLevel2 + howICanProductArmyLevel3 - howICanProductTanksLevel1 - howICanProductTanksLevel2 - howICanProductTanksLevel3;
         if (player.getSupplyEnergy() < 20){
             player.setEnergy(player.getEnergy() + 1);
             player.setSupplyEnergy(player.getSupplyEnergy() + 1);
@@ -357,11 +357,11 @@ public class BattleManager {
     }
 
     public int getHowCanBuildFactories() {
-        return howIcanBuildFactories;
+        return howICanBuildFactories;
     }
 
-    public void setHowIcanBuildFactories(int howIcanBuildFactories) {
-        this.howIcanBuildFactories = howIcanBuildFactories;
+    public void setHowICanBuildFactories(int howICanBuildFactories) {
+        this.howICanBuildFactories = howICanBuildFactories;
     }
 
     public int getHowICanBuild() {

@@ -7,20 +7,19 @@ import Unities.Unity;
 
 public final class ProductionStep extends Step {
 
-    public ProductionStep(BattleManager battleManager, PriorityUnit priorityUnit) {
+    protected ProductionStep(BattleManager battleManager, PriorityUnit priorityUnit) {
         super(battleManager, priorityUnit);
     }
 
     @Override
     public void run() {
-        int width = priorityUnit.getWidth();
-        int height = priorityUnit.getHeight();
-        String id = "" + priorityUnit.getName();
-        int hitPoints = priorityUnit.getHitPoints();
-        if (priorityUnit.getName() == 'w'){
-            battleManager.putDoubleWall(battleManager.getPlayer(), priorityUnit.getPoint(), new Unity(width, height, id, hitPoints));
-        } else {
-            battleManager.putUnity(battleManager.getPlayer(), priorityUnit.getPoint(), new Unity(width, height, id, hitPoints));
+        if (priorityUnit.getPriority() != Double.MIN_VALUE){
+            Unity unity = priorityUnit.getUnity();
+            if (unity.getId().equals("w")){
+                battleManager.putDoubleWall(battleManager.getPlayer(), priorityUnit.getPoint(), unity);
+            } else {
+                battleManager.putUnity(battleManager.getPlayer(), priorityUnit.getPoint(), unity);
+            }
         }
     }
 }

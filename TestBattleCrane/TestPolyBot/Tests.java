@@ -11,6 +11,8 @@ import Unities.Unity;
 import org.junit.Test;
 
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -143,5 +145,30 @@ public class Tests {
         assertTrue(300.0 == priorityGenerator.getPriority());
         assertTrue(0.0 == priorityEmpty.getPriority());
         battleManagerTest.getBattleField().toString();
+        System.out.println(priorityEmpty.toString());
+    }
+
+    @Test
+    public void probeAccommodationOfUnisTest(){
+        BattleManager battleManagerTest  = new BattleManager(new BattleField());
+        battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
+        battleManagerTest.initializeField();
+        battleManagerTest.setHowICanBuild(2);
+        battleManagerTest.setConstructedGenerator(false);
+        battleManagerTest.setHowICanBuildFactories(0);
+        battleManagerTest.setHowICanProductArmyLevel1(0);
+        battleManagerTest.setHowICanProductArmyLevel2(0);
+        battleManagerTest.setHowICanProductArmyLevel3(0);
+        battleManagerTest.setHowICanProductTanksLevel1(0);
+        battleManagerTest.setHowICanProductTanksLevel1(0);
+        battleManagerTest.setHowICanProductTanksLevel1(0);
+        PolyProbe polyProbe = new PolyProbe();
+        List<PriorityUnit> priorityUnitsList = polyProbe.probeAccommodationOfUnitsTest(battleManagerTest);
+        System.out.println(priorityUnitsList.size());
+        System.out.println(priorityUnitsList.toString());
+
+
+
+
     }
 }

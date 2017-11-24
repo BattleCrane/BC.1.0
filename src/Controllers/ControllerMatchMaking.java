@@ -139,7 +139,7 @@ public final class ControllerMatchMaking implements Initializable {
                         if (labelUnit.equals("factory") && battleManager.getHowCanBuildFactories() > 0 && battleManager.getHowICanBuild() > 0) {
                             if (battleManager.canConstructBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
-                                battleManager.setHowIcanBuildFactories(battleManager.getHowCanBuildFactories() - 1);
+                                battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() - 1);
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
                                 if (battleManager.getHowCanBuildFactories() == 0){
                                     buttonBuildFactory.setVisible(false);

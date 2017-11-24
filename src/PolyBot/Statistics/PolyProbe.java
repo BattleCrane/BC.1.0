@@ -10,9 +10,7 @@ import Controllers.ControllerMatchMaking;
 import Players.Player;
 import PolyBot.Priority.PolyMapOfPriority;
 import PolyBot.Priority.PolyPriorityUnit;
-import PolyBot.Steps.ProductionStep;
 import Unities.Unity;
-import javafx.scene.layout.Pane;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,7 +52,11 @@ public class PolyProbe implements Probe {
         this.controllerMatchMaking = controllerMatchMaking;
     }
 
-    public List<PriorityUnit> probeAccomodationOfUnits(BattleManager battleManager) {
+    public List<PriorityUnit> probeAccommodationOfUnitsTest(BattleManager battleManager) {
+        return probeAccommodationOfUnits(battleManager);
+    }
+
+    public List<PriorityUnit> probeAccommodationOfUnits(BattleManager battleManager) {
         Pair listOfBestPriorityBallistic = new Pair(new ArrayList<>(), 0);
         Pair listOfBestPriorityBuilding = new Pair(new ArrayList<>(), 0);
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
@@ -66,7 +68,7 @@ public class PolyProbe implements Probe {
         int howICanProductArmyLevel3 = battleManager.getHowICanProductArmyLevel3();
         int howICanProductTanksLevel3 = battleManager.getHowICanProductTanksLevel3();
 
-        int howICanBuild = battleManager.getHowICanBuild();
+        int howICanBuild = 2;
         int howCanBuildFactories = battleManager.getHowCanBuildFactories();
         boolean isConstructedGenerator = battleManager.isConstructedGenerator();
 
@@ -76,10 +78,13 @@ public class PolyProbe implements Probe {
         Unity wall = battleManager.getWall();
         Unity turret = battleManager.getGenerator();
 
-        PriorityUnit mostPriorityBallistic = new PolyPriorityUnit(Double.MIN_VALUE);
-        PriorityUnit mostPriorityBuilding = new PolyPriorityUnit(Double.MIN_VALUE);
-        while (howICanProductArmyLevel1 > 0 || howICanProductTanksLevel1 > 0 || howICanProductArmyLevel2 > 0 ||
-                howICanProductTanksLevel2 > 0 || howICanProductArmyLevel3 > 0 || howICanProductTanksLevel3 > 0 || howICanBuild > 0) {
+        PriorityUnit mostPriorityBallistic = new PolyPriorityUnit(Double.MIN_VALUE, null, null);
+        PriorityUnit mostPriorityBuilding = new PolyPriorityUnit(Double.MIN_VALUE, null, null);
+
+//        howICanProductArmyLevel1 + howICanProductTanksLevel1 + howICanProductArmyLevel2 +
+////                howICanProductTanksLevel2 + howICanProductArmyLevel3 + howICanProductTanksLevel3 +
+
+        while (howICanBuild > 0) {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     Point currentPoint = new Point(i, j);
@@ -89,82 +94,82 @@ public class PolyProbe implements Probe {
                         String labelStepBallistic = "";
                         if (currentUnity.substring(0, 1).equals(battleManager.getPlayer().getColorType())) {//Если это наша пустая клетка ->
 
-                            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-                            if (howICanProductTanksLevel1 > 0) { //Проверяем танки 1-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    mostPriorityBallistic = priorityUnit;
-                                    labelStepBallistic = "tankLvl1";
-                                }
-                            }
-                            if (howICanProductArmyLevel1 > 0) { //Проверяем автоматчиков 1-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    mostPriorityBallistic = priorityUnit;
-                                    labelStepBallistic = "gunnerLvl1";
-                                }
-                            }
-                            if (howICanProductTanksLevel2 > 0) { //Проверяем танки 2-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "tankLvl2";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                            if (howICanProductArmyLevel2 > 0) { //Проверяем автоматчиков 2-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "gunnerLvl2";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                            if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "tankLvl13";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                            if (howICanProductArmyLevel3 > 0) {  //Проверяем автоматчиков 3-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "gunnerLvl3";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
+//                            //Army:
+//                            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                            if (howICanProductTanksLevel1 > 0) { //Проверяем танки 1-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    mostPriorityBallistic = priorityUnit;
+//                                    labelStepBallistic = "tankLvl1";
+//                                }
+//                            }
+//                            if (howICanProductArmyLevel1 > 0) { //Проверяем автоматчиков 1-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    mostPriorityBallistic = priorityUnit;
+//                                    labelStepBallistic = "gunnerLvl1";
+//                                }
+//                            }
+//                            if (howICanProductTanksLevel2 > 0) { //Проверяем танки 2-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "tankLvl2";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                            if (howICanProductArmyLevel2 > 0) { //Проверяем автоматчиков 2-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "gunnerLvl2";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                            if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "tankLvl13";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                            if (howICanProductArmyLevel3 > 0) {  //Проверяем автоматчиков 3-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "gunnerLvl3";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
                         }
-                        if (currentUnity.substring(0, 1).equals(" ")) {//Если это нейтральная клетка ->
-                            if (howICanProductTanksLevel2 > 0) { //Проверяем танки 2-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "tankLvl2";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                            if (howICanProductArmyLevel2 > 0) { //Проверяем автоматчиков 2-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "gunnerLvl2";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                            if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "tankLvl3";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                            if (howICanProductArmyLevel3 > 0) { //Проверяем автоматчиков 3-го уровня:
-                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
-                                    labelStepBallistic = "gunnerLvl3";
-                                    mostPriorityBallistic = priorityUnit;
-                                }
-                            }
-                        }
+//                        if (currentUnity.substring(0, 1).equals(" ")) {//Если это нейтральная клетка ->
+//                            if (howICanProductTanksLevel2 > 0) { //Проверяем танки 2-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "tankLvl2";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                            if (howICanProductArmyLevel2 > 0) { //Проверяем автоматчиков 2-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "gunnerLvl2";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                            if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "tankLvl3";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                            if (howICanProductArmyLevel3 > 0) { //Проверяем автоматчиков 3-го уровня:
+//                                PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
+//                                if (priorityUnit.getPriority() > mostPriorityBallistic.getPriority()) {
+//                                    labelStepBallistic = "gunnerLvl3";
+//                                    mostPriorityBallistic = priorityUnit;
+//                                }
+//                            }
+//                        }
                         if (currentUnity.substring(0, 1).equals(battleManager.getOpponentPlayer().getColorType())) {//Если это клетка оппонента ->
                             if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
                                 PriorityUnit priorityUnit = probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
@@ -201,7 +206,8 @@ public class PolyProbe implements Probe {
                                 howICanProductArmyLevel3--;
                                 break;
                         }
-                        if (mostPriorityBallistic.getPriority() != Double.MIN_VALUE) {
+                        if (mostPriorityBallistic.getPriority() > Double.MIN_VALUE &&
+                                !listOfBestPriorityBallistic.priorityUnitList.contains(mostPriorityBallistic)) {
                             listOfBestPriorityBallistic.add(mostPriorityBallistic);
                         }
 
@@ -233,7 +239,7 @@ public class PolyProbe implements Probe {
                             if (howICanBuild <= 2 && !isConstructedGenerator && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
                                     battleManager.isEmptyTerritory(currentPoint, generator)) {
                                 PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
+                                if (priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
                                     labelStepBuilding = "generator";
                                     mostPriorityBuilding = priorityUnit;
                                 }
@@ -290,32 +296,35 @@ public class PolyProbe implements Probe {
                     }
                     switch (labelStepBuilding) {
                         case "barracks":
-                            howICanBuild--;
+                            howICanBuild = howICanBuild - 1;
                             break;
                         case "factory":
-                            howICanBuild--;
+                            howICanBuild = howICanBuild - 1;
                             howCanBuildFactories--;
                             break;
                         case "generator":
-                            howICanBuild--;
+                            howICanBuild = howICanBuild - 1;
                             isConstructedGenerator = true;
                             break;
                         case "wall":
-                            howICanBuild--;
+                            howICanBuild = howICanBuild - 1;
                             break;
                         case "turret":
-                            howICanBuild--;
+                            howICanBuild = howICanBuild - 1;
                             break;
                         case "upgrade":
-                            howICanBuild--;
+                            howICanBuild = howICanBuild - 1;
                             break;
                     }
-                    listOfBestPriorityBuilding.add(mostPriorityBuilding);
+                    if (mostPriorityBuilding.getPriority() != Double.MIN_VALUE &&
+                            !listOfBestPriorityBuilding.priorityUnitList.contains(mostPriorityBuilding)) {
+                        listOfBestPriorityBuilding.add(mostPriorityBuilding);
+                    }
                 }
             }
         }
 
-        if (listOfBestPriorityBallistic.sum > listOfBestPriorityBuilding.sum){
+        if (listOfBestPriorityBallistic.sum > listOfBestPriorityBuilding.sum) {
             return listOfBestPriorityBallistic.priorityUnitList;
         } else {
             return listOfBestPriorityBuilding.priorityUnitList;
@@ -341,7 +350,7 @@ public class PolyProbe implements Probe {
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         value += collectValOfBallisticUnit(currentPlayer, matrix, point);
         System.out.println("3 " + value);
-        return new PolyPriorityUnit(unity.getId().charAt(0), value, point);
+        return new PolyPriorityUnit(value, point, unity);
     }
 
     public int findClosestEnemyTest(BattleManager battleManager, Point startPoint, int width, int height) {
@@ -468,7 +477,7 @@ public class PolyProbe implements Probe {
         value += (8.0 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
         System.out.println("2: " + value);
         value += collectValOfRadius(battleManager.getPlayer(), battleManager.getBattleField().getMatrix(), point) * 0.5;
-        return new PolyPriorityUnit(value);
+        return new PolyPriorityUnit(value, point, unity);
     }
 
     private double collectValOfRadius(Player currentPlayer, List<List<String>> matrix, Point start) {
@@ -504,6 +513,7 @@ public class PolyProbe implements Probe {
 
     @NotNull
     private PriorityUnit probeBuilding(BattleManager battleManager, Unity unity, Point point) {
+        double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
         double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
@@ -519,7 +529,8 @@ public class PolyProbe implements Probe {
         }
 
         value += probeForLock(battleManager, unity, point);
-        return new PolyPriorityUnit(value);
+        value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
+        return new PolyPriorityUnit(value, point, unity);
     }
 
     public int probeForLockTest(BattleManager battleManager, Unity unity, Point start) {
@@ -596,10 +607,10 @@ public class PolyProbe implements Probe {
                         }
                     }
                 }
-                return new PolyPriorityUnit(polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)));
+                return new PolyPriorityUnit(polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
             }
         }
-        return new PolyPriorityUnit(0);
+        return new PolyPriorityUnit(Double.MIN_VALUE, point, unity);
     }
 
 

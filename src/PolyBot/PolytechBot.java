@@ -23,7 +23,7 @@ public class PolytechBot implements Bot {
 
     private Probe probe = new PolyProbe(controllerMatchMaking); //Зонд
 
-    private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(controllerMatchMaking.getBattleManager());
+//    private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(controllerMatchMaking.getBattleManager());
 
     //Конструктор:
     public PolytechBot(ControllerMatchMaking controllerMatchMaking) {
