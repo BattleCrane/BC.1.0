@@ -153,7 +153,8 @@ public class Tests {
         BattleManager battleManagerTest  = new BattleManager(new BattleField());
         battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
         battleManagerTest.initializeField();
-        battleManagerTest.setHowICanBuild(2);
+        new AdjutantFielder().fillZones(battleManagerTest);
+        battleManagerTest.setHowICanBuild(5);
         battleManagerTest.setConstructedGenerator(false);
         battleManagerTest.setHowICanBuildFactories(0);
         battleManagerTest.setHowICanProductArmyLevel1(0);
