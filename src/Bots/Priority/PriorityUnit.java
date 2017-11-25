@@ -188,17 +188,7 @@ public abstract class PriorityUnit {
         PriorityUnit that = (PriorityUnit) o;
 
         if (Double.compare(that.priority, priority) != 0) return false;
-        if (hitPoints != that.hitPoints) return false;
-        if (level != that.level) return false;
-        if (isActive != that.isActive) return false;
-        if (color != that.color) return false;
-        if (name != that.name) return false;
-        if (isRoot != that.isRoot) return false;
-        if (width != that.width) return false;
-        if (height != that.height) return false;
-        if (inputUnit != null ? !inputUnit.equals(that.inputUnit) : that.inputUnit != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (typeOfAttack != null ? !typeOfAttack.equals(that.typeOfAttack) : that.typeOfAttack != null) return false;
+        if (!unity.equals(that.unity)) return false;
         return point != null ? point.equals(that.point) : that.point == null;
     }
 

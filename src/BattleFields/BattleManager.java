@@ -44,6 +44,9 @@ public class BattleManager {
     private Player playerBlue = new Player(0, -1, -1 ,"+");
     private Player playerRed = new Player(1, 0, 0, "-");
     private Player player;
+
+
+
     private Player opponentPlayer;
 
     //Юниты:
@@ -322,6 +325,10 @@ public class BattleManager {
 
     public Player getOpponentPlayer() {
         return opponentPlayer;
+    }
+
+    public void setOpponentPlayer(Player opponentPlayer) {
+        this.opponentPlayer = opponentPlayer;
     }
 
     public Unity getHeadquarters() {

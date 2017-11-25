@@ -1,7 +1,6 @@
 package PolyBot.Statistics;
 
 import Adjutants.AdjutantFielder;
-import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
@@ -54,7 +53,7 @@ public class PolyProbe implements Probe {
     }
 
     public List<PriorityUnit> probeAccommodationOfUnitsTest(BattleManager battleManager) {
-        return probeAccommodationOfUnits(battleManager);
+        return probeAccomodationOfUnits(battleManager);
     }
 
     public boolean containsTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity){
@@ -62,14 +61,14 @@ public class PolyProbe implements Probe {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                 System.out.println(i + "     " + j);
                 if (listOfMarkedTerritory.contains(new Point(i, j))){
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
-    public void marksTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity){
+    public void markTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity){
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                 System.out.println(i + "     " + j);
@@ -78,7 +77,7 @@ public class PolyProbe implements Probe {
         }
     }
 
-    public List<PriorityUnit> probeAccommodationOfUnits(BattleManager battleManager) {
+    public List<PriorityUnit> probeAccomodationOfUnits(BattleManager battleManager) {
         Pair listOfBestPriorityBallistic = new Pair(new ArrayList<>(), 0);
         Pair listOfBestPriorityBuilding = new Pair(new ArrayList<>(), 0);
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
@@ -115,13 +114,12 @@ public class PolyProbe implements Probe {
 
         for (int k = 0; k < sum; k++) {
             String labelStepBuilding = "";
-            Point currentPoint = new Point(0, 0);
+            Point currentPoint;
 
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
-                    currentPoint = new Point(j, i);
+                    currentPoint = new Point(i, j);
                     String currentUnity = matrix.get(j).get(i);
-                    System.out.println("QQQQQQQQQQQQQQQQQQQQq" + currentUnity);
 
                     if (currentUnity.substring(1).equals("    0")) { //Если это пустая клетка ->
                         String labelStepBallistic = "";
@@ -248,94 +246,93 @@ public class PolyProbe implements Probe {
 
                         if (howICanBuild > 0) {//Если можно строить строения:
 
+                            //Проверяем генератор:
+                            if (howICanBuild <= 2 ){
+
+                                if (isConstructedGenerator  == false && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
+                                        battleManager.isEmptyTerritory(currentPoint, generator)) {
+
+                                    PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
+                                    if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
+                                        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+                                        labelStepBuilding = "generator";
+                                        mostPriorityBuilding = priorityUnit;
+                                    }
+                                }
+                            }
+
+
                             //Проверяем бараки:
-                            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                             if (battleManager.canConstructBuilding(currentPoint, barracks, battleManager.getPlayer()) &&
                                     battleManager.isEmptyTerritory(currentPoint, barracks)) {
 
                                 PriorityUnit priorityUnit = probeBuilding(battleManager, barracks, currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
+                                if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
                                     labelStepBuilding = "barracks";
                                     mostPriorityBuilding = priorityUnit;
                                 }
                             }
 
-                            //Проверяем завод:
-                            if (howCanBuildFactories > 0 && battleManager.canConstructBuilding(currentPoint, factory, battleManager.getPlayer()) &&
-                                    battleManager.isEmptyTerritory(currentPoint, factory)) {
-                                PriorityUnit priorityUnit = probeBuilding(battleManager, factory, currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
-                                    labelStepBuilding = "factory";
-                                    mostPriorityBuilding = priorityUnit;
-                                }
-                            }
-                            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                            //Проверяем генератор:
-                            if (howICanBuild <= 2 && !isConstructedGenerator && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
-                                    battleManager.isEmptyTerritory(currentPoint, generator)) {
-
-                                PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
-                                if (priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
-                                    labelStepBuilding = "generator";
-                                    mostPriorityBuilding = priorityUnit;
-                                }
-                            }
-
-                            //Проверяем стену:
-                            if (battleManager.canConstructBuilding(currentPoint, barracks, battleManager.getPlayer()) &&
-                                    battleManager.isEmptyTerritory(currentPoint, barracks)) {
-                                PriorityUnit priorityUnit = probeBuilding(battleManager, wall, currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
-                                    labelStepBuilding = "wall";
-                                    mostPriorityBuilding = priorityUnit;
-                                }
-                            }
-
-                            //Проверяем турель:
-                            if (battleManager.canConstructBuilding(currentPoint, turret, battleManager.getPlayer()) &&
-                                    battleManager.isEmptyTerritory(currentPoint, turret)) {
-                                PriorityUnit priorityUnit = probeRadiusUnit(battleManager, turret, currentPoint);
-                                if (priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
-                                    labelStepBuilding = "turret";
-                                    mostPriorityBuilding = priorityUnit;
-                                }
-                            }
+//                            //Проверяем завод:
+//                            if (howCanBuildFactories > 0 && battleManager.canConstructBuilding(currentPoint, factory, battleManager.getPlayer()) &&
+//                                    battleManager.isEmptyTerritory(currentPoint, factory)) {
+//                                PriorityUnit priorityUnit = probeBuilding(battleManager, factory, currentPoint);
+//                                if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                    labelStepBuilding = "factory";
+//                                    mostPriorityBuilding = priorityUnit;
+//                                }
+//                            }
+//
+//
+//                            //Проверяем стену:
+//                            if (battleManager.canConstructBuilding(currentPoint, barracks, battleManager.getPlayer()) &&
+//                                    battleManager.isEmptyTerritory(currentPoint, barracks)) {
+//                                PriorityUnit priorityUnit = probeBuilding(battleManager, wall, currentPoint);
+//                                if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                    labelStepBuilding = "wall";
+//                                    mostPriorityBuilding = priorityUnit;
+//                                }
+//                            }
+//
+//                            //Проверяем турель:
+//                            if (battleManager.canConstructBuilding(currentPoint, turret, battleManager.getPlayer()) &&
+//                                    battleManager.isEmptyTerritory(currentPoint, turret)) {
+//                                PriorityUnit priorityUnit = probeRadiusUnit(battleManager, turret, currentPoint);
+//                                if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                    labelStepBuilding = "turret";
+//                                    mostPriorityBuilding = priorityUnit;
+//                                }
+//                            }
                         }
 
                     } else {
                         if (howICanBuild > 0) {
-
-                            PriorityUnit priorityBarracks = probeUpgrade(battleManager, barracks, currentPoint);
-                            if (priorityBarracks.getPriority() > mostPriorityBuilding.getPriority()) {
-                                labelStepBuilding = "upgrade";
-                                mostPriorityBuilding = priorityBarracks;
-                            }
-
-                            PriorityUnit priorityFactory = probeUpgrade(battleManager, factory, currentPoint);
-                            if (priorityFactory.getPriority() > mostPriorityBuilding.getPriority()) {
-                                labelStepBuilding = "upgrade";
-                                mostPriorityBuilding = priorityFactory;
-                            }
-
-                            PriorityUnit priorityGenerator = probeUpgrade(battleManager, generator, currentPoint);
-                            if (priorityGenerator.getPriority() > mostPriorityBuilding.getPriority()) {
-                                labelStepBuilding = "upgrade";
-                                mostPriorityBuilding = priorityGenerator;
-                            }
-
-                            PriorityUnit priorityTurret = probeUpgrade(battleManager, turret, currentPoint);
-                            if (priorityTurret.getPriority() > mostPriorityBuilding.getPriority()) {
-                                labelStepBuilding = "upgrade";
-                                mostPriorityBuilding = priorityTurret;
-                            }
+//
+//                            PriorityUnit priorityBarracks = probeUpgrade(battleManager, barracks, currentPoint);
+//                            if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityBarracks) && priorityBarracks.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                labelStepBuilding = "upgrade";
+//                                mostPriorityBuilding = priorityBarracks;
+//                            }
+//
+//                            PriorityUnit priorityFactory = probeUpgrade(battleManager, factory, currentPoint);
+//                            if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityFactory) && priorityFactory.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                labelStepBuilding = "upgrade";
+//                                mostPriorityBuilding = priorityFactory;
+//                            }
+//
+//                            PriorityUnit priorityGenerator = probeUpgrade(battleManager, generator, currentPoint);
+//                            if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityGenerator) && priorityGenerator.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                labelStepBuilding = "upgrade";
+//                                mostPriorityBuilding = priorityGenerator;
+//                            }
+//
+//                            PriorityUnit priorityTurret = probeUpgrade(battleManager, turret, currentPoint);
+//                            if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityTurret) && priorityTurret.getPriority() > mostPriorityBuilding.getPriority()) {
+//                                labelStepBuilding = "upgrade";
+//                                mostPriorityBuilding = priorityTurret;
+//                            }
                         }
                     }
-
-
-//                    &&
-//                    !containsTerritory(listOfProbeBuildings, currentPoint, mostPriorityBuilding.getUnity()
-
-
                 }
             }
             switch (labelStepBuilding) {
@@ -347,8 +344,10 @@ public class PolyProbe implements Probe {
                     howCanBuildFactories = howCanBuildFactories - 1;
                     break;
                 case "generator":
+                    System.out.println(!isConstructedGenerator + "      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
                     howICanBuild = howICanBuild - 1;
                     isConstructedGenerator = true;
+                    System.out.println(!isConstructedGenerator + "      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
                     break;
                 case "wall":
                     howICanBuild = howICanBuild - 1;
@@ -360,14 +359,18 @@ public class PolyProbe implements Probe {
                     howICanBuild = howICanBuild - 1;
                     break;
             }
-            if (mostPriorityBuilding.getPriority() > -10000.0 &&
-                    !listOfBestPriorityBuilding.priorityUnitList.contains(mostPriorityBuilding)){
+
+//            &&
+//            !containsTerritory(listOfProbeBuildings, currentPoint, mostPriorityBuilding.getUnity())
+
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111     " + mostPriorityBuilding.getPriority());
+            if (mostPriorityBuilding.getPriority() > -10000.0){
                 listOfBestPriorityBuilding.add(mostPriorityBuilding);
-                marksTerritory(listOfProbeBuildings, currentPoint, mostPriorityBuilding.getUnity());
+//                markTerritory(listOfProbeBuildings, mostPriorityBuilding.getPoint(), mostPriorityBuilding.getUnity());
             }
         }
 
-        System.out.println(listOfBestPriorityBuilding.priorityUnitList.toString());
+        System.out.println(listOfProbeBuildings.toString());
         return listOfBestPriorityBuilding.priorityUnitList;
 //        if (listOfBestPriorityBallistic.sum > listOfBestPriorityBuilding.sum) {
 //            return listOfBestPriorityBallistic.priorityUnitList;
@@ -398,52 +401,24 @@ public class PolyProbe implements Probe {
         return new PolyPriorityUnit(value, point, unity);
     }
 
-    public int findClosestEnemyTest(BattleManager battleManager, Point startPoint, int width, int height) {
+    public double findClosestEnemyTest(BattleManager battleManager, Point startPoint, int width, int height) {
         return findClosestEnemy(battleManager, startPoint, width, height);
     }
 
-    private int findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
+    private double findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
         boolean isNotFind = true;
         int startX = startPoint.X();
         int startY = startPoint.Y();
-        int distance = 0;
+        double distance = 0.0;
         int dx = 1;
         int dy = 1;
         while (isNotFind) {
-            int i;
-            int j = startY - dy;
-            for (i = startX - dx; i < startX + width + dx; i++) {
-                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
-                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
-                        isNotFind = false;
-                    }
-                }
-            }
-            i--;
-            for (j = startY - dy + 1; j < startY + height + dy; j++) {
-                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
-                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
-                        isNotFind = false;
-                    }
-                }
-            }
-            j--;
-            for (i = startX + width + dx - 2; i > startX - dx; i--) {
-                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
-                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
-                        isNotFind = false;
-                    }
-                }
-            }
-
-            for (j = startY + dy; j > startX + height - dy; j--) {
-                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
-                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
-                        isNotFind = false;
+            for (int i = startX - dx; i < startX + width + dx; i++) {
+                for (int j = startY - dy; j < startY + height + dy; j++) {
+                    if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                        if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(3, 4).contains(battleManager.getOpponentPlayer().getColorType())) {
+                            isNotFind = false;
+                        }
                     }
                 }
             }
@@ -556,6 +531,7 @@ public class PolyProbe implements Probe {
         return probeBuilding(battleManager, unity, point);
     }
 
+    //Прямая точка:
     @NotNull
     private PriorityUnit probeBuilding(BattleManager battleManager, Unity unity, Point point) {
         double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
@@ -572,9 +548,11 @@ public class PolyProbe implements Probe {
         if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))) {
             value -= 10;
         }
-
+        System.out.println("1: " + value);
         value += probeForLock(battleManager, unity, point);
+        System.out.println("2: " + value);
         value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
+        System.out.println("3: " + value);
         return new PolyPriorityUnit(value, point, unity);
     }
 
@@ -583,8 +561,8 @@ public class PolyProbe implements Probe {
     }
 
     private int probeForLock(BattleManager battleManager, Unity unity, Point point) {
-        System.out.println("StartBattleField");
-        battleManager.getBattleField().toString();
+//        System.out.println("StartBattleField");
+//        battleManager.getBattleField().toString();
         int currentPoints = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
@@ -594,7 +572,7 @@ public class PolyProbe implements Probe {
                 }
             }
         }
-        System.out.println("CurrentPoints: " + currentPoints);
+//        System.out.println("CurrentPoints: " + currentPoints);
         int futurePoints = 0;
         String field = battleManager.getBattleField().getMatrix().get(point.X()).get(point.Y());
         if (unity.getId().equals("w")) {
@@ -604,8 +582,8 @@ public class PolyProbe implements Probe {
         }
 
         adjutantFielder.fillZones(battleManager);
-        System.out.println("ModifiedBattleField");
-        battleManager.getBattleField().toString();
+//        System.out.println("ModifiedBattleField");
+//        battleManager.getBattleField().toString();
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 if (battleManager.getBattleField().getMatrix().get(j).get(i).charAt(0) ==
@@ -627,8 +605,8 @@ public class PolyProbe implements Probe {
         }
         adjutantFielder.flush(battleManager);
         adjutantFielder.fillZones(battleManager);
-        System.out.println("StartBattleField");
-        battleManager.getBattleField().toString();
+//        System.out.println("StartBattleField");
+//        battleManager.getBattleField().toString();
         return (futurePoints - currentPoints) * 30;
     }
 
@@ -654,13 +632,13 @@ public class PolyProbe implements Probe {
                         }
                     }
                 }
-                return new PolyPriorityUnit(polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
+                return new PolyPriorityUnit(100.0 + polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
             }
         }
         return new PolyPriorityUnit(-10000, point, unity);
     }
 
-    public boolean upgradeBuilding(BattleManager battleManager, Point point, Player player) {
+    private boolean upgradeBuilding(BattleManager battleManager, Point point, Player player) {
         boolean isUpgraded = false;
         String unityBuild = battleManager.getBattleField().getMatrix().get(point.X()).get(point.Y());
         if (unityBuild.contains(player.getColorType())) {

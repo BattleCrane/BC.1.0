@@ -22,16 +22,22 @@ public class Tests {
         BattleManager battleManagerTest1 = new BattleManager(new BattleField());
         battleManagerTest1.initializeField();
         battleManagerTest1.setPlayer(battleManagerTest1.getPlayerBlue());
+        battleManagerTest1.setOpponentPlayer(battleManagerTest1.getPlayerRed());
         Point pointSpawnTest1 = new Point(8, 5);
         battleManagerTest1.putUnity(battleManagerTest1.getPlayer(), pointSpawnTest1, battleManagerTest1.getGunner());
-        assertEquals(4, new PolyProbe().findClosestEnemyTest(battleManagerTest1, pointSpawnTest1, 1, 1));
+        assertTrue(4.0 == new PolyProbe().findClosestEnemyTest(battleManagerTest1, pointSpawnTest1, 1, 1));
 
         BattleManager battleManagerTest2 = new BattleManager(new BattleField());
         battleManagerTest2.initializeField();
         battleManagerTest2.setPlayer(battleManagerTest2.getPlayerBlue());
+        battleManagerTest2.setOpponentPlayer(battleManagerTest2.getPlayerRed());
         Point pointSpawnTest2 = new Point(12, 12);
         battleManagerTest2.putUnity(battleManagerTest2.getPlayer(), pointSpawnTest2, battleManagerTest2.getTank());
-        assertEquals(8, new PolyProbe().findClosestEnemyTest(battleManagerTest2, pointSpawnTest2, 1, 1));
+        assertTrue(8 == new PolyProbe().findClosestEnemyTest(battleManagerTest2, pointSpawnTest2, 1, 1));
+        System.out.println("/////////////////////////////////////////////////");
+        assertTrue(10 == new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(14, 7), 2, 1));
+        assertTrue(10 == new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(7, 14), 2, 1));
+        System.out.println(new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(7, 14), 2,  1 ));
     }
 
     @Test
@@ -88,6 +94,7 @@ public class Tests {
         assertTrue(37.5 == priorityTurretTest1.getPriority());
         assertTrue(57.5 == priorityTurretTest2.getPriority());
         assertTrue(252.5 == priorityTurretTest3.getPriority());
+
     }
 
     @Test
@@ -115,24 +122,27 @@ public class Tests {
     public void probeBuildingUnitTest(){
         BattleManager battleManagerTest  = new BattleManager(new BattleField());
         battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
+        battleManagerTest.setOpponentPlayer(battleManagerTest.getPlayerRed());
         battleManagerTest.initializeField();
-        battleManagerTest.putUnity(battleManagerTest.getPlayerRed(), new Point(0, 15), battleManagerTest.getTank());
         battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(12, 9), battleManagerTest.getGenerator());
         battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(9, 12), battleManagerTest.getGenerator());
         battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(7, 12), battleManagerTest.getGenerator());
+        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(5, 10), battleManagerTest.getGenerator());
         battleManagerTest.getBattleField().toString();
         AdjutantFielder adjutantFielder = new AdjutantFielder();
         adjutantFielder.fillZones(battleManagerTest);
         PolyProbe polyProbe = new PolyProbe();
         polyProbe.setListDangerousZone(polyProbe.probeDangerousZone(battleManagerTest));
         PriorityUnit priorityGenerator = polyProbe.probeBuildingTest(battleManagerTest, battleManagerTest.getGenerator(), new Point(12, 9));
-        PriorityUnit priorityBarracks = polyProbe.probeBuildingTest(battleManagerTest, battleManagerTest.getBarracks(), new Point (7, 14));
+        PriorityUnit priorityBarracks = new PolyProbe().probeBuildingTest(battleManagerTest, battleManagerTest.getBarracks(), new Point (7, 14));
         PriorityUnit priorityWall = polyProbe.probeBuildingTest(battleManagerTest, battleManagerTest.getWall(), new Point(7, 14));
         PriorityUnit priorityGenerator2 = polyProbe.probeBuildingTest(battleManagerTest, battleManagerTest.getGenerator(), new Point(14, 9));
-//        assertTrue(300.0 == priorityGenerator.getPriority());
-//        assertTrue(30.0 == priorityBarracks.getPriority());
-//        assertTrue(180.0 == priorityWall.getPriority());
-        System.out.println("!!!!!!!" + priorityGenerator2.getPriority());
+        System.out.println(priorityWall.getPriority());
+        assertTrue(540.0 == priorityGenerator.getPriority());
+        System.out.println(new PolyProbe().findClosestEnemyTest(battleManagerTest, new Point(7, 14), 2,  1 ));
+        assertTrue(480.0 == priorityBarracks.getPriority());
+        assertTrue(200.0 == priorityWall.getPriority());
+
     }
 
     @Test
@@ -144,7 +154,7 @@ public class Tests {
         PolyProbe polyProbe = new PolyProbe();
         PriorityUnit priorityGenerator = polyProbe.probeUpgradeTest(battleManagerTest, battleManagerTest.getGenerator(), new Point (14,9));
         PriorityUnit priorityEmpty = polyProbe.probeUpgradeTest(battleManagerTest, battleManagerTest.getGenerator(), new Point (10,10));
-        assertTrue(300.0 == priorityGenerator.getPriority());
+        assertTrue(400.0 == priorityGenerator.getPriority());
         assertTrue(-10000.0 == priorityEmpty.getPriority());
         battleManagerTest.getBattleField().toString();
     }
@@ -153,11 +163,8 @@ public class Tests {
     public void probeAccommodationOfUnisTest(){
         BattleManager battleManagerTest  = new BattleManager(new BattleField());
         battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
+        battleManagerTest.setOpponentPlayer(battleManagerTest.getPlayerRed());
         battleManagerTest.initializeField();
-        battleManagerTest.putUnity(battleManagerTest.getPlayerRed(), new Point(0, 2), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(14, 9), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(10, 14), battleManagerTest.getBarracks());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(9, 14), battleManagerTest.getBarracks());
         new AdjutantFielder().fillZones(battleManagerTest);
         battleManagerTest.getBattleField().toString();
         battleManagerTest.setHowICanBuild(2);
