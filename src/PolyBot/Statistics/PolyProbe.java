@@ -247,19 +247,19 @@ public class PolyProbe implements Probe {
                         if (howICanBuild > 0) {//Если можно строить строения:
 
                             //Проверяем генератор:
-                            if (howICanBuild <= 2 ){
-
-                                if (isConstructedGenerator  == false && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
-                                        battleManager.isEmptyTerritory(currentPoint, generator)) {
-
-                                    PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
-                                    if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
-                                        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-                                        labelStepBuilding = "generator";
-                                        mostPriorityBuilding = priorityUnit;
-                                    }
-                                }
-                            }
+//                            if (howICanBuild <= 2 ){
+//
+//                                if (isConstructedGenerator  == false && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
+//                                        battleManager.isEmptyTerritory(currentPoint, generator)) {
+//
+//                                    PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
+//                                    if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
+//                                        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+//                                        labelStepBuilding = "generator";
+//                                        mostPriorityBuilding = priorityUnit;
+//                                    }
+//                                }
+//                            }
 
 
                             //Проверяем бараки:
@@ -267,9 +267,21 @@ public class PolyProbe implements Probe {
                                     battleManager.isEmptyTerritory(currentPoint, barracks)) {
 
                                 PriorityUnit priorityUnit = probeBuilding(battleManager, barracks, currentPoint);
+
+
                                 if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() > mostPriorityBuilding.getPriority()) {
                                     labelStepBuilding = "barracks";
                                     mostPriorityBuilding = priorityUnit;
+
+                                    System.out.println();
+                                    System.out.println();
+                                    System.out.println("7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777");
+                                    System.out.println(priorityUnit.toString());
+                                    System.out.println(listOfBestPriorityBuilding.priorityUnitList.toString());
+                                    System.out.println();
+                                    System.out.println();
+                                    System.out.println();
+                                    System.out.println();
                                 }
                             }
 

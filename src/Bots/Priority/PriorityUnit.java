@@ -188,7 +188,6 @@ public abstract class PriorityUnit {
         PriorityUnit that = (PriorityUnit) o;
 
         if (Double.compare(that.priority, priority) != 0) return false;
-        if (!unity.equals(that.unity)) return false;
         return point != null ? point.equals(that.point) : that.point == null;
     }
 

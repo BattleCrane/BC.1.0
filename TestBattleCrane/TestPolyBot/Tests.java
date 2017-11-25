@@ -167,7 +167,7 @@ public class Tests {
         battleManagerTest.initializeField();
         new AdjutantFielder().fillZones(battleManagerTest);
         battleManagerTest.getBattleField().toString();
-        battleManagerTest.setHowICanBuild(2);
+        battleManagerTest.setHowICanBuild(3);
         battleManagerTest.setConstructedGenerator(false);
         battleManagerTest.setHowICanBuildFactories(0);
         battleManagerTest.setHowICanProductArmyLevel1(0);
