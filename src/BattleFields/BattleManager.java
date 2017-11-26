@@ -103,6 +103,32 @@ public class BattleManager {
         nextTurnOfCurrentPlayer();
     }
 
+    public void initializeFieldSlava() {
+        //Размещение штабов:
+        putUnity(playerRed, new Point(0, 0), headquarters);
+        putUnity(playerBlue, new Point(14, 14), headquarters);
+
+        //Размещение стен:
+        for (int j = 0; j < 5; j++) {
+            putUnity(playerRed, new Point(j, 4), wall);
+            putUnity(playerRed, new Point(4, j), wall);
+
+            putUnity(playerBlue, new Point(15 - j, 11), wall);
+            putUnity(playerBlue, new Point(11, 15 - j), wall);
+        }
+        playerBlue.setEnergy(10);
+//        for (int j = 0; j < 16; j++){
+//            putUnity(playerBlue, new Point(15 -j, j), barracks);
+//        }
+//        putUnity(playerBlue, new Point(14, 3), factory);
+//        putUnity(playerBlue, new Point(4, 13), factory);
+        nextTurnOfCurrentPlayer();
+//        for (int j = 0; j < 16; j++){
+//            putUnity(playerBlue, new Point(14, j), turret);
+//            putUnity(playerBlue, new Point(j, 14), turret);
+//        }
+    }
+
     public boolean putUnity(Player player, Point point, Unity unity) {
         if (isEmptyTerritory(point, unity)) {
             for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {

@@ -611,7 +611,7 @@ public final class ControllerMatchMaking implements Initializable {
 
     @Override
     public final void initialize(URL location, ResourceBundle resources) {
-        battleManager.initializeField();
+        battleManager.initializeFieldSlava();
         battleManager.getBattleField().toString();
         buttonCreateArmy.setVisible(false);
         adjutantFielder.fillZones(battleManager);
