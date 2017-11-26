@@ -29,18 +29,25 @@ public class PolyProbe implements Probe {
 //            : probeDangerousZone(controllerMatchMaking.getBattleManager());
 
 
-    private class Pair {
+    static class Pair {
         private List<PriorityUnit> priorityUnitList;
         private double sum;
 
-        private Pair(List<PriorityUnit> priorityUnitList, double sum) {
+        Pair(List<PriorityUnit> priorityUnitList, double sum) {
             this.priorityUnitList = priorityUnitList;
             this.sum = sum;
         }
 
-        private void add(PriorityUnit priorityUnit) {
+        void add(PriorityUnit priorityUnit) {
             priorityUnitList.add(priorityUnit);
             sum += priorityUnit.getPriority();
+        }
+
+        void removeLast(){
+            if (priorityUnitList.size() > 0){
+                sum -= priorityUnitList.get(priorityUnitList.size() - 1).getPriority();
+                priorityUnitList.remove(priorityUnitList.size() - 1);
+            }
         }
     }
 
@@ -56,31 +63,6 @@ public class PolyProbe implements Probe {
         return probeAccommodationOfUnits(battleManager);
     }
 
-    public boolean containsTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity){
-        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
-            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                System.out.println(i + "     " + j);
-                if (listOfMarkedTerritory.contains(new Point(i, j))){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public void markTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity){
-        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
-            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                System.out.println(i + "     " + j);
-                listOfMarkedTerritory.add(new Point(i, j));
-            }
-        }
-    }
-    private void show(BattleManager battleManager, List<PriorityUnit> priorityUnitList){
-        for (PriorityUnit priorityUnit: priorityUnitList){
-            battleManager.putUnity(battleManager.getPlayer(), priorityUnit.getPoint(), priorityUnit.getUnity());
-        }
-    }
 
     public List<PriorityUnit> probeAccommodationOfUnits(BattleManager battleManager) {
         Pair listOfBestPriorityBallistic = new Pair(new ArrayList<>(), 0);
@@ -99,7 +81,7 @@ public class PolyProbe implements Probe {
         boolean isConstructedGenerator = battleManager.isConstructedGenerator();
 
         int sum = howICanProductArmyLevel1 + howICanProductTanksLevel1 + howICanProductArmyLevel2 +
-                howICanProductTanksLevel2 +  howICanProductArmyLevel3 +  howICanProductTanksLevel3 + howICanBuild;
+                howICanProductTanksLevel2 + howICanProductArmyLevel3 + howICanProductTanksLevel3 + howICanBuild;
         System.out.println(sum);
 
         Unity barracks = battleManager.getBarracks();
@@ -125,11 +107,10 @@ public class PolyProbe implements Probe {
                 for (int j = 0; j < 16; j++) {
                     currentPoint = new Point(i, j);
                     String currentUnity = matrix.get(j).get(i);
-
-
                     if (currentUnity.substring(1).equals("    0")) { //Если это пустая клетка ->
                         String labelStepBallistic = "";
-                        if (currentUnity.substring(0, 1).equals(battleManager.getPlayer().getColorType())) {//Если это наша пустая клетка ->
+                        if (currentUnity.substring(0, 1).equals(battleManager.getPlayer().getColorType())) {
+                            //Если это наша пустая клетка ->
 
 //                            //Army:
 //                            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -248,22 +229,21 @@ public class PolyProbe implements Probe {
 //                            listOfBestPriorityBallistic.add(mostPriorityBallistic);
 //                        }
 
-                        ////////////////////////////////////////////////////////////////////////////////////////////////
-
+                        //////////////////////////////////////////////////////////////////////////////////////////////
                         if (howICanBuild > 0) {//Если можно строить строения:
 
-                            //Проверяем генератор:
-                            if (howICanBuild <= 2 ){
-
-                                if (!isConstructedGenerator && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
-                                        battleManager.isEmptyTerritory(currentPoint, generator)) {
-                                    PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
-                                    if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
-                                        labelStepBuilding = "generator";
-                                        mostPriorityBuilding = priorityUnit;
-                                    }
-                                }
-                            }
+//                            //Проверяем генератор:
+//                            if (howICanBuild <= 2 ){
+//
+//                                if (!isConstructedGenerator && battleManager.canConstructBuilding(currentPoint, generator, battleManager.getPlayer()) &&
+//                                        battleManager.isEmptyTerritory(currentPoint, generator)) {
+//                                    PriorityUnit priorityUnit = probeBuilding(battleManager, generator, currentPoint);
+//                                    if (!listOfBestPriorityBuilding.priorityUnitList.contains(priorityUnit) && priorityUnit.getPriority() >= mostPriorityBuilding.getPriority()) {
+//                                        labelStepBuilding = "generator";
+//                                        mostPriorityBuilding = priorityUnit;
+//                                    }
+//                                }
+//                            }
 
 
                             //Проверяем бараки:
@@ -367,7 +347,7 @@ public class PolyProbe implements Probe {
 //            !containsTerritory(listOfProbeBuildings, currentPoint, mostPriorityBuilding.getUnity())
 
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111     " + mostPriorityBuilding.getPriority());
-            if (mostPriorityBuilding.getPriority() > -10000.0){
+            if (mostPriorityBuilding.getPriority() > -10000.0) {
                 listOfBestPriorityBuilding.add(mostPriorityBuilding);
                 System.out.println(listOfBestPriorityBuilding.priorityUnitList.toString());
 //                markTerritory(listOfProbeBuildings, mostPriorityBuilding.getPoint(), mostPriorityBuilding.getUnity());
@@ -385,8 +365,35 @@ public class PolyProbe implements Probe {
 //        }
     }
 
-    //BallisticUnits
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public boolean containsTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity) {
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
+                System.out.println(i + "     " + j);
+                if (listOfMarkedTerritory.contains(new Point(i, j))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void markTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity) {
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
+                System.out.println(i + "     " + j);
+                listOfMarkedTerritory.add(new Point(i, j));
+            }
+        }
+    }
+
+    private void show(BattleManager battleManager, List<PriorityUnit> priorityUnitList) {
+        for (PriorityUnit priorityUnit : priorityUnitList) {
+            battleManager.putUnity(battleManager.getPlayer(), priorityUnit.getPoint(), priorityUnit.getUnity());
+        }
+    }
+
 
     @NotNull
     @Contract(pure = true)
@@ -533,6 +540,12 @@ public class PolyProbe implements Probe {
 
     //Building:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public List<PriorityUnit> probeBuildings(BattleManager battleManager, Unity unity, Point point) {
+        return null;
+    }
+
+
     public PriorityUnit probeBuildingTest(BattleManager battleManager, Unity unity, Point point) {
         return probeBuilding(battleManager, unity, point);
     }
@@ -629,7 +642,7 @@ public class PolyProbe implements Probe {
             if (upgradeBuilding(battleManager, point, battleManager.getPlayer())) {
                 for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
                     for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                        if (i >= 0 && i < 16 && j >= 0 && j < 16){
+                        if (i >= 0 && i < 16 && j >= 0 && j < 16) {
                             if (i == point.X() && j == point.Y()) {
                                 battleManager.getBattleField().getMatrix().get(i).set(j, currentUnity);
                             } else {
@@ -648,24 +661,24 @@ public class PolyProbe implements Probe {
         boolean isUpgraded = false;
         String unityBuild = battleManager.getBattleField().getMatrix().get(point.X()).get(point.Y());
         if (unityBuild.contains(player.getColorType())) {
-                            switch (unityBuild.substring(4, 5)) { //Смотрим строение:
-                                case "g": //Улучшение генератора: -> Опускаемся в бараки:
-                                case "b": //Улучшение бараков:
-                                    if (!unityBuild.contains(">")) {
-                                        isUpgraded = true;
-                                    }
-                                    break;
-                                case "f": //Улучшение завода:
-                                    if (!unityBuild.contains(">")) {
-                                        isUpgraded = true;
-                                    }
-                                    break;
-                                case "t": //Улучшение туррели:
-                                    if (unityBuild.contains("^")) {
-                                        isUpgraded = true;
-                                    }
-                            }
-                        }
+            switch (unityBuild.substring(4, 5)) { //Смотрим строение:
+                case "g": //Улучшение генератора: -> Опускаемся в бараки:
+                case "b": //Улучшение бараков:
+                    if (!unityBuild.contains(">")) {
+                        isUpgraded = true;
+                    }
+                    break;
+                case "f": //Улучшение завода:
+                    if (!unityBuild.contains(">")) {
+                        isUpgraded = true;
+                    }
+                    break;
+                case "t": //Улучшение туррели:
+                    if (unityBuild.contains("^")) {
+                        isUpgraded = true;
+                    }
+            }
+        }
 
         return isUpgraded;
     }
