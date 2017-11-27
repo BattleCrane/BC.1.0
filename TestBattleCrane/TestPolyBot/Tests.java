@@ -168,7 +168,7 @@ public class Tests {
         battleManagerTest.initializeField();
         new AdjutantFielder().fillZones(battleManagerTest);
         battleManagerTest.getBattleField().toString();
-        battleManagerTest.setHowICanBuild(4);
+        battleManagerTest.setHowICanBuild(3);
         battleManagerTest.setConstructedGenerator(false);
         battleManagerTest.setHowICanBuildFactories(0);
         battleManagerTest.setHowICanProductArmyLevel1(0);
@@ -181,6 +181,7 @@ public class Tests {
         List<PriorityUnit> priorityUnitsList = polyProbe.probeAccommodationOfUnitsTest(battleManagerTest);
         System.out.println(priorityUnitsList.size());
         System.out.println(priorityUnitsList.toString());
+        battleManagerTest.getBattleField().toString();
 
 
 

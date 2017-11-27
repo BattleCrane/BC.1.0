@@ -41,10 +41,9 @@ public class BattleManager {
     private int turn = 1;
 
     //Игроки:
-    private Player playerBlue = new Player(0, -1, -1 ,"+");
+    private Player playerBlue = new Player(0, -1, -1, "+");
     private Player playerRed = new Player(1, 0, 0, "-");
     private Player player;
-
 
 
     private Player opponentPlayer;
@@ -148,6 +147,17 @@ public class BattleManager {
         } else {
             return false;
         }
+    }
+
+    @Deprecated
+    public void removeUnity(Point point, Unity unity) {
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
+                identificationField.getMatrix().get(i).set(j, "     0");
+                battleField.getMatrix().get(i).set(j, "     0");
+            }
+        }
+        identificationField.setNumberUnity(identificationField.getNumberUnity() - 1);
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -303,7 +313,7 @@ public class BattleManager {
         adjutantWakeUpper.wakeUpUnities(this);
         adjutantReporter.getReportAboutUnities(this);
         howICanBuildFactories = howICanProductArmyLevel1 + howICanProductArmyLevel2 + howICanProductArmyLevel3 - howICanProductTanksLevel1 - howICanProductTanksLevel2 - howICanProductTanksLevel3;
-        if (player.getSupplyEnergy() < 20){
+        if (player.getSupplyEnergy() < 20) {
             player.setEnergy(player.getEnergy() + 1);
             player.setSupplyEnergy(player.getSupplyEnergy() + 1);
         } else {
@@ -323,9 +333,6 @@ public class BattleManager {
             opponentPlayer = playerBlue;
         }
     }
-
-
-
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
