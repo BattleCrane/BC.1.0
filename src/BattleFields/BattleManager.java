@@ -150,11 +150,11 @@ public class BattleManager {
     }
 
     @Deprecated
-    public void removeUnity(Point point, Unity unity) {
+    public void removeUnity(Point point, Unity unity, String field) {
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                 identificationField.getMatrix().get(i).set(j, "     0");
-                battleField.getMatrix().get(i).set(j, "     0");
+                battleField.getMatrix().get(i).set(j, field + "    0");
             }
         }
         identificationField.setNumberUnity(identificationField.getNumberUnity() - 1);
