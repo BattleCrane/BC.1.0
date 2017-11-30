@@ -170,7 +170,7 @@ public class Tests {
         battleManagerTest.getBattleField().toString();
         battleManagerTest.setHowICanBuild(3);
         battleManagerTest.setConstructedGenerator(false);
-        battleManagerTest.setHowICanBuildFactories(0);
+        battleManagerTest.setHowICanBuildFactories(1);
         battleManagerTest.setHowICanProductArmyLevel1(0);
         battleManagerTest.setHowICanProductArmyLevel2(0);
         battleManagerTest.setHowICanProductArmyLevel3(0);
