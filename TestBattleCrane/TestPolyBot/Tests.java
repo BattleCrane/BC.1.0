@@ -34,7 +34,8 @@ public class Tests {
         Point pointSpawnTest2 = new Point(12, 12);
         battleManagerTest2.putUnity(battleManagerTest2.getPlayer(), pointSpawnTest2, battleManagerTest2.getTank());
         assertTrue(8 == new PolyProbe().findClosestEnemyTest(battleManagerTest2, pointSpawnTest2, 1, 1));
-        System.out.println("/////////////////////////////////////////////////");
+        double a = new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(14, 7), 2, 1);
+        System.out.println(a);
         assertTrue(10 == new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(14, 7), 2, 1));
         assertTrue(10 == new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(7, 14), 2, 1));
         System.out.println(new PolyProbe().findClosestEnemyTest(battleManagerTest2, new Point(7, 14), 2,  1 ));

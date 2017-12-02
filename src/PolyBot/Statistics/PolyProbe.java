@@ -349,34 +349,6 @@ public class PolyProbe implements Probe {
 //
 
 
-    public boolean containsTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity) {
-        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
-            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                System.out.println(i + "     " + j);
-                if (listOfMarkedTerritory.contains(new Point(i, j))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public void markTerritory(List<Point> listOfMarkedTerritory, Point point, Unity unity) {
-        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
-            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                System.out.println(i + "     " + j);
-                listOfMarkedTerritory.add(new Point(i, j));
-            }
-        }
-    }
-
-    private void show(BattleManager battleManager, List<PriorityUnit> priorityUnitList) {
-        for (PriorityUnit priorityUnit : priorityUnitList) {
-            battleManager.putUnity(battleManager.getPlayer(), priorityUnit.getPoint(), priorityUnit.getUnity());
-        }
-    }
-
-
     @NotNull
     @Contract(pure = true)
     public PriorityUnit probeBallisticUnit(BattleManager battleManager, Unity unity, Point point) {
@@ -400,20 +372,72 @@ public class PolyProbe implements Probe {
         return findClosestEnemy(battleManager, startPoint, width, height);
     }
 
-    private double findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
+//    private double findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
+//        boolean isNotFind = true;
+//        int startX = startPoint.X();
+//        int startY = startPoint.Y();
+//        double distance = 0.0;
+//        int dx = 1;
+//        int dy = 1;
+//        while (isNotFind) {
+//            for (int i = startX - dx; i < startX + width + dx; i++) {
+//                for (int j = startY - dy; j < startY + height + dy; j++) {
+//                    if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+//                        if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(3, 4).contains(battleManager.getOpponentPlayer().getColorType())) {
+//                            isNotFind = false;
+//                        }
+//                    }
+//                }
+//            }
+//            distance++;
+//            dx++;
+//            dy++;
+//        }
+//        return distance;
+//    }
+
+    private int findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
         boolean isNotFind = true;
         int startX = startPoint.X();
         int startY = startPoint.Y();
-        double distance = 0.0;
+        int distance = 0;
         int dx = 1;
         int dy = 1;
         while (isNotFind) {
-            for (int i = startX - dx; i < startX + width + dx; i++) {
-                for (int j = startY - dy; j < startY + height + dy; j++) {
-                    if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-                        if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(3, 4).contains(battleManager.getOpponentPlayer().getColorType())) {
-                            isNotFind = false;
-                        }
+            int i;
+            int j = startY - dy;
+            for (i = startX - dx; i < startX + height + dx; i++) {
+                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
+                        isNotFind = false;
+                    }
+                }
+            }
+            i--;
+            for (j = startY - dy; j < startY + width + dy; j++) {
+                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
+                        isNotFind = false;
+                    }
+                }
+            }
+            j--;
+            for (i = startX + height; i >= startX - dx; i--) {
+                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
+                        isNotFind = false;
+                    }
+                }
+            }
+            i++;
+            for (j = startY +width; j >= startY - dy; j--) {
+                if (i >= 0 && i < 16 && j >= 0 && j < 16) {
+                    String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i).substring(1);
+                    if (currentUnity.contains(battleManager.getOpponentPlayer().getColorType())) {
+                        isNotFind = false;
                     }
                 }
             }

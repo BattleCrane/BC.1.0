@@ -11,28 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Builder {
-
-
-
-
-
-    BuildersList bestCombinationOfBuild = new BuildersList(new ArrayList<>(), -10000.0);
-    BuildersList currentCombinationOfBuild = new BuildersList(new ArrayList<>(), 0.0);
-    double max = 0.0;
+    private BuildersList bestCombinationOfBuild = new BuildersList(new ArrayList<>(), -10000.0);
+    private BuildersList currentCombinationOfBuild = new BuildersList(new ArrayList<>(), 0.0);
+    private double max = 0.0;
 
     public void findCombination(BattleManager battleManager, int howICanBuild) {
         List<ConditionalUnit> conditionalUnitList = List.of(
-//                Barracks:
-                new ConditionalUnit(battleManager, battleManager.getBarracks(), (s) -> {
-                }, (e) -> {
-                }) {
+                //Barracks:
+                new ConditionalUnit(battleManager, battleManager.getBarracks(), (s) -> {}, (e) -> {}) {
                     @Override
                     public boolean isPerformedCondition(Point point) {
                         return battleManager.isEmptyTerritory(point, battleManager.getBarracks()) &&
                                 battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer());
                     }
                 },
-//                Factory:
+                //Factory:
                 new ConditionalUnit(battleManager, battleManager.getFactory(),
                         (s) -> battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() - 1),
                         (e) -> battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() + 1)) {
@@ -40,7 +33,18 @@ public class Builder {
                     public boolean isPerformedCondition(Point point) {
                         return battleManager.getHowCanBuildFactories() > 0 && battleManager.canConstructBuilding(point,
                                 battleManager.getFactory(), battleManager.getPlayer()) &&
-                                    battleManager.isEmptyTerritory(point, battleManager.getFactory());
+                                battleManager.isEmptyTerritory(point, battleManager.getFactory());
+                    }
+                },
+                //Generator:
+                new ConditionalUnit(battleManager, battleManager.getGenerator(),
+                        (s) -> battleManager.setConstructedGenerator(true),
+                        (e) -> battleManager.setConstructedGenerator(false)) {
+                    @Override
+                    public boolean isPerformedCondition(Point point) {
+                        return howICanBuild <= 2 && !battleManager.isConstructedGenerator() &&
+                                battleManager.canConstructBuilding(point, battleManager.getGenerator(), battleManager.getPlayer()) &&
+                                battleManager.isEmptyTerritory(point, battleManager.getGenerator());
                     }
                 }
 
@@ -53,8 +57,8 @@ public class Builder {
                 String currentUnity = battleManager.getBattleField().getMatrix().get(i).get(j);
                 Point point = new Point(j, i);
                 if (currentUnity.substring(1).equals("    0")) { //Если пустая клетка
-                    for (ConditionalUnit unit: conditionalUnitList){
-                        if (unit.isPerformedCondition(point)){
+                    for (ConditionalUnit unit : conditionalUnitList) {
+                        if (unit.isPerformedCondition(point)) {
                             checkConditionalUnit(battleManager, unit, point, currentUnity, howICanBuild);
                         }
                     }
@@ -63,7 +67,7 @@ public class Builder {
         }
     }
 
-    private void checkConditionalUnit(BattleManager battleManager, ConditionalUnit conditionalUnit,  Point point, String currentUnity, int howICanBuild) {
+    private void checkConditionalUnit(BattleManager battleManager, ConditionalUnit conditionalUnit, Point point, String currentUnity, int howICanBuild) {
         if (conditionalUnit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
             PriorityUnit priorityUnit = new PolyProbe().probeBuildingTest(battleManager, conditionalUnit.getUnity(), point); //Исследуем приоритет на бараки
             if (!currentCombinationOfBuild.contains(priorityUnit) && battleManager.putUnity(battleManager.getPlayer(), point, priorityUnit.getUnity())) { //Если нет в текущем списке и построилось строение
