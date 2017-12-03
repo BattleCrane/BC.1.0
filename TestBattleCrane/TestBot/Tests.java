@@ -3,8 +3,8 @@ package TestBot;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import Bots.Statistics.Probe;
-import Bots.Statistics.TemplateProbe;
+import Bots.Probes.Probe;
+import Bots.Probes.TemplateProbe;
 import org.junit.Test;
 import java.util.List;
 

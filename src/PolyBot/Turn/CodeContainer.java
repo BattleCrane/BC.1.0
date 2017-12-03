@@ -1,6 +1,6 @@
-package PolyBot.Statistics;
+package PolyBot.Turn;
 
-public class Container {
+public class CodeContainer {
 }
 //    public List<PriorityUnit> probeAccommodationOfUnits(BattleManager battleManager) {
 //        Pair listOfBestPriorityBallistic = new Pair(new ArrayList<>(), 0);

@@ -1,15 +1,16 @@
-package PolyBot.Statistics;
+package PolyBot.Turn;
 
 import Adjutants.AdjutantFielder;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
-import Bots.Statistics.Probe;
+import Bots.Probes.Probe;
 import Bots.Steps.Step;
 import Controllers.ControllerMatchMaking;
 import Players.Player;
 import PolyBot.Priority.PolyMapOfPriority;
 import PolyBot.Priority.PolyPriorityUnit;
+import PolyBot.Turn.IteratorBuilding.PolyIteratorBuilder;
 import Unities.Unity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -40,9 +41,9 @@ public class PolyProbe implements Probe {
     }
 
     public List<PriorityUnit> probeAccommodationOfUnitsTest(BattleManager battleManager) {
-        Builder builder = new Builder();
-        builder.findCombination(battleManager, battleManager.getHowICanBuild());
-        return builder.getBestCombinationOfBuild().getPriorityUnitList();
+        PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder();
+        polyIteratorBuilder.findCombination(battleManager, battleManager.getHowICanBuild());
+        return polyIteratorBuilder.getBestCombinationOfBuild().getPriorityUnitList();
     }
 
 //

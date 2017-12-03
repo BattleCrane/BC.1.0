@@ -1,4 +1,4 @@
-package Bots.Statistics;
+package Bots.Probes;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;

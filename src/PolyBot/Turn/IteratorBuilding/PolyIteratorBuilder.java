@@ -1,19 +1,21 @@
-package PolyBot.Statistics;
+package PolyBot.Turn.IteratorBuilding;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import PolyBot.Priority.PolyPriorityUnit;
-import PolyBot.Statistics.Builders.BuildersList;
-import PolyBot.Statistics.Builders.ConditionalUnit;
+import PolyBot.Turn.Creating.CreatingList;
+import PolyBot.Turn.Creating.ConditionalUnit;
+import PolyBot.Turn.PolyProbe;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Builder {
-    private BuildersList bestCombinationOfBuild = new BuildersList(new ArrayList<>(), -10000.0);
-    private BuildersList currentCombinationOfBuild = new BuildersList(new ArrayList<>(), 0.0);
+public class PolyIteratorBuilder {
+    private CreatingList bestCombinationOfBuild = new CreatingList(new ArrayList<>(), -10000.0);
+    private CreatingList currentCombinationOfBuild = new CreatingList(new ArrayList<>(), 0.0);
     private double max = 0.0;
+
 
     public void findCombination(BattleManager battleManager, int howICanBuild) {
         List<ConditionalUnit> conditionalUnitList = List.of(
@@ -79,7 +81,7 @@ public class Builder {
                 } else {
                     if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
                         max = currentCombinationOfBuild.getSum();
-                        bestCombinationOfBuild = new BuildersList(new ArrayList<>(), 0);
+                        bestCombinationOfBuild = new CreatingList(new ArrayList<>(), 0);
                         for (PriorityUnit p : currentCombinationOfBuild.getPriorityUnitList()) {
                             bestCombinationOfBuild.add(new PolyPriorityUnit(p.getPriority(), p.getPoint(), p.getUnity()));
                         }
@@ -94,7 +96,7 @@ public class Builder {
         }
     }
 
-    public BuildersList getBestCombinationOfBuild() {
+    public CreatingList getBestCombinationOfBuild() {
         System.out.println("Max: " + max);
         return bestCombinationOfBuild;
     }

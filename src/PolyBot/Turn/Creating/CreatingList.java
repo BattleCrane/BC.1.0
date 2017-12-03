@@ -1,14 +1,14 @@
-package PolyBot.Statistics.Builders;
+package PolyBot.Turn.Creating;
 
 import Bots.Priority.PriorityUnit;
 
 import java.util.List;
 
-public class BuildersList {
+public class CreatingList {
         private List<PriorityUnit> priorityUnitList;
         private double sum;
 
-        public BuildersList(List<PriorityUnit> priorityUnitList, double sum) {
+        public CreatingList(List<PriorityUnit> priorityUnitList, double sum) {
             this.priorityUnitList = priorityUnitList;
             this.sum = sum;
         }

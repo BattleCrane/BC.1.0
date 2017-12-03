@@ -1,4 +1,4 @@
-package Bots.Statistics;
+package Bots.Probes;
 
 
 public class TemplateProbe implements Probe {

@@ -2,13 +2,11 @@ package PolyBot;
 
 import BattleFields.BattleManager;
 import Bots.Bot;
-import Bots.Priority.PriorityUnit;
-import Bots.Statistics.Probe;
+import Bots.Probes.Probe;
 import Bots.Steps.Step;
 import Controllers.ControllerMatchMaking;
-import PolyBot.Priority.PolyAdjutantPriorityField;
-import PolyBot.Statistics.PolyProbe;
-import PolyBot.Steps.*;
+import PolyBot.Turn.PolyProbe;
+
 import java.util.ArrayList;
 import java.util.List;
 

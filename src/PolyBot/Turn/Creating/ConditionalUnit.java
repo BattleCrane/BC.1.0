@@ -1,10 +1,8 @@
-package PolyBot.Statistics.Builders;
+package PolyBot.Turn.Creating;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Unities.Unity;
-
-import java.util.List;
 
 public abstract class ConditionalUnit {
 

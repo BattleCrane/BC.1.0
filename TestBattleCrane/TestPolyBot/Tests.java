@@ -6,7 +6,7 @@ import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import Players.Player;
-import PolyBot.Statistics.PolyProbe;
+import PolyBot.Turn.PolyProbe;
 import Unities.Unity;
 import org.junit.Test;
 
