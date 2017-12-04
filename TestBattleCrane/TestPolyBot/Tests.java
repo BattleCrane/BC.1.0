@@ -6,12 +6,16 @@ import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import Players.Player;
+import PolyBot.Turn.Creating.CreatingList;
+import PolyBot.Turn.GenesisBuilding.PolyGenesisBuilder;
 import PolyBot.Turn.PolyProbe;
 import Unities.Unity;
 import org.junit.Test;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -186,6 +190,37 @@ public class Tests {
 
 
 
+
+    }
+
+    @Test
+    public void randomCombination(){
+        BattleManager battleManager = new BattleManager(new BattleField());
+        battleManager.setPlayer(battleManager.getPlayerBlue());
+        battleManager.setOpponentPlayer(battleManager.getPlayerRed());
+        battleManager.initializeField();
+        new AdjutantFielder().fillZones(battleManager);
+        battleManager.getBattleField().toString();
+        battleManager.setHowICanBuild(6);
+        battleManager.setConstructedGenerator(false);
+        battleManager.setHowICanBuildFactories(1);
+        battleManager.setHowICanProductArmyLevel1(0);
+        battleManager.setHowICanProductArmyLevel2(0);
+        battleManager.setHowICanProductArmyLevel3(0);
+        battleManager.setHowICanProductTanksLevel1(0);
+        battleManager.setHowICanProductTanksLevel1(0);
+        battleManager.setHowICanProductTanksLevel1(0);
+
+        PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder();
+        polyGenesisBuilder.createPopulation(battleManager, 2);
+        System.out.println(polyGenesisBuilder.getCombinations().toString());
+        Set<CreatingList> set = polyGenesisBuilder.getCombinations();
+        List<CreatingList> list = new ArrayList<>();
+        list.addAll(set);
+
+
+        CreatingList creatingList = polyGenesisBuilder.merge(list.get(0), list.get(1));
+        System.out.println(creatingList);
 
     }
 }

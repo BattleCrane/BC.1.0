@@ -36,4 +36,32 @@ public class CreatingList {
         public double getSum() {
             return sum;
         }
+
+    @Override
+    public String toString() {
+
+
+        return "\n \n sum = " + sum + "\n priorityUnitList=" + priorityUnitList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CreatingList that = (CreatingList) o;
+
+        if (Double.compare(that.sum, sum) != 0) return false;
+        return priorityUnitList.equals(that.priorityUnitList);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = priorityUnitList.hashCode();
+        temp = Double.doubleToLongBits(sum);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

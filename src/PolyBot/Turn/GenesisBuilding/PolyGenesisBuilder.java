@@ -11,6 +11,8 @@ import PolyBot.Turn.PolyProbe;
 import java.util.*;
 
 public class PolyGenesisBuilder {
+
+
     private Set<CreatingList> combinations = new HashSet<>();
     private CreatingList bestCombinationOfBuild = new CreatingList(new ArrayList<>(), -10000.0);
     private CreatingList currentCombinationOfBuild = new CreatingList(new ArrayList<>(), 0.0);
@@ -19,12 +21,14 @@ public class PolyGenesisBuilder {
 
 
     public void findCombination(BattleManager battleManager, int howICanBuild){
-        int population = 0;
-        randomCombination(battleManager, howICanBuild);
+        int population = 20;
+        createPopulation(battleManager, population);
     }
 
-    private void createPopulation(int population){
-        for (int i = 0; i < population; i++){}
+    public void createPopulation(BattleManager battleManager, int population){
+        for (int i = 0; i < population; i++){
+            randomCombination(battleManager, battleManager.getHowICanBuild());
+        }
     }
 
     private void randomCombination(BattleManager battleManager, int howICanBuild) {
@@ -108,9 +112,42 @@ public class PolyGenesisBuilder {
         }
     }
 
+    public CreatingList merge(CreatingList creatingList, CreatingList otherCreatingList){
+        int combinationSize = creatingList.getPriorityUnitList().size();
+        int otherCombinationSize = otherCreatingList.getPriorityUnitList().size();
+        int size = combinationSize > otherCombinationSize ? combinationSize : otherCombinationSize;
+        CreatingList mergeCombination = new CreatingList(new ArrayList<>(), 0);
+        for (int i = 0; i < size; i++){
+            if (i % 2 == 0 && combinationSize >= size){
+                PriorityUnit priorityUnit = creatingList.getPriorityUnitList().get(i);
+                mergeCombination.add(new PolyPriorityUnit(priorityUnit.getPriority(), priorityUnit.getPoint(), priorityUnit.getUnity()));
+            } else {
+                PriorityUnit priorityUnit = otherCreatingList.getPriorityUnitList().get(i);
+                mergeCombination.add(new PolyPriorityUnit(priorityUnit.getPriority(), priorityUnit.getPoint(), priorityUnit.getUnity()));
+            }
+        }
+        return mergeCombination;
+    }
+
+    public void mergePopulation(){
+        List<CreatingList> lists = new ArrayList<>();
+        lists.addAll(combinations);
+        int lastIndex = lists.size() - 1;
+        for (int i = 0; i <= lastIndex; i++){
+            CreatingList mergeCombination = merge(lists.get(i), lists.get(lastIndex - i));
+            if (!combinations.contains(mergeCombination)){
+                combinations.add(mergeCombination);
+            }
+        }
+    }
+
     public CreatingList getBestCombinationOfBuild() {
         System.out.println("Max: " + max);
         return bestCombinationOfBuild;
+    }
+
+    public Set<CreatingList> getCombinations() {
+        return combinations;
     }
 
 }
