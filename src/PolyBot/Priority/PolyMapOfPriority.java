@@ -16,6 +16,7 @@ public class PolyMapOfPriority {
                     'T', 40.0 //Танк
             );
 
+
     private Map<Character, Double> mapOfPriorityBonusUnits = new HashMap<>().;
             Map.of(  //Бонусы:
                     'e', 100.0, //Энергетическая батарея
