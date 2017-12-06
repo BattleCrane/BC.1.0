@@ -201,7 +201,7 @@ public class Tests {
         battleManager.initializeField();
         new AdjutantFielder().fillZones(battleManager);
         battleManager.getBattleField().toString();
-        battleManager.setHowICanBuild(6);
+        battleManager.setHowICanBuild(3);
         battleManager.setConstructedGenerator(false);
         battleManager.setHowICanBuildFactories(1);
         battleManager.setHowICanProductArmyLevel1(0);
@@ -219,8 +219,15 @@ public class Tests {
         list.addAll(set);
 
 
-        CreatingList creatingList = polyGenesisBuilder.merge(list.get(0), list.get(1));
-        System.out.println(creatingList);
+        CreatingList mergedList = polyGenesisBuilder.merge(list.get(0), list.get(1));
+        System.out.println(mergedList);
+
+        CreatingList correctedList = polyGenesisBuilder.correctBuildings(battleManager, mergedList);
+        System.out.println(correctedList);
+
+        CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, battleManager.getHowICanBuild(), correctedList);
+        System.out.println("MUTATED_LIST");
+        System.out.println(mutatedList);
 
     }
 }

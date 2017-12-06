@@ -8,7 +8,6 @@ import PolyBot.Turn.Creating.CreatingList;
 import PolyBot.Turn.Creating.ConditionalUnit;
 import PolyBot.Turn.PolyProbe;
 import Unities.Unity;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -151,54 +150,44 @@ public class PolyGenesisBuilder {
 
 //    CreatingList mutatedCombination = null;
 
-    class Checker {
-        private BattleManager b;
-
-        private Checker(BattleManager b){
-            this.b = b;
-        }
-
-        private boolean isGenerator(Unity u){
-           return u.equals(b.getGenerator());
-        }
-
-        @Contract(value = "true -> true; false -> false", pure = true)
-        private boolean checkGenerator(boolean isConstructedGenerator) {
-            return isConstructedGenerator;
-        }
-
-        private boolean checkFactory(Unity u, int howICanBuildFactories){
-            return u.equals(b.getFactory()) && howICanBuildFactories > 0;
-        }
-    }
-
-    private CreatingList correctBuildings(BattleManager battleManager, CreatingList creatingList) {
+    public CreatingList correctBuildings(BattleManager battleManager, CreatingList creatingList) {
+        CreatingList correctedCreatingList = new CreatingList(new ArrayList<>(), 0);
         boolean isConstructedGenerator = false;
         int howCanBuildFactories = battleManager.getHowCanBuildFactories();
 
 
-        CreatingList correctedCreatingList = new CreatingList(new ArrayList<>(), 0);
-
         for (PriorityUnit p : creatingList.getPriorityUnitList()) {
             if (p.getUnity().equals(battleManager.getGenerator())) {
-                if (isConstructedGenerator){
-
+                if (isConstructedGenerator) {
+                    correctedCreatingList.add(new PolyPriorityUnit(0.0, new Point(0, 0),
+                            new Unity(0, 0, "", 0)));
                 } else {
+                    correctedCreatingList.add(p);
                     isConstructedGenerator = true;
+                }
+            } else {
+                if (p.getUnity().equals(battleManager.getFactory())) {
+                    if (howCanBuildFactories > 0) {
+                        correctedCreatingList.add(p);
+                        howCanBuildFactories--;
+                    } else {
+                        correctedCreatingList.add(new PolyPriorityUnit(0.0, new Point(0, 0),
+                                new Unity(0, 0, "", 0)));
+                    }
+                } else {
+                    correctedCreatingList.add(p);
                 }
             }
         }
-
-
         return correctedCreatingList;
     }
 
     @Nullable
-    private CreatingList mutate(BattleManager battleManager, int howICanBuild, CreatingList creatingList) {
-        CreatingList mutatedCombination = new CreatingList(new ArrayList<>(), 0);
+    public CreatingList mutate(BattleManager battleManager, int howICanBuild, CreatingList creatingList) {
+        CreatingList correctedList = correctBuildings(battleManager, creatingList);
 
-        Map<Unity, ConditionalUnit> conditionalUnitMap = new HashMap<>();
-        conditionalUnitMap.put(battleManager.getBarracks(), new ConditionalUnit(battleManager, battleManager.getBarracks(), (s) -> {
+        Map<String, ConditionalUnit> conditionalUnitMap = new HashMap<>();
+        conditionalUnitMap.put("b", new ConditionalUnit(battleManager, battleManager.getBarracks(), (s) -> {
         }, (e) -> {
         }) {
             @Override
@@ -207,7 +196,7 @@ public class PolyGenesisBuilder {
                         battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer());
             }
         });
-        conditionalUnitMap.put(battleManager.getBarracks(), new ConditionalUnit(battleManager, battleManager.getFactory(),
+        conditionalUnitMap.put("f", new ConditionalUnit(battleManager, battleManager.getFactory(),
                 (s) -> battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() - 1),
                 (e) -> battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() + 1)) {
             @Override
@@ -217,7 +206,7 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getFactory());
             }
         });
-        conditionalUnitMap.put(battleManager.getBarracks(), new ConditionalUnit(battleManager, battleManager.getGenerator(),
+        conditionalUnitMap.put("g", new ConditionalUnit(battleManager, battleManager.getGenerator(),
                         (s) -> battleManager.setConstructedGenerator(true),
                         (e) -> battleManager.setConstructedGenerator(false)) {
                     @Override
@@ -228,54 +217,80 @@ public class PolyGenesisBuilder {
                     }
                 }
         );
+        conditionalUnitMap.put("", new ConditionalUnit(battleManager,
+                new Unity(0, 0, "", 0),
+                (s) -> {
+                }, (e) -> {
+        }) {
+            @Override
+            public boolean isPerformedCondition(Point point) {
+                return false;
+            }
+        });
 
+        class RemoveGroup {
+            private Point point;
+            private Unity unity;
+            private String color;
 
-        for (PriorityUnit p : creatingList.getPriorityUnitList()) { //Идем по всем расположенным юнитам:
-            ConditionalUnit conditionalUnit = conditionalUnitMap.get(p.getUnity());
+            private RemoveGroup(Point point, Unity unity, String color) {
+                this.point = point;
+                this.unity = unity;
+                this.color = color;
+            }
+        }
+
+        List<RemoveGroup> removeGroupList = new ArrayList<>();
+
+        bestCombinationOfBuild = new CreatingList(new ArrayList<>(), -10000.0);
+
+        for (PriorityUnit p : correctedList.getPriorityUnitList()) {
+            //Идем по всем расположенным юнитам:
+            ConditionalUnit conditionalUnit = conditionalUnitMap.get(p.getUnity().getId());
+            System.out.println(p.getUnity().getId());
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(conditionalUnit);
+            System.out.println(conditionalUnit.isPerformedCondition(p.getPoint()));
             if (!conditionalUnit.isPerformedCondition(p.getPoint())) { //Если условия не выполняются
                 for (int i = 0; i < 16; i++) {
                     for (int j = 0; j < 16; j++) {
                         String currentUnity = battleManager.getBattleField().getMatrix().get(i).get(j);
                         Point point = new Point(j, i);
                         if (currentUnity.substring(1).equals("    0")) { //Если пустая клетка
+                            for (ConditionalUnit unit : conditionalUnitMap.values()) { //Тогда идем по всем строениям:
+                                System.out.println("KEY: " + !unit.getUnity().getId().equals(""));
+                                System.out.println("ID: " +  unit.getUnity().getId());
+                                if (!unit.getUnity().getId().equals("")) {//Если это не плохой ключ
 
-                            if (conditionalUnit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
-                                PriorityUnit priorityUnit = new PolyProbe().probeBuildingTest(battleManager, conditionalUnit.getUnity(), point); //Исследуем приоритет на бараки
-                                if (!currentCombinationOfBuild.contains(priorityUnit) && battleManager.putUnity(battleManager.getPlayer(), point, priorityUnit.getUnity())) { //Если нет в текущем списке и построилось строение
-                                    currentCombinationOfBuild.add(priorityUnit);
-                                    int nextBuild = howICanBuild - 1;
-                                    conditionalUnit.getStartPredicate().run(battleManager);
-                                    if (nextBuild > 0) {
-                                        findCombination(battleManager, nextBuild);
-                                    } else {
-                                        if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
-                                            max = currentCombinationOfBuild.getSum();
-                                            bestCombinationOfBuild = new CreatingList(new ArrayList<>(), 0);
-                                            for (PriorityUnit e : currentCombinationOfBuild.getPriorityUnitList()) {
-                                                bestCombinationOfBuild.add(new PolyPriorityUnit(e.getPriority(), e.getPoint(), e.getUnity()));
-                                            }
+                                    if (unit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
+                                        PriorityUnit priorityUnit = new PolyProbe().probeBuildingTest(battleManager, unit.getUnity(), point); //Исследуем приоритет на постройку
+
+
+
+
+                                        if (!currentCombinationOfBuild.contains(priorityUnit) &&
+                                                battleManager.putUnity(battleManager.getPlayer(), point, priorityUnit.getUnity())) { //Если нет в текущем списке и построилось строение
+                                            removeGroupList.add(new RemoveGroup(point, unit.getUnity(), currentUnity.substring(0, 1)));
+                                            currentCombinationOfBuild.add(priorityUnit);
                                         }
                                     }
-                                    currentCombinationOfBuild.removeLast();
-                                    battleManager.removeUnity(point, conditionalUnit.getUnity(), currentUnity.substring(0, 1));
-                                    conditionalUnit.getEndPredicate().run(battleManager);
-//                            new AdjutantFielder().flush(battleManager);
-//                            new AdjutantFielder().fillZones(battleManager);
                                 }
                             }
-
-
                         }
                     }
                 }
-            } else {
-
             }
-
-
         }
 
-
+        int combinationSize = currentCombinationOfBuild.getPriorityUnitList().size();
+        CreatingList mutatedCombination = currentCombinationOfBuild;
+        for (int i = 0; i < combinationSize; i++) {
+            RemoveGroup g = removeGroupList.get(i);
+            PriorityUnit p = currentCombinationOfBuild.getPriorityUnitList().get(i);
+            mutatedCombination.add(new PolyPriorityUnit(p.getPriority(), p.getPoint(), p.getUnity()));
+            currentCombinationOfBuild.removeLast();
+            battleManager.removeUnity(g.point, g.unity, g.color);
+        }
         return mutatedCombination;
     }
 
