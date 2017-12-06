@@ -9,6 +9,7 @@ import PolyBot.Turn.Creating.ConditionalUnit;
 import PolyBot.Turn.PolyProbe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PolyIteratorBuilder {
@@ -18,9 +19,11 @@ public class PolyIteratorBuilder {
 
 
     public void findCombination(BattleManager battleManager, int howICanBuild) {
-        List<ConditionalUnit> conditionalUnitList = List.of(
+        List<ConditionalUnit> conditionalUnitList = Arrays.asList(
                 //Barracks:
-                new ConditionalUnit(battleManager, battleManager.getBarracks(), (s) -> {}, (e) -> {}) {
+                new ConditionalUnit(battleManager, battleManager.getBarracks(), (s) -> {
+                }, (e) -> {
+                }) {
                     @Override
                     public boolean isPerformedCondition(Point point) {
                         return battleManager.isEmptyTerritory(point, battleManager.getBarracks()) &&

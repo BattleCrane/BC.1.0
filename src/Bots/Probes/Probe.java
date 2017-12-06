@@ -80,7 +80,7 @@ public interface Probe {
     }
 
     //Определение опасных точек от автоматчиков, танков
-    private void shift(Player currentPlayer, List<List<String>> matrix, List<Point> listDangerousZone, int dx, int dy, Point start) {
+    default void shift(Player currentPlayer, List<List<String>> matrix, List<Point> listDangerousZone, int dx, int dy, Point start) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
         while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
             start.setX(start.X() + dx);
@@ -105,7 +105,7 @@ public interface Probe {
 
 
     //Определение опасных точек от турелей:
-    private void radiusMark(List<List<String>> matrix, List<Point> listDangerousZone, int radius, Point middle) {
+    default void radiusMark(List<List<String>> matrix, List<Point> listDangerousZone, int radius, Point middle) {
         int x = middle.X();
         int y = middle.Y();
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
@@ -149,7 +149,7 @@ public interface Probe {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Random random = new Random(Calendar.getInstance().getTimeInMillis());
 
-    private static int partition(int[] elements, int min, int max) {
+    static int partition(int[] elements, int min, int max) {
         int x = elements[min + random.nextInt(max - min + 1)];
         int left = min, right = max;
         while (left <= right) {
@@ -170,7 +170,7 @@ public interface Probe {
         return right;
     }
 
-    private static void quickSort(int[] elements, int min, int max) {
+    static void quickSort(int[] elements, int min, int max) {
         if (min < max) {
             int border = partition(elements, min, max);
             quickSort(elements, min, border);

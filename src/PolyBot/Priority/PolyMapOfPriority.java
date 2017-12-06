@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class PolyMapOfPriority {
 
-    private Map<Character, Double> mapOfPriorityBasicUnits =
+    private Map<Character, Double> mapOfPriorityBasicUnits = new HashMap<>();
             Map.of( //Основные юниты:
                     'h', 400.0, //Штаб
                     'g', 300.0, //Генератор
@@ -16,7 +16,7 @@ public class PolyMapOfPriority {
                     'T', 40.0 //Танк
             );
 
-    private Map<Character, Double> mapOfPriorityBonusUnits =
+    private Map<Character, Double> mapOfPriorityBonusUnits = new HashMap<>().;
             Map.of(  //Бонусы:
                     'e', 100.0, //Энергетическая батарея
                     'H', 150.0, //Ракетчик
@@ -32,6 +32,17 @@ public class PolyMapOfPriority {
 
 
     public PolyMapOfPriority() {
+        mapOfPriorityBasicUnits.put('h', 400.0);//Штаб
+                'g', 300.0, //Генератор
+                'b', 150.0, //Бараки
+                'f', 250.0, //Завод
+                't', 25.0, //Турель
+                'w', 10.0, //Стена
+                'G', 50.0, //Автоматчик
+                'T', 40.0 //Танк
+
+
+
         mapOfPriorityUnits.putAll(mapOfPriorityBasicUnits);
         mapOfPriorityUnits.putAll(mapOfPriorityBonusUnits);
 

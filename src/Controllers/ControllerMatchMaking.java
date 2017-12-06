@@ -14,6 +14,7 @@ import ResourceInit.ResourceOfBonuses;
 import Unities.Unity;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -119,7 +120,7 @@ public final class ControllerMatchMaking implements Initializable {
     private ControllerBonusesCollection controllerBonusesCollection = new ControllerBonusesCollection();
 
     //Управляющий базовыми событиями:
-    private EventHandler<? super MouseEvent> eventHandler = new EventHandler<>() {
+    private EventHandler<? super MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             {
