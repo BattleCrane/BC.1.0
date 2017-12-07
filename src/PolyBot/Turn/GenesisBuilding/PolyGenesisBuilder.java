@@ -333,6 +333,7 @@ public class PolyGenesisBuilder {
                 bestCombinationOfBuild.add(p);
                 currentCombinationOfBuild.add(p);
             }
+
         }
 
         int combinationSize = bestCombinationOfBuild.getPriorityUnitList().size();
