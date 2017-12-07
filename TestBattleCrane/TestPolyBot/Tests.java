@@ -222,10 +222,12 @@ public class Tests {
         CreatingList mergedList = polyGenesisBuilder.merge(list.get(0), list.get(1));
         System.out.println(mergedList);
 
-        CreatingList correctedList = polyGenesisBuilder.correctBuildings(battleManager, mergedList);
-        System.out.println(correctedList);
+        System.out.println("Factories__________________________________________________" + battleManager.getHowCanBuildFactories());
 
-        CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, battleManager.getHowICanBuild(), correctedList);
+//        CreatingList correctedList = polyGenesisBuilder.correctBuildings(battleManager, mergedList);
+//        System.out.println(correctedList);
+
+        CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, battleManager.getHowICanBuild(), mergedList);
         System.out.println("MUTATED_LIST");
         System.out.println(mutatedList);
 
