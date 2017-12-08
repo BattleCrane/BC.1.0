@@ -136,7 +136,7 @@ public class PolyGenesisBuilder {
         return mergeCombination;
     }
 
-    public void mergePopulation() {
+    public void mergeAndMutatePopulation() {
         List<CreatingList> lists = new ArrayList<>();
         lists.addAll(combinations);
         int lastIndex = lists.size() - 1;

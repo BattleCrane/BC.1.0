@@ -224,9 +224,6 @@ public class Tests {
 
         System.out.println("Factories__________________________________________________" + battleManager.getHowCanBuildFactories());
 
-//        CreatingList correctedList = polyGenesisBuilder.correctBuildings(battleManager, mergedList);
-//        System.out.println(correctedList);
-
         CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, mergedList);
         System.out.println("MUTATED_LIST");
         System.out.println(mutatedList);
