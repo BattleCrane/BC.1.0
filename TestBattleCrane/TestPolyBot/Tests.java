@@ -227,7 +227,7 @@ public class Tests {
 //        CreatingList correctedList = polyGenesisBuilder.correctBuildings(battleManager, mergedList);
 //        System.out.println(correctedList);
 
-        CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, battleManager.getHowICanBuild(), mergedList);
+        CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, mergedList);
         System.out.println("MUTATED_LIST");
         System.out.println(mutatedList);
 
