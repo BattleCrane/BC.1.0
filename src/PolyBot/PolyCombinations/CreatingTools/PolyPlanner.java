@@ -2,6 +2,6 @@ package PolyBot.PolyCombinations.CreatingTools;
 
 import BattleFields.BattleManager;
 
-public interface PolyPredicate {
+public interface PolyPlanner {
     void run(BattleManager battleManager);
 }

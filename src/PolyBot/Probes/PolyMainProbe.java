@@ -1,4 +1,4 @@
-package PolyBot.PolyCombinstions;
+package PolyBot.Probes;
 
 import Adjutants.AdjutantFielder;
 import BattleFields.BattleManager;
@@ -10,7 +10,7 @@ import Controllers.ControllerMatchMaking;
 import Players.Player;
 import PolyBot.Priority.PolyMapOfPriority;
 import PolyBot.Priority.PolyPriorityUnit;
-import PolyBot.PolyCombinstions.IteratorBuilding.PolyIteratorBuilder;
+import PolyBot.PolyCombinations.IteratorBuilding.PolyIteratorBuilder;
 import Unities.Unity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -20,23 +20,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PolyProbe implements Probe {
+public class PolyMainProbe implements Probe {
     private ControllerMatchMaking controllerMatchMaking;
     private PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
     private List<Point> listDangerousZone = new ArrayList<>();
     private AdjutantFielder adjutantFielder = new AdjutantFielder();
-    private List<Step> listOfStep = new ArrayList<>();
-//            probeDangerousZone(controllerMatchMaking.getBattleManager()) == null ? new ArrayList<>()
-//            : probeDangerousZone(controllerMatchMaking.getBattleManager());
 
+    public PolyMainProbe() {}
 
-
-
-
-    public PolyProbe() {
-    }
-
-    public PolyProbe(ControllerMatchMaking controllerMatchMaking) {
+    public PolyMainProbe(ControllerMatchMaking controllerMatchMaking) {
         this.controllerMatchMaking = controllerMatchMaking;
     }
 
@@ -358,44 +350,17 @@ public class PolyProbe implements Probe {
         if (listDangerousZone.contains(point.invariant())) {
             value = -value;
         }
-//        System.out.println("1 " + value);
         value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) *
                 0.1 * startValue;
-//        System.out.println("2 " + value);
         Player currentPlayer = battleManager.getPlayer();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         value += collectValOfBallisticUnit(currentPlayer, matrix, point);
-//        System.out.println("3 " + value);
         return new PolyPriorityUnit(value, point, unity);
     }
 
     public double findClosestEnemyTest(BattleManager battleManager, Point startPoint, int width, int height) {
         return findClosestEnemy(battleManager, startPoint, width, height);
     }
-
-//    private double findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
-//        boolean isNotFind = true;
-//        int startX = startPoint.X();
-//        int startY = startPoint.Y();
-//        double distance = 0.0;
-//        int dx = 1;
-//        int dy = 1;
-//        while (isNotFind) {
-//            for (int i = startX - dx; i < startX + width + dx; i++) {
-//                for (int j = startY - dy; j < startY + height + dy; j++) {
-//                    if (i >= 0 && i < 16 && j >= 0 && j < 16) {
-//                        if (battleManager.getBattleField().getMatrix().get(i).get(j).substring(3, 4).contains(battleManager.getOpponentPlayer().getColorType())) {
-//                            isNotFind = false;
-//                        }
-//                    }
-//                }
-//            }
-//            distance++;
-//            dx++;
-//            dy++;
-//        }
-//        return distance;
-//    }
 
     private int findClosestEnemy(BattleManager battleManager, Point startPoint, int width, int height) {
         boolean isNotFind = true;
@@ -548,12 +513,7 @@ public class PolyProbe implements Probe {
     //Building:
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<PriorityUnit> probeBuildings(BattleManager battleManager, Unity unity, Point point) {
-        return null;
-    }
-
-
-    public PriorityUnit probeBuildingTest(BattleManager battleManager, Unity unity, Point point) {
+       public PriorityUnit probeBuildingTest(BattleManager battleManager, Unity unity, Point point) {
         return probeBuilding(battleManager, unity, point);
     }
 
@@ -574,11 +534,8 @@ public class PolyProbe implements Probe {
         if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))) {
             value -= 10;
         }
-//        System.out.println("1: " + value);
         value += probeForLock(battleManager, unity, point);
-//        System.out.println("2: " + value);
         value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
-//        System.out.println("3: " + value);
         return new PolyPriorityUnit(value, point, unity);
     }
 
@@ -587,8 +544,6 @@ public class PolyProbe implements Probe {
     }
 
     private int probeForLock(BattleManager battleManager, Unity unity, Point point) {
-//        System.out.println("StartBattleField");
-//        battleManager.getBattleField().toString();
         int currentPoints = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
@@ -608,8 +563,6 @@ public class PolyProbe implements Probe {
         }
 
         adjutantFielder.fillZones(battleManager);
-//        System.out.println("ModifiedBattleField");
-//        battleManager.getBattleField().toString();
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 if (battleManager.getBattleField().getMatrix().get(j).get(i).charAt(0) ==
@@ -618,7 +571,6 @@ public class PolyProbe implements Probe {
                 }
             }
         }
-//        System.out.println("FuturePoints: " + futurePoints);
         int QuantityBuildings = 1; //Существуют постройки, которые строятся по 2
         if (unity.getId().equals("w")) {//Пример стена
             QuantityBuildings *= 2;
@@ -631,8 +583,6 @@ public class PolyProbe implements Probe {
         }
         adjutantFielder.flush(battleManager);
         adjutantFielder.fillZones(battleManager);
-//        System.out.println("StartBattleField");
-//        battleManager.getBattleField().toString();
         return (futurePoints - currentPoints) * 30;
     }
 

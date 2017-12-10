@@ -3,6 +3,8 @@ package Bots.Priority;
 import BattleFields.Point;
 import Unities.Unity;
 
+import java.util.Objects;
+
 public abstract class PriorityUnit {
     private String inputUnit;
     private Unity unity;
@@ -25,6 +27,25 @@ public abstract class PriorityUnit {
 
     public PriorityUnit(double priority){
         this.priority = priority;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PriorityUnit that = (PriorityUnit) o;
+        return Double.compare(that.priority, priority) == 0 &&
+                hitPoints == that.hitPoints &&
+                level == that.level &&
+                isActive == that.isActive &&
+                color == that.color &&
+                name == that.name &&
+                isRoot == that.isRoot &&
+                width == that.width &&
+                height == that.height &&
+                Objects.equals(inputUnit, that.inputUnit) &&
+                Objects.equals(unity, that.unity) &&
+                Objects.equals(point, that.point);
     }
 
     public PriorityUnit(String inputUnit, double priority, Point point){
@@ -180,16 +201,16 @@ public abstract class PriorityUnit {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PriorityUnit that = (PriorityUnit) o;
-
-        if (Double.compare(that.priority, priority) != 0) return false;
-        return point != null ? point.equals(that.point) : that.point == null;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        PriorityUnit that = (PriorityUnit) o;
+//
+//        if (Double.compare(that.priority, priority) != 0) return false;
+//        return point != null ? point.equals(that.point) : that.point == null;
+//    }
 
     @Override
     public int hashCode() {

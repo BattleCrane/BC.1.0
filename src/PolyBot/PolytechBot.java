@@ -5,7 +5,7 @@ import Bots.Bot;
 import Bots.Probes.Probe;
 import Bots.Steps.Step;
 import Controllers.ControllerMatchMaking;
-import PolyBot.Turn.PolyProbe;
+import PolyBot.Probes.PolyMainProbe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class PolytechBot implements Bot {
 
     private boolean isGoingToDraft = false; //Буду делать армию;
 
-    private Probe probe = new PolyProbe(controllerMatchMaking); //Зонд
+    private Probe probe = new PolyMainProbe(controllerMatchMaking); //Зонд
 
 //    private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(controllerMatchMaking.getBattleManager());
 

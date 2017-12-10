@@ -1,4 +1,4 @@
-package PolyBot.PolyCombinstions;
+package PolyBot.PolyCombinations;
 
 public class CodeContainer {
 }
