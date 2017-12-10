@@ -6,7 +6,7 @@ import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import Players.Player;
-import PolyBot.Turn.Creating.CreatingList;
+import PolyBot.Turn.Creating.CreatingCombination;
 import PolyBot.Turn.GenesisBuilding.PolyGenesisBuilder;
 import PolyBot.Turn.PolyProbe;
 import Unities.Unity;
@@ -203,7 +203,7 @@ public class Tests {
         battleManager.getBattleField().toString();
         battleManager.setHowICanBuild(3);
         battleManager.setConstructedGenerator(false);
-        battleManager.setHowICanBuildFactories(1);
+        battleManager.setHowICanBuildFactories(2);
         battleManager.setHowICanProductArmyLevel1(0);
         battleManager.setHowICanProductArmyLevel2(0);
         battleManager.setHowICanProductArmyLevel3(0);
@@ -214,19 +214,47 @@ public class Tests {
         PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder();
         polyGenesisBuilder.createPopulation(battleManager, 2);
         System.out.println(polyGenesisBuilder.getCombinations().toString());
-        Set<CreatingList> set = polyGenesisBuilder.getCombinations();
-        List<CreatingList> list = new ArrayList<>();
+        Set<CreatingCombination> set = polyGenesisBuilder.getCombinations();
+        List<CreatingCombination> list = new ArrayList<>();
         list.addAll(set);
 
 
-        CreatingList mergedList = polyGenesisBuilder.merge(list.get(0), list.get(1));
-        System.out.println(mergedList);
 
-        System.out.println("Factories__________________________________________________" + battleManager.getHowCanBuildFactories());
 
-        CreatingList mutatedList = polyGenesisBuilder.mutate(battleManager, mergedList);
-        System.out.println("MUTATED_LIST");
-        System.out.println(mutatedList);
+    }
+
+    @Test
+    public void mutation (){
+        //        CreatingCombination mergedList = polyGenesisBuilder.merge(list.get(0), list.get(1));
+//        System.out.println(mergedList);
+//
+//        CreatingCombination mutatedList = polyGenesisBuilder.mutate(battleManager, mergedList);
+//        System.out.println("MUTATED_LIST");
+//        System.out.println(mutatedList);
+    }
+
+    @Test
+    public void findCombination(){
+        BattleManager battleManager = new BattleManager(new BattleField());
+        battleManager.setPlayer(battleManager.getPlayerBlue());
+        battleManager.setOpponentPlayer(battleManager.getPlayerRed());
+        battleManager.initializeField();
+        new AdjutantFielder().fillZones(battleManager);
+        battleManager.getBattleField().toString();
+        battleManager.setHowICanBuild(3);
+        battleManager.setConstructedGenerator(false);
+        battleManager.setHowICanBuildFactories(2);
+        battleManager.setHowICanProductArmyLevel1(0);
+        battleManager.setHowICanProductArmyLevel2(0);
+        battleManager.setHowICanProductArmyLevel3(0);
+        battleManager.setHowICanProductTanksLevel1(0);
+        battleManager.setHowICanProductTanksLevel1(0);
+        battleManager.setHowICanProductTanksLevel1(0);
+
+        PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder();
+        CreatingCombination best = polyGenesisBuilder.findCombination(battleManager);
+        System.out.println(best);
+        battleManager.getBattleField().toString();
 
     }
 }

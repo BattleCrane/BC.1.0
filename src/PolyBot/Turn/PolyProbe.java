@@ -358,14 +358,14 @@ public class PolyProbe implements Probe {
         if (listDangerousZone.contains(point.invariant())) {
             value = -value;
         }
-        System.out.println("1 " + value);
+//        System.out.println("1 " + value);
         value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) *
                 0.1 * startValue;
-        System.out.println("2 " + value);
+//        System.out.println("2 " + value);
         Player currentPlayer = battleManager.getPlayer();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         value += collectValOfBallisticUnit(currentPlayer, matrix, point);
-        System.out.println("3 " + value);
+//        System.out.println("3 " + value);
         return new PolyPriorityUnit(value, point, unity);
     }
 
@@ -513,9 +513,9 @@ public class PolyProbe implements Probe {
         if (listDangerousZone.contains(point)) {
             value = -value;
         }
-        System.out.println("1: " + value);
+//        System.out.println("1: " + value);
         value += (8.0 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
-        System.out.println("2: " + value);
+//        System.out.println("2: " + value);
         value += collectValOfRadius(battleManager.getPlayer(), battleManager.getBattleField().getMatrix(), point) * 0.5;
         return new PolyPriorityUnit(value, point, unity);
     }
@@ -564,7 +564,7 @@ public class PolyProbe implements Probe {
         double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                System.out.println(i + "     " + j);
+//                System.out.println(i + "     " + j);
                 if (listDangerousZone.contains(new Point(j, i))) {
                     value = -value;
                     break;
@@ -574,11 +574,11 @@ public class PolyProbe implements Probe {
         if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))) {
             value -= 10;
         }
-        System.out.println("1: " + value);
+//        System.out.println("1: " + value);
         value += probeForLock(battleManager, unity, point);
-        System.out.println("2: " + value);
+//        System.out.println("2: " + value);
         value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
-        System.out.println("3: " + value);
+//        System.out.println("3: " + value);
         return new PolyPriorityUnit(value, point, unity);
     }
 
@@ -618,7 +618,7 @@ public class PolyProbe implements Probe {
                 }
             }
         }
-        System.out.println("FuturePoints: " + futurePoints);
+//        System.out.println("FuturePoints: " + futurePoints);
         int QuantityBuildings = 1; //Существуют постройки, которые строятся по 2
         if (unity.getId().equals("w")) {//Пример стена
             QuantityBuildings *= 2;

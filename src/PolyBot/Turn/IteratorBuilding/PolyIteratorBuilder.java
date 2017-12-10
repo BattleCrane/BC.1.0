@@ -4,7 +4,7 @@ import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import PolyBot.Priority.PolyPriorityUnit;
-import PolyBot.Turn.Creating.CreatingList;
+import PolyBot.Turn.Creating.CreatingCombination;
 import PolyBot.Turn.Creating.ConditionalUnit;
 import PolyBot.Turn.PolyProbe;
 
@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PolyIteratorBuilder {
-    private CreatingList bestCombinationOfBuild = new CreatingList(new ArrayList<>(), -10000.0);
-    private CreatingList currentCombinationOfBuild = new CreatingList(new ArrayList<>(), 0.0);
+    private CreatingCombination bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), -10000.0);
+    private CreatingCombination currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
     private double max = 0.0;
 
 
@@ -84,7 +84,7 @@ public class PolyIteratorBuilder {
                 } else {
                     if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
                         max = currentCombinationOfBuild.getSum();
-                        bestCombinationOfBuild = new CreatingList(new ArrayList<>(), 0);
+                        bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0);
                         for (PriorityUnit p : currentCombinationOfBuild.getPriorityUnitList()) {
                             bestCombinationOfBuild.add(new PolyPriorityUnit(p.getPriority(), p.getPoint(), p.getUnity()));
                         }
@@ -99,7 +99,7 @@ public class PolyIteratorBuilder {
         }
     }
 
-    public CreatingList getBestCombinationOfBuild() {
+    public CreatingCombination getBestCombinationOfBuild() {
         System.out.println("Max: " + max);
         return bestCombinationOfBuild;
     }

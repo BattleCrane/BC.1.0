@@ -4,11 +4,11 @@ import Bots.Priority.PriorityUnit;
 
 import java.util.List;
 
-public class CreatingList {
+public class CreatingCombination {
         private List<PriorityUnit> priorityUnitList;
         private double sum;
 
-        public CreatingList(List<PriorityUnit> priorityUnitList, double sum) {
+        public CreatingCombination(List<PriorityUnit> priorityUnitList, double sum) {
             this.priorityUnitList = priorityUnitList;
             this.sum = sum;
         }
@@ -49,7 +49,7 @@ public class CreatingList {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CreatingList that = (CreatingList) o;
+        CreatingCombination that = (CreatingCombination) o;
 
         if (Double.compare(that.sum, sum) != 0) return false;
         return priorityUnitList.equals(that.priorityUnitList);
