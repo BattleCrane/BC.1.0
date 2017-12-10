@@ -1,12 +1,12 @@
-package PolyBot.Turn.IteratorBuilding;
+package PolyBot.PolyCombinstions.IteratorBuilding;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import PolyBot.Priority.PolyPriorityUnit;
-import PolyBot.Turn.Creating.CreatingCombination;
-import PolyBot.Turn.Creating.ConditionalUnit;
-import PolyBot.Turn.PolyProbe;
+import PolyBot.PolyCombinstions.Creating.CreatingCombination;
+import PolyBot.PolyCombinstions.Creating.ConditionalUnit;
+import PolyBot.PolyCombinstions.PolyProbe;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,12 +1,12 @@
-package PolyBot.Turn.GenesisBuilding;
+package PolyBot.PolyCombinstions.GenesisBuilding;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import PolyBot.Priority.PolyPriorityUnit;
-import PolyBot.Turn.Creating.CreatingCombination;
-import PolyBot.Turn.Creating.ConditionalUnit;
-import PolyBot.Turn.PolyProbe;
+import PolyBot.PolyCombinstions.Creating.CreatingCombination;
+import PolyBot.PolyCombinstions.Creating.ConditionalUnit;
+import PolyBot.PolyCombinstions.PolyProbe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
