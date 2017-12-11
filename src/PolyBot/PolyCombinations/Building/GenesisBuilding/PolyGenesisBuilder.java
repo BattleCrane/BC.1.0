@@ -32,6 +32,7 @@ public class PolyGenesisBuilder {
 
     //Инициализация строений:
     private void initUnitMap(BattleManager battleManager) {
+        //Barracks:
         estimatedUnitMap.put("b", new EstimatedUnit(battleManager, battleManager.getBarracks(), (s) -> {
         }, (e) -> {
         }) {
@@ -41,7 +42,7 @@ public class PolyGenesisBuilder {
                         battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer());
             }
         });
-
+        //Factory:
         estimatedUnitMap.put("f", new EstimatedUnit(battleManager, battleManager.getFactory(),
                 (s) -> battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() - 1),
                 (e) -> battleManager.setHowICanBuildFactories(battleManager.getHowCanBuildFactories() + 1)) {
@@ -52,6 +53,7 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getFactory());
             }
         });
+        //Generator
         estimatedUnitMap.put("g", new EstimatedUnit(battleManager, battleManager.getGenerator(),
                 (s) -> battleManager.setConstructedGenerator(true),
                 (e) -> battleManager.setConstructedGenerator(false)) {
@@ -62,6 +64,26 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getGenerator());
             }
         });
+//        //Wall:
+//        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
+//                (s) -> {},
+//                (e) -> {}) {
+//            @Override
+//            public boolean isPerformedCondition(Point point) {
+//                return  battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
+//                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
+//            }
+//        });
+//        //Turret:
+//        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
+//                (s) -> {},
+//                (e) -> {}) {
+//            @Override
+//            public boolean isPerformedCondition(Point point) {
+//                return  battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
+//                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
+//            }
+//        });
     }
 
     //Найти лучшую комбинацию:
