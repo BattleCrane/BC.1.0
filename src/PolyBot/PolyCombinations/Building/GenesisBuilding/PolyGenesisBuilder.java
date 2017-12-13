@@ -29,9 +29,11 @@ public class PolyGenesisBuilder {
     public PolyGenesisBuilder(BattleManager battleManager) {
         initUnitMap(battleManager);
     }
+    private int controllerBuilding;
 
     //Инициализация строений:
     private void initUnitMap(BattleManager battleManager) {
+        controllerBuilding = battleManager.getHowICanBuild();
         //Barracks:
         estimatedUnitMap.put("b", new EstimatedUnit(battleManager, battleManager.getBarracks(), (s) -> {
         }, (e) -> {
@@ -59,31 +61,31 @@ public class PolyGenesisBuilder {
                 (e) -> battleManager.setConstructedGenerator(false)) {
             @Override
             public boolean isPerformedCondition(Point point) {
-                return battleManager.getHowICanBuild() <= 2 && !battleManager.isConstructedGenerator() &&
+                return controllerBuilding <= 2 && !battleManager.isConstructedGenerator() &&
                         battleManager.canConstructBuilding(point, battleManager.getGenerator(), battleManager.getPlayer()) &&
                         battleManager.isEmptyTerritory(point, battleManager.getGenerator());
             }
         });
-        //Wall:
-        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
-                (s) -> {},
-                (e) -> {}) {
-            @Override
-            public boolean isPerformedCondition(Point point) {
-                return  battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
-                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
-            }
-        });
-        //Turret:
-        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
-                (s) -> {},
-                (e) -> {}) {
-            @Override
-            public boolean isPerformedCondition(Point point) {
-                return  battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
-                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
-            }
-        });
+//        //Wall:
+//        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
+//                (s) -> {},
+//                (e) -> {}) {
+//            @Override
+//            public boolean isPerformedCondition(Point point) {
+//                return  battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
+//                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
+//            }
+//        });
+//        //Turret:
+//        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
+//                (s) -> {},
+//                (e) -> {}) {
+//            @Override
+//            public boolean isPerformedCondition(Point point) {
+//                return  battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
+//                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
+//            }
+//        });
     }
 
     //Найти лучшую комбинацию:
@@ -93,9 +95,10 @@ public class PolyGenesisBuilder {
         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
         currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
 
-        int population = 200; //Всего комбинаций:
+        int population = 40; //Всего комбинаций:
         int selection = 5; //Всего уровней отборов:
         createPopulation(battleManager, population);
+//        System.out.println("population " + combinations);
         for (int i = 0; i < selection; i++) {
             mergeAndMutatePopulation(battleManager);
             arrangeTournament();
@@ -274,6 +277,9 @@ public class PolyGenesisBuilder {
         combinationList.addAll(combinations);
         int lastIndex = combinationList.size() - 1;
         for (int i = 0; i <= lastIndex / 2; i++) {
+            if (combinations.size() ==  1){
+                break;
+            }
             if (combinationList.get(i).getSum() > combinationList.get(lastIndex - i).getSum()) {
                 combinations.remove(combinationList.get(lastIndex - i));
             } else {

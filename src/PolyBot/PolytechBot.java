@@ -1,5 +1,6 @@
 package PolyBot;
 
+import Adjutants.AdjutantFielder;
 import BattleFields.BattleManager;
 import Bots.Bot;
 import Bots.Priority.PriorityUnit;
@@ -20,6 +21,8 @@ public class PolytechBot implements Bot {
     private ControllerMatchMaking controllerMatchMaking;
     private CreatingCombination combination;
 
+    public static int step = 0;
+
     //Конструктор:
     public PolytechBot(ControllerMatchMaking controllerMatchMaking) {
         this.controllerMatchMaking = controllerMatchMaking;
@@ -31,12 +34,16 @@ public class PolytechBot implements Bot {
         BattleManager battleManager = controllerMatchMaking.getBattleManager();
         PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
         CreatingCombination buildings = polyGenesisBuilder.findBuildCombination(battleManager);
+        System.out.println("Buildings: " + buildings);
         if (!controllerMatchMaking.getButtonCreateArmy().isVisible()){
             combination = buildings;
         }
 
         //Если всё-таки кнопочка с армией открыта -> проверяем армию
         if (controllerMatchMaking.getButtonCreateArmy().isVisible()){
+            AdjutantFielder adjutantFielder = new AdjutantFielder();
+            adjutantFielder.flush(battleManager);
+            adjutantFielder.fillZones(battleManager);
             PolyIteratorArmy polyIteratorArmy = new PolyIteratorArmy();
             CreatingCombination army = polyIteratorArmy.findCombination(battleManager);
             // Если строения набрали больше
@@ -73,11 +80,12 @@ public class PolytechBot implements Bot {
     public List<Step> loadSteps(BattleManager battleManager) {
         List<Step> steps = new ArrayList<>();
         chooseDevelopment(); //Выбор постройки
+        System.out.println(combination);
         for (PriorityUnit p: combination.getPriorityUnitList()){
             steps.add(new UnityStep(battleManager, p));
         }
-        steps.addAll(chooseAttacks());
-
+//        steps.addAll(chooseAttacks());
+        System.out.println("!");
         return steps;
     }
 }

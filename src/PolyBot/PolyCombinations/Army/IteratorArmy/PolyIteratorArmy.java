@@ -6,6 +6,7 @@ import Bots.Priority.PriorityUnit;
 import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
 import PolyBot.Priority.PolyPriorityUnit;
 import PolyBot.Probes.PolyMainProbe;
+import Unities.Unity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class PolyIteratorArmy {
         PolyMainProbe polyMainProbe = new PolyMainProbe();
         System.out.println(sum);
         for (int k = 0; k < sum; k++) {
-            PriorityUnit best = new PolyPriorityUnit(0.0, null, null);
+            PriorityUnit best = new PolyPriorityUnit(0.0, new Point(0, 0), new Unity(""));
             String labelStepBallistic = "";
             String flag = "";
             for (int i = 0; i < 16; i++) {

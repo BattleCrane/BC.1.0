@@ -8,6 +8,7 @@ import Bots.Bot;
 import Bots.Steps.Step;
 import Graphics.Painter;
 import Players.Player;
+import PolyBot.PolytechBot;
 import ResourceInit.Resource;
 import Bonuses.ControllerBonusesCollection;
 import ResourceInit.ResourceOfBonuses;
@@ -613,6 +614,7 @@ public final class ControllerMatchMaking implements Initializable {
     public final void initialize(URL location, ResourceBundle resources) {
         battleManager.initializeField();
         battleManager.getBattleField().toString();
+        battleManager.getPlayerBlue().setBot(new PolytechBot(this));
         buttonCreateArmy.setVisible(false);
         adjutantFielder.fillZones(battleManager);
         Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
@@ -623,7 +625,7 @@ public final class ControllerMatchMaking implements Initializable {
     }
 
     private void nextTurn() {
-        Timeline timeline = new Timeline();
+        Timeline timeline;
         controllerBonusesCollection.flush(paneControlSupport, battleManager);
         battleManager.checkDestroyedUnities();
         battleManager.nextTurnOfCurrentPlayer();
@@ -646,21 +648,29 @@ public final class ControllerMatchMaking implements Initializable {
             buttonCreateArmy.setDisable(true);
             buttonEndTurn.setDisable(true);
             Bot bot = battleManager.getPlayer().getBot();
+//            battleManager.setHowICanBuild(3);
             List<Step> listOfStep = bot.loadSteps(battleManager);
+            PolytechBot.step = 0;
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-                if (bot.getCountOfStep() < listOfStep.size()){
-                    listOfStep.get(bot.getCountOfStep()).makeStep();
-                    bot.setCountOfStep(bot.getCountOfStep() + 1);
-                } else {
-                    nextTurn();
-                }
+                adjutantFielder.flush(battleManager);
+                adjutantFielder.fillZones(battleManager);
+                listOfStep.get(PolytechBot.step++).makeStep();
+//                if (bot.getCountOfStep() < listOfStep.size()){
+//                    listOfStep.get(bot.getCountOfStep()).makeStep();
+                    System.out.println("Yes   " + PolytechBot.step);
+//                    bot.setCountOfStep(bot.getCountOfStep() + 1);
+
+                Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
+//                }
             }));
+            timeline.setCycleCount(listOfStep.size());
+            timeline.setOnFinished(event -> {
+                buttonBuild.setDisable(false);
+                buttonCreateArmy.setDisable(false);
+                buttonEndTurn.setDisable(false);
+                nextTurn();
+            });
             timeline.play();
-        } else {
-            buttonBuild.setDisable(false);
-            buttonCreateArmy.setDisable(false);
-            buttonEndTurn.setDisable(false);
-            timeline.stop();
         }
     }
 

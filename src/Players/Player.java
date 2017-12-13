@@ -22,7 +22,7 @@ public final class Player {
     private String colorType;
     private List<Bonus> listOfBonuses;
 
-    public Player(int turn, int energy, int supplyEnergy,  String colorType, List<Bonus> listOfBonuses, Bot bot) {
+    public Player(int turn, int energy, int supplyEnergy, String colorType, List<Bonus> listOfBonuses, Bot bot) {
         this.turn = turn;
         this.energy = energy;
         this.supplyEnergy = supplyEnergy;
@@ -53,6 +53,10 @@ public final class Player {
     @Contract(pure = true)
     public Bot getBot() {
         return bot;
+    }
+
+    public void setBot(Bot bot) {
+        this.bot = bot;
     }
 
 
