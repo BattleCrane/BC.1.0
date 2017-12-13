@@ -50,11 +50,11 @@ public class PolytechBot implements Bot {
     }
 
     private List<AttackStep> chooseAttacks() {
-        List<List<String>> matrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
+        BattleManager battleManager = controllerMatchMaking.getBattleManager();
         Player player = controllerMatchMaking.getBattleManager().getPlayer();
 
         PolyAttackerProbe polyAttackerProbe = new PolyAttackerProbe();
-        return polyAttackerProbe.findAttackSteps(matrix, player);
+        return polyAttackerProbe.findAttackSteps(battleManager, player);
     }
 
 
