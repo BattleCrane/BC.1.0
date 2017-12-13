@@ -12,6 +12,4 @@ public interface Bot {
     void setCountOfStep(int countOfStep);
 
     List<Step> loadSteps(BattleManager battleManager);
-
-    void setStep(int step);
 }

@@ -2,29 +2,23 @@ package PolyBot;
 
 import BattleFields.BattleManager;
 import Bots.Bot;
-import Bots.Probes.Probe;
+import Bots.Priority.PriorityUnit;
+import Bots.Steps.AttackStep;
 import Bots.Steps.Step;
+import Bots.Steps.UnityStep;
 import Controllers.ControllerMatchMaking;
+import Players.Player;
 import PolyBot.PolyCombinations.Army.IteratorArmy.PolyIteratorArmy;
 import PolyBot.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
 import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
-import PolyBot.Probes.PolyMainProbe;
+import PolyBot.Probes.PolyAttackerProbe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PolytechBot implements Bot {
-
-
     private ControllerMatchMaking controllerMatchMaking;
-
-    private boolean isGoingToBuild = false; //Буду строить;
-
-    private boolean isGoingToDraft = false; //Буду делать армию;
-
-    private Probe probe = new PolyMainProbe(controllerMatchMaking); //Зонд
-
-//    private PolyAdjutantPriorityField polyAdjutantPriorityField = new PolyAdjutantPriorityField(controllerMatchMaking.getBattleManager());
+    private CreatingCombination combination;
 
     //Конструктор:
     public PolytechBot(ControllerMatchMaking controllerMatchMaking) {
@@ -38,8 +32,7 @@ public class PolytechBot implements Bot {
         PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
         CreatingCombination buildings = polyGenesisBuilder.findBuildCombination(battleManager);
         if (!controllerMatchMaking.getButtonCreateArmy().isVisible()){
-            isGoingToBuild = true;
-            isGoingToDraft = false;
+            combination = buildings;
         }
 
         //Если всё-таки кнопочка с армией открыта -> проверяем армию
@@ -48,51 +41,23 @@ public class PolytechBot implements Bot {
             CreatingCombination army = polyIteratorArmy.findCombination(battleManager);
             // Если строения набрали больше
             if (buildings.getSum() > army.getSum()){
-                isGoingToBuild = true;
-                isGoingToDraft = false;
+                combination = buildings;
             // Если армия набрала не меньше
             } else {
-                isGoingToBuild = false;
-                isGoingToDraft = true;
+                combination = army;
             }
         }
+    }
 
+    private List<AttackStep> chooseAttacks() {
+        List<List<String>> matrix = controllerMatchMaking.getBattleManager().getBattleField().getMatrix();
+        Player player = controllerMatchMaking.getBattleManager().getPlayer();
+
+        PolyAttackerProbe polyAttackerProbe = new PolyAttackerProbe();
+        return polyAttackerProbe.findAttackSteps(matrix, player);
     }
 
 
-    @Override
-    public List<Step> loadSteps(BattleManager battleManager) {
-        //Загрузка бонусных ходов:
-        List<Step> stepList = new ArrayList<>();
-//        for (int i = 0; i < battleManager.getPlayer().getEnergy(); i++) {
-//            stepList.add(new BonusStep());
-//        }
-//        //Загрузка ходов атакующих юнитов:
-//        List<PriorityUnit> priorityUnitList = probe.showActiveUnits(polyAdjutantPriorityField.getMatrix(), battleManager.getPlayer());
-//        for (PriorityUnit aPriorityUnitList : priorityUnitList) {
-//            stepList.add(new AttackStep(aPriorityUnitList));
-//        }
-//        //Выбор развития:
-//        chooseDevelopment();
-//        if (isGoingToBuild) { //Если строим ->
-//            for (int i = 0; i < battleManager.getHowICanBuild(); i++) {
-//                stepList.add(new ProductionStep());
-//            }
-//        }
-//        if (isGoingToDraft) { //Если делаем армию ->
-//            int countOfProductionTanks = battleManager.getHowICanProductTanksLevel1() + battleManager.getHowICanProductTanksLevel2() +
-//                    battleManager.getHowICanProductTanksLevel3();
-//            int countOfDraft = battleManager.getHowICanProductArmyLevel1() + battleManager.getHowICanProductArmyLevel1() +
-//                    battleManager.getHowICanProductArmyLevel1();
-//            for (int i = 0; i < countOfProductionTanks; i++) {
-//                stepList.add(new TankStep());
-//            }
-//            for (int i = 0; i < countOfDraft; i++) {
-//                stepList.add(new ArmyStep());
-//            }
-//        }
-        return stepList;
-    }
 
     @Override
     public int getCountOfStep() {
@@ -104,20 +69,15 @@ public class PolytechBot implements Bot {
 
     }
 
-
     @Override
-    public void setStep(int step) {
+    public List<Step> loadSteps(BattleManager battleManager) {
+        List<Step> steps = new ArrayList<>();
+        chooseDevelopment(); //Выбор постройки
+        for (PriorityUnit p: combination.getPriorityUnitList()){
+            steps.add(new UnityStep(battleManager, p));
+        }
+        steps.addAll(chooseAttacks());
 
-    }
-
-    //Показать активных юнитов:
-
-
-    public boolean isGoingToBuild() {
-        return isGoingToBuild;
-    }
-
-    public void setGoingToBuild(boolean goingToBuild) {
-        isGoingToBuild = goingToBuild;
+        return steps;
     }
 }

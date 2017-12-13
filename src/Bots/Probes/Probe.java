@@ -128,20 +128,6 @@ public interface Probe {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Contract(pure = true)
-    default List<PriorityUnit> showActiveUnits(List<List<PriorityUnit>> matrix, Player player) {
-        List<PriorityUnit> listOfActivePriorityUnit = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                PriorityUnit priorityUnit = matrix.get(j).get(i);
-                if (priorityUnit.getColor() == player.getColorType().charAt(0) && priorityUnit.isActive()) {
-                    listOfActivePriorityUnit.add(priorityUnit);
-                }
-            }
-        }
-        return listOfActivePriorityUnit;
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 

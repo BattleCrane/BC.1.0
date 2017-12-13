@@ -14,7 +14,6 @@ import ResourceInit.ResourceOfBonuses;
 import Unities.Unity;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -650,7 +649,7 @@ public final class ControllerMatchMaking implements Initializable {
             List<Step> listOfStep = bot.loadSteps(battleManager);
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
                 if (bot.getCountOfStep() < listOfStep.size()){
-                    listOfStep.get(bot.getCountOfStep()).run();
+                    listOfStep.get(bot.getCountOfStep()).makeStep();
                     bot.setCountOfStep(bot.getCountOfStep() + 1);
                 } else {
                     nextTurn();
