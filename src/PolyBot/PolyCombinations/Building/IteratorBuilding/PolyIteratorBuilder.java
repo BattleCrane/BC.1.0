@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PolyIteratorBuilder {
-    private CreatingCombination bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), -10000.0);
+    private CreatingCombination bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
     private CreatingCombination currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
     private double max = 0.0;
 

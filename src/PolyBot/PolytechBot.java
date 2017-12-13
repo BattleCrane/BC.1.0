@@ -5,6 +5,9 @@ import Bots.Bot;
 import Bots.Probes.Probe;
 import Bots.Steps.Step;
 import Controllers.ControllerMatchMaking;
+import PolyBot.PolyCombinations.Army.IteratorArmy.PolyIteratorArmy;
+import PolyBot.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
+import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
 import PolyBot.Probes.PolyMainProbe;
 
 import java.util.ArrayList;
@@ -30,10 +33,30 @@ public class PolytechBot implements Bot {
 
     //Определяет, что будет делать:
     private void chooseDevelopment() {
+        //Всегда проверяем постройки:
+        BattleManager battleManager = controllerMatchMaking.getBattleManager();
+        PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
+        CreatingCombination buildings = polyGenesisBuilder.findBuildCombination(battleManager);
         if (!controllerMatchMaking.getButtonCreateArmy().isVisible()){
             isGoingToBuild = true;
             isGoingToDraft = false;
         }
+
+        //Если всё-таки кнопочка с армией открыта -> проверяем армию
+        if (controllerMatchMaking.getButtonCreateArmy().isVisible()){
+            PolyIteratorArmy polyIteratorArmy = new PolyIteratorArmy();
+            CreatingCombination army = polyIteratorArmy.findCombination(battleManager);
+            // Если строения набрали больше
+            if (buildings.getSum() > army.getSum()){
+                isGoingToBuild = true;
+                isGoingToDraft = false;
+            // Если армия набрала не меньше
+            } else {
+                isGoingToBuild = false;
+                isGoingToDraft = true;
+            }
+        }
+
     }
 
 

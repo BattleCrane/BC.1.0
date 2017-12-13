@@ -64,26 +64,26 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getGenerator());
             }
         });
-//        //Wall:
-//        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
-//                (s) -> {},
-//                (e) -> {}) {
-//            @Override
-//            public boolean isPerformedCondition(Point point) {
-//                return  battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
-//                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
-//            }
-//        });
-//        //Turret:
-//        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
-//                (s) -> {},
-//                (e) -> {}) {
-//            @Override
-//            public boolean isPerformedCondition(Point point) {
-//                return  battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
-//                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
-//            }
-//        });
+        //Wall:
+        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
+                (s) -> {},
+                (e) -> {}) {
+            @Override
+            public boolean isPerformedCondition(Point point) {
+                return  battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
+                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
+            }
+        });
+        //Turret:
+        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
+                (s) -> {},
+                (e) -> {}) {
+            @Override
+            public boolean isPerformedCondition(Point point) {
+                return  battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
+                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
+            }
+        });
     }
 
     //Найти лучшую комбинацию:

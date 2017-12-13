@@ -22,7 +22,7 @@ public class PolyMapOfPriority {
         mapOfPriorityBasicUnits.put('t', 25.0); //Турель
         mapOfPriorityBasicUnits.put('w', 10.0); //Стена
         mapOfPriorityBasicUnits.put('G', 50.0); //Автоматчик
-        mapOfPriorityBasicUnits.put('T', 40.0); //Танк
+        mapOfPriorityBasicUnits.put('T', 100.0); //Танк
 
         mapOfPriorityBonusUnits.put('e', 100.0); //Энергетическая батарея
         mapOfPriorityBonusUnits.put('H', 150.0); //Ракетчик
