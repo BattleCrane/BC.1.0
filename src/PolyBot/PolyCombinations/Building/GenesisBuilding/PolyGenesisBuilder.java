@@ -29,6 +29,7 @@ public class PolyGenesisBuilder {
     public PolyGenesisBuilder(BattleManager battleManager) {
         initUnitMap(battleManager);
     }
+
     private int controllerBuilding;
 
     //Инициализация строений:
@@ -66,36 +67,41 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getGenerator());
             }
         });
-//        //Wall:
-//        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
-//                (s) -> {},
-//                (e) -> {}) {
-//            @Override
-//            public boolean isPerformedCondition(Point point) {
-//                return  battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
-//                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
-//            }
-//        });
-//        //Turret:
-//        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
-//                (s) -> {},
-//                (e) -> {}) {
-//            @Override
-//            public boolean isPerformedCondition(Point point) {
-//                return  battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
-//                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
-//            }
-//        });
+        //Wall:
+        estimatedUnitMap.put("w", new EstimatedUnit(battleManager, battleManager.getWall(),
+                (s) -> {
+                },
+                (e) -> {
+                }) {
+            @Override
+            public boolean isPerformedCondition(Point point) {
+                return battleManager.canConstructBuilding(point, battleManager.getBarracks(), battleManager.getPlayer()) &&
+                        battleManager.isEmptyTerritory(point, battleManager.getBarracks());
+            }
+        });
+        //Turret:
+        estimatedUnitMap.put("t", new EstimatedUnit(battleManager, battleManager.getTurret(),
+                (s) -> {
+                },
+                (e) -> {
+                }) {
+            @Override
+            public boolean isPerformedCondition(Point point) {
+                return battleManager.canConstructBuilding(point, battleManager.getTurret(), battleManager.getPlayer()) &&
+                        battleManager.isEmptyTerritory(point, battleManager.getTurret());
+            }
+        });
     }
 
     //Найти лучшую комбинацию:
     public CreatingCombination findBuildCombination(BattleManager battleManager) {
 
+
         combinations = new HashSet<>();
         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
         currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
 
-        int population = 40; //Всего комбинаций:
+        int population = 100; //Всего комбинаций:
         int selection = 5; //Всего уровней отборов:
         createPopulation(battleManager, population);
 //        System.out.println("population " + combinations);
@@ -131,16 +137,42 @@ public class PolyGenesisBuilder {
             Point point = new Point(y, x);
             if (currentUnity.substring(1).equals("    0")) { //Если клетка пустая ->
                 int i = new Random().nextInt(estimatedUnitMap.size()); //Берем любое строение
-                if (i == 3) {
-                    i = 0;
+                if (i == estimatedUnitMap.size()) {
+                    i = 0; //Тогда первый элемент
                 }
                 List<EstimatedUnit> estimatedUnits = new ArrayList<>(); //Создаем лист, чтобы обратится к индексу постройки
                 estimatedUnits.addAll(estimatedUnitMap.values());
                 EstimatedUnit estimatedUnit = estimatedUnits.get(i);
                 if (estimatedUnit.isPerformedCondition(point)) { //Если это строение можно построить
-                    PriorityUnit priorityUnit = new PolyMainProbe().probeBuildingTest(battleManager, estimatedUnit.getUnity(), point); //Исследуем значение приспосабливаемости
-                    if (!currentCombinationOfBuild.contains(priorityUnit) && battleManager.putUnity(battleManager.getPlayer(), point,
-                            priorityUnit.getUnity())) { //Если такого юнита в комбинации нет, и построилось строение
+                    PriorityUnit priorityUnit;
+
+                    switch (estimatedUnit.getUnity().getId()) {
+                        //Исследуем значение приспосабливаемости:
+                        case "t":
+                            priorityUnit = new PolyMainProbe().probeRadiusUnitTest(battleManager, battleManager.getTurret(), point);
+                            break;
+                        case "w":
+                            priorityUnit = new PolyMainProbe().probeBuildingTest(battleManager, estimatedUnit.getUnity(), point);
+                            break;
+                        default:
+                            priorityUnit = new PolyMainProbe().probeBuildingTest(battleManager, estimatedUnit.getUnity(), point);
+                            break;
+                    }
+
+                    class WallChecker{
+                        private boolean check(){
+                            if (estimatedUnit.getUnity().getId().equals("w")){
+                                return battleManager.putDoubleWall(battleManager.getPlayer(), point, battleManager.getWall());
+                            } else {
+                                return battleManager.putUnity(battleManager.getPlayer(), point,
+                                        estimatedUnit.getUnity());
+                            }
+                        }
+                    }
+
+                    WallChecker wallChecker = new WallChecker();
+
+                    if (!currentCombinationOfBuild.contains(priorityUnit) && wallChecker.check()) { //Если такого юнита в комбинации нет, и построилось строение
                         isConstructed = true; //Этот цикл завершен
                         currentCombinationOfBuild.add(priorityUnit);
                         battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1); //Теперь можно строить на одно строение меньше
@@ -158,7 +190,12 @@ public class PolyGenesisBuilder {
                         }
                         battleManager.setHowICanBuild(battleManager.getHowICanBuild() + 1); //Вернули постройку
                         currentCombinationOfBuild.removeLast(); //Очистили последнее строение
-                        battleManager.removeUnity(point, estimatedUnit.getUnity(), currentUnity.substring(0, 1)); // Убрали последнее строение с поля
+                        if (estimatedUnit.getUnity().getId().equals("w")){
+                            battleManager.removeUnity(point, battleManager.getBarracks(), currentUnity.substring(0, 1));
+                        } else {
+                            battleManager.removeUnity(point, estimatedUnit.getUnity(), currentUnity.substring(0, 1));
+                        }
+                        // Убрали последнее строение с поля
                         estimatedUnit.returnResources().run(battleManager); //Вернули ресурсы
                     }
                 }
@@ -221,9 +258,33 @@ public class PolyGenesisBuilder {
                             for (EstimatedUnit unit : estimatedUnitMap.values()) { //Тогда перебираем все строения:
 
                                 if (unit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
-                                    PriorityUnit priorityUnit = new PolyMainProbe().probeBuildingTest(battleManager, unit.getUnity(), point); //Исследуем приоритет на постройку
-                                    if (!currentCombinationOfBuild.contains(priorityUnit) &&
-                                            battleManager.putUnity(battleManager.getPlayer(), point, priorityUnit.getUnity())) { //Если нет в текущем списке, и построилось строение
+                                    PriorityUnit priorityUnit;
+                                    switch (unit.getUnity().getId()) {
+                                        //Исследуем значение приспосабливаемости:
+                                        case "t":
+                                            priorityUnit = new PolyMainProbe().probeRadiusUnitTest(battleManager, battleManager.getTurret(), point);
+                                            break;
+                                        case "w":
+                                            priorityUnit = new PolyMainProbe().probeBuildingTest(battleManager, battleManager.getWall(), point);
+                                            break;
+                                        default:
+                                            priorityUnit = new PolyMainProbe().probeBuildingTest(battleManager, unit.getUnity(), point);
+                                            break;
+                                    }
+
+                                    class WallChecker{
+                                        private boolean check(){
+                                            if (unit.getUnity().getId().equals("w")){
+                                                return battleManager.putDoubleWall(battleManager.getPlayer(), point, battleManager.getWall());
+                                            } else {
+                                                return battleManager.putUnity(battleManager.getPlayer(), point, unit.getUnity());
+                                            }
+                                        }
+                                    }
+
+                                    WallChecker wallChecker = new WallChecker();
+
+                                    if (!currentCombinationOfBuild.contains(priorityUnit) && wallChecker.check()) { //Если нет в текущем списке, и построилось строение
                                         currentCombinationOfBuild.add(priorityUnit);
                                         unit.takeResources().run(battleManager);
                                         if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
@@ -235,7 +296,11 @@ public class PolyGenesisBuilder {
                                         }
                                         unit.returnResources().run(battleManager);
                                         currentCombinationOfBuild.removeLast();
-                                        battleManager.removeUnity(point, unit.getUnity(), currentUnity.substring(0, 1));
+                                        if (unit.getUnity().getId().equals("w")){
+                                            battleManager.removeUnity(point, battleManager.getBarracks(), currentUnity.substring(0, 1));
+                                        } else {
+                                            battleManager.removeUnity(point, unit.getUnity(), currentUnity.substring(0, 1));
+                                        }
                                     }
                                 }
                             }
@@ -244,30 +309,63 @@ public class PolyGenesisBuilder {
                 }
 
                 PriorityUnit newPriorityUnit = bestCombinationOfBuild.getPriorityUnitList().get(
-                        bestCombinationOfBuild.getPriorityUnitList().size() - 1
-                );
+                        bestCombinationOfBuild.getPriorityUnitList().size() - 1);
 
                 currentCombinationOfBuild.add(new PolyPriorityUnit(newPriorityUnit.getPriority(), newPriorityUnit.getPoint(),
                         newPriorityUnit.getUnity()));
 
-                battleManager.putUnity(battleManager.getPlayer(), newPriorityUnit.getPoint(), newPriorityUnit.getUnity());
+                class WallChecker{
+                    private void putUnity(){
+                        if (newPriorityUnit.getUnity().getId().equals("w")){
+                            battleManager.putDoubleWall(battleManager.getPlayer(), newPriorityUnit.getPoint(), battleManager.getWall());
+                        } else {
+                            battleManager.putUnity(battleManager.getPlayer(), newPriorityUnit.getPoint(),
+                                    newPriorityUnit.getUnity());
+                        }
+                    }
+                }
+
+                WallChecker wallChecker = new WallChecker();
+
+                wallChecker.putUnity();
                 EstimatedUnit newEstimatedUnit = estimatedUnitMap.get(newPriorityUnit.getUnity().getId());
                 newEstimatedUnit.takeResources().run(battleManager);
                 int nextStep = step + 1;
                 nextMutate(battleManager, nextStep, mergedList);
                 newEstimatedUnit.returnResources().run(battleManager);
-                battleManager.removeUnity(newPriorityUnit.getPoint(), newPriorityUnit.getUnity(), flag);
-
+                if (newEstimatedUnit.getUnity().getId().equals("w")){
+                    battleManager.removeUnity(newPriorityUnit.getPoint(), battleManager.getBarracks(), flag);
+                } else {
+                    battleManager.removeUnity(newPriorityUnit.getPoint(), newEstimatedUnit.getUnity(), flag);
+                }
             } else {
                 bestCombinationOfBuild.add(p);
                 currentCombinationOfBuild.add(p);
                 String flag = battleManager.getBattleField().getMatrix().get(p.getPoint().X()).get(p.getPoint().Y()).substring(0, 1);
-                battleManager.putUnity(battleManager.getPlayer(), p.getPoint(), p.getUnity());
+
+                class WallChecker{
+                    private void putUnity(){
+                        if (p.getUnity().getId().equals("w")){
+                            battleManager.putDoubleWall(battleManager.getPlayer(), p.getPoint(), battleManager.getWall());
+                        } else {
+                            battleManager.putUnity(battleManager.getPlayer(), p.getPoint(), p.getUnity());
+                        }
+                    }
+                }
+
+                WallChecker wallChecker = new WallChecker();
+
+                wallChecker.putUnity();
                 estimatedUnit.takeResources().run(battleManager);
                 int nextStep = step + 1;
                 nextMutate(battleManager, nextStep, mergedList);
                 estimatedUnit.returnResources().run(battleManager);
-                battleManager.removeUnity(p.getPoint(), p.getUnity(), flag);
+
+                if (p.getUnity().getId().equals("w")){
+                    battleManager.removeUnity(p.getPoint(), battleManager.getBarracks(), flag);
+                } else {
+                    battleManager.removeUnity(p.getPoint(), p.getUnity(), flag);
+                }
             }
         }
     }
@@ -277,7 +375,7 @@ public class PolyGenesisBuilder {
         combinationList.addAll(combinations);
         int lastIndex = combinationList.size() - 1;
         for (int i = 0; i <= lastIndex / 2; i++) {
-            if (combinations.size() ==  1){
+            if (combinations.size() == 1) {
                 break;
             }
             if (combinationList.get(i).getSum() > combinationList.get(lastIndex - i).getSum()) {

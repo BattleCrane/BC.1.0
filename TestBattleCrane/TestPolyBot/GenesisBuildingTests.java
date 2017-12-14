@@ -24,7 +24,7 @@ public class GenesisBuildingTests {
         battleManager.initializeField();
         new AdjutantFielder().fillZones(battleManager);
         battleManager.getBattleField().toString();
-        battleManager.setHowICanBuild(3);
+        battleManager.setHowICanBuild(1);
         battleManager.setConstructedGenerator(false);
         battleManager.setHowICanBuildFactories(2);
         battleManager.setHowICanProductArmyLevel1(0);
@@ -35,9 +35,10 @@ public class GenesisBuildingTests {
         battleManager.setHowICanProductTanksLevel1(0);
 
         PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
-        polyGenesisBuilder.createPopulation(battleManager, 2);
+        polyGenesisBuilder.createPopulation(battleManager, 5);
+        battleManager.getBattleField().toString();
 
-        assertTrue(polyGenesisBuilder.getCombinations().size() == 2);
+//        assertTrue(polyGenesisBuilder.getCombinations().size() == 2);
         //Вывод популяции:
         System.out.println(polyGenesisBuilder.getCombinations().toString());
     }
@@ -69,6 +70,8 @@ public class GenesisBuildingTests {
         PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
         CreatingCombination mutated = polyGenesisBuilder.mutate(battleManager, creatingCombination);
 
+        System.out.println(mutated);
+        battleManager.getBattleField().toString();
         assertEquals(new PolyPriorityUnit(600.0, new Point(14, 9), battleManager.getGenerator()),
                 mutated.getPriorityUnitList().get(0));
     }
@@ -81,9 +84,9 @@ public class GenesisBuildingTests {
         battleManager.initializeField();
         new AdjutantFielder().fillZones(battleManager);
         battleManager.getBattleField().toString();
-        battleManager.setHowICanBuild(3);
+        battleManager.setHowICanBuild(2);
         battleManager.setConstructedGenerator(false);
-        battleManager.setHowICanBuildFactories(0);
+        battleManager.setHowICanBuildFactories(2);
         battleManager.setHowICanProductArmyLevel1(0);
         battleManager.setHowICanProductArmyLevel2(0);
         battleManager.setHowICanProductArmyLevel3(0);

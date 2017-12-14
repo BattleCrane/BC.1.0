@@ -19,8 +19,8 @@ public class PolyMapOfPriority {
         mapOfPriorityBasicUnits.put('g', 300.0); //Генератор
         mapOfPriorityBasicUnits.put('b', 150.0); //Бараки
         mapOfPriorityBasicUnits.put('f', 250.0); //Завод
-        mapOfPriorityBasicUnits.put('t', 25.0); //Турель
-        mapOfPriorityBasicUnits.put('w', 10.0); //Стена
+        mapOfPriorityBasicUnits.put('t', 125.0); //Турель
+        mapOfPriorityBasicUnits.put('w', 125.0); //Стена
         mapOfPriorityBasicUnits.put('G', 50.0); //Автоматчик
         mapOfPriorityBasicUnits.put('T', 100.0); //Танк
 

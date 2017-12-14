@@ -227,11 +227,15 @@ public class PolyMainProbe implements Probe {
                 }
             }
         }
+
+        value += probeForLock(battleManager, unity, point);
         if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))) {
             value -= 10;
+            value += (8 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
+        } else {
+            value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
         }
-        value += probeForLock(battleManager, unity, point);
-        value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
+
         return new PolyPriorityUnit(value, point, unity);
     }
 
