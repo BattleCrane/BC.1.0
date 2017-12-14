@@ -60,7 +60,7 @@ public class PolytechBot implements Bot {
         BattleManager battleManager = controllerMatchMaking.getBattleManager();
         Player player = controllerMatchMaking.getBattleManager().getPlayer();
 
-        PolyAttackerProbe polyAttackerProbe = new PolyAttackerProbe();
+        PolyAttackerProbe polyAttackerProbe = new PolyAttackerProbe(controllerMatchMaking);
         return polyAttackerProbe.findAttackSteps(battleManager, player);
     }
 
@@ -84,7 +84,7 @@ public class PolytechBot implements Bot {
         for (PriorityUnit p: combination.getPriorityUnitList()){
             steps.add(new UnityStep(battleManager, p));
         }
-//        steps.addAll(chooseAttacks());
+        steps.addAll(chooseAttacks());
         System.out.println("!");
         return steps;
     }

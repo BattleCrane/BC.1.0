@@ -20,7 +20,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class Tests {
+public class MainProbeTests {
     @Test
     public void findClosestEnemy() {
         BattleManager battleManagerTest1 = new BattleManager(new BattleField());

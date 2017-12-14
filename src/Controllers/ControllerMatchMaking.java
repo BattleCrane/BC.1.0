@@ -622,6 +622,10 @@ public final class ControllerMatchMaking implements Initializable {
         System.out.println(battleManager.getPlayer().getColorType());
         initializeBonuses(battleManager);
         controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
+
+
+
+//        battleManager.putUnity(battleManager.getPlayerBlue(), new Point(2, 2), battleManager.getGunner());
     }
 
     private void nextTurn() {
@@ -669,6 +673,23 @@ public final class ControllerMatchMaking implements Initializable {
                 buttonCreateArmy.setDisable(false);
                 buttonEndTurn.setDisable(false);
                 nextTurn();
+                if (battleManager.getHowICanProductArmyLevel1() - battleManager.getHowICanProductTanksLevel1() > 0 ||
+                        battleManager.getHowICanProductArmyLevel2() - battleManager.getHowICanProductTanksLevel2() > 0 ||
+                        battleManager.getHowICanProductArmyLevel3() - battleManager.getHowICanProductTanksLevel3() > 0) {
+                    buttonBuildFactory.setVisible(true);
+                } else {
+                    buttonBuildFactory.setVisible(false);
+                }
+                if (battleManager.getHowICanProductArmyLevel1() > 0 || battleManager.getHowICanProductTanksLevel1() > 0 ||
+                        battleManager.getHowICanProductArmyLevel2() > 0 || battleManager.getHowICanProductTanksLevel2() > 0 ||
+                        battleManager.getHowICanProductArmyLevel3() > 0 || battleManager.getHowICanProductTanksLevel3() > 0) {
+                    buttonCreateArmy.setVisible(true);
+                } else {
+                    buttonCreateArmy.setVisible(false);
+                }
+                buttonBuild.setVisible(true);
+                paneControlBuild.setVisible(false);
+                paneControlArmy.setVisible(false);
             });
             timeline.play();
         }
@@ -957,4 +978,7 @@ public final class ControllerMatchMaking implements Initializable {
         return paneControlArmy;
     }
 
+    public void setBattleManager(BattleManager battleManager) {
+        this.battleManager = battleManager;
+    }
 }
