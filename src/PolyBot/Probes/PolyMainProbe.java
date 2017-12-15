@@ -310,7 +310,7 @@ public class PolyMainProbe implements Probe {
                 return new PolyPriorityUnit(100.0 + polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
             }
         }
-        return new PolyPriorityUnit(-10000, point, unity);
+        return new PolyPriorityUnit(0, point, unity);
     }
 
     private boolean upgradeBuilding(BattleManager battleManager, Point point, Player player) {

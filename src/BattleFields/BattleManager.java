@@ -150,7 +150,6 @@ public class BattleManager {
         }
     }
 
-    @Deprecated
     public void removeUnity(Point point, Unity unity, String field) {
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
@@ -293,6 +292,27 @@ public class BattleManager {
                 return unity.substring(0, 1) + '<' + unity.substring(2);
             case "<":
                 return unity.substring(0, 1) + '>' + unity.substring(2);
+        }
+        return unity;
+    }
+
+    public void aggravateUnit(Point point, Unity unity){
+        for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
+            for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
+                String e = battleField.getMatrix().get(i).get(j);
+                e = levelDown(e);
+                battleField.getMatrix().get(i).set(j, e);
+            }
+        }
+    }
+
+    @Nullable
+    public String levelDown(String unity) {
+        switch (unity.substring(1, 2)) {
+            case "<":
+                return unity.substring(0, 1) + '^' + unity.substring(2);
+            case ">":
+                return unity.substring(0, 1) + '<' + unity.substring(2);
         }
         return unity;
     }

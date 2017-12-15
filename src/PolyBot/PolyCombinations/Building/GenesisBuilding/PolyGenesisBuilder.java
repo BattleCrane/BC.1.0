@@ -248,7 +248,10 @@ public class PolyGenesisBuilder {
             PriorityUnit p = mergedList.getPriorityUnitList().get(step);
             EstimatedUnit estimatedUnit = estimatedUnitMap.get(p.getUnity().getId());
 
-            if (!estimatedUnit.isPerformedCondition(p.getPoint())) { //Если условия не выполняются
+            if (!estimatedUnit.isPerformedCondition(p.getPoint())) { //Если условия не выполняются, тогда рассматриваем альтернативный вариант строения и улучшения
+
+                //Проверка на лучшее улучшение и добавление комбинации
+
                 String flag = ""; //Определитель территории
                 for (int i = 0; i < 16; i++) { //Ищем сами лучший вариант
                     for (int j = 0; j < 16; j++) {
