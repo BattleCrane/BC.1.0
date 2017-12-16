@@ -10,8 +10,9 @@ import Unities.Unity;
 import java.util.*;
 
 public class PolyUpgrading {
-    private BattleManager battleManager;
-    private Map<String, Unity> map = new HashMap<>();
+    private final BattleManager battleManager;
+    private final Map<String, Unity> map = new HashMap<>();
+    private CreatingCombination best = null;
 
     public PolyUpgrading(BattleManager battleManager) {
         this.battleManager = battleManager;
@@ -25,7 +26,7 @@ public class PolyUpgrading {
         PolyMainProbe polyMainProbe = new PolyMainProbe();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         List<PriorityUnit> list = new ArrayList<>();
-        CreatingCombination best = new CreatingCombination(new ArrayList<>(), 0);
+        best = new CreatingCombination(new ArrayList<>(), 0);
         for (int i = 0; i < 16; i++){
             for (int j = 0; j < 16; j++){
                 String type = matrix.get(j).get(i).substring(4, 5);
@@ -49,11 +50,18 @@ public class PolyUpgrading {
         list.sort((o1, o2) -> {
             int p1 = (int) o1.getPriority();
             int p2 = (int) o2.getPriority();
-            return p1 - p2;
+            return p2 - p1;
         });
-        for (int i = 0; i < battleManager.getHowICanBuild(); i++){
+        int size = battleManager.getHowICanBuild() > list.size() ? list.size() : battleManager.getHowICanBuild();
+        System.out.println("Size " + size);
+        for (int i = 0; i < size; i++){
             best.add(list.get(i));
         }
+        System.out.println("List " + best);
+        return best;
+    }
+
+    public CreatingCombination getBest() {
         return best;
     }
 }

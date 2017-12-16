@@ -83,7 +83,7 @@ public class PolyIteratorBuilder {
                     if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
                         max = currentCombinationOfBuild.getSum();
                         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0);
-                        for (PriorityUnit p : currentCombinationOfBuild.getPriorityUnitList()) {
+                        for (PriorityUnit p : currentCombinationOfBuild.getUnits()) {
                             bestCombinationOfBuild.add(new PolyPriorityUnit(p.getPriority(), p.getPoint(), p.getUnity()));
                         }
                     }

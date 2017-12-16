@@ -307,12 +307,43 @@ public class BattleManager {
     }
 
     @Nullable
-    public String levelDown(String unity) {
+    private String levelDown(String unity) {
+        int decrease;
         switch (unity.substring(1, 2)) {
             case "<":
-                return unity.substring(0, 1) + '^' + unity.substring(2);
+                if (unity.substring(4, 5).equals("g")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 1;
+                    return "" + decrease + '^' + unity.substring(2);
+                }
+                if (unity.substring(4, 5).equals("b")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 1;
+                    return "" + decrease + '^' + unity.substring(2);
+                }
+                if (unity.substring(4, 5).equals("f")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 3;
+                    return "" + decrease + '^' + unity.substring(2);
+                }
+                if (unity.substring(4, 5).equals("t")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 1;
+                    return "" + decrease+ '^' + unity.substring(2);
+                }
             case ">":
-                return unity.substring(0, 1) + '<' + unity.substring(2);
+                if (unity.substring(4, 5).equals("g")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
+                    return "" + decrease + '<' + unity.substring(2);
+                }
+                if (unity.substring(4, 5).equals("b")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
+                    return "" + decrease + '<' + unity.substring(2);
+                }
+                if (unity.substring(4, 5).equals("f")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
+                    return "" + decrease + '<' + unity.substring(2);
+                }
+                if (unity.substring(4, 5).equals("t")){
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
+                    return "" + decrease + '<' + unity.substring(2);
+                }
         }
         return unity;
     }

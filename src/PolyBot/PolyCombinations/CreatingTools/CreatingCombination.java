@@ -52,7 +52,7 @@ public class CreatingCombination {
         return result;
     }
 
-    public List<PriorityUnit> getPriorityUnitList() {
+    public List<PriorityUnit> getUnits() {
         return priorityUnitList;
     }
 

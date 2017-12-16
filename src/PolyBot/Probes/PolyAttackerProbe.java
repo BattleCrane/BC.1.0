@@ -38,7 +38,7 @@ public class PolyAttackerProbe {
                 Matcher matcherBonus = patternBonuses.matcher(type);
                 if (unity.substring(3, 4).equals(player.getColorType()) && (matcherBonus.find() || matcherBasic.find())) {
                     Point pointCheck = new Point(j, i);
-                    attacks.add(new AttackStep(pointCheck, findBestShot(battleManager, pointCheck), controllerMatchMaking));
+                    attacks.add(new AttackStep(pointCheck, controllerMatchMaking));
                 }
             }
         }

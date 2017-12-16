@@ -115,6 +115,7 @@ public final class ControllerMatchMaking implements Initializable {
     private boolean isClickButtonOfBonus = false;
     private Unity unit;
     private String labelUnit = ""; //Определитель действия
+    private int controllerBuild = 1;
 
     private AdjutantFielder adjutantFielder = new AdjutantFielder();
     private ControllerBonusesCollection controllerBonusesCollection = new ControllerBonusesCollection();
@@ -158,7 +159,7 @@ public final class ControllerMatchMaking implements Initializable {
                             }
                         }
                         //Если строите генератор:
-                        if (labelUnit.equals("generator") && battleManager.getHowICanBuild() > 0 && battleManager.getHowICanBuild() <= 2 && !battleManager.isConstructedGenerator()) {
+                        if (labelUnit.equals("generator") && battleManager.getHowICanBuild() > 0 && controllerBuild <= 2 && !battleManager.isConstructedGenerator()) {
                             if (battleManager.canConstructBuilding(pointClick, unit, battleManager.getPlayer()) &&
                                     battleManager.putUnity(battleManager.getPlayer(), pointClick, unit)) {
                                 battleManager.setHowICanBuild(battleManager.getHowICanBuild() - 1);
@@ -635,6 +636,7 @@ public final class ControllerMatchMaking implements Initializable {
         battleManager.nextTurnOfCurrentPlayer();
         controllerBonusesCollection.showBonuses(this, battleManager.getPlayer(), paneControlSupport);
         labelUnit = "";
+        controllerBuild = battleManager.getHowICanBuild();
         System.out.println(battleManager.getPlayer().getColorType());
         System.out.println("Осталось построек: " + battleManager.getHowICanBuild());
         System.out.println("Осталось автоматчиков 1 Уровня: " + battleManager.getHowICanProductArmyLevel1());
@@ -672,6 +674,7 @@ public final class ControllerMatchMaking implements Initializable {
                 buttonBuild.setDisable(false);
                 buttonCreateArmy.setDisable(false);
                 buttonEndTurn.setDisable(false);
+                Painter.drawGraphic(battleManager, resource, paneControlField, resourceOfBonuses);
                 nextTurn();
                 if (battleManager.getHowICanProductArmyLevel1() - battleManager.getHowICanProductTanksLevel1() > 0 ||
                         battleManager.getHowICanProductArmyLevel2() - battleManager.getHowICanProductTanksLevel2() > 0 ||
@@ -691,6 +694,7 @@ public final class ControllerMatchMaking implements Initializable {
                 paneControlBuild.setVisible(false);
                 paneControlArmy.setVisible(false);
             });
+
             timeline.play();
         }
     }

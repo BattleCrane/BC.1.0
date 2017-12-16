@@ -81,7 +81,7 @@ public class PolytechBot implements Bot {
         List<Step> steps = new ArrayList<>();
         chooseDevelopment(); //Выбор постройки
         System.out.println(combination);
-        for (PriorityUnit p: combination.getPriorityUnitList()){
+        for (PriorityUnit p: combination.getUnits()){
             steps.add(new UnityStep(battleManager, p));
         }
         steps.addAll(chooseAttacks());

@@ -34,7 +34,7 @@ public class PolyMainProbe implements Probe {
     public List<PriorityUnit> probeAccommodationOfUnitsTest(BattleManager battleManager) {
         PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder();
         polyIteratorBuilder.findCombination(battleManager, battleManager.getHowICanBuild());
-        return polyIteratorBuilder.getBestCombinationOfBuild().getPriorityUnitList();
+        return polyIteratorBuilder.getBestCombinationOfBuild().getUnits();
     }
 
 
@@ -194,7 +194,7 @@ public class PolyMainProbe implements Probe {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
                 if (inBounds && !otherUnit.substring(1).equals("    0") &&
                         otherUnit.charAt(3) != currentPlayer.getColorType().charAt(0)) {
-                    value += polyMapOfPriority.getMapOfPriorityUnits().get(otherUnit.charAt(4));
+                    value += 5 * polyMapOfPriority.getMapOfPriorityUnits().get(otherUnit.charAt(4));
                 }
             }
             countShift++;
@@ -231,7 +231,7 @@ public class PolyMainProbe implements Probe {
         value += probeForLock(battleManager, unity, point);
         if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))) {
             value -= 10;
-            value += (8 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
+            value += (10 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
         } else {
             value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
         }
@@ -307,7 +307,12 @@ public class PolyMainProbe implements Probe {
                         }
                     }
                 }
-                return new PolyPriorityUnit(100.0 + polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
+                if (unity.getId().equals("g")){
+                    return new PolyPriorityUnit(polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
+                } else {
+                    return new PolyPriorityUnit(1.2 * polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0)), point, unity);
+                }
+
             }
         }
         return new PolyPriorityUnit(0, point, unity);
@@ -335,7 +340,6 @@ public class PolyMainProbe implements Probe {
                     }
             }
         }
-
         return isUpgraded;
     }
 

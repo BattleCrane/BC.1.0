@@ -57,8 +57,9 @@ public class PolyIteratorArmy {
                                 }
                             }
                         }
-                        //Если это нейральная пустая клетка ->
-                        if (currentUnity.substring(0, 1).equals(" ")) {
+                        //Если это нейральная или наша пустая клетка ->
+                        if (currentUnity.substring(0, 1).equals(" ") || currentUnity.substring(0, 1)
+                                .equals(battleManager.getPlayer().getColorType())) {
                             if (howICanProductTanksLevel2 > 0) { //Проверяем танки 2-го уровня:
                                 PriorityUnit priorityUnit = polyMainProbe.probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
                                 if (priorityUnit.getPriority() > best.getPriority()) {
@@ -76,23 +77,21 @@ public class PolyIteratorArmy {
                                 }
                             }
                         }
-                        //Если это вражеская пустая клетка ->
-                        if (currentUnity.substring(0, 1).equals(battleManager.getOpponentPlayer().getColorType())) {
-                            if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
-                                PriorityUnit priorityUnit = polyMainProbe.probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
-                                if (priorityUnit.getPriority() > best.getPriority()) {
-                                    labelStepBallistic = "tankLvl3";
-                                    best = priorityUnit;
-                                    flag = "-";
-                                }
+                        //Если это пустая клетка ->
+                        if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
+                            PriorityUnit priorityUnit = polyMainProbe.probeBallisticUnit(battleManager, battleManager.getTank(), currentPoint);
+                            if (priorityUnit.getPriority() > best.getPriority()) {
+                                labelStepBallistic = "tankLvl3";
+                                best = priorityUnit;
+                                flag = "-";
                             }
-                            if (howICanProductArmyLevel3 > 0) {  //Проверяем автоматчиков 3-го уровня:
-                                PriorityUnit priorityUnit = polyMainProbe.probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
-                                if (priorityUnit.getPriority() > best.getPriority()) {
-                                    labelStepBallistic = "gunnerLvl3";
-                                    best = priorityUnit;
-                                    flag = "-";
-                                }
+                        }
+                        if (howICanProductArmyLevel3 > 0) {  //Проверяем автоматчиков 3-го уровня:
+                            PriorityUnit priorityUnit = polyMainProbe.probeBallisticUnit(battleManager, battleManager.getGunner(), currentPoint);
+                            if (priorityUnit.getPriority() > best.getPriority()) {
+                                labelStepBallistic = "gunnerLvl3";
+                                best = priorityUnit;
+                                flag = "-";
                             }
                         }
                     }
@@ -129,8 +128,8 @@ public class PolyIteratorArmy {
             flags.add(flag);
             battleManager.putUnity(battleManager.getPlayer(), best.getPoint(), best.getUnity());
         }
-        for (int i = 0; i < bestCombination.getPriorityUnitList().size(); i++){
-            PriorityUnit p =  bestCombination.getPriorityUnitList().get(i);
+        for (int i = 0; i < bestCombination.getUnits().size(); i++) {
+            PriorityUnit p = bestCombination.getUnits().get(i);
             battleManager.removeUnity(p.getPoint(), p.getUnity(), flags.get(i));
         }
         return bestCombination;

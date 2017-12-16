@@ -3,12 +3,15 @@ package PolyBot.PolyCombinations.Building.GenesisBuilding;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
+import PolyBot.PolyCombinations.upgrading.PolyUpgrading;
 import PolyBot.Priority.PolyPriorityUnit;
 import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
 import PolyBot.PolyCombinations.CreatingTools.EstimatedUnit;
 import PolyBot.Probes.PolyMainProbe;
+import Unities.Unity;
 
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * PolyGenesisBuilder - класс, реализующий выбор наилучшей комбинации построек на основе генетического алгоритма.
@@ -21,13 +24,21 @@ import java.util.*;
 
 public class PolyGenesisBuilder {
 
+    private interface Predicate{
+        void run(PriorityUnit p);
+    }
+
     private final Map<String, EstimatedUnit> estimatedUnitMap = new HashMap<>();
     private Set<CreatingCombination> combinations = new HashSet<>();
     private CreatingCombination bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
     private CreatingCombination currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
+    private CreatingCombination bestUpgradeCombination;
+    private List<EstimatedUnit> estimatedUnits = null;
 
     public PolyGenesisBuilder(BattleManager battleManager) {
         initUnitMap(battleManager);
+        PolyUpgrading polyUpgrading = new PolyUpgrading(battleManager);
+        bestUpgradeCombination = polyUpgrading.findCombination();
     }
 
     private int controllerBuilding;
@@ -91,11 +102,11 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getTurret());
             }
         });
+        estimatedUnits = Arrays.asList(estimatedUnitMap.get("g"), estimatedUnitMap.get("b"), estimatedUnitMap.get("f"));
     }
 
     //Найти лучшую комбинацию:
     public CreatingCombination findBuildCombination(BattleManager battleManager) {
-
 
         combinations = new HashSet<>();
         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
@@ -136,13 +147,9 @@ public class PolyGenesisBuilder {
             String currentUnity = battleManager.getBattleField().getMatrix().get(x).get(y);
             Point point = new Point(y, x);
             if (currentUnity.substring(1).equals("    0")) { //Если клетка пустая ->
-                int i = new Random().nextInt(estimatedUnitMap.size()); //Берем любое строение
-                if (i == estimatedUnitMap.size()) {
-                    i = 0; //Тогда первый элемент
-                }
-                List<EstimatedUnit> estimatedUnits = new ArrayList<>(); //Создаем лист, чтобы обратится к индексу постройки
-                estimatedUnits.addAll(estimatedUnitMap.values());
+                int i = new Random().nextInt(estimatedUnitMap.size() - 2); //Берем любое строение, кроме турели и стены
                 EstimatedUnit estimatedUnit = estimatedUnits.get(i);
+
                 if (estimatedUnit.isPerformedCondition(point)) { //Если это строение можно построить
                     PriorityUnit priorityUnit;
 
@@ -182,7 +189,7 @@ public class PolyGenesisBuilder {
                         } else {
                             if (!combinations.contains(currentCombinationOfBuild)) { //Если такой комбинации ещё не было
                                 CreatingCombination combination = new CreatingCombination(new ArrayList<>(), 0);
-                                for (PriorityUnit p : currentCombinationOfBuild.getPriorityUnitList()) {
+                                for (PriorityUnit p : currentCombinationOfBuild.getUnits()) {
                                     combination.add(new PolyPriorityUnit(p.getPriority(), p.getPoint(), p.getUnity()));
                                 }
                                 combinations.add(combination);
@@ -204,16 +211,16 @@ public class PolyGenesisBuilder {
     }
 
     public CreatingCombination merge(CreatingCombination creatingCombination, CreatingCombination otherCreatingCombination) {
-        int combinationSize = creatingCombination.getPriorityUnitList().size();
-        int otherCombinationSize = otherCreatingCombination.getPriorityUnitList().size();
+        int combinationSize = creatingCombination.getUnits().size();
+        int otherCombinationSize = otherCreatingCombination.getUnits().size();
         int size = combinationSize > otherCombinationSize ? combinationSize : otherCombinationSize;
         CreatingCombination mergedCombination = new CreatingCombination(new ArrayList<>(), 0);
         for (int i = 0; i < size; i++) {
             if (i % 2 == 0 && combinationSize >= size) {
-                PriorityUnit priorityUnit = creatingCombination.getPriorityUnitList().get(i);
+                PriorityUnit priorityUnit = creatingCombination.getUnits().get(i);
                 mergedCombination.add(new PolyPriorityUnit(priorityUnit.getPriority(), priorityUnit.getPoint(), priorityUnit.getUnity()));
             } else {
-                PriorityUnit priorityUnit = otherCreatingCombination.getPriorityUnitList().get(i);
+                PriorityUnit priorityUnit = otherCreatingCombination.getUnits().get(i);
                 mergedCombination.add(new PolyPriorityUnit(priorityUnit.getPriority(), priorityUnit.getPoint(), priorityUnit.getUnity()));
             }
         }
@@ -243,9 +250,9 @@ public class PolyGenesisBuilder {
 
     private void nextMutate(BattleManager battleManager, int step, CreatingCombination mergedList) {
 
-        if (step < mergedList.getPriorityUnitList().size()) {
+        if (step < mergedList.getUnits().size()) {
             //Идем по всем расположенным юнитам:
-            PriorityUnit p = mergedList.getPriorityUnitList().get(step);
+            PriorityUnit p = mergedList.getUnits().get(step);
             EstimatedUnit estimatedUnit = estimatedUnitMap.get(p.getUnity().getId());
 
             if (!estimatedUnit.isPerformedCondition(p.getPoint())) { //Если условия не выполняются, тогда рассматриваем альтернативный вариант строения и улучшения
@@ -292,7 +299,7 @@ public class PolyGenesisBuilder {
                                         unit.takeResources().run(battleManager);
                                         if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
                                             bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0);
-                                            for (PriorityUnit e : currentCombinationOfBuild.getPriorityUnitList()) {
+                                            for (PriorityUnit e : currentCombinationOfBuild.getUnits()) {
                                                 bestCombinationOfBuild.add(new PolyPriorityUnit(e.getPriority(), e.getPoint(), e.getUnity()));
                                             }
                                             flag = currentUnity.substring(0, 1);
@@ -310,37 +317,50 @@ public class PolyGenesisBuilder {
                         }
                     }
                 }
+                PriorityUnit newPriorityUnit;
+                Predicate predicateStart;
+                Predicate predicateEnd;
+                PriorityUnit lastCreated = bestCombinationOfBuild.getUnits()
+                        .get(bestCombinationOfBuild.getUnits().size() - 1);
+                PriorityUnit currentUpgraded;
+                if (bestUpgradeCombination.getUnits().size() - 1 > 0){
+                    currentUpgraded = bestUpgradeCombination.getUnits().get(0);
+                } else {
+                    currentUpgraded = new PolyPriorityUnit(-10.0);
+                }
+                if (lastCreated.getPriority() > currentUpgraded.getPriority()){
+                    newPriorityUnit = lastCreated;
+                    predicateStart = o -> {
+                        if (o.getUnity().getId().equals("w")){
+                            battleManager.putDoubleWall(battleManager.getPlayer(), o.getPoint(), battleManager.getWall());
+                        } else {
+                            battleManager.putUnity(battleManager.getPlayer(), o.getPoint(),
+                                    o.getUnity());
+                        }
+                    };
+                    String f = flag;
+                    predicateEnd = o -> {
+                        if (o.getUnity().getId().equals("w")){
+                            battleManager.removeUnity(o.getPoint(), battleManager.getBarracks(), f);
 
-                PriorityUnit newPriorityUnit = bestCombinationOfBuild.getPriorityUnitList().get(
-                        bestCombinationOfBuild.getPriorityUnitList().size() - 1);
-
+                        } else {
+                            battleManager.removeUnity(o.getPoint(), o.getUnity(), f);
+                        }
+                    };
+                } else {
+                    newPriorityUnit = currentUpgraded;
+                    predicateStart = o -> battleManager.upgradeBuilding(o.getPoint(), battleManager.getPlayer());
+                    predicateEnd = o -> battleManager.aggravateUnit(o.getPoint(), o.getUnity());
+                }
                 currentCombinationOfBuild.add(new PolyPriorityUnit(newPriorityUnit.getPriority(), newPriorityUnit.getPoint(),
                         newPriorityUnit.getUnity()));
-
-                class WallChecker{
-                    private void putUnity(){
-                        if (newPriorityUnit.getUnity().getId().equals("w")){
-                            battleManager.putDoubleWall(battleManager.getPlayer(), newPriorityUnit.getPoint(), battleManager.getWall());
-                        } else {
-                            battleManager.putUnity(battleManager.getPlayer(), newPriorityUnit.getPoint(),
-                                    newPriorityUnit.getUnity());
-                        }
-                    }
-                }
-
-                WallChecker wallChecker = new WallChecker();
-
-                wallChecker.putUnity();
+                predicateStart.run(newPriorityUnit);
                 EstimatedUnit newEstimatedUnit = estimatedUnitMap.get(newPriorityUnit.getUnity().getId());
                 newEstimatedUnit.takeResources().run(battleManager);
                 int nextStep = step + 1;
                 nextMutate(battleManager, nextStep, mergedList);
                 newEstimatedUnit.returnResources().run(battleManager);
-                if (newEstimatedUnit.getUnity().getId().equals("w")){
-                    battleManager.removeUnity(newPriorityUnit.getPoint(), battleManager.getBarracks(), flag);
-                } else {
-                    battleManager.removeUnity(newPriorityUnit.getPoint(), newEstimatedUnit.getUnity(), flag);
-                }
+                predicateEnd.run(newPriorityUnit);
             } else {
                 bestCombinationOfBuild.add(p);
                 currentCombinationOfBuild.add(p);
@@ -396,7 +416,12 @@ public class PolyGenesisBuilder {
                 best = combination;
             }
         }
-        return best;
+        if (best.getSum() > bestUpgradeCombination.getSum()){
+            return best;
+        } else {
+            return bestUpgradeCombination;
+        }
+
     }
 
     public Set<CreatingCombination> getCombinations() {

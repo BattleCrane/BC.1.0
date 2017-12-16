@@ -109,7 +109,23 @@ public class Tests {
         AdjutantFielder adjutantFielder = new AdjutantFielder();
         adjutantFielder.fillZones(battleManager);
         battleManager.getBattleField().toString();
+    }
 
+    @Test
+    public void aggravateUnit(){
+        BattleManager battleManagerTest = new BattleManager(new BattleField());
+        battleManagerTest.setPlayer(battleManagerTest.getPlayerBlue());
+        battleManagerTest.setOpponentPlayer(battleManagerTest.getPlayerRed());
+        battleManagerTest.initializeField();
+        Point upgradePoint = new Point(10, 7);
+        battleManagerTest.putUnity(battleManagerTest.getPlayer(), upgradePoint, battleManagerTest.getGenerator());
+        battleManagerTest.getBattleField().toString();
+        battleManagerTest.upgradeBuilding(upgradePoint, battleManagerTest.getPlayer());
+
+        battleManagerTest.aggravateUnit(upgradePoint, battleManagerTest.getGenerator());
+        System.out.println("---------------------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------------------------");
+        battleManagerTest.getBattleField().toString();
     }
 
 }
