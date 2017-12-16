@@ -20,11 +20,11 @@ public final class PolyAdjutantPriorityField {
 
 //    public PolyAdjutantPriorityField(BattleManager battleManager) {
 //        BattleField battleField = battleManager.getBattleField();
-//        PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
+//        Priorities polyMapOfPriority = new Priorities();
 //        for (int i = 0; i < 16; i++) {
 //            for (int j = 0; j < 16; j++) {
 //                String unit = battleField.getMatrix().get(j).get(i);
-//                PolyPriorityUnit polyPriorityUnit = new PolyPriorityUnit(unit.charAt(4), polyMapOfPriority.getMapOfPriorityUnits().get(unit.charAt(4)), new Point(j, i), "unchecked");
+//                PolyPriorityUnit polyPriorityUnit = new PolyPriorityUnit(unit.charAt(4), polyMapOfPriority.getPriorities().get(unit.charAt(4)), new Point(j, i), "unchecked");
 //                priorityMatrix.get(j).set(i, polyPriorityUnit);
 //            }
 //        }

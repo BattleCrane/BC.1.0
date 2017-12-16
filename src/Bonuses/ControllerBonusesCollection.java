@@ -21,6 +21,8 @@ import java.util.regex.Pattern;
 /**
  * Класс ControllerBonusCollection хранит в себе экземпляры класса Support и управляет ими
  */
+
+// TODO: 16.12.2017 This class is so huge and difficult to understand! Transform bonuses in classes
 public final class ControllerBonusesCollection {
     public void showBonuses(ControllerMatchMaking controllerMatchMaking, Player player, Pane paneControlBonus) {
         int x = 42;

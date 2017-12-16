@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
  * Абстрактный класс Bonus являтся бонусом поддержки для игроков.
  * У него есть единственный параметр - энергия, взамен на которую активируется бонус.
  */
-
+// TODO: 16.12.2017 remove this extending!!! Create a subclass ButtonBonus which can be extend by button
 public abstract class Bonus extends Button{
     private int energy;
     private ImageView sprite;

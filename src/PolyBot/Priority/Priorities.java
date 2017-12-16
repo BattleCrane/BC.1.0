@@ -3,11 +3,11 @@ package PolyBot.Priority;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PolyMapOfPriority {
-    private Map<Character, Double> mapOfPriorityUnits = new HashMap<>();
+//TODO Make this class Enum
+public class Priorities {
+    private Map<Character, Double> priorities = new HashMap<>();
 
-    public PolyMapOfPriority() {
-
+    public Priorities() {
         Map<Character, Double> mapOfPriorityBasicUnits = new HashMap<>();
         mapOfPriorityBasicUnits.put('h', 500.0);//Штаб
         mapOfPriorityBasicUnits.put('g', 300.0); //Генератор
@@ -28,13 +28,11 @@ public class PolyMapOfPriority {
         mapOfPriorityBonusUnits.put('i', 100.0); //Форт
         mapOfPriorityBonusUnits.put('Q', 30.0); //Танк "Буффало"
 
-
-        mapOfPriorityUnits.putAll(mapOfPriorityBasicUnits);
-        mapOfPriorityUnits.putAll(mapOfPriorityBonusUnits);
+        priorities.putAll(mapOfPriorityBasicUnits);
+        priorities.putAll(mapOfPriorityBonusUnits);
     }
 
-    public Map<Character, Double> getMapOfPriorityUnits() {
-        return mapOfPriorityUnits;
+    public Map<Character, Double> getPriorities() {
+        return priorities;
     }
-
 }

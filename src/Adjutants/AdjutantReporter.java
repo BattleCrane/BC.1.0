@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 /**
  * Класс AdjutantReporter с помощью метода getReportAboutUnities рапортует о том, какие юниты и сколько их вы можете сделать.
  */
+
+// TODO: 16.12.2017 make AdjutantReporter injectable
 public final class AdjutantReporter {
     public void getReportAboutUnities(BattleManager battleManager){
         Pattern patternBarracks = Pattern.compile("[!?][+-]b'"); //Шаблон бараков

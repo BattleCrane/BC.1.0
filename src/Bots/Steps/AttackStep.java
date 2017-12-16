@@ -6,7 +6,7 @@ import BattleFields.Point;
 import Bonuses.ControllerBonusesCollection;
 import Controllers.ControllerMatchMaking;
 import Graphics.Painter;
-import PolyBot.Probes.PolyAttackerProbe;
+import PolyBot.Probes.PolyTargetProbe;
 import ResourceInit.Resource;
 import ResourceInit.ResourceOfBonuses;
 import javafx.scene.layout.Pane;
@@ -28,7 +28,7 @@ public class AttackStep implements Step {
 
     @Override
     public void makeStep() {
-        Point shotPoint = new PolyAttackerProbe(controllerMatchMaking).findBestShot(controllerMatchMaking.getBattleManager(), startPoint);
+        Point shotPoint = new PolyTargetProbe(controllerMatchMaking).findBestShot(controllerMatchMaking.getBattleManager(), startPoint);
         if (shotPoint != null){
             AdjutantAttacker adjutantAttacker = new AdjutantAttacker();
             Resource resource = controllerMatchMaking.getResource();

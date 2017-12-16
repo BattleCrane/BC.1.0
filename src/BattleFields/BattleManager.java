@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
  * 5.) Отрисовка территорий
  */
 //Контроллер игры, делегат
+// TODO: 16.12.2017 make enum units & move methods callable from units, extending their from Unity
 public class BattleManager {
 
     //Основные переменные:
@@ -296,7 +297,7 @@ public class BattleManager {
         return unity;
     }
 
-    public void aggravateUnit(Point point, Unity unity){
+    public void aggravateUnit(Point point, Unity unity) {
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
                 String e = battleField.getMatrix().get(i).get(j);
@@ -311,32 +312,32 @@ public class BattleManager {
         int decrease;
         switch (unity.substring(1, 2)) {
             case "<":
-                if (unity.substring(4, 5).equals("g")){
+                if (unity.substring(4, 5).equals("g")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 1;
                     return "" + decrease + '^' + unity.substring(2);
                 }
-                if (unity.substring(4, 5).equals("b")){
+                if (unity.substring(4, 5).equals("b")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 1;
                     return "" + decrease + '^' + unity.substring(2);
                 }
-                if (unity.substring(4, 5).equals("f")){
+                if (unity.substring(4, 5).equals("f")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 3;
                     return "" + decrease + '^' + unity.substring(2);
                 }
-                if (unity.substring(4, 5).equals("t")){
+                if (unity.substring(4, 5).equals("t")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
-                    return "" + decrease+ '^' + unity.substring(2);
+                    return "" + decrease + '^' + unity.substring(2);
                 }
             case ">":
-                if (unity.substring(4, 5).equals("g")){
+                if (unity.substring(4, 5).equals("g")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
                     return "" + decrease + '<' + unity.substring(2);
                 }
-                if (unity.substring(4, 5).equals("b")){
+                if (unity.substring(4, 5).equals("b")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
                     return "" + decrease + '<' + unity.substring(2);
                 }
-                if (unity.substring(4, 5).equals("f")){
+                if (unity.substring(4, 5).equals("f")) {
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
                     return "" + decrease + '<' + unity.substring(2);
                 }

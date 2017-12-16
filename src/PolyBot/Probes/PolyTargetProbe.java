@@ -1,24 +1,22 @@
 package PolyBot.Probes;
 
 import Adjutants.AdjutantAttacker;
-import Adjutants.AdjutantFielder;
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import Bots.Priority.PriorityUnit;
 import Bots.Steps.AttackStep;
 import Controllers.ControllerMatchMaking;
 import Players.Player;
-import PolyBot.Priority.PolyMapOfPriority;
+import PolyBot.Priority.Priorities;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PolyAttackerProbe {
-    PolyMapOfPriority polyMapOfPriority = new PolyMapOfPriority();
+public class PolyTargetProbe {
+    Priorities priorities = new Priorities();
 
-    public PolyAttackerProbe(ControllerMatchMaking controllerMatchMaking) {
+    public PolyTargetProbe(ControllerMatchMaking controllerMatchMaking) {
         this.controllerMatchMaking = controllerMatchMaking;
     }
 
@@ -69,7 +67,7 @@ public class PolyAttackerProbe {
                 if (adjutantAttacker.checkTarget(battleManager, point, currentPoint) && !target.equals(" ") &&
                         !target.equals("X") && !unit.substring(3, 4).equals(battleManager.getPlayer().getColorType())){
                     System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR:             " + target);
-                    Target currentTarget = new Target(currentPoint, polyMapOfPriority.getMapOfPriorityUnits().get(target.charAt(0)));
+                    Target currentTarget = new Target(currentPoint, priorities.getPriorities().get(target.charAt(0)));
                     if (currentTarget.priority > best.priority){
                         best = currentTarget;
                     }

@@ -14,9 +14,10 @@ import javafx.stage.Stage;
  * а реальный объект на входе Stage unused игнорируется
  */
 
+// TODO: 16.12.2017 make this injectable & set maven project
 public class Main extends Application {
     //Статическое окно, которое можно переключать
-    public static Stage BattleCraneStage = new Stage();
+    private static Stage BattleCraneStage = new Stage();
 
     public static void main(String[] args) {
         launch(args);

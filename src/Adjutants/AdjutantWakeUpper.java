@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 /**
  * Класс AdjutantWakeUpper с помощью метода wakeUpUnities активирует ваших юнитов в начале хода.
  */
+
+// TODO: 16.12.2017 make AdjutantWakeUpper injectable
 public final class AdjutantWakeUpper {
     public void wakeUpUnities(BattleManager battleManager){
         Pattern patternBarracksAndFactories = Pattern.compile("[bfi]'");

@@ -5,6 +5,7 @@ import Unities.Unity;
 
 import java.util.Objects;
 
+// TODO: 16.12.2017 After that how you fix your big problem with Unity you can to begin working with Priority
 public abstract class PriorityUnit {
     private String inputUnit;
     private Unity unity;
@@ -199,18 +200,6 @@ public abstract class PriorityUnit {
     public void setHeight(int height) {
         this.height = height;
     }
-
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        PriorityUnit that = (PriorityUnit) o;
-//
-//        if (Double.compare(that.priority, priority) != 0) return false;
-//        return point != null ? point.equals(that.point) : that.point == null;
-//    }
 
     @Override
     public int hashCode() {

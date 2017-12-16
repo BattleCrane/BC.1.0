@@ -12,6 +12,7 @@ import java.util.List;
  * При создании нового юнита на поле боя происходит запись его номера в матрицу.
  * Работает вместо координат юнита.
  */
+// TODO: 16.12.2017 merge this with BattleField & by means of unity param ID
 public final class IdentificationField {
 
     private final List<List<String>> matrix = new ArrayList<>();

@@ -11,9 +11,11 @@ import java.util.regex.Pattern;
 /**
  * Класс AdjutantAttacker реализует методы атак:
  */
+
+
+// TODO: 16.12.2017 make AdjutantAttacker injectable
 public final class AdjutantAttacker {
     private int countShortsForHeadquarters = 0;
-
 
     @NotNull
     public String attack(String targetUnity, int damage) {
@@ -130,7 +132,7 @@ public final class AdjutantAttacker {
 
 
     @Contract(pure = true)
-    public  static int min(int a, int b) {
+    private static int min(int a, int b) {
         if (a <= b) {
             return a;
         } else {
@@ -140,7 +142,7 @@ public final class AdjutantAttacker {
 
 
     @Contract(pure = true)
-    public static int max(int a, int b) {
+    private static int max(int a, int b) {
         if (a <= b) {
             return b;
         } else {

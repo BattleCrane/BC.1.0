@@ -12,7 +12,7 @@ import Players.Player;
 import PolyBot.PolyCombinations.Army.IteratorArmy.PolyIteratorArmy;
 import PolyBot.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
 import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
-import PolyBot.Probes.PolyAttackerProbe;
+import PolyBot.Probes.PolyTargetProbe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +60,8 @@ public class PolytechBot implements Bot {
         BattleManager battleManager = controllerMatchMaking.getBattleManager();
         Player player = controllerMatchMaking.getBattleManager().getPlayer();
 
-        PolyAttackerProbe polyAttackerProbe = new PolyAttackerProbe(controllerMatchMaking);
-        return polyAttackerProbe.findAttackSteps(battleManager, player);
+        PolyTargetProbe polyTargetProbe = new PolyTargetProbe(controllerMatchMaking);
+        return polyTargetProbe.findAttackSteps(battleManager, player);
     }
 
 

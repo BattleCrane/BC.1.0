@@ -14,6 +14,7 @@ import java.util.List;
  * Он вызывается в конце каждого хода и выводит на консоль состояние поля боя.
  */
 
+// TODO: 16.12.2017 make loading field from file & change matrix type to List<List<Unity>>
 public final class BattleField {
     private List<List<String>> matrix = new ArrayList<>();
 

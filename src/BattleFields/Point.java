@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Класс Point реализует координаты объектов на оси XoY
  */
-
+// TODO: 16.12.2017 reformat "x" & "y". Make final these params
 public final class Point {
     private int x;
     private int y;
