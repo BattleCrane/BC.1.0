@@ -3,6 +3,7 @@ package PolyBot.PolyCombinations.Building.GenesisBuilding;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
+import PolyBot.PolyCombinations.Building.IteratorBuilding.PolyIteratorBuilder;
 import PolyBot.PolyCombinations.upgrading.PolyUpgrading;
 import PolyBot.Priority.PolyPriorityUnit;
 import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
@@ -34,11 +35,13 @@ public class PolyGenesisBuilder {
     private CreatingCombination currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
     private CreatingCombination bestUpgradeCombination;
     private List<EstimatedUnit> estimatedUnits = null;
+    private CreatingCombination turretCombinations;
 
     public PolyGenesisBuilder(BattleManager battleManager) {
         initUnitMap(battleManager);
         PolyUpgrading polyUpgrading = new PolyUpgrading(battleManager);
         bestUpgradeCombination = polyUpgrading.findCombination();
+
     }
 
     private int controllerBuilding;
@@ -107,6 +110,9 @@ public class PolyGenesisBuilder {
 
     //Найти лучшую комбинацию:
     public CreatingCombination findBuildCombination(BattleManager battleManager) {
+        PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder();
+        polyIteratorBuilder.findTurretCombination(battleManager);
+        turretCombinations = polyIteratorBuilder.getBestCombinationOfBuild();
 
         combinations = new HashSet<>();
         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
@@ -416,11 +422,18 @@ public class PolyGenesisBuilder {
                 best = combination;
             }
         }
+        CreatingCombination combination;
         if (best.getSum() > bestUpgradeCombination.getSum()){
-            return best;
+            combination = best;
         } else {
-            return bestUpgradeCombination;
+            combination = bestUpgradeCombination;
         }
+        if (combination.getSum() > turretCombinations.getSum()){
+            return combination;
+        } else {
+            return turretCombinations;
+        }
+
 
     }
 

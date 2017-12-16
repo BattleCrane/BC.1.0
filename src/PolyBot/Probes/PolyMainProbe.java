@@ -33,7 +33,7 @@ public class PolyMainProbe implements Probe {
 
     public List<PriorityUnit> probeAccommodationOfUnitsTest(BattleManager battleManager) {
         PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder();
-        polyIteratorBuilder.findCombination(battleManager, battleManager.getHowICanBuild());
+        polyIteratorBuilder.findCombination(battleManager);
         return polyIteratorBuilder.getBestCombinationOfBuild().getUnits();
     }
 
@@ -194,7 +194,7 @@ public class PolyMainProbe implements Probe {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
                 if (inBounds && !otherUnit.substring(1).equals("    0") &&
                         otherUnit.charAt(3) != currentPlayer.getColorType().charAt(0)) {
-                    value += 5 * polyMapOfPriority.getMapOfPriorityUnits().get(otherUnit.charAt(4));
+                    value += 10 * polyMapOfPriority.getMapOfPriorityUnits().get(otherUnit.charAt(4));
                 }
             }
             countShift++;

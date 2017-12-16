@@ -324,7 +324,7 @@ public class BattleManager {
                     return "" + decrease + '^' + unity.substring(2);
                 }
                 if (unity.substring(4, 5).equals("t")){
-                    decrease = Integer.parseInt(unity.substring(0, 1)) - 1;
+                    decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
                     return "" + decrease+ '^' + unity.substring(2);
                 }
             case ">":
@@ -337,10 +337,6 @@ public class BattleManager {
                     return "" + decrease + '<' + unity.substring(2);
                 }
                 if (unity.substring(4, 5).equals("f")){
-                    decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
-                    return "" + decrease + '<' + unity.substring(2);
-                }
-                if (unity.substring(4, 5).equals("t")){
                     decrease = Integer.parseInt(unity.substring(0, 1)) - 2;
                     return "" + decrease + '<' + unity.substring(2);
                 }
