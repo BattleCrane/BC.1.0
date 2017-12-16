@@ -42,5 +42,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.google.inject:guice:4.1.0" level="application" />
   </component>
 </module>
