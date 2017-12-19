@@ -1,5 +1,5 @@
 package Bots.Probes;
-import PolyBot.Probes.parametres.Params;
+import polytech.polyNexus.Probes.parametres.Params;
 
 public class TemplateProbe implements Probe {
     @Override

@@ -1,18 +1,6 @@
 package Bots.Probes;
 
-import BattleFields.BattleManager;
-import BattleFields.Point;
-import Bots.Priority.PriorityUnit;
-import Players.Player;
-import PolyBot.Probes.parametres.Params;
-import org.jetbrains.annotations.Contract;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import polytech.polyNexus.Probes.parametres.Params;
 
 /**
  * Интерфейс Probe - это классический интерфейс, который содержит в себе

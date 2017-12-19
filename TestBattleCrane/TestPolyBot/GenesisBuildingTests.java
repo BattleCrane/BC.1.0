@@ -4,9 +4,9 @@ import Adjutants.AdjutantFielder;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import PolyBot.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
-import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
-import PolyBot.Priority.PolyPriorityUnit;
+import polytech.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
+import polytech.PolyCombinations.CreatingTools.CreatingCombination;
+import polytech.Priority.PolyPriorityUnit;
 import Unities.Unity;
 import org.junit.Test;
 

@@ -3,8 +3,8 @@ package TestPolyBot;
 import Adjutants.AdjutantFielder;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
-import PolyBot.PolyCombinations.Army.IteratorArmy.PolyIteratorArmy;
-import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
+import polytech.PolyCombinations.Army.IteratorArmy.PolyIteratorArmy;
+import polytech.PolyCombinations.CreatingTools.CreatingCombination;
 import org.junit.Test;
 
 public class CreatingArmyTest {

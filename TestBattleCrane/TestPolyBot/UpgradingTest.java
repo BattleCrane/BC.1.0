@@ -2,8 +2,8 @@ package TestPolyBot;
 
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
-import PolyBot.PolyCombinations.upgrading.PolyUpgrading;
+import polytech.PolyCombinations.CreatingTools.CreatingCombination;
+import polytech.PolyCombinations.upgrading.PolyUpgrading;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

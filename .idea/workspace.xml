@@ -2,106 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16c613ff-2a58-4f01-9824-5526d1f4b983" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Adjutants/AdjutantAttacker.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Adjutants/AdjutantFielder$ZoneOfPlayer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Adjutants/AdjutantFielder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Adjutants/AdjutantReporter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Adjutants/AdjutantWakeUpper.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/BattleFields/BattleField.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/BattleFields/BattleManager.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/BattleFields/IdentificationField.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/BattleFields/Point.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/Bonus.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$10.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$11.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$12.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$13.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$14.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$15.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$16.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$17.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$18.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$19.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$2.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$20.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$21.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$22.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$23.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$24.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$25.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$3.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$4.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$5.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$6.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$7.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$8.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection$9.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bonuses/ControllerBonusesCollection.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Bot.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Priority/PriorityUnit.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Priority/TemplatePriorityUnit.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Probes/Probe.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Probes/TemplateProbe.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Steps/Step.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Bots/Turn.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Controllers/ControllerMatchMaking$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Controllers/ControllerMatchMaking.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Controllers/ControllerMenu.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Graphics/Painter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Main/Main.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Players/Player.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder$2.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder$3.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/CodeContainer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/CreatingTools/CreatingCombination.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/CreatingTools/EstimatedUnit.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolyCombinations/CreatingTools/PolyPlanner.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/PolytechBot.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/Priority/PolyAdjutantPriorityField.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/Priority/PolyMapOfPriority.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/Priority/PolyPriorityUnit.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/PolyBot/Probes/PolyMainProbe.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/ResourceInit/Resource.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/ResourceInit/ResourceOfBonuses.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_10_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_11_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_12_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_13_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_14_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_15_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_16_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_17_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_1_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_2_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_3_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_4_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_5_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_6_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_7_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_8_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/CampaignScenario/Mission_9_.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/MultiplayerScenario/StandardScenario.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Scenarios/Scenario.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/megaDoofense/Unities/Unity.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Bots/Bot.java" afterPath="$PROJECT_DIR$/src/Bots/Bot.java" />
-      <change beforePath="$PROJECT_DIR$/src/Bots/Steps/AttackStep.java" afterPath="$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java" />
-      <change beforePath="$PROJECT_DIR$/src/Bots/Steps/BonusStep.java" afterPath="$PROJECT_DIR$/src/PolyBot/Steps/BonusStep.java" />
-      <change beforePath="$PROJECT_DIR$/src/Bots/Steps/Step.java" afterPath="$PROJECT_DIR$/src/PolyBot/Steps/Step.java" />
-      <change beforePath="$PROJECT_DIR$/src/Bots/Steps/UnityStep.java" afterPath="$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" afterPath="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/PolytechBot.java" afterPath="$PROJECT_DIR$/src/PolyBot/PolytechBot.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java" afterPath="$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/PolyCombinator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/parametres/Params.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/PolytechBot.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/parametres/Params.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/CreatingArmyTest.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/CreatingArmyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/GenesisBuildingTests.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/GenesisBuildingTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BattleFields/BattleManager.java" afterPath="$PROJECT_DIR$/src/BattleFields/BattleManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bots/Bot.java" afterPath="$PROJECT_DIR$/src/Bots/Bot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bots/Probes/Probe.java" afterPath="$PROJECT_DIR$/src/Bots/Probes/Probe.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bots/Probes/TemplateProbe.java" afterPath="$PROJECT_DIR$/src/Bots/Probes/TemplateProbe.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" afterPath="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/CodeContainer.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/CodeContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/CreatingCombination.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/CreatingCombination.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/EstimatedUnit.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/EstimatedUnit.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/PolyPlanner.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/PolyPlanner.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/PolyCombinations/upgrading/PolyUpgrading.java" afterPath="$PROJECT_DIR$/src/polytech/PolyCombinations/upgrading/PolyUpgrading.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Priority/PolyAdjutantPriorityField.java" afterPath="$PROJECT_DIR$/src/polytech/Priority/PolyAdjutantPriorityField.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Priority/PolyPriorityUnit.java" afterPath="$PROJECT_DIR$/src/polytech/Priority/PolyPriorityUnit.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Priority/Priorities.java" afterPath="$PROJECT_DIR$/src/polytech/Priority/Priorities.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBallisticProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBuildingProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyDistanceProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyMainProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyRadiusProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyTargetProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyUpgradingProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyZoneProbe.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java" afterPath="$PROJECT_DIR$/src/polytech/Steps/AttackStep.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Steps/BonusStep.java" afterPath="$PROJECT_DIR$/src/polytech/Steps/BonusStep.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Steps/Step.java" afterPath="$PROJECT_DIR$/src/polytech/Steps/Step.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java" afterPath="$PROJECT_DIR$/src/polytech/Steps/UnityStep.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -130,116 +78,120 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="AttackStep.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java">
+      <file leaf-file-name="PolyMainProbe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyMainProbe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="32" column="87" lean-forward="false" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
+            <state relative-caret-position="-800">
+              <caret line="23" column="4" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+              <folding>
+                <element signature="e#1227#1228#0" expanded="true" />
+                <element signature="e#1254#1255#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PolyIteratorBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PolyDistanceProbe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyDistanceProbe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#339#340#0" expanded="true" />
+                <element signature="e#389#390#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PolyUpgrading.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/upgrading/PolyUpgrading.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BonusStep.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/BonusStep.java">
+      <file leaf-file-name="PolyIteratorArmy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnityStep.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="320">
+              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="PolyBallisticProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java">
+        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBallisticProbe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1218">
-              <caret line="58" column="48" lean-forward="true" selection-start-line="58" selection-start-column="48" selection-end-line="58" selection-end-column="49" />
+            <state relative-caret-position="528">
+              <caret line="33" column="11" lean-forward="true" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PolyGenesisBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="50" column="65" lean-forward="true" selection-start-line="50" selection-start-column="65" selection-end-line="50" selection-end-column="65" />
+              <folding>
+                <element signature="method#initUnitMap#0;class#PolyGenesisBuilder#0" expanded="false" />
+                <element signature="method#merge#0;class#PolyGenesisBuilder#0" expanded="false" />
+                <element signature="method#mergeAndMutatePopulation#0;class#PolyGenesisBuilder#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="PolyBuildingProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java">
+        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBuildingProbe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="43" column="64" lean-forward="false" selection-start-line="43" selection-start-column="64" selection-end-line="43" selection-end-column="64" />
+            <state relative-caret-position="352">
+              <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="PolyRadiusProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java">
+        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyRadiusProbe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-              <folding>
-                <element signature="e#3494#3495#0" expanded="true" />
-                <element signature="e#3545#3546#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PolyTargetProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="903">
-              <caret line="57" column="85" lean-forward="false" selection-start-line="57" selection-start-column="85" selection-end-line="57" selection-end-column="85" />
-              <folding>
-                <element signature="e#1130#1131#0" expanded="true" />
-                <element signature="e#1174#1175#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PolyMainProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="15" column="45" lean-forward="false" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-              <folding>
-                <element signature="e#843#844#0" expanded="true" />
-                <element signature="e#870#871#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PolyGenesisBuilder.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="276">
+              <caret line="44" column="18" lean-forward="false" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PolyDistanceProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java">
+      <file leaf-file-name="PolyCombinator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/PolyCombinator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+            <state relative-caret-position="413">
+              <caret line="33" column="35" lean-forward="false" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#310#311#0" expanded="true" />
-                <element signature="e#360#361#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -295,23 +247,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Bots/Steps/BonusStep.java" />
-        <option value="$PROJECT_DIR$/src/Bots/Bot.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/Players/Player.java" />
-        <option value="$PROJECT_DIR$/src/Bots/Steps/Step.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/AttackerProbeTest.java" />
-        <option value="$PROJECT_DIR$/src/PolyBot/PolytechBot.java" />
-        <option value="$PROJECT_DIR$/src/Bots/Steps/UnityStep.java" />
-        <option value="$PROJECT_DIR$/src/PolyBot/PolyCombinations/upgrading/Upgrading.java" />
-        <option value="$PROJECT_DIR$/src/PolyBot/Priority/PolyPriorityUnit.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java" />
-        <option value="$PROJECT_DIR$/src/PolyBot/PolyCombinations/upgrading/PolyUpgrading.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/GenesisBuildingTests.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestBattleCrane/Tests.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java" />
         <option value="$PROJECT_DIR$/src/PolyBot/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java" />
-        <option value="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" />
         <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyAttackerProbe.java" />
         <option value="$PROJECT_DIR$/src/Bots/Steps/AttackStep.java" />
         <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java" />
@@ -346,6 +282,22 @@
         <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java" />
         <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java" />
         <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/PolytechBot.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/PolyBot.java" />
+        <option value="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" />
+        <option value="$PROJECT_DIR$/src/polytech/Probes/PolyMainProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/Probes/PolyProbeManager.java" />
+        <option value="$PROJECT_DIR$/src/polytech/Probes/PolyNexus.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyDistanceProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java" />
+        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyRadiusProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBuildingProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java" />
+        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/PolyCombinator.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBallisticProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java" />
+        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/upgrading/PolyUpgrading.java" />
       </list>
     </option>
   </component>
@@ -570,53 +522,29 @@
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
               <item name="PolyCombinations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyCombinations" type="462c0819:PsiDirectoryNode" />
-              <item name="IteratorArmy" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
+              <item name="polyNexus" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyCombinations" type="462c0819:PsiDirectoryNode" />
-              <item name="Building" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyCombinations" type="462c0819:PsiDirectoryNode" />
-              <item name="Building" type="462c0819:PsiDirectoryNode" />
-              <item name="GenesisBuilding" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
+              <item name="polyNexus" type="462c0819:PsiDirectoryNode" />
               <item name="Probes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PolyBot" type="462c0819:PsiDirectoryNode" />
-              <item name="Steps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
@@ -649,9 +577,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -679,46 +607,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.IteratorBuildingTest.findTurretCombination">
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="Main.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="megaDoofense" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
     <configuration name="GenesisBuildingTests.findCombination" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -768,6 +656,25 @@
       </option>
       <envs />
       <patterns />
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="Main.Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="megaDoofense" />
+      <envs />
     </configuration>
     <configuration name="MainProbeTests.probeRadiusUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
@@ -819,6 +726,27 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -838,6 +766,12 @@
       </option>
       <envs />
       <patterns />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -872,12 +806,6 @@
       <envs />
       <properties />
       <listeners />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
@@ -1079,7 +1007,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1089,28 +1017,47 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21574973" sideWeight="0.5044843" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3922652" sideWeight="0.4955157" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20759289" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21574973" sideWeight="0.5044843" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49775785" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3922652" sideWeight="0.4955157" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49434572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1172,47 +1119,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Players/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="42" column="29" lean-forward="true" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
-          <folding>
-            <element signature="e#1510#1511#0" expanded="false" />
-            <element signature="e#1540#1541#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/Step.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Steps/Step.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/lang/Comparable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="95" column="17" lean-forward="false" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/CodeContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/lang/Comparable.java" />
     <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
@@ -1220,14 +1134,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Priority/PolyAdjutantPriorityField.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Priority/PolyAdjutantPriorityField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/PolyPlanner.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/PolyPlanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
@@ -1241,37 +1155,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Priority/PolyPriorityUnit.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Priority/PolyPriorityUnit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="12" column="11" lean-forward="false" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
           <folding>
-            <element signature="e#328#329#0" expanded="false" />
-            <element signature="e#359#360#0" expanded="false" />
+            <element signature="e#329#330#0" expanded="false" />
+            <element signature="e#360#361#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="95" column="25" lean-forward="false" selection-start-line="95" selection-start-column="25" selection-end-line="95" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/CreatingCombination.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/CreatingCombination.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="28" column="25" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="644" column="105" lean-forward="true" selection-start-line="644" selection-start-column="105" selection-end-line="644" selection-end-column="105" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1283,13 +1181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1974">
-          <caret line="104" column="69" lean-forward="false" selection-start-line="104" selection-start-column="69" selection-end-line="104" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
@@ -1298,17 +1189,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/upgrading/PolyUpgrading.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1113">
-          <caret line="60" column="19" lean-forward="false" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+        <state relative-caret-position="80">
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1328,22 +1213,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolytechBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="33" column="79" lean-forward="true" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/parametres/Params.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Priority/Priorities.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Priority/Priorities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="83">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
@@ -1362,69 +1232,80 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BattleFields/BattleManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="166" column="24" lean-forward="false" selection-start-line="166" selection-start-column="24" selection-end-line="166" selection-end-column="24" />
+        <state relative-caret-position="5104">
+          <caret line="326" column="74" lean-forward="false" selection-start-line="326" selection-start-column="74" selection-end-line="326" selection-end-column="74" />
           <folding>
-            <element signature="e#16617#16618#0" expanded="false" />
-            <element signature="e#16651#16652#0" expanded="false" />
-            <element signature="e#16688#16689#0" expanded="false" />
-            <element signature="e#16721#16722#0" expanded="false" />
-            <element signature="e#16757#16758#0" expanded="false" />
-            <element signature="e#16789#16790#0" expanded="false" />
-            <element signature="e#16822#16823#0" expanded="false" />
-            <element signature="e#16851#16852#0" expanded="false" />
-            <element signature="e#16895#16896#0" expanded="false" />
-            <element signature="e#16931#16932#0" expanded="false" />
-            <element signature="e#16972#16973#0" expanded="false" />
-            <element signature="e#17009#17010#0" expanded="false" />
-            <element signature="e#17069#17070#0" expanded="false" />
-            <element signature="e#17121#17122#0" expanded="false" />
-            <element signature="e#17159#17160#0" expanded="false" />
-            <element signature="e#17194#17195#0" expanded="false" />
-            <element signature="e#17228#17229#0" expanded="false" />
-            <element signature="e#17259#17260#0" expanded="false" />
-            <element signature="e#17294#17295#0" expanded="false" />
-            <element signature="e#17326#17327#0" expanded="false" />
-            <element signature="e#17359#17360#0" expanded="false" />
-            <element signature="e#17389#17390#0" expanded="false" />
-            <element signature="e#17421#17422#0" expanded="false" />
-            <element signature="e#17450#17451#0" expanded="false" />
-            <element signature="e#17480#17481#0" expanded="false" />
-            <element signature="e#17507#17508#0" expanded="false" />
-            <element signature="e#17539#17540#0" expanded="false" />
-            <element signature="e#17568#17569#0" expanded="false" />
-            <element signature="e#17598#17599#0" expanded="false" />
-            <element signature="e#17625#17626#0" expanded="false" />
-            <element signature="e#17669#17670#0" expanded="false" />
-            <element signature="e#17713#17714#0" expanded="false" />
-            <element signature="e#17886#17887#0" expanded="false" />
-            <element signature="e#17921#17922#0" expanded="false" />
-            <element signature="e#17974#17975#0" expanded="false" />
-            <element signature="e#18022#18023#0" expanded="false" />
-            <element signature="e#18070#18071#0" expanded="false" />
-            <element signature="e#18117#18118#0" expanded="false" />
-            <element signature="e#18315#18316#0" expanded="false" />
-            <element signature="e#18363#18364#0" expanded="false" />
-            <element signature="e#18564#18565#0" expanded="false" />
-            <element signature="e#18611#18612#0" expanded="false" />
-            <element signature="e#18809#18810#0" expanded="false" />
-            <element signature="e#18857#18858#0" expanded="false" />
-            <element signature="e#19058#19059#0" expanded="false" />
-            <element signature="e#19105#19106#0" expanded="false" />
-            <element signature="e#19303#19304#0" expanded="false" />
-            <element signature="e#19351#19352#0" expanded="false" />
-            <element signature="e#19552#19553#0" expanded="false" />
-            <element signature="e#19597#19598#0" expanded="false" />
-            <element signature="e#19670#19671#0" expanded="false" />
-            <element signature="e#19731#19732#0" expanded="false" />
-            <element signature="e#19790#19791#0" expanded="false" />
-            <element signature="e#19832#19833#0" expanded="false" />
-            <element signature="e#19887#19888#0" expanded="false" />
-            <element signature="e#19927#19928#0" expanded="false" />
-            <element signature="e#19980#19981#0" expanded="false" />
-            <element signature="e#20019#20020#0" expanded="false" />
-            <element signature="e#20078#20079#0" expanded="false" />
-            <element signature="e#20124#20125#0" expanded="false" />
+            <element signature="e#20050#20051#0" expanded="true" />
+            <element signature="e#20096#20097#0" expanded="true" />
+            <marker date="1513682770765" expanded="true" signature="14832:15034" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="15076:15365" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="15430:16143" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="16201:16425" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="16588:16599" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="16618:16624" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="16659:16670" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="16688:16694" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="16728:16739" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="16756:16762" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="16793:16804" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="16818:16824" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="16866:16877" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="16898:16904" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="16943:16954" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="16976:16982" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17040:17051" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17088:17094" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17130:17141" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17161:17167" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17199:17210" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17226:17232" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17265:17276" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17293:17299" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17330:17341" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17356:17362" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17392:17403" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17417:17423" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17451:17462" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17474:17480" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17510:17521" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17535:17541" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17569:17580" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17592:17598" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17640:17651" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17680:17686" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17756:17823" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="17857:17868" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17888:17894" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="17945:17956" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="17989:17995" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="18041:18052" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="18084:18090" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="18166:18239" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="18286:18297" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="18330:18336" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="18414:18489" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="18535:18546" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="18578:18584" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="18660:18733" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="18780:18791" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="18824:18830" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="18908:18983" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="19029:19040" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19072:19078" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="19154:19227" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="19274:19285" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19318:19324" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="19402:19477" ph="{...}" />
+            <marker date="1513682770765" expanded="true" signature="19523:19534" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19564:19570" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="19641:19652" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19698:19704" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="19761:19772" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19799:19805" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="19858:19869" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19894:19900" ph=" }" />
+            <marker date="1513682770765" expanded="true" signature="19951:19962" ph=" { " />
+            <marker date="1513682770765" expanded="true" signature="19986:19992" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1463,10 +1344,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#157#158#0" expanded="false" />
-            <element signature="e#214#215#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1524,7 +1402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="27" column="6" lean-forward="false" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1536,20 +1413,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyZoneProbe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="847">
           <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
           <folding>
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
-            <element signature="e#4719#4720#0" expanded="true" />
-            <element signature="e#4755#4756#0" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#4739#4740#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyUpgradingProbe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
           <caret line="46" column="32" lean-forward="false" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
@@ -1557,7 +1432,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/BonusStep.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Steps/BonusStep.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
@@ -1565,7 +1440,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Steps/AttackStep.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="32" column="87" lean-forward="false" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
@@ -1573,7 +1448,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/Steps/UnityStep.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
@@ -1581,73 +1456,178 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyTargetProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="e#3494#3495#0" expanded="true" />
-            <element signature="e#3545#3546#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#310#311#0" expanded="true" />
-            <element signature="e#360#361#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="43" column="64" lean-forward="false" selection-start-line="43" selection-start-column="64" selection-end-line="43" selection-end-column="64" />
+        <state relative-caret-position="903">
+          <caret line="57" column="85" lean-forward="false" selection-start-line="57" selection-start-column="85" selection-end-line="57" selection-end-column="85" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolytechBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="903">
-          <caret line="57" column="85" lean-forward="false" selection-start-line="57" selection-start-column="85" selection-end-line="57" selection-end-column="85" />
+        <state relative-caret-position="192">
+          <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
           <folding>
-            <element signature="e#1130#1131#0" expanded="true" />
-            <element signature="e#1174#1175#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="false" />
+            <element signature="e#724#725#0" expanded="false" />
+            <element signature="e#874#875#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java">
+    <entry file="file://$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1218">
-          <caret line="58" column="48" lean-forward="true" selection-start-line="58" selection-start-column="48" selection-end-line="58" selection-end-column="49" />
+        <state relative-caret-position="278">
+          <caret line="658" column="21" lean-forward="false" selection-start-line="658" selection-start-column="21" selection-end-line="658" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#handle#0;class#3454:46486" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/parametres/Params.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+          <folding>
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1649#1650#0" expanded="true" />
+            <element signature="e#1696#1697#0" expanded="true" />
+            <element signature="e#1732#1733#0" expanded="true" />
+            <element signature="e#1766#1767#0" expanded="true" />
+            <element signature="e#1792#1793#0" expanded="true" />
+            <element signature="e#1835#1836#0" expanded="true" />
+            <element signature="e#1867#1868#0" expanded="true" />
+            <element signature="e#1918#1919#0" expanded="true" />
+            <element signature="e#1954#1955#0" expanded="true" />
+            <element signature="e#2001#2002#0" expanded="true" />
+            <element signature="e#2035#2036#0" expanded="true" />
+            <element signature="e#2088#2089#0" expanded="true" />
+            <element signature="e#2125#2126#0" expanded="true" />
+            <element signature="e#2178#2179#0" expanded="true" />
+            <element signature="e#2215#2216#0" expanded="true" />
+            <element signature="e#2266#2267#0" expanded="true" />
+            <element signature="e#2302#2303#0" expanded="true" />
+            <element signature="e#2349#2350#0" expanded="true" />
+            <element signature="e#2383#2384#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyMainProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-800">
+          <caret line="23" column="4" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+          <folding>
+            <element signature="e#1227#1228#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyRadiusProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="15" column="45" lean-forward="false" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+        <state relative-caret-position="276">
+          <caret line="44" column="18" lean-forward="false" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBuildingProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="50" column="65" lean-forward="true" selection-start-line="50" selection-start-column="65" selection-end-line="50" selection-end-column="65" />
           <folding>
-            <element signature="e#843#844#0" expanded="true" />
-            <element signature="e#870#871#0" expanded="true" />
+            <element signature="method#initUnitMap#0;class#PolyGenesisBuilder#0" expanded="false" />
+            <element signature="method#merge#0;class#PolyGenesisBuilder#0" expanded="false" />
+            <element signature="method#mergeAndMutatePopulation#0;class#PolyGenesisBuilder#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/CodeContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="32">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyDistanceProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+            <element signature="e#389#390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBallisticProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="33" column="11" lean-forward="true" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/PolyCombinator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="33" column="35" lean-forward="false" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/PolyCombinations/upgrading/PolyUpgrading.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
           <folding />
         </state>
       </provider>

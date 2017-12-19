@@ -6,16 +6,12 @@ import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
 import Players.Player;
-import PolyBot.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
-import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
-import PolyBot.Probes.PolyMainProbe;
+import polytech.polyNexus.Probes.PolyMainProbe;
 import Unities.Unity;
 import org.junit.Test;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

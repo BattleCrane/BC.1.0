@@ -4,8 +4,8 @@ import Adjutants.AdjutantFielder;
 import BattleFields.BattleField;
 import BattleFields.BattleManager;
 import BattleFields.Point;
-import PolyBot.PolyCombinations.Building.IteratorBuilding.PolyIteratorBuilder;
-import PolyBot.PolyCombinations.CreatingTools.CreatingCombination;
+import polytech.PolyCombinations.Building.IteratorBuilding.PolyIteratorBuilder;
+import polytech.PolyCombinations.CreatingTools.CreatingCombination;
 import org.junit.Test;
 
 public class IteratorBuildingTest {
