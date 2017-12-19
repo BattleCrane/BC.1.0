@@ -2,91 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16c613ff-2a58-4f01-9824-5526d1f4b983" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/TestInitializer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticAndRadiusProbesTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyMainProbe.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/megaDoofense.iml" afterPath="$PROJECT_DIR$/megaDoofense.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestBattleCrane/Tests.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestBattleCrane/Tests.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestBot/Tests.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/CreatingArmyTest.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/GenesisBuildingTests.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java" afterPath="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Adjutants/AdjutantAttacker.java" afterPath="$PROJECT_DIR$/src/game/adjutants/AdjutantAttacker.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Adjutants/AdjutantFielder.java" afterPath="$PROJECT_DIR$/src/game/adjutants/AdjutantFielder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Adjutants/AdjutantReporter.java" afterPath="$PROJECT_DIR$/src/game/adjutants/AdjutantReporter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Adjutants/AdjutantWakeUpper.java" afterPath="$PROJECT_DIR$/src/game/adjutants/AdjutantWakeUpper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/BattleFields/BattleField.java" afterPath="$PROJECT_DIR$/src/game/battleFields/BattleField.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/BattleFields/BattleManager.java" afterPath="$PROJECT_DIR$/src/game/battleFields/BattleManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/BattleFields/IdentificationField.java" afterPath="$PROJECT_DIR$/src/game/battleFields/IdentificationField.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/BattleFields/Point.java" afterPath="$PROJECT_DIR$/src/game/battleFields/Point.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bonuses/Bonus.java" afterPath="$PROJECT_DIR$/src/bonuses/Bonus.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bonuses/ControllerBonusesCollection.java" afterPath="$PROJECT_DIR$/src/bonuses/ControllerBonusesCollection.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bots/Bot.java" afterPath="$PROJECT_DIR$/src/botInterface/Bot.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bots/Priority/PriorityUnit.java" afterPath="$PROJECT_DIR$/src/botInterface/priority/PriorityUnit.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bots/Probes/Probe.java" afterPath="$PROJECT_DIR$/src/botInterface/probes/Probe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bots/Probes/TemplateProbe.java" afterPath="$PROJECT_DIR$/src/botInterface/probes/TemplateProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Bots/Turn.java" afterPath="$PROJECT_DIR$/src/botInterface/Turn.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java" afterPath="$PROJECT_DIR$/src/game/controllers/ControllerMatchMaking.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Controllers/ControllerMenu.java" afterPath="$PROJECT_DIR$/src/game/controllers/ControllerMenu.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Graphics/Painter.java" afterPath="$PROJECT_DIR$/src/game/graphics/Painter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Main/Main.java" afterPath="$PROJECT_DIR$/src/main/BGame.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Players/Player.java" afterPath="$PROJECT_DIR$/src/game/players/Player.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ResourceInit/Resource.java" afterPath="$PROJECT_DIR$/src/game/resourceInitialization/Resource.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ResourceInit/ResourceOfBonuses.java" afterPath="$PROJECT_DIR$/src/game/resourceInitialization/ResourceOfBonuses.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_10_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_10_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_11_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_11_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_12_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_12_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_13_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_13_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_14_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_14_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_15_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_15_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_16_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_16_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_17_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_17_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_1_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_1_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_2_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_2_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_3_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_3_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_4_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_4_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_5_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_5_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_6_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_6_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_7_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_7_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_8_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_8_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_9_.java" afterPath="$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_9_.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/MultiplayerScenario/StandardScenario.java" afterPath="$PROJECT_DIR$/src/scenarios/MultiplayerScenario/StandardScenario.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Scenarios/Scenario.java" afterPath="$PROJECT_DIR$/src/scenarios/Scenario.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Unities/Unity.java" afterPath="$PROJECT_DIR$/src/game/unities/Unity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/fxmlFiles/fxmlBattleFieldWindow.fxml" afterPath="$PROJECT_DIR$/src/game/fxmlFiles/fxmlBattleFieldWindow.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/fxmlFiles/fxmlMenu.fxml" afterPath="$PROJECT_DIR$/src/game/fxmlFiles/fxmlMenu.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/Army/iteratorArmy/PolyIteratorArmy.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/building/genesisBuilding/PolyGenesisBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/building/iteratorBuilding/PolyIteratorBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/CodeContainer.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/CodeContainer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/CreatingCombination.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/CreatingCombination.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/EstimatedUnit.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/EstimatedUnit.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/CreatingTools/PolyPlanner.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/PolyPlanner.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/PolyCombinator.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/PolyCombinations/upgrading/PolyUpgrading.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/upgrading/PolyIteratorUpgrading.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Priority/PolyAdjutantPriorityField.java" afterPath="$PROJECT_DIR$/src/polytech/priority/PolyAdjutantPriorityField.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Priority/PolyPriorityUnit.java" afterPath="$PROJECT_DIR$/src/polytech/priority/PolyPriorityUnit.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Priority/Priorities.java" afterPath="$PROJECT_DIR$/src/polytech/priority/Priorities.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Steps/AttackStep.java" afterPath="$PROJECT_DIR$/src/polytech/steps/AttackStep.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Steps/BonusStep.java" afterPath="$PROJECT_DIR$/src/polytech/steps/BonusStep.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Steps/Step.java" afterPath="$PROJECT_DIR$/src/polytech/steps/Step.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/Steps/UnityStep.java" afterPath="$PROJECT_DIR$/src/polytech/steps/UnityStep.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBallisticProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBuildingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyDistanceProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyRadiusProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyTargetProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyTargetProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyUpgradingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyZoneProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/polytech/polyNexus/Probes/parametres/Params.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/parametres/Params.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -174,8 +90,8 @@
       <file leaf-file-name="PolyCombinator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="818">
-              <caret line="69" column="9" lean-forward="false" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+            <state relative-caret-position="114">
+              <caret line="25" column="54" lean-forward="true" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -248,7 +164,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="BattleCraneJ1.8" />
+        <entry key="$PROJECT_DIR$" value="TestBranch" />
       </map>
     </option>
     <favorite-branches>
@@ -946,6 +862,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -953,14 +870,14 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21574973" sideWeight="0.5044843" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21534938" sideWeight="0.5044843" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3922652" sideWeight="0.4955157" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22455573" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22455573" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49434572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1048,7 +965,8 @@
     <MESSAGE value="Separation PolyMainProbe&#10;created classes: PolyBallisticProbe, PolyBuildingProbe, PolyDistanceProbe, PolyRadiusProbe, PolyTargetProbe, PolyUpgradingProbe, PolyZoneProbe;&#10;modified: interface Probe;&#10;added: class Params for ars transfer;&#10;added: comments TODO.&#10;WARNING: NOT COMPILED CODE" />
     <MESSAGE value="added: library Google Guice" />
     <MESSAGE value="Saving Data&#10;WARNING NOT COMPILED CODE!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving Data&#10;WARNING NOT COMPILED CODE!" />
+    <MESSAGE value="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages." />
+    <option name="LAST_COMMIT_MESSAGE" value="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1461,7 +1379,7 @@
         <state relative-caret-position="16">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1556,8 +1474,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="818">
-          <caret line="69" column="9" lean-forward="false" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+        <state relative-caret-position="114">
+          <caret line="25" column="54" lean-forward="true" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
           <folding />
         </state>
       </provider>
