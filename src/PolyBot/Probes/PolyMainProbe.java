@@ -8,27 +8,22 @@ import Bots.Probes.Probe;
 import Controllers.ControllerMatchMaking;
 import PolyBot.PolyCombinations.Building.IteratorBuilding.PolyIteratorBuilder;
 import PolyBot.Priority.Priorities;
+import PolyBot.Probes.parametres.Params;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PolyMainProbe implements Probe {
-    private ControllerMatchMaking controllerMatchMaking;
-    private Priorities priorities = new Priorities();
-    private List<Point> listDangerousZone = new ArrayList<>();
-    private AdjutantFielder adjutantFielder = new AdjutantFielder();
-
-    public PolyMainProbe() {
-    }
-
-    public PolyMainProbe(ControllerMatchMaking controllerMatchMaking) {
-        this.controllerMatchMaking = controllerMatchMaking;
-    }
 
     public List<PriorityUnit> probeAccommodationOfUnitsTest(BattleManager battleManager) {
         PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder();
         polyIteratorBuilder.findCombination(battleManager);
         return polyIteratorBuilder.getBestCombinationOfBuild().getUnits();
+    }
+
+    @Override
+    public Object probe(Params params) {
+        return null;
     }
 }
 

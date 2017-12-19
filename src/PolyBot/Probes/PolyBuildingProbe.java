@@ -1,49 +1,78 @@
 package PolyBot.Probes;
 
+import Adjutants.AdjutantFielder;
 import BattleFields.BattleManager;
 import BattleFields.Point;
 import Bots.Priority.PriorityUnit;
+import Bots.Probes.Probe;
 import PolyBot.Priority.PolyPriorityUnit;
+import PolyBot.Priority.Priorities;
+import PolyBot.Probes.parametres.Params;
 import Unities.Unity;
 import org.jetbrains.annotations.NotNull;
 
-public class PolyBuildingProbe {
-    public PriorityUnit probeBuildingTest(BattleManager battleManager, Unity unity, Point point) {
+public final class PolyBuildingProbe implements Probe {
+    private final int WALL_COEFFICIENT = 10;
+    private final double DISTANCE_COEFFICIENT = 0.1;
 
-        return probeBuilding(battleManager, unity, point);
+    private final AdjutantFielder adjutantFielder = new AdjutantFielder();
+
+    private final BattleManager battleManager;
+    private final Priorities map;
+    private final PolyZoneProbe zoneProbe;
+    private final PolyDistanceProbe distanceProbe;
+
+    public PolyBuildingProbe(BattleManager battleManager, Priorities map, PolyZoneProbe zoneProbe, PolyDistanceProbe distanceProbe) {
+        this.battleManager = battleManager;
+        this.map = map;
+        this.zoneProbe = zoneProbe;
+        this.distanceProbe = distanceProbe;
+    }
+
+    static final class BuildingParams extends Params{
+        private final Unity unity;
+        private final Point point;
+
+        public BuildingParams(Unity unity, Point point) {
+            this.unity = unity;
+            this.point = point;
+        }
+    }
+
+    @Override
+    public Object probe(Params params) {
+        BuildingParams buildingParams = (BuildingParams) params;
+        return probeBuilding(buildingParams.unity, buildingParams.point);
     }
 
     //Прямая точка:
     @NotNull
-    private PriorityUnit probeBuilding(BattleManager battleManager, Unity unity, Point point) {
-        double startValue = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
-        double value = polyMapOfPriority.getMapOfPriorityUnits().get(unity.getId().charAt(0));
+    private PriorityUnit probeBuilding(Unity unity, Point point) {
+        double startValue = map.getPriorities().get(unity.getId().charAt(0));
+        double value = startValue;
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-//                System.out.println(i + "     " + j);
-                if (listDangerousZone.contains(new Point(j, i))) {
+                if (zoneProbe.getDangerousZone().contains(new Point(j, i))) {
                     value = -value;
                     break;
                 }
             }
         }
+        value += probeLock(unity, point);
+        PolyDistanceProbe.DistanceParams distanceParams = new PolyDistanceProbe
+                .DistanceParams(unity.getWidth(), unity.getHeight(), point);
+        Integer distance = (Integer) distanceProbe.probe(distanceParams);
+        if (unity.getId().equals("w") && zoneProbe.getDangerousZone().contains(new Point(point.Y() + 1, point.X()))) {
 
-        value += probeForLock(battleManager, unity, point);
-        if (unity.getId().equals("w") && listDangerousZone.contains(new Point(point.Y() + 1, point.X()))) {
-            value -= 10;
-            value += (10 - findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight())) * 0.1 * startValue;
+            value += (WALL_COEFFICIENT - distance) * DISTANCE_COEFFICIENT * startValue;
         } else {
-            value += findClosestEnemy(battleManager, point, unity.getWidth(), unity.getHeight()) * 0.1 * startValue;
+            value += distance * DISTANCE_COEFFICIENT * startValue;
         }
-
         return new PolyPriorityUnit(value, point, unity);
     }
 
-    public int probeForLockTest(BattleManager battleManager, Unity unity, Point start) {
-        return probeForLock(battleManager, unity, start);
-    }
 
-    private int probeForLock(BattleManager battleManager, Unity unity, Point point) {
+    private int probeLock(Unity unity, Point point) {
         int currentPoints = 0;
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {

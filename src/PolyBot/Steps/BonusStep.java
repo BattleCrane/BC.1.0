@@ -1,4 +1,4 @@
-package Bots.Steps;
+package PolyBot.Steps;
 
 public class BonusStep implements Step {
     @Override

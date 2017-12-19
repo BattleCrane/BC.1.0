@@ -1,18 +1,17 @@
-package Bots.Steps;
+package PolyBot.Steps;
 
 import Adjutants.AdjutantAttacker;
 import BattleFields.BattleManager;
 import Bots.Priority.PriorityUnit;
 
 public class UnityStep implements Step {
-    BattleManager battleManager;
-    private PriorityUnit priorityUnit;
+    private final BattleManager battleManager;
+    private final PriorityUnit priorityUnit;
 
     public UnityStep(BattleManager battleManager, PriorityUnit priorityUnit) {
         this.battleManager = battleManager;
         this.priorityUnit = priorityUnit;
     }
-
 
     @Override
     public void makeStep() {
@@ -26,6 +25,7 @@ public class UnityStep implements Step {
                 }
             }
         }
+
         WallChecker wallChecker = new WallChecker();
         if (!wallChecker.check()){
             battleManager.upgradeBuilding(priorityUnit.getPoint(), battleManager.getPlayer());

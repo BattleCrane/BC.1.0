@@ -5,7 +5,7 @@ import Adjutants.AdjutantFielder;
 import BattleFields.*;
 import Bonuses.Bonus;
 import Bots.Bot;
-import Bots.Steps.Step;
+import PolyBot.Steps.Step;
 import Graphics.Painter;
 import Players.Player;
 import PolyBot.PolytechBot;

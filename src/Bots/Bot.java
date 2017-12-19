@@ -1,7 +1,7 @@
 package Bots;
 
 import BattleFields.BattleManager;
-import Bots.Steps.Step;
+import PolyBot.Steps.Step;
 
 import java.util.List;
 

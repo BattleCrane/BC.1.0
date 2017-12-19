@@ -12,20 +12,15 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PolyZoneProbe implements Probe {
+public final class PolyZoneProbe implements Probe {
     private final BattleManager battleManager;
+    private Set<Point> dangerousZone;
 
     public PolyZoneProbe(BattleManager battleManager) {
         this.battleManager = battleManager;
     }
 
-    private Set<Point> dangerousZone;
-
-    public Set<Point> getDangerousZone() {
-        return dangerousZone;
-    }
-
-    static class ZoneParams extends Params {
+    static final class ZoneParams extends Params {
         public ZoneParams() {}
     }
 
@@ -49,14 +44,14 @@ public class PolyZoneProbe implements Probe {
                                 if (m == 0 && k == 0){
                                     continue;
                                 }
-                                shift(currentPlayer, matrix, zone, m, k, new Point(j, i));
+                                directShift(currentPlayer, matrix, zone, m, k, new Point(j, i));
                             }
                         }
                     }
                     Matcher matcherTurret = turretPattern.matcher(current);
                     //Если это вражеская турель:
                     if (matcherTurret.find()) {
-                        radiusMark(zone, getRadius(current), new Point(j, i));
+                        radiusShift(zone, getRadius(current), new Point(j, i));
                     }
                 }
             }
@@ -65,27 +60,8 @@ public class PolyZoneProbe implements Probe {
         return zone;
     }
 
-    private int getRadius(String current) {
-        int radius;
-        switch (current.substring(1, 2) + current.substring(4, 5)) {
-            case "^t":
-                radius = 2;
-                break;
-            case "<t":
-                radius = 3;
-                break;
-            case "^u":
-            case "<u":
-                radius = 5;
-                break;
-            default:
-                radius = 0;
-        }
-        return radius;
-    }
-
     //Определение опасных точек от автоматчиков, танков:
-    private void shift(Player currentPlayer, List<List<String>> matrix, Set<Point> listDangerousZone, int dx, int dy, Point start) {
+    private void directShift(Player currentPlayer, List<List<String>> matrix, Set<Point> listDangerousZone, int dx, int dy, Point start) {
         Pattern patternBuildings = Pattern.compile("[hgbfwt]");
         while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
             start.setX(start.X() + dx);
@@ -104,7 +80,7 @@ public class PolyZoneProbe implements Probe {
     }
 
     //Определение опасных точек от турелей:
-    private void radiusMark(Set<Point> listDangerousZone, int radius, Point middle) {
+    private void radiusShift(Set<Point> listDangerousZone, int radius, Point middle) {
         int x = middle.X();
         int y = middle.Y();
         int countShift = 0; //"Пирамидальный сдвиг": с каждой итерируется по горизонтали с формулой 2i -1
@@ -120,6 +96,29 @@ public class PolyZoneProbe implements Probe {
                 countShift = countShift - 2; //Перетягивание countShift--
             }
         }
+    }
+
+    public int getRadius(String current) {
+        int radius;
+        switch (current.substring(1, 2) + current.substring(4, 5)) {
+            case "^t":
+                radius = 2;
+                break;
+            case "<t":
+                radius = 3;
+                break;
+            case "^u":
+            case "<u":
+                radius = 5;
+                break;
+            default:
+                radius = 0;
+        }
+        return radius;
+    }
+
+    public Set<Point> getDangerousZone() {
+        return dangerousZone;
     }
 }
 
