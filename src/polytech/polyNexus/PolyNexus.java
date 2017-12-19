@@ -1,9 +1,9 @@
 package polytech.polyNexus;
 
-import BattleFields.BattleManager;
-import Controllers.ControllerMatchMaking;
-import polytech.Priority.Priorities;
-import polytech.polyNexus.Probes.*;
+import game.battleFields.BattleManager;
+import game.controllers.ControllerMatchMaking;
+import polytech.priority.Priorities;
+import polytech.polyNexus.probes.*;
 
 public class PolyNexus {
     private final ControllerMatchMaking controllerMatchMaking;
