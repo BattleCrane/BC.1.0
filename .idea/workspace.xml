@@ -813,7 +813,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513687960875</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages.">
+      <created>1513698909046</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1513698909046</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TestHistory">
