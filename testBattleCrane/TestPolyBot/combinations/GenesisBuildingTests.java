@@ -1,14 +1,17 @@
-package TestPolyBot;
+package TestPolyBot.combinations;
 
-import Adjutants.AdjutantFielder;
-import BattleFields.BattleField;
-import BattleFields.BattleManager;
-import BattleFields.Point;
-import polytech.PolyCombinations.Building.GenesisBuilding.PolyGenesisBuilder;
-import polytech.PolyCombinations.CreatingTools.CreatingCombination;
-import polytech.Priority.PolyPriorityUnit;
-import Unities.Unity;
+import game.battleFields.BattleManager;
+import game.battleFields.Point;
+import TestPolyBot.TestInitializer;
+import polytech.polyCombinations.building.genesisBuilding.PolyGenesisBuilder;
+import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
+import polytech.polyCombinations.creatingTools.CreatingCombination;
+import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
+import polytech.priority.PolyPriorityUnit;
+import game.unities.Unity;
 import org.junit.Test;
+import polytech.priority.Priorities;
+import polytech.polyNexus.probes.*;
 
 import java.util.ArrayList;
 
@@ -17,35 +20,39 @@ import static org.junit.Assert.assertTrue;
 
 public class GenesisBuildingTests {
 
-    private BattleManager initBattleManager() {
-        BattleManager battleManager = new BattleManager(new BattleField());
-        battleManager.setPlayer(battleManager.getPlayerBlue());
-        battleManager.setOpponentPlayer(battleManager.getPlayerRed());
-        battleManager.initializeField();
-        new AdjutantFielder().fillZones(battleManager);
-        return battleManager;
-    }
+    private PolyGenesisBuilder initGenesisBuilder(BattleManager battleManager) {
+        Priorities priorities = new Priorities();
+        PolyDistanceProbe polyDistanceProbe = new PolyDistanceProbe(battleManager);
+        PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManager);
 
+        PolyBuildingProbe polyBuildingProbe = new PolyBuildingProbe(battleManager, priorities
+                , polyZoneProbe, polyDistanceProbe);
+
+        PolyRadiusProbe polyRadiusProbe = new PolyRadiusProbe(battleManager, priorities
+                , polyZoneProbe, polyDistanceProbe);
+
+        PolyIteratorUpgrading polyIteratorUpgrading = new PolyIteratorUpgrading(battleManager
+                , new PolyUpgradingProbe(battleManager, priorities));
+
+        PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder(battleManager, polyBuildingProbe
+                , polyRadiusProbe);
+
+        return new PolyGenesisBuilder(battleManager, polyBuildingProbe
+                , polyRadiusProbe, polyIteratorUpgrading, polyIteratorBuilder);
+    }
 
     @Test
     public void randomCombination() {
-        BattleManager battleManager = initBattleManager();
+        BattleManager battleManager = TestInitializer.initBattleManager();
+        TestInitializer.setArmy(battleManager, 0, 0, 0, 0, 0 , 0);
+        TestInitializer.setBuildings(battleManager, 1, false, 2);
         battleManager.getBattleField().toString();
-        battleManager.setHowICanBuild(1);
-        battleManager.setConstructedGenerator(false);
-        battleManager.setHowICanBuildFactories(2);
-        battleManager.setHowICanProductArmyLevel1(0);
-        battleManager.setHowICanProductArmyLevel2(0);
-        battleManager.setHowICanProductArmyLevel3(0);
-        battleManager.setHowICanProductTanksLevel1(0);
-        battleManager.setHowICanProductTanksLevel1(0);
-        battleManager.setHowICanProductTanksLevel1(0);
 
-        PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
+        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
+
         polyGenesisBuilder.createPopulation(battleManager, 5);
         battleManager.getBattleField().toString();
         System.out.println(polyGenesisBuilder.getCombinations().toString());
-
     }
 
     @Test
@@ -58,21 +65,19 @@ public class GenesisBuildingTests {
         other.add(new PolyPriorityUnit(20, new Point(7, 7), new Unity("!")));
         other.add(new PolyPriorityUnit(200, new Point(7, 7), new Unity("!")));
         other.add(new PolyPriorityUnit(2000, new Point(7, 7), new Unity("!")));
-        CreatingCombination merged = new PolyGenesisBuilder(new BattleManager()).merge(creatingCombination, other);
+
+        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(new BattleManager());
+        CreatingCombination merged = polyGenesisBuilder.merge(creatingCombination, other);
         assertTrue(1210.0 == merged.getSum());
     }
 
     @Test
     public void mutate() {
-        BattleManager battleManager = new BattleManager(new BattleField());
-        battleManager.setPlayer(battleManager.getPlayerBlue());
-        battleManager.setOpponentPlayer(battleManager.getPlayerRed());
-        battleManager.initializeField();
-        new AdjutantFielder().fillZones(battleManager);
+        BattleManager battleManager = TestInitializer.initBattleManager();
 
         CreatingCombination creatingCombination = new CreatingCombination(new ArrayList<>(), 0);
         creatingCombination.add(new PolyPriorityUnit(20, new Point(8, 8), battleManager.getBarracks()));
-        PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
+        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
         CreatingCombination mutated = polyGenesisBuilder.mutate(battleManager, creatingCombination);
 
         System.out.println(mutated);
@@ -83,21 +88,9 @@ public class GenesisBuildingTests {
 
     @Test
     public void findCombination() {
-        BattleManager battleManager = new BattleManager(new BattleField());
-        battleManager.setPlayer(battleManager.getPlayerBlue());
-        battleManager.setOpponentPlayer(battleManager.getPlayerRed());
-        battleManager.initializeField();
-        new AdjutantFielder().fillZones(battleManager);
-
-        battleManager.setHowICanBuild(2);
-        battleManager.setConstructedGenerator(false);
-        battleManager.setHowICanBuildFactories(2);
-        battleManager.setHowICanProductArmyLevel1(0);
-        battleManager.setHowICanProductArmyLevel2(0);
-        battleManager.setHowICanProductArmyLevel3(0);
-        battleManager.setHowICanProductTanksLevel1(0);
-        battleManager.setHowICanProductTanksLevel1(0);
-        battleManager.setHowICanProductTanksLevel1(0);
+        BattleManager battleManager = TestInitializer.initBattleManager();
+        TestInitializer.setBuildings(battleManager, 2, false, 2);
+        TestInitializer.setArmy(battleManager, 0,0,0,0,0, 0);
 
         battleManager.putUnity(battleManager.getPlayer(), new Point(5, 5), battleManager.getTurret());
         battleManager.putUnity(battleManager.getPlayer(), new Point(12, 2), battleManager.getGenerator());
@@ -106,7 +99,7 @@ public class GenesisBuildingTests {
 
         battleManager.getBattleField().toString();
 
-        PolyGenesisBuilder polyGenesisBuilder = new PolyGenesisBuilder(battleManager);
+        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
         CreatingCombination best = polyGenesisBuilder.findBuildCombination(battleManager);
         System.out.println(best);
         battleManager.getBattleField().toString();
