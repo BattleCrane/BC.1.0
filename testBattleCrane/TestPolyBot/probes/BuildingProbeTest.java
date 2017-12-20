@@ -1,5 +1,6 @@
 package TestPolyBot.probes;
 
+import TestPolyBot.TestSettings;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
@@ -10,56 +11,76 @@ import polytech.priority.Priorities;
 import polytech.polyNexus.probes.PolyBuildingProbe;
 import polytech.polyNexus.probes.PolyDistanceProbe;
 import polytech.polyNexus.probes.PolyZoneProbe;
-import polytech.polyNexus.probes.parametres.Params;
+
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
-public class BuildingProbeTest {
-    @Test
-    public void probeLockTest(){
-        BattleManager battleManager = TestInitializer.initBattleManager();
-        Player playerBlue = battleManager.getPlayerBlue();
+public final class BuildingProbeTest {
+    private final Logger logger = Logger.getLogger(BuildingProbeTest.class.getName());
 
-        battleManager.putUnity(playerBlue, new Point(12, 9), battleManager.getGenerator());
-        battleManager.putUnity(playerBlue, new Point(12, 7), battleManager.getGenerator());
-        battleManager.getBattleField().toString();
+    @Test //Worked!
+    public final void probeLockTest(){
+        BattleManager manager = TestInitializer.initBattleManager();
+        Player playerBlue = manager.getPlayerBlue();
 
-        PolyZoneProbe zoneProbe = new PolyZoneProbe(battleManager);
-        PolyBuildingProbe probe = new PolyBuildingProbe(battleManager,  new Priorities()
-                , zoneProbe, new PolyDistanceProbe(battleManager));
+        manager.putUnity(playerBlue, new Point(12, 9), manager.getGenerator());
+        manager.putUnity(playerBlue, new Point(12, 7), manager.getGenerator());
 
+        PolyZoneProbe zoneProbe = new PolyZoneProbe(manager);
         zoneProbe.probe(null);
 
-        int valueOfFactory = probe.probeLock(battleManager.getFactory(), new Point(14, 5));
-        int valueOfBarracks = probe.probeLock(battleManager.getTurret(), new Point(11, 10));
-        int valueOfTurret =  probe.probeLock(battleManager.getBarracks(), new Point(12, 12));
+        PolyBuildingProbe probe = new PolyBuildingProbe(manager,  new Priorities()
+                , zoneProbe, new PolyDistanceProbe(manager));
+
+        int valueOfFactory = probe.probeLock(manager.getFactory(), new Point(14, 5));
+        int valueOfBarracks = probe.probeLock(manager.getTurret(), new Point(11, 10));
+        int valueOfTurret =  probe.probeLock(manager.getBarracks(), new Point(12, 12));
+
+        logger.info(manager.getBattleField().toString());
+        logger.info("" + valueOfFactory);
+        logger.info("" + valueOfBarracks);
+        logger.info("" + valueOfTurret);
 
         assertTrue(180 == valueOfFactory);
-        assertTrue(-60 == valueOfBarracks);
-        assertTrue(0 == valueOfTurret);
+        assertTrue(0 == valueOfBarracks);
+        assertTrue(-60 == valueOfTurret);
     }
 
-    @Test
-    public void probeBuildingUnitTest(){
-        BattleManager battleManagerTest  = TestInitializer.initBattleManager();
+    @Test //Worked!
+    public final void probeBuildingUnitTest(){
+        BattleManager manager  = TestInitializer.initBattleManager();
+        createTest(manager, () -> {
+            manager.putUnity(manager.getPlayerBlue(), new Point(12, 9), manager.getGenerator());
+            manager.putUnity(manager.getPlayerBlue(), new Point(9, 12), manager.getGenerator());
+            manager.putUnity(manager.getPlayerBlue(), new Point(7, 12), manager.getGenerator());
+            manager.putUnity(manager.getPlayerBlue(), new Point(5, 10), manager.getGenerator());
+            manager.putUnity(manager.getPlayerBlue(), new Point(14, 9), manager.getBarracks());
+        }, new PolyBuildingProbe.Params(manager.getBarracks(), new Point(15, 8)), 345);
 
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(12, 9), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(9, 12), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(7, 12), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(5, 10), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(14, 9), battleManagerTest.getBarracks());
-        battleManagerTest.getBattleField().toString();
+        BattleManager manager2 = TestInitializer.initBattleManager();
+        createTest(manager2, new PolyBuildingProbe.Params(manager2.getWall(), new Point(5, 10)), 300);
 
-        PolyZoneProbe zoneProbe = new PolyZoneProbe(battleManagerTest);
+        BattleManager manager3 = TestInitializer.initBattleManager();
+        createTest(manager3, () -> manager3.putUnity(manager3.getOpponentPlayer(), new Point (8, 12)
+                , manager3.getTank()), new PolyBuildingProbe.Params(manager3.getGenerator()
+                , new Point(8,8)), -210);
+    }
 
-        PolyBuildingProbe probe = new PolyBuildingProbe(battleManagerTest, new Priorities()
-                , zoneProbe, new PolyDistanceProbe(battleManagerTest));
+    private void createTest(BattleManager manager, TestSettings testSettings, PolyBuildingProbe.Params params
+            , double expectResult){
+        testSettings.setup();
+        createTest(manager, params, expectResult);
+    }
+
+    private void createTest(BattleManager manager, PolyBuildingProbe.Params params, double expectResult){
+        logger.info(manager.getBattleField().toString());
+        PolyZoneProbe zoneProbe = new PolyZoneProbe(manager);
+        PolyBuildingProbe probe = new PolyBuildingProbe(manager, new Priorities()
+                , zoneProbe, new PolyDistanceProbe(manager));
         zoneProbe.probe(null);
-
-        Params params = new PolyBuildingProbe.BuildingParams(battleManagerTest.getBarracks(), new Point(15, 8));
-
-        PriorityUnit priorityBarracks2 = (PriorityUnit) probe.probe(params);
-        System.out.println(priorityBarracks2.getPriority());
-
+        PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
+        logger.info("" + priorityUnit.getPriority());
+        assertTrue(expectResult == priorityUnit.getPriority());
     }
 }

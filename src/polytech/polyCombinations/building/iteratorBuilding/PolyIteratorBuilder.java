@@ -6,10 +6,10 @@ import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
 import polytech.polyCombinations.creatingTools.CreatingCombination;
 import polytech.polyCombinations.creatingTools.EstimatedUnit;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import polytech.polyNexus.probes.PolyBuildingProbe;
 import polytech.polyNexus.probes.PolyRadiusProbe;
-import polytech.polyNexus.probes.parametres.Params;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,14 +114,14 @@ public class PolyIteratorBuilder {
     private void checkConditionalUnit(BattleManager battleManager, EstimatedUnit conditionalUnit, Point point, String currentUnity, int howICanBuild) {
         if (conditionalUnit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
             Probe probe;
-            Params params;
+            ParentParams params;
             PriorityUnit priorityUnit;
             if (conditionalUnit.getUnity().getId().equals("t")){ //Исследуем приоритет на турель
                 System.out.println("TRUE");
                 params = new PolyRadiusProbe.RadiusParams(conditionalUnit.getUnity(), point);
                 probe = radiusProbe;
             } else {
-                params = new PolyBuildingProbe.BuildingParams(conditionalUnit.getUnity(), point);
+                params = new PolyBuildingProbe.Params(conditionalUnit.getUnity(), point);
                 probe = buildingProbe;
 
             }

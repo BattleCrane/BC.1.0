@@ -39,8 +39,8 @@ public final class BattleField {
                 }
             }
         }
-        System.out.print(stringBuilder.toString());
-        return stringBuilder.toString();
+//        System.out.print(stringBuilder.toString());
+        return "\n" + stringBuilder.toString();
     }
 
     @Contract(pure = true)

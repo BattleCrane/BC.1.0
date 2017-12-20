@@ -8,7 +8,7 @@ import polytech.steps.AttackStep;
 import game.controllers.ControllerMatchMaking;
 import game.players.Player;
 import polytech.priority.Priorities;
-import polytech.polyNexus.probes.parametres.Params;
+import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public final class PolyTargetProbe implements Probe {
         this.map = map;
     }
 
-    static class TargetParams extends Params {
+    static class TargetParams extends ParentParams {
         private final Player player;
 
         public TargetParams(Player player) {
@@ -38,7 +38,7 @@ public final class PolyTargetProbe implements Probe {
     }
 
     @Override
-    public Object probe(Params params) {
+    public Object probe(ParentParams params) {
         TargetParams targetParams = (TargetParams) params;
         return findAttackSteps(targetParams.player);
     }

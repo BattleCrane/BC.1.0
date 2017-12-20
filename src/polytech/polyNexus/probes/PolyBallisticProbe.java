@@ -4,9 +4,10 @@ import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.probes.Probe;
 import game.players.Player;
+import org.jetbrains.annotations.Contract;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.Priorities;
 import polytech.priority.PolyPriorityUnit;
-import polytech.polyNexus.probes.parametres.Params;
 import game.unities.Unity;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public final class PolyBallisticProbe implements Probe {
         this.distanceProbe = distanceProbe;
     }
 
-    public static final class BallisticParams extends Params {
+    public static final class BallisticParams extends ParentParams {
         private final Unity unity;
         private final Point point;
 
@@ -39,10 +40,20 @@ public final class PolyBallisticProbe implements Probe {
             this.unity = unity;
             this.point = point;
         }
+
+        @Contract(pure = true)
+        public Unity getUnity() {
+            return unity;
+        }
+
+        @Contract(pure = true)
+        public Point getPoint() {
+            return point;
+        }
     }
 
     @Override
-    public final Object probe(Params params) {
+    public final Object probe(ParentParams params) {
         BallisticParams ballisticParams = (BallisticParams) params;
         Unity unity = ballisticParams.unity;
         Point point = ballisticParams.point;
@@ -52,9 +63,8 @@ public final class PolyBallisticProbe implements Probe {
         if (zoneProbe.getDangerousZone().contains(point.invariant())) {
             value = -value;
         }
-        PolyDistanceProbe.DistanceParams distanceParams = new PolyDistanceProbe
-                .DistanceParams(unity.getWidth(), unity.getHeight(), point);
-        Integer distance = (Integer) distanceProbe.probe(distanceParams);
+        PolyDistanceProbe.Params distParams = new PolyDistanceProbe.Params(unity.getWidth(), unity.getHeight(), point);
+        Integer distance = (Integer) distanceProbe.probe(distParams);
         value += distance * DISTANCE_COEFFICIENT * startValue;
         Player currentPlayer = battleManager.getPlayer();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();

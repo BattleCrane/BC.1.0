@@ -7,7 +7,7 @@ import botInterface.probes.Probe;
 import game.players.Player;
 import polytech.priority.PolyPriorityUnit;
 import polytech.priority.Priorities;
-import polytech.polyNexus.probes.parametres.Params;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import game.unities.Unity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public class PolyUpgradingProbe implements Probe {
         this.map = map;
     }
 
-    public static final class UpgradingParams extends Params{
+    public static final class UpgradingParams extends ParentParams {
         private final Unity unity;
         private final Point point;
 
@@ -34,7 +34,7 @@ public class PolyUpgradingProbe implements Probe {
     }
 
     @Override
-    public Object probe(Params params) {
+    public Object probe(ParentParams params) {
         UpgradingParams upgradingParams = (UpgradingParams) params;
         return probeUpgrade(upgradingParams.unity, upgradingParams.point);
     }

@@ -5,14 +5,18 @@ import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import polytech.priority.Priorities;
-import polytech.polyNexus.probes.parametres.Params;
 import game.unities.Unity;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.logging.Logger;
+
 public final class PolyBuildingProbe implements Probe {
-    private final int WALL_COEFFICIENT = 10;
+    private final Logger logger = Logger.getLogger(PolyBuildingProbe.class.getName());
+
+    private final int WALL_COEFFICIENT = 16;
     private final double DISTANCE_COEFFICIENT = 0.1;
 
     private final AdjutantFielder adjutantFielder = new AdjutantFielder();
@@ -29,19 +33,20 @@ public final class PolyBuildingProbe implements Probe {
         this.distanceProbe = distanceProbe;
     }
 
-    public static final class BuildingParams extends Params{
+    public static final class Params extends ParentParams {
         private final Unity unity;
         private final Point point;
 
-        public BuildingParams(Unity unity, Point point) {
+        public Params(Unity unity, Point point) {
             this.unity = unity;
             this.point = point;
         }
     }
 
+    @NotNull
     @Override
-    public Object probe(Params params) {
-        BuildingParams buildingParams = (BuildingParams) params;
+    public Object probe(ParentParams params) {
+        Params buildingParams = (Params) params;
         return probeBuilding(buildingParams.unity, buildingParams.point);
     }
 
@@ -52,18 +57,17 @@ public final class PolyBuildingProbe implements Probe {
         double value = startValue;
         for (int i = point.X(); i < point.X() + unity.getWidth(); i++) {
             for (int j = point.Y(); j < point.Y() + unity.getHeight(); j++) {
-                if (zoneProbe.getDangerousZone().contains(new Point(j, i))) {
+                if (zoneProbe.getDangerousZone().contains(new Point(j, i)) && !unity.getId().equals("w")) {
                     value = -value;
                     break;
                 }
             }
         }
         value += probeLock(unity, point);
-        PolyDistanceProbe.DistanceParams distanceParams = new PolyDistanceProbe
-                .DistanceParams(unity.getWidth(), unity.getHeight(), point);
-        Integer distance = (Integer) distanceProbe.probe(distanceParams);
-        if (unity.getId().equals("w") && zoneProbe.getDangerousZone().contains(new Point(point.Y() + 1, point.X()))) {
-
+        PolyDistanceProbe.Params params = new PolyDistanceProbe.Params(unity.getWidth(), unity.getHeight(), point);
+        Integer distance = (Integer) distanceProbe.probe(params);
+        logger.info("Distance: " + distance);
+        if (unity.getId().equals("w")) {
             value += (WALL_COEFFICIENT - distance) * DISTANCE_COEFFICIENT * startValue;
         } else {
             value += distance * DISTANCE_COEFFICIENT * startValue;

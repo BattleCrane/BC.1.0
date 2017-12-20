@@ -6,12 +6,12 @@ import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
 import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
 import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import polytech.polyCombinations.creatingTools.CreatingCombination;
 import polytech.polyCombinations.creatingTools.EstimatedUnit;
 import polytech.polyNexus.probes.PolyBuildingProbe;
 import polytech.polyNexus.probes.PolyRadiusProbe;
-import polytech.polyNexus.probes.parametres.Params;
 
 import java.util.*;
 
@@ -171,13 +171,13 @@ public class PolyGenesisBuilder {
                 int i = new Random().nextInt(estimatedUnitMap.size() - 2); //Берем любое строение, кроме турели и стены
                 EstimatedUnit estimatedUnit = estimatedUnits.get(i);
                 if (estimatedUnit.isPerformedCondition(point)) { //Если это строение можно построить
-                    Params params;
+                    ParentParams params;
                     Probe probe;
                     if (estimatedUnit.getUnity().getId().equals("t")){
                         params = new PolyRadiusProbe.RadiusParams(battleManager.getTurret(), point);
                         probe = radiusProbe;
                     } else {
-                        params = new PolyBuildingProbe.BuildingParams(estimatedUnit.getUnity(), point);
+                        params = new PolyBuildingProbe.Params(estimatedUnit.getUnity(), point);
                         probe = buildingProbe;
                     }
 
@@ -278,13 +278,13 @@ public class PolyGenesisBuilder {
                             for (EstimatedUnit unit : estimatedUnitMap.values()) { //Тогда перебираем все строения:
 
                                 if (unit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
-                                    Params params;
+                                    ParentParams params;
                                     Probe probe;
                                     if (unit.getUnity().getId().equals("t")){
                                         params = new PolyRadiusProbe.RadiusParams(battleManager.getTurret(), point);
                                         probe = radiusProbe;
                                     } else {
-                                        params = new PolyBuildingProbe.BuildingParams(unit.getUnity(), point);
+                                        params = new PolyBuildingProbe.Params(unit.getUnity(), point);
                                         probe = buildingProbe;
                                     }
                                     PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);

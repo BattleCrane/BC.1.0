@@ -12,7 +12,7 @@ import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
 import polytech.steps.AttackStep;
 import polytech.polyNexus.PolyNexus;
 import polytech.polyNexus.probes.PolyTargetProbe;
-import polytech.polyNexus.probes.parametres.Params;
+import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -45,7 +45,7 @@ public class PolyCombinator {
 
     //Определяет, что будет делать:
     public CreatingCombination chooseDevelopment() {
-        nexus.getZoneProbe().probe(new Params());
+        nexus.getZoneProbe().probe(new ParentParams());
         //Всегда проверяем постройки:
         CreatingCombination genesisBuildings = genesisBuilder.findBuildCombination(battleManager);
         System.out.println("Buildings: " + genesisBuildings);

@@ -4,6 +4,7 @@ import game.adjutants.AdjutantFielder;
 import game.battleFields.BattleField;
 import game.battleFields.BattleManager;
 
+// TODO: 20.12.17 make injectable
 public class TestInitializer {
     public static BattleManager initBattleManager() {
         BattleManager battleManager = new BattleManager(new BattleField());
@@ -28,5 +29,4 @@ public class TestInitializer {
         battleManagerTest.setConstructedGenerator(g);
         battleManagerTest.setHowICanBuildFactories(f);
     }
-
 }

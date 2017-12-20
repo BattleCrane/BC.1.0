@@ -1,6 +1,6 @@
 package botInterface.probes;
 
-import polytech.polyNexus.probes.parametres.Params;
+import polytech.polyNexus.probes.parametres.ParentParams;
 
 /**
  * Интерфейс Probe - это классический интерфейс, который содержит в себе
@@ -14,7 +14,7 @@ import polytech.polyNexus.probes.parametres.Params;
 
 public interface Probe {
 
-    Object probe(Params params);
+    Object probe(ParentParams params);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    default List<Point> probeDangerousZone(BattleManager battleManager) {

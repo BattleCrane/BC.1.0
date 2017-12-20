@@ -1,31 +1,40 @@
 package TestPolyBot.probes;
 
-import game.battleFields.BattleField;
+import TestPolyBot.TestInitializer;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import org.junit.Test;
 import polytech.polyNexus.probes.PolyZoneProbe;
 
 import java.util.Set;
+import java.util.logging.Logger;
 
-public class ProbeZoneTest {
+//Worked!
+public final class ProbeZoneTest {
+    private final Logger logger = Logger.getLogger(ProbeZoneTest.class.getName());
+
     @Test
-    public void probeDangerousZone() {
-        BattleManager battleManager = new BattleManager(new BattleField());
+    public final void probeDangerousZone() {
+        BattleManager battleManager = TestInitializer.initBattleManager();
+        setUnities(battleManager);
+        PolyZoneProbe zoneProbe = new PolyZoneProbe(battleManager);
+        zoneProbe.probe(null);
+        Set<Point> listOfDangerousZone = zoneProbe.getDangerousZone();
+        markTerritory(battleManager, listOfDangerousZone);
+    }
 
-        battleManager.setPlayer(battleManager.getPlayerBlue());
+    private void setUnities(BattleManager battleManager){
         battleManager.putUnity(battleManager.getPlayerRed(), new Point(12, 10), battleManager.getGunner());
         battleManager.putUnity(battleManager.getPlayerRed(), new Point(7, 0), battleManager.getTank());
         battleManager.putUnity(battleManager.getPlayerRed(), new Point(9, 3), battleManager.getTurret());
         battleManager.putUnity(battleManager.getPlayerRed(), new Point(0, 15), battleManager.getTurret());
         battleManager.putUnity(battleManager.getPlayerRed(), new Point(7, 8), battleManager.getTank());
-        battleManager.initializeField();
-        PolyZoneProbe zoneProbe = new PolyZoneProbe(battleManager);
-        zoneProbe.probe(null);
-        Set<Point> listOfDangerousZone = zoneProbe.getDangerousZone();
+    }
+
+    private void markTerritory(BattleManager battleManager, Set<Point> listOfDangerousZone){
         for (Point point : listOfDangerousZone) {
             battleManager.getBattleField().getMatrix().get(point.Y()).set(point.X(), "XXXXXX");
         }
-        battleManager.getBattleField().toString();
+        logger.info(battleManager.getBattleField().toString());
     }
 }

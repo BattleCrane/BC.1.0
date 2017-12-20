@@ -5,9 +5,9 @@ import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
 import game.players.Player;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import polytech.priority.Priorities;
-import polytech.polyNexus.probes.parametres.Params;
 import game.unities.Unity;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ public final class PolyRadiusProbe implements Probe {
         this.distanceProbe = distanceProbe;
     }
 
-    public static final class RadiusParams extends Params {
+    public static final class RadiusParams extends ParentParams {
         private final Unity unity;
         private final Point start;
 
@@ -42,7 +42,7 @@ public final class PolyRadiusProbe implements Probe {
     }
 
     @Override
-    public Object probe(Params params) {
+    public Object probe(ParentParams params) {
         RadiusParams radiusParams = (RadiusParams) params;
         return probeRadiusUnit(radiusParams.unity, radiusParams.start);
     }
@@ -54,9 +54,8 @@ public final class PolyRadiusProbe implements Probe {
         if (zoneProbe.getDangerousZone().contains(point)) {
             value = -value;
         }
-        PolyDistanceProbe.DistanceParams distanceParams = new PolyDistanceProbe
-                .DistanceParams(unity.getWidth(), unity.getHeight(), point);
-        Integer distance = (Integer) distanceProbe.probe(distanceParams);
+        PolyDistanceProbe.Params params = new PolyDistanceProbe.Params(unity.getWidth(), unity.getHeight(), point);
+        Integer distance = (Integer) distanceProbe.probe(params);
         value += (AVERAGE_DISTANCE - distance) * DISTANCE_COEFFICIENT * startValue;
         value += collect(battleManager.getPlayer(), battleManager.getBattleField().getMatrix(), point)
                 * ATTACK_COEFFICIENT;

@@ -10,7 +10,7 @@ import polytech.priority.Priorities;
 import polytech.polyNexus.probes.PolyBallisticProbe;
 import polytech.polyNexus.probes.PolyDistanceProbe;
 import polytech.polyNexus.probes.PolyZoneProbe;
-import polytech.polyNexus.probes.parametres.Params;
+import polytech.polyNexus.probes.parametres.ParentParams;
 
 import static org.junit.Assert.assertTrue;
 
@@ -53,10 +53,10 @@ public class BallisticAndRadiusProbesTest {
                 , zoneProbe, new PolyDistanceProbe(battleManagerTest));
         zoneProbe.probe(null);
 
-        Params paramsGunner = new PolyBallisticProbe.BallisticParams(unityGunner, pointTest1);
+        ParentParams paramsGunner = new PolyBallisticProbe.BallisticParams(unityGunner, pointTest1);
         PriorityUnit priorityGunner = (PriorityUnit) probe.probe(paramsGunner);
 
-        Params paramsTank = new PolyBallisticProbe.BallisticParams(unityTank, new Point (7,8));
+        ParentParams paramsTank = new PolyBallisticProbe.BallisticParams(unityTank, new Point (7,8));
         PriorityUnit priorityTank = (PriorityUnit) probe.probe(paramsTank);
         //Рассматривается точка относительно синего игрока:
         assertTrue(-25.0 == priorityGunner.getPriority());
@@ -78,11 +78,11 @@ public class BallisticAndRadiusProbesTest {
         zoneProbe.probe(null);
 
 
-        Params params1 = new PolyBallisticProbe.BallisticParams(battleManager.getTurret(), new Point(7,7));
+        ParentParams params1 = new PolyBallisticProbe.BallisticParams(battleManager.getTurret(), new Point(7,7));
 
-        Params params2 = new PolyBallisticProbe.BallisticParams(battleManager.getTurret(), new Point(4, 5));
+        ParentParams params2 = new PolyBallisticProbe.BallisticParams(battleManager.getTurret(), new Point(4, 5));
 
-        Params params3 = new PolyBallisticProbe.BallisticParams(battleManager.getTurret(), new Point (2, 2));
+        ParentParams params3 = new PolyBallisticProbe.BallisticParams(battleManager.getTurret(), new Point (2, 2));
 
         PriorityUnit priorityTurretTest1 = (PriorityUnit) probe.probe(params1);
         PriorityUnit priorityTurretTest2 = (PriorityUnit) probe.probe(params2);
