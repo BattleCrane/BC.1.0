@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16c613ff-2a58-4f01-9824-5526d1f4b983" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -973,7 +967,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513860906325</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="21.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: static colors in TestInitializer">
+      <created>1513861011481</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1513861011481</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
