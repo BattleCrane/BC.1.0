@@ -62,7 +62,7 @@ public final class PolyRadiusProbe implements Probe {
         return new PolyPriorityUnit(value, point, unity);
     }
 
-    private double collect(Player currentPlayer, List<List<String>> matrix, Point start) {
+    public double collect(Player currentPlayer, List<List<String>> matrix, Point start) {
         double value = 0;
         int x = start.X();
         int y = start.Y();

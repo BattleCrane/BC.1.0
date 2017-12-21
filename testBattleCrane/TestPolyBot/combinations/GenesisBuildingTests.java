@@ -7,6 +7,7 @@ import polytech.polyCombinations.building.genesisBuilding.PolyGenesisBuilder;
 import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
 import polytech.polyCombinations.creatingTools.CreatingCombination;
 import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import game.unities.Unity;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class GenesisBuildingTests {
+public class GenesisBuildingTests implements TestInitializer{
 
     private PolyGenesisBuilder initGenesisBuilder(BattleManager battleManager) {
         Priorities priorities = new Priorities();
@@ -43,9 +44,9 @@ public class GenesisBuildingTests {
 
     @Test
     public void randomCombination() {
-        BattleManager battleManager = TestInitializer.initBattleManager();
-        TestInitializer.setArmy(battleManager, 0, 0, 0, 0, 0 , 0);
-        TestInitializer.setBuildings(battleManager, 1, false, 2);
+        BattleManager battleManager = initBattleManager();
+        setArmy(battleManager, 0, 0, 0, 0, 0 , 0);
+        setBuildings(battleManager, 1, false, 2);
         battleManager.getBattleField().toString();
 
         PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
@@ -73,7 +74,7 @@ public class GenesisBuildingTests {
 
     @Test
     public void mutate() {
-        BattleManager battleManager = TestInitializer.initBattleManager();
+        BattleManager battleManager = initBattleManager();
 
         CreatingCombination creatingCombination = new CreatingCombination(new ArrayList<>(), 0);
         creatingCombination.add(new PolyPriorityUnit(20, new Point(8, 8), battleManager.getBarracks()));
@@ -88,9 +89,9 @@ public class GenesisBuildingTests {
 
     @Test
     public void findCombination() {
-        BattleManager battleManager = TestInitializer.initBattleManager();
-        TestInitializer.setBuildings(battleManager, 2, false, 2);
-        TestInitializer.setArmy(battleManager, 0,0,0,0,0, 0);
+        BattleManager battleManager = initBattleManager();
+        setBuildings(battleManager, 2, false, 2);
+        setArmy(battleManager, 0,0,0,0,0, 0);
 
         battleManager.putUnity(battleManager.getPlayer(), new Point(5, 5), battleManager.getTurret());
         battleManager.putUnity(battleManager.getPlayer(), new Point(12, 2), battleManager.getGenerator());
@@ -103,5 +104,11 @@ public class GenesisBuildingTests {
         CreatingCombination best = polyGenesisBuilder.findBuildCombination(battleManager);
         System.out.println(best);
         battleManager.getBattleField().toString();
+    }
+
+
+    @Override
+    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+        return null;
     }
 }

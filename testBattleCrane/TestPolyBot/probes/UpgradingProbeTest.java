@@ -1,40 +1,42 @@
 package TestPolyBot.probes;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import TestPolyBot.TestInitializer;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import polytech.priority.Priorities;
+import polytech.polyNexus.PolyNexus;
 import polytech.polyNexus.probes.PolyUpgradingProbe;
 import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.logging.Logger;
 
-import static org.junit.Assert.assertTrue;
-
 //Worked!
-public final class UpgradingProbeTest {
+public final class UpgradingProbeTest implements TestInitializer{
     private final Logger logger = Logger.getLogger(UpgradingProbeTest.class.getName());
 
     @Test
     public final void probeUpgradeTest(){
-        BattleManager battleManagerTest  = TestInitializer.initBattleManager();
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue()
-                , new Point(14, 9), battleManagerTest.getGenerator());
-        PolyUpgradingProbe probe = new PolyUpgradingProbe(battleManagerTest, new Priorities());
+        BattleManager manager1  = initBattleManager();
+        createTest(manager1, new PolyUpgradingProbe
+                .UpgradingParams(manager1.getGenerator(), new Point (14,9))
+                , () -> manager1.putUnity(manager1.getPlayerBlue()
+                , new Point(14, 9), manager1.getGenerator()), 240.0);
 
-        ParentParams params1 = new PolyUpgradingProbe.UpgradingParams(battleManagerTest.getGenerator(), new Point (14,9));
-        ParentParams params2 = new PolyUpgradingProbe.UpgradingParams(battleManagerTest.getGenerator(), new Point (10,10));
+        BattleManager manager2 = initBattleManager();
+        createTest(manager2, new PolyUpgradingProbe.UpgradingParams(manager1.getGenerator()
+                , new Point (10,10)), 0.0);
+    }
 
-        PriorityUnit priorityGenerator = (PriorityUnit) probe.probe(params1);
-        PriorityUnit priorityEmpty = (PriorityUnit) probe.probe(params2);
-
-        logger.info(battleManagerTest.getBattleField().toString());
-        logger.info("" + priorityGenerator.getPriority());
-        logger.info("" + priorityEmpty.getPriority());
-
-        assertTrue(240.0 == priorityGenerator.getPriority());
-        assertTrue(0.0 == priorityEmpty.getPriority());
+    @NotNull
+    @Override
+    public Object createTest(BattleManager manager, ParentParams params) {
+        Probe probe = PolyNexus.createUpgradingProbe(manager);
+        PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
+        logger.info(manager.getBattleField().toString());
+        logger.info("" + priorityUnit);
+        return priorityUnit.getPriority();
     }
 }

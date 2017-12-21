@@ -1,26 +1,26 @@
 package TestPolyBot.probes;
 
 import TestPolyBot.TestInitializer;
+import TestPolyBot.TestSettings;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import polytech.polyNexus.PolyNexus;
 import polytech.polyNexus.probes.PolyZoneProbe;
+import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.Set;
 import java.util.logging.Logger;
 
 //Worked!
-public final class ProbeZoneTest {
+public final class ProbeZoneTest implements TestInitializer {
     private final Logger logger = Logger.getLogger(ProbeZoneTest.class.getName());
 
     @Test
     public final void probeDangerousZone() {
-        BattleManager battleManager = TestInitializer.initBattleManager();
-        setUnities(battleManager);
-        PolyZoneProbe zoneProbe = new PolyZoneProbe(battleManager);
-        zoneProbe.probe(null);
-        Set<Point> listOfDangerousZone = zoneProbe.getDangerousZone();
-        markTerritory(battleManager, listOfDangerousZone);
+        BattleManager battleManager = initBattleManager();
+        createTest(battleManager,null, () -> setUnities(battleManager), "");
     }
 
     private void setUnities(BattleManager battleManager){
@@ -36,5 +36,15 @@ public final class ProbeZoneTest {
             battleManager.getBattleField().getMatrix().get(point.Y()).set(point.X(), "XXXXXX");
         }
         logger.info(battleManager.getBattleField().toString());
+    }
+
+    @NotNull
+    @Override
+    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+        PolyZoneProbe zoneProbe = PolyNexus.createZoneProbe(battleManager);
+        zoneProbe.probe(null);
+        Set<Point> listOfDangerousZone = zoneProbe.getDangerousZone();
+        markTerritory(battleManager, listOfDangerousZone);
+        return "";
     }
 }

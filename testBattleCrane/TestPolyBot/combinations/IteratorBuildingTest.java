@@ -6,10 +6,11 @@ import TestPolyBot.TestInitializer;
 import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
 import polytech.polyCombinations.creatingTools.CreatingCombination;
 import org.junit.Test;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.Priorities;
 import polytech.polyNexus.probes.*;
 
-public class IteratorBuildingTest {
+public class IteratorBuildingTest implements TestInitializer{
 
     private PolyIteratorBuilder initPolyIteratorBuilder(BattleManager battleManager){
         Priorities priorities = new Priorities();
@@ -27,7 +28,7 @@ public class IteratorBuildingTest {
 
     @Test
     public void findTurretCombination(){
-        BattleManager battleManager = TestInitializer.initBattleManager();
+        BattleManager battleManager = initBattleManager();
         battleManager.setHowICanBuild(3);
 
         battleManager.putUnity(battleManager.getPlayer(), new Point(5, 5), battleManager.getTurret());
@@ -41,5 +42,10 @@ public class IteratorBuildingTest {
         polyIteratorBuilder.findTurretCombination();
         CreatingCombination turretCombination = polyIteratorBuilder.getBest();
         System.out.println(turretCombination);
+    }
+
+    @Override
+    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+        return null;
     }
 }

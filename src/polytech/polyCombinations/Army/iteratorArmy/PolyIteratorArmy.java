@@ -46,10 +46,10 @@ public final class PolyIteratorArmy {
                     String currentUnity = matrix.get(j).get(i);
                     if (currentUnity.substring(1).equals("    0")) { //Если это пустая клетка ->
                         //Если это наша пустая клетка ->
-                        PolyBallisticProbe.BallisticParams params;
+                        PolyBallisticProbe.Params params;
                         if (currentUnity.substring(0, 1).equals(battleManager.getPlayer().getColorType())) {
                             if (howICanProductTanksLevel1 > 0) { //Проверяем танки 1-го уровня:
-                                params = new PolyBallisticProbe.BallisticParams(battleManager.getTank(), currentPoint);
+                                params = new PolyBallisticProbe.Params(battleManager.getTank(), currentPoint);
                                 PriorityUnit priorityUnit = (PriorityUnit) ballisticProbe.probe(params);
                                 if (priorityUnit.getPriority() > best.getPriority()) {
                                     best = priorityUnit;
@@ -58,7 +58,7 @@ public final class PolyIteratorArmy {
                                 }
                             }
                             if (howICanProductArmyLevel1 > 0) { //Проверяем автоматчиков 1-го уровня:
-                                params = new PolyBallisticProbe.BallisticParams(battleManager.getGunner(), currentPoint);
+                                params = new PolyBallisticProbe.Params(battleManager.getGunner(), currentPoint);
                                 PriorityUnit priorityUnit = (PriorityUnit) ballisticProbe.probe(params);
                                 if (priorityUnit.getPriority() > best.getPriority()) {
                                     best = priorityUnit;
@@ -71,7 +71,7 @@ public final class PolyIteratorArmy {
                         if (currentUnity.substring(0, 1).equals(" ") || currentUnity.substring(0, 1)
                                 .equals(battleManager.getPlayer().getColorType())) {
                             if (howICanProductTanksLevel2 > 0) { //Проверяем танки 2-го уровня:
-                                params = new PolyBallisticProbe.BallisticParams(battleManager.getTank(), currentPoint);
+                                params = new PolyBallisticProbe.Params(battleManager.getTank(), currentPoint);
                                 PriorityUnit priorityUnit = (PriorityUnit) ballisticProbe.probe(params);
                                 if (priorityUnit.getPriority() > best.getPriority()) {
                                     labelStepBallistic = "tankLvl2";
@@ -80,7 +80,7 @@ public final class PolyIteratorArmy {
                                 }
                             }
                             if (howICanProductArmyLevel2 > 0) { //Проверяем автоматчиков 2-го уровня:
-                                params = new PolyBallisticProbe.BallisticParams(battleManager.getGunner(), currentPoint);
+                                params = new PolyBallisticProbe.Params(battleManager.getGunner(), currentPoint);
                                 PriorityUnit priorityUnit = (PriorityUnit) ballisticProbe.probe(params);
                                 if (priorityUnit.getPriority() > best.getPriority()) {
                                     labelStepBallistic = "gunnerLvl2";
@@ -91,7 +91,7 @@ public final class PolyIteratorArmy {
                         }
                         //Если это пустая клетка ->
                         if (howICanProductTanksLevel3 > 0) { //Проверяем танки 3-го уровня:
-                            params = new PolyBallisticProbe.BallisticParams(battleManager.getTank(), currentPoint);
+                            params = new PolyBallisticProbe.Params(battleManager.getTank(), currentPoint);
                             PriorityUnit priorityUnit = (PriorityUnit) ballisticProbe.probe(params);
                             if (priorityUnit.getPriority() > best.getPriority()) {
                                 labelStepBallistic = "tankLvl3";
@@ -100,7 +100,7 @@ public final class PolyIteratorArmy {
                             }
                         }
                         if (howICanProductArmyLevel3 > 0) {  //Проверяем автоматчиков 3-го уровня:
-                            params = new PolyBallisticProbe.BallisticParams(battleManager.getGunner(), currentPoint);
+                            params = new PolyBallisticProbe.Params(battleManager.getGunner(), currentPoint);
                             PriorityUnit priorityUnit = (PriorityUnit) ballisticProbe.probe(params);
                             if (priorityUnit.getPriority() > best.getPriority()) {
                                 labelStepBallistic = "gunnerLvl3";

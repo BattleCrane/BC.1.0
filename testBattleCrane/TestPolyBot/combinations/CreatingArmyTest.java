@@ -6,12 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import polytech.polyCombinations.Army.iteratorArmy.PolyIteratorArmy;
 import polytech.polyCombinations.creatingTools.CreatingCombination;
 import org.junit.Test;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.Priorities;
 import polytech.polyNexus.probes.PolyBallisticProbe;
 import polytech.polyNexus.probes.PolyDistanceProbe;
 import polytech.polyNexus.probes.PolyZoneProbe;
 
-public class CreatingArmyTest {
+public class CreatingArmyTest implements TestInitializer{
 
     @NotNull
     private PolyIteratorArmy initPolyIteratorArmy(BattleManager battleManagerTest, PolyZoneProbe polyZoneProbe){
@@ -22,13 +23,19 @@ public class CreatingArmyTest {
 
     @Test
     public void findCombination(){
-        BattleManager battleManagerTest = TestInitializer.initBattleManager();
-        TestInitializer.setArmy(battleManagerTest, 0, 1, 1, 1, 0, 1);
+        BattleManager battleManagerTest = initBattleManager();
+        setArmy(battleManagerTest, 0, 1, 1, 1, 0, 1);
         PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManagerTest);
         polyZoneProbe.probe(null);
         PolyIteratorArmy polyIteratorArmy = initPolyIteratorArmy(battleManagerTest, polyZoneProbe);
         CreatingCombination best = polyIteratorArmy.findCombination(battleManagerTest);
         System.out.println(best);
         battleManagerTest.getBattleField().toString();
+    }
+
+
+    @Override
+    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+        return null;
     }
 }

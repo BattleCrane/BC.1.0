@@ -2,9 +2,12 @@ package polytech.polyNexus;
 
 import game.battleFields.BattleManager;
 import game.controllers.ControllerMatchMaking;
+import org.jetbrains.annotations.NotNull;
 import polytech.priority.Priorities;
 import polytech.polyNexus.probes.*;
 
+
+// TODO: 21.12.17 make Factories
 public class PolyNexus {
     private final ControllerMatchMaking controllerMatchMaking;
     private final BattleManager battleManager;
@@ -34,6 +37,52 @@ public class PolyNexus {
     }
 
 
+    /**
+     * Класс PoyNexus реализует фабрику Probe.
+     * Это используется в большей мере для удобства тестирования, чем
+     * используется в реальной механики игры.
+     * В данном случае фабрика упрощает конструкторы для сложных Probes.
+     */
+
+    @NotNull
+    public static PolyZoneProbe createZoneProbe(BattleManager battleManager){
+        return new PolyZoneProbe(battleManager);
+    }
+
+    @NotNull
+    public static PolyDistanceProbe createDistanceProbe(BattleManager battleManager){
+        return new PolyDistanceProbe(battleManager);
+    }
+
+    @NotNull
+    public static PolyTargetProbe createTargetProbe(ControllerMatchMaking controllerMatchMaking){
+        return new PolyTargetProbe(controllerMatchMaking, new Priorities());
+    }
+
+    @NotNull
+    public static PolyUpgradingProbe createUpgradingProbe(BattleManager battleManager){
+        return new PolyUpgradingProbe(battleManager, new Priorities());
+    }
+
+    @NotNull
+    public static PolyBallisticProbe createBallisticProbe(BattleManager manager){
+        return new PolyBallisticProbe(manager, new Priorities()
+                , new PolyZoneProbe(manager), new PolyDistanceProbe(manager));
+    }
+
+    @NotNull
+    public static PolyRadiusProbe createRadiusProbe(BattleManager manager){
+        return new PolyRadiusProbe(manager, new Priorities()
+                , new PolyZoneProbe(manager), new PolyDistanceProbe(manager));
+    }
+
+    @NotNull
+    public static PolyBuildingProbe createBuildingProbe(BattleManager manager){
+        return new PolyBuildingProbe(manager, new Priorities()
+                , new PolyZoneProbe(manager), new PolyDistanceProbe(manager));
+    }
+
+    //Getters:
     public ControllerMatchMaking getControllerMatchMaking() {
         return controllerMatchMaking;
     }

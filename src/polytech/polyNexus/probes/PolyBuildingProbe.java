@@ -5,6 +5,7 @@ import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
+import org.jetbrains.annotations.Contract;
 import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import polytech.priority.Priorities;
@@ -116,5 +117,10 @@ public final class PolyBuildingProbe implements Probe {
         adjutantFielder.flush(battleManager);
         adjutantFielder.fillZones(battleManager);
         return (futurePoints - currentPoints) * 30;
+    }
+
+    @Contract(pure = true)
+    public PolyZoneProbe getZoneProbe() {
+        return zoneProbe;
     }
 }

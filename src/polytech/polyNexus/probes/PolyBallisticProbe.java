@@ -11,10 +11,16 @@ import polytech.priority.PolyPriorityUnit;
 import game.unities.Unity;
 
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class PolyBallisticProbe implements Probe {
+    private final Logger logger = Logger.getLogger(PolyBallisticProbe.class.getName());
+    private final ConsoleHandler consoleHandler = new ConsoleHandler();
+
     private final Double DISTANCE_COEFFICIENT = 0.1;
     private final Double DIRECT_ATTACK_COEFFICIENT = 0.5;
     private final Double INDIRECT_ATTACK_COEFFICIENT = 0.2;
@@ -30,13 +36,14 @@ public final class PolyBallisticProbe implements Probe {
         this.map = map;
         this.zoneProbe = zoneProbe;
         this.distanceProbe = distanceProbe;
+        consoleHandler.setLevel(Level.FINE);
     }
 
-    public static final class BallisticParams extends ParentParams {
+    public static final class Params extends ParentParams {
         private final Unity unity;
         private final Point point;
 
-        public BallisticParams(Unity unity, Point point) {
+        public Params(Unity unity, Point point) {
             this.unity = unity;
             this.point = point;
         }
@@ -54,7 +61,10 @@ public final class PolyBallisticProbe implements Probe {
 
     @Override
     public final Object probe(ParentParams params) {
-        BallisticParams ballisticParams = (BallisticParams) params;
+        logger.setLevel(Level.INFO);
+        logger.addHandler(consoleHandler);
+
+        Params ballisticParams = (Params) params;
         Unity unity = ballisticParams.unity;
         Point point = ballisticParams.point;
 
@@ -73,6 +83,7 @@ public final class PolyBallisticProbe implements Probe {
     }
 
     public double collect(Player currentPlayer, List<List<String>> matrix, Point point) {
+
         double value = 0;
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
@@ -86,15 +97,16 @@ public final class PolyBallisticProbe implements Probe {
                     while (start.X() + dx >= 0 && start.X() + dx < 16 && start.Y() + dy >= 0 && start.Y() + dy < 16) {
                         start.setX(start.X() + dx);
                         start.setY(start.Y() + dy);
-                        String currentUnity = matrix.get(start.Y()).get(start.X()).substring(1);
+                        String currentUnity = matrix.get(start.X()).get(start.Y()).substring(1);
                         Matcher matcher = patternBuildings.matcher(currentUnity.substring(3, 4));
                         Matcher matcherNotBlockedUnits = patternNotBlockedUnits.matcher(currentUnity.substring(3, 4));
-                        boolean OpponentBuilding = matcher.matches() && !currentUnity.substring(2, 3)
-                                .equals(currentPlayer.getColorType());
-                        boolean OpponentOtherUnit = matcherNotBlockedUnits.matches() && !currentUnity
-                                .substring(2, 3).equals(currentPlayer.getColorType());
-                        if (OpponentBuilding) {
+                        boolean yourUnit = currentUnity.substring(2, 3).equals(currentPlayer.getColorType());
+                        boolean opponentBuilding = matcher.matches() && !yourUnit;
+                        boolean opponentOtherUnit = matcherNotBlockedUnits.matches() && !yourUnit;
+
+                        if (opponentBuilding) {
                             if (!isSecondaryPurpose) {
+                                logger.fine("Other building detected");
                                 value += priorities.getPriorities().get(currentUnity.charAt(3))
                                         * DIRECT_ATTACK_COEFFICIENT;
                                 isSecondaryPurpose = true;
@@ -103,7 +115,8 @@ public final class PolyBallisticProbe implements Probe {
                                         * INDIRECT_ATTACK_COEFFICIENT;
                             }
                         }
-                        if (OpponentOtherUnit) {
+                        if (opponentOtherUnit) {
+                            logger.fine("Other unit detected");
                             if (!isSecondaryPurpose) {
                                 value += priorities.getPriorities().get(currentUnity.charAt(3))
                                         * DIRECT_ATTACK_COEFFICIENT;
@@ -117,5 +130,10 @@ public final class PolyBallisticProbe implements Probe {
             }
         }
         return value;
+    }
+
+    @Contract(pure = true)
+    public PolyZoneProbe getZoneProbe() {
+        return zoneProbe;
     }
 }

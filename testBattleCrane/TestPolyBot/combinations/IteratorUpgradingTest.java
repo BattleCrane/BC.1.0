@@ -6,12 +6,13 @@ import TestPolyBot.TestInitializer;
 import polytech.polyCombinations.creatingTools.CreatingCombination;
 import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
 import org.junit.Test;
+import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.Priorities;
 import polytech.polyNexus.probes.*;
 
 import static org.junit.Assert.assertTrue;
 
-public class IteratorUpgradingTest {
+public class IteratorUpgradingTest implements TestInitializer {
 
     private PolyIteratorUpgrading initPolyIteratorUpgrading(BattleManager battleManager){
         Priorities priorities = new Priorities();
@@ -21,7 +22,7 @@ public class IteratorUpgradingTest {
 
     @Test
     public void findCombination(){
-        BattleManager battleManagerTest = TestInitializer.initBattleManager();
+        BattleManager battleManagerTest = initBattleManager();
 
         battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(7,10), battleManagerTest.getGenerator());
         battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(14, 1), battleManagerTest.getBarracks());
@@ -31,5 +32,10 @@ public class IteratorUpgradingTest {
         CreatingCombination creatingCombination = polyIteratorUpgrading.findCombination();
         System.out.println(creatingCombination);
         assertTrue(1050.0 == creatingCombination.getSum());
+    }
+
+    @Override
+    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+        return null;
     }
 }
