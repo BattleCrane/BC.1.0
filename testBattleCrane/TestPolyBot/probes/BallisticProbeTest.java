@@ -39,7 +39,7 @@ public final class BallisticProbeTest implements TestInitializer {
                 , battleManagerTest.getBattleField().getMatrix(), pointSpawnTest3);
 
         logger.info(battleManagerTest.getBattleField().toString());
-        logger.info(ANSI_CYAN + "Result_1: " + result1 );
+        logger.info("Result_1: " + result1 );
         logger.info("Result_2: " + result2);
         logger.info("Result_3: " + result3);
         assertTrue(275.0 == result1);
