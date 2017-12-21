@@ -89,7 +89,7 @@ public class RadiusProbeTest implements TestInitializer{
 
 
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+    public final Object createTest(BattleManager battleManager, ParentParams parentParams) {
         return null;
     }
 }

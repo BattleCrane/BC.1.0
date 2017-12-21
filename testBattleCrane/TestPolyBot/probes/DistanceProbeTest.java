@@ -35,7 +35,7 @@ public final class DistanceProbeTest implements TestInitializer {
     }
 
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams params) {
+    public final Object createTest(BattleManager battleManager, ParentParams params) {
         Probe probe = PolyNexus.createDistanceProbe(battleManager);
         int distance = (Integer) probe.probe(params);
         logger.info(battleManager.getBattleField().toString());

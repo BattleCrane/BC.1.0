@@ -14,11 +14,11 @@ import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
-public class BallisticProbeTest implements TestInitializer {
+public final class BallisticProbeTest implements TestInitializer {
     private final Logger logger = Logger.getLogger(BallisticProbeTest.class.getName());
 
-    @Test
-    public void collect() {
+    @Test //Worked:
+    public final void collect() {
         BattleManager battleManagerTest = initBattleManager();
 
         Point pointSpawnTest1 = new Point(7, 7);
@@ -47,8 +47,8 @@ public class BallisticProbeTest implements TestInitializer {
         assertTrue(725.0 == result3);
     }
 
-    @Test
-    public void probeBallisticUnit() {
+    @Test //Worked:
+    public final void probeBallisticUnit() {
         BattleManager manager = initBattleManager();
 
         Unity unityGunner = manager.getGunner();
@@ -63,7 +63,7 @@ public class BallisticProbeTest implements TestInitializer {
     }
 
     @Override
-    public Object createTest(BattleManager manager, ParentParams params) {
+    public final Object createTest(BattleManager manager, ParentParams params) {
         PolyBallisticProbe probe = PolyNexus.createBallisticProbe(manager);
         probe.getZoneProbe().probe(null);
         PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);

@@ -32,7 +32,7 @@ public final class UpgradingProbeTest implements TestInitializer{
 
     @NotNull
     @Override
-    public Object createTest(BattleManager manager, ParentParams params) {
+    public final Object createTest(BattleManager manager, ParentParams params) {
         Probe probe = PolyNexus.createUpgradingProbe(manager);
         PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
         logger.info(manager.getBattleField().toString());

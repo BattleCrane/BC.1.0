@@ -40,7 +40,7 @@ public final class ProbeZoneTest implements TestInitializer {
 
     @NotNull
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+    public final Object createTest(BattleManager battleManager, ParentParams parentParams) {
         PolyZoneProbe zoneProbe = PolyNexus.createZoneProbe(battleManager);
         zoneProbe.probe(null);
         Set<Point> listOfDangerousZone = zoneProbe.getDangerousZone();

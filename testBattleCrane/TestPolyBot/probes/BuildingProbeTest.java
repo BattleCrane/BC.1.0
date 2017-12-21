@@ -63,7 +63,7 @@ public final class BuildingProbeTest implements TestInitializer{
     }
 
     @Override
-    public Object createTest(BattleManager manager, ParentParams params) {
+    public final Object createTest(BattleManager manager, ParentParams params) {
         PolyBuildingProbe probe = PolyNexus.createBuildingProbe(manager);
         probe.getZoneProbe().probe(null);
         PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
