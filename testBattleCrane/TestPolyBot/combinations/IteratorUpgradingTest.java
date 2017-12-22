@@ -1,41 +1,38 @@
 package TestPolyBot.combinations;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import TestPolyBot.TestInitializer;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
-import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
+import org.jetbrains.annotations.NotNull;
+import polytech.polyCombinations.PolyCombinator;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
+import polytech.polyCombinations.polyFinders.upgrading.PolyIteratorUpgrading;
 import org.junit.Test;
-import polytech.polyNexus.probes.parametres.ParentParams;
-import polytech.priority.Priorities;
-import polytech.polyNexus.probes.*;
 
-import static org.junit.Assert.assertTrue;
+import java.util.logging.Logger;
 
-public class IteratorUpgradingTest implements TestInitializer {
-
-    private PolyIteratorUpgrading initPolyIteratorUpgrading(BattleManager battleManager){
-        Priorities priorities = new Priorities();
-        return new PolyIteratorUpgrading(battleManager
-                , new PolyUpgradingProbe(battleManager, priorities));
-    }
+//Worked:
+public final class IteratorUpgradingTest implements TestInitializer {
+    private final Logger logger = Logger.getLogger(IteratorUpgradingTest.class.getName());
 
     @Test
-    public void findCombination(){
-        BattleManager battleManagerTest = initBattleManager();
-
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(7,10), battleManagerTest.getGenerator());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(14, 1), battleManagerTest.getBarracks());
-        battleManagerTest.putUnity(battleManagerTest.getPlayerBlue(), new Point(12, 4), battleManagerTest.getTurret());
-        battleManagerTest.setHowICanBuild(3);
-        PolyIteratorUpgrading polyIteratorUpgrading = initPolyIteratorUpgrading(battleManagerTest);
-        CreatingCombination creatingCombination = polyIteratorUpgrading.findCombination();
-        System.out.println(creatingCombination);
-        assertTrue(1050.0 == creatingCombination.getSum());
+    public final void findCombination() {
+        BattleManager manager = initBattleManager();
+        createTest(manager, null, () -> {
+            manager.putUnity(manager.getPlayerBlue(), new Point(7, 10), manager.getGenerator());
+            manager.putUnity(manager.getPlayerBlue(), new Point(14, 1), manager.getBarracks());
+            manager.putUnity(manager.getPlayerBlue(), new Point(12, 4), manager.getTurret());
+            manager.setHowICanBuild(3);
+        }, 630.0);
     }
 
+    @NotNull
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
-        return null;
+    public final Object createTest(BattleManager manager, Probe.Params parentParams) {
+        PolyIteratorUpgrading polyIteratorUpgrading = PolyCombinator.createIteratorUpgrading(manager);
+        CreatingCombination combination = polyIteratorUpgrading.findCombination();
+        logger.info(combination.toString());
+        return combination.getSum();
     }
 }

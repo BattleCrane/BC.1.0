@@ -1,9 +1,8 @@
 package botInterface.probes;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 public class TemplateProbe implements Probe {
     @Override
-    public Object probe(ParentParams o) {
+    public Object probe(Params o) {
         throw new UnsupportedOperationException();
     }
 }

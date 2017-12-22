@@ -2,94 +2,76 @@ package TestPolyBot.probes;
 
 import TestPolyBot.TestInitializer;
 import botInterface.priority.PriorityUnit;
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import org.junit.Test;
 import polytech.polyNexus.PolyNexus;
-import polytech.polyNexus.probes.PolyBallisticProbe;
-import polytech.polyNexus.probes.PolyDistanceProbe;
-import polytech.polyNexus.probes.PolyZoneProbe;
-import polytech.polyNexus.probes.parametres.ParentParams;
-import polytech.priority.Priorities;
+import polytech.polyNexus.probes.PolyRadiusProbe;
 
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
-public class RadiusProbeTest implements TestInitializer{
+public final class RadiusProbeTest implements TestInitializer {
     private final Logger logger = Logger.getLogger(RadiusProbeTest.class.getName());
-    ConsoleHandler handler = new ConsoleHandler();
 
     @Test
-    public void collect(){
+    public final void collect() {
+        BattleManager manager = initBattleManager();
 
-        BattleManager battleManagerTest = initBattleManager();
-
-        Point pointSpawnTest1 = new Point(7, 7);
-        Point pointSpawnTest2 = new Point(7, 3);
+        Point pointSpawnTest1 = new Point(3, 3);
+        Point pointSpawnTest2 = new Point(6, 3);
         Point pointSpawnTest3 = new Point(2, 2);
 
-        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest1, battleManagerTest.getGunner());
-        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest2, battleManagerTest.getGunner());
-        battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest3, battleManagerTest.getTank());
+        PolyRadiusProbe probe = PolyNexus.createRadiusProbe(manager);
+        probe.getZoneProbe().probe(null);
 
-        PolyBallisticProbe probe = PolyNexus.createBallisticProbe(battleManagerTest);
+        double result1 = probe.collect(manager.getPlayer()
+                , manager.getBattleField().getMatrix(), pointSpawnTest1, manager.getTurret());
+        double result2 = probe.collect(manager.getPlayer()
+                , manager.getBattleField().getMatrix(), pointSpawnTest2, manager.getTurret());
+        double result3 = probe.collect(manager.getPlayer()
+                , manager.getBattleField().getMatrix(), pointSpawnTest3, manager.getTurret());
 
-        double result1 = probe.collect(battleManagerTest.getPlayer()
-                , battleManagerTest.getBattleField().getMatrix(), pointSpawnTest1);
-        double result2 = probe.collect(battleManagerTest.getPlayer()
-                , battleManagerTest.getBattleField().getMatrix(), pointSpawnTest2);
-        double result3 = probe.collect(battleManagerTest.getPlayer()
-                , battleManagerTest.getBattleField().getMatrix(), pointSpawnTest3);
-
-        logger.info(battleManagerTest.getBattleField().toString());
+        logger.info(manager.getBattleField().toString());
         logger.info("Result_1: " + result1);
         logger.info("Result_2: " + result2);
         logger.info("Result_3: " + result3);
 
-        assertTrue(275.0 == result1);
-        assertTrue(150.0 == result2);
-        assertTrue(725.0 == result3);
+        assertTrue(3750.0 == result1);
+        assertTrue(750.0 == result2);
+        assertTrue(4000.0 == result3);
     }
 
     @Test
-    public void probeRadiusUnitTest() {
-        BattleManager battleManager = initBattleManager();
-        createTest(battleManager, new PolyBallisticProbe.Params(battleManager.getTurret(), new Point(7, 7))
+    public final void probeRadiusUnitTest() {
+
+        BattleManager manager1 = initBattleManager();
+        createTest(manager1, new PolyRadiusProbe.Params(manager1.getTurret(), new Point(7, 7))
                 , () -> {
-                    battleManager.putUnity(battleManager.getPlayerBlue(), new Point(7, 7), battleManager.getTurret());
-                    battleManager.putUnity(battleManager.getPlayerBlue(), new Point(4, 5), battleManager.getTurret());
-                    battleManager.putUnity(battleManager.getPlayerBlue(), new Point(2, 2), battleManager.getTurret());
-                }, 0);
+                    manager1.putUnity(manager1.getPlayerBlue(), new Point(4, 5), manager1.getTurret());
+                    manager1.putUnity(manager1.getPlayerBlue(), new Point(2, 2), manager1.getTurret());
+                }, 225.0);
 
-
-        battleManager.getBattleField().toString();
-
-        PolyZoneProbe zoneProbe = new PolyZoneProbe(battleManager);
-        PolyBallisticProbe probe = new PolyBallisticProbe(battleManager, new Priorities()
-                , zoneProbe, new PolyDistanceProbe(battleManager));
-        zoneProbe.probe(null);
-
-
-        ParentParams params1 = new PolyBallisticProbe.Params(battleManager.getTurret(), new Point(7, 7));
-
-        ParentParams params2 = new PolyBallisticProbe.Params(battleManager.getTurret(), new Point(4, 5));
-
-        ParentParams params3 = new PolyBallisticProbe.Params(battleManager.getTurret(), new Point(2, 2));
-
-        PriorityUnit priorityTurretTest1 = (PriorityUnit) probe.probe(params1);
-        PriorityUnit priorityTurretTest2 = (PriorityUnit) probe.probe(params2);
-        PriorityUnit priorityTurretTest3 = (PriorityUnit) probe.probe(params3);
-        System.out.println(priorityTurretTest1.getPriority());
-        System.out.println(priorityTurretTest2.getPriority());
-        System.out.println(priorityTurretTest3.getPriority());
-
+        BattleManager manager2 = initBattleManager();
+        createTest(manager2, new PolyRadiusProbe.Params(manager2.getTurret(), new Point(2, 2))
+                , () -> {
+                    manager2.putUnity(manager2.getPlayerBlue(), new Point(2, 2), manager2.getTurret());
+                    manager2.putUnity(manager2.getPlayerRed(), new Point(2, 3), manager2.getTank());
+                    manager2.putUnity(manager2.getPlayerRed(), new Point(6, 6), manager2.getGenerator());
+                }, 2505.0);
     }
 
 
     @Override
-    public final Object createTest(BattleManager battleManager, ParentParams parentParams) {
-        return null;
+    public final Object createTest(BattleManager manager, Probe.Params params) {
+        PolyRadiusProbe probe = PolyNexus.createRadiusProbe(manager);
+        probe.getZoneProbe().probe(null);
+        PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
+        double result = priorityUnit.getPriority();
+        logger.info(manager.getBattleField().toString());
+        logger.info("" + result);
+        return result;
     }
 }

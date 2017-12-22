@@ -1,41 +1,34 @@
 package TestPolyBot.combinations;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import TestPolyBot.TestInitializer;
-import org.jetbrains.annotations.NotNull;
-import polytech.polyCombinations.Army.iteratorArmy.PolyIteratorArmy;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
+import polytech.polyCombinations.PolyCombinator;
+import polytech.polyCombinations.polyFinders.iteratorArmy.PolyIteratorArmy;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
 import org.junit.Test;
-import polytech.polyNexus.probes.parametres.ParentParams;
-import polytech.priority.Priorities;
-import polytech.polyNexus.probes.PolyBallisticProbe;
-import polytech.polyNexus.probes.PolyDistanceProbe;
-import polytech.polyNexus.probes.PolyZoneProbe;
 
-public class CreatingArmyTest implements TestInitializer{
+import java.util.logging.Logger;
 
-    @NotNull
-    private PolyIteratorArmy initPolyIteratorArmy(BattleManager battleManagerTest, PolyZoneProbe polyZoneProbe){
-        PolyBallisticProbe ballisticProbe = new PolyBallisticProbe(battleManagerTest, new Priorities()
-                , polyZoneProbe, new PolyDistanceProbe(battleManagerTest));
-        return new PolyIteratorArmy(battleManagerTest, ballisticProbe);
-    }
+//Worked:
+public final class CreatingArmyTest implements TestInitializer {
+    private final Logger logger = Logger.getLogger(CreatingArmyTest.class.getName());
 
     @Test
-    public void findCombination(){
-        BattleManager battleManagerTest = initBattleManager();
-        setArmy(battleManagerTest, 0, 1, 1, 1, 0, 1);
-        PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManagerTest);
-        polyZoneProbe.probe(null);
-        PolyIteratorArmy polyIteratorArmy = initPolyIteratorArmy(battleManagerTest, polyZoneProbe);
-        CreatingCombination best = polyIteratorArmy.findCombination(battleManagerTest);
-        System.out.println(best);
-        battleManagerTest.getBattleField().toString();
+    public final void findCombination() {
+        BattleManager manager = initBattleManager();
+        createTest(manager, null, () -> {
+            setArmy(manager, 0, 1, 1, 1, 0, 1);
+        }, -1);
     }
 
-
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
-        return null;
+    public final Object createTest(BattleManager manager, Probe.Params params) {
+        PolyIteratorArmy polyIteratorArmy = PolyCombinator.createIteratorArmy(manager);
+        polyIteratorArmy.getBallisticProbe().getZoneProbe().probe(null);
+        CreatingCombination best = polyIteratorArmy.findCombination(manager);
+        logger.info("Best: " + best);
+        logger.info(manager.getBattleField().toString());
+        return -1;
     }
 }

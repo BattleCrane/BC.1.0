@@ -1,4 +1,4 @@
-package polytech.polyCombinations.creatingTools;
+package polytech.polyCombinations.polyFinders.creatingTools;
 
 import botInterface.priority.PriorityUnit;
 

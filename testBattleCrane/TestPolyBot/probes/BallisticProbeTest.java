@@ -1,5 +1,6 @@
 package TestPolyBot.probes;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
@@ -8,7 +9,6 @@ import game.unities.Unity;
 import org.junit.Test;
 import polytech.polyNexus.PolyNexus;
 import polytech.polyNexus.probes.PolyBallisticProbe;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.logging.Logger;
 
@@ -30,6 +30,7 @@ public final class BallisticProbeTest implements TestInitializer {
         battleManagerTest.putUnity(battleManagerTest.getPlayer(), pointSpawnTest3, battleManagerTest.getTank());
 
         PolyBallisticProbe probe = PolyNexus.createBallisticProbe(battleManagerTest);
+        probe.getZoneProbe().probe(null);
 
         double result1 = probe.collect(battleManagerTest.getPlayer()
                 , battleManagerTest.getBattleField().getMatrix(), pointSpawnTest1);
@@ -63,7 +64,7 @@ public final class BallisticProbeTest implements TestInitializer {
     }
 
     @Override
-    public final Object createTest(BattleManager manager, ParentParams params) {
+    public final Object createTest(BattleManager manager, Probe.Params params) {
         PolyBallisticProbe probe = PolyNexus.createBallisticProbe(manager);
         probe.getZoneProbe().probe(null);
         PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);

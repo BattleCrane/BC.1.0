@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import polytech.polyNexus.PolyNexus;
 import polytech.polyNexus.probes.PolyUpgradingProbe;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.logging.Logger;
 
@@ -32,7 +31,7 @@ public final class UpgradingProbeTest implements TestInitializer{
 
     @NotNull
     @Override
-    public final Object createTest(BattleManager manager, ParentParams params) {
+    public final Object createTest(BattleManager manager, Probe.Params params) {
         Probe probe = PolyNexus.createUpgradingProbe(manager);
         PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
         logger.info(manager.getBattleField().toString());

@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16c613ff-2a58-4f01-9824-5526d1f4b983" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" />
+    <list default="true" id="16c613ff-2a58-4f01-9824-5526d1f4b983" name="Default" comment="Separated methods in probe classes">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/out/test/megaDoofense/TestBattleCrane/Tests.class" afterPath="$PROJECT_DIR$/out/test/megaDoofense/TestBattleCrane/Tests.class" />
+      <change beforePath="$PROJECT_DIR$/src/botInterface/probes/Probe.java" afterPath="$PROJECT_DIR$/src/botInterface/probes/Probe.java" />
+      <change beforePath="$PROJECT_DIR$/src/botInterface/probes/TemplateProbe.java" afterPath="$PROJECT_DIR$/src/botInterface/probes/TemplateProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/game/fxmlFiles/fxmlBattleFieldWindow.fxml" afterPath="$PROJECT_DIR$/src/fxmlFiles/fxmlBattleFieldWindow.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/game/fxmlFiles/fxmlMenu.fxml" afterPath="$PROJECT_DIR$/src/fxmlFiles/fxmlMenu.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/main/BGame.java" afterPath="$PROJECT_DIR$/src/main/BGame.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/Army/iteratorArmy/PolyIteratorArmy.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/iteratorArmy/PolyIteratorArmy.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/building/genesisBuilding/PolyGenesisBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/genesisBuilding/PolyGenesisBuilder.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/building/iteratorBuilding/PolyIteratorBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/iteratorBuilding/PolyIteratorBuilder.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/CreatingCombination.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/creatingTools/CreatingCombination.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/EstimatedUnit.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/creatingTools/EstimatedUnit.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/PolyPlanner.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/creatingTools/PolyPlanner.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/upgrading/PolyIteratorUpgrading.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/upgrading/PolyIteratorUpgrading.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyTargetProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyTargetProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/parametres/ParentParams.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestInitializer.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestInitializer.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java" />
+      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,9 +47,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/BattleCrane$DistanceProbeTest_findClosestEnemy.coverage" NAME="DistanceProbeTest.findClosestEnemy Coverage Results" MODIFIED="1513787973218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>TestPolyBot.probes.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/BattleCrane$Main.coverage" NAME="Main Coverage Results" MODIFIED="1513284483517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Main.*</FILTER>
     </SUITE>
@@ -35,11 +65,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="BuildingProbeTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java">
+      <file leaf-file-name="IteratorBuildingTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="65" column="16" lean-forward="false" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+            <state relative-caret-position="189">
+              <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,109 +77,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BallisticProbeTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java">
+      <file leaf-file-name="GenesisBuildingTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="45" column="37" lean-forward="true" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpgradingProbeTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PolyBuildingProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="122" column="29" lean-forward="false" selection-start-line="122" selection-start-column="29" selection-end-line="122" selection-end-column="29" />
-              <folding>
-                <element signature="e#4810#4811#0" expanded="true" />
-                <element signature="e#4842#4843#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RadiusProbeTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4068#4069#0" expanded="true" />
-                <element signature="e#4095#4096#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProbeZoneTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DistanceProbeTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="37" column="16" lean-forward="false" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PolyRadiusProbe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
+            <state relative-caret-position="231">
+              <caret line="39" column="69" lean-forward="true" selection-start-line="39" selection-start-column="69" selection-end-line="39" selection-end-column="69" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestInitializer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestInitializer.java">
+      <file leaf-file-name="PolyGenesisBuilder.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/genesisBuilding/PolyGenesisBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+            <state relative-caret-position="301">
+              <caret line="134" column="69" lean-forward="true" selection-start-line="134" selection-start-column="69" selection-end-line="134" selection-end-column="69" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#PolyGenesisBuilder#0;class#PolyGenesisBuilder#0" expanded="false" />
+                <element signature="method#initUnitMap#0;class#PolyGenesisBuilder#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Priorities.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/polytech/priority/Priorities.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -159,7 +105,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -169,10 +114,7 @@
       <find>System</find>
       <find>System.</find>
       <find>unity='g'</find>
-      <find>i: 0</find>
-      <find>i: 0 j: 4</find>
-      <find>true</find>
-      <find>detec</find>
+      <find>Sys</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,6 +136,7 @@
             <value>
               <list>
                 <branch-info repo="$PROJECT_DIR$" source="origin/BattleCraneJ1.8" />
+                <branch-info repo="$PROJECT_DIR$" source="origin/SuperTest" />
               </list>
             </value>
           </entry>
@@ -209,57 +152,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java" />
-        <option value="$PROJECT_DIR$/src/polytech/PolyCombinations/PolyCombinator.java" />
-        <option value="$PROJECT_DIR$/src/polytech/PolytechBot.java" />
-        <option value="$PROJECT_DIR$/src/polytech/PolytechnicBot.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestBot/ProbeZoneTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/ProbeZoneTest.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyDistanceProbe.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/DistanceProbeTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/BallisticProbeTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/BuildingProbeTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingProbeTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorUpgradingTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/GenesisBuildingTests.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/TestInitializer.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBallisticProbe.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyBuildingProbe.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyZoneProbe.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" />
-        <option value="$PROJECT_DIR$/src/main/BGame.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestBattleCrane/Tests.java" />
-        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/BallisticAndRadiusProbesTest.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" />
-        <option value="$PROJECT_DIR$/src/game/battleFields/BattleField.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/megaDoofense.iml" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestSettings.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java" />
-        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Priority/UnitPriority.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Priority/Priorities.java" />
+        <option value="$PROJECT_DIR$/src/Adjutants/AdjutantAttacker.java" />
+        <option value="$PROJECT_DIR$/src/Adjutants/AdjutantFielder.java" />
+        <option value="$PROJECT_DIR$/src/Adjutants/AdjutantReporter.java" />
+        <option value="$PROJECT_DIR$/src/Adjutants/AdjutantWakeUpper.java" />
+        <option value="$PROJECT_DIR$/src/BattleFields/BattleManager.java" />
+        <option value="$PROJECT_DIR$/src/BattleFields/BattleField.java" />
+        <option value="$PROJECT_DIR$/src/BattleFields/IdentificationField.java" />
+        <option value="$PROJECT_DIR$/src/BattleFields/Point.java" />
+        <option value="$PROJECT_DIR$/src/Bonuses/Bonus.java" />
+        <option value="$PROJECT_DIR$/src/Bonuses/ControllerBonusesCollection.java" />
+        <option value="$PROJECT_DIR$/src/Bots/Priority/PriorityUnit.java" />
+        <option value="$PROJECT_DIR$/src/Bots/Probes/TemplateProbe.java" />
+        <option value="$PROJECT_DIR$/src/Main/Main.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java" />
+        <option value="$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java" />
         <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticAndRadiusProbesTest.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/TestInitializer.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/building/iteratorBuilding/PolyIteratorBuilder.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java" />
+        <option value="$PROJECT_DIR$/src/botInterface/probes/Probe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyTargetProbe.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/building/genesisBuilding/PolyGenesisBuilder.java" />
+        <option value="$PROJECT_DIR$/src/botInterface/probes/TemplateProbe.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/RadiusProbeTest.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/iteratorArmy/PolyIteratorArmy.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" />
         <option value="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestInitializer.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java" />
-        <option value="$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/iteratorBuilding/PolyIteratorBuilder.java" />
+        <option value="$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java" />
+        <option value="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/genesisBuilding/PolyGenesisBuilder.java" />
       </list>
     </option>
   </component>
@@ -272,7 +215,7 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-47" />
     <option name="y" value="70" />
-    <option name="width" value="1292" />
+    <option name="width" value="1920" />
     <option name="height" value="1006" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -394,9 +337,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -413,6 +353,12 @@
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="polytech" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -420,7 +366,44 @@
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="polytech" type="462c0819:PsiDirectoryNode" />
-              <item name="polyNexus" type="462c0819:PsiDirectoryNode" />
+              <item name="polyCombinations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
+              <item name="polyCombinations" type="462c0819:PsiDirectoryNode" />
+              <item name="polyFinders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
+              <item name="polyCombinations" type="462c0819:PsiDirectoryNode" />
+              <item name="polyFinders" type="462c0819:PsiDirectoryNode" />
+              <item name="building" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
+              <item name="polyCombinations" type="462c0819:PsiDirectoryNode" />
+              <item name="polyFinders" type="462c0819:PsiDirectoryNode" />
+              <item name="building" type="462c0819:PsiDirectoryNode" />
+              <item name="genesisBuilding" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="polytech" type="462c0819:PsiDirectoryNode" />
+              <item name="polyCombinations" type="462c0819:PsiDirectoryNode" />
+              <item name="polyFinders" type="462c0819:PsiDirectoryNode" />
+              <item name="building" type="462c0819:PsiDirectoryNode" />
+              <item name="iteratorBuilding" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
@@ -428,7 +411,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="polytech" type="462c0819:PsiDirectoryNode" />
               <item name="polyNexus" type="462c0819:PsiDirectoryNode" />
-              <item name="probes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
@@ -440,39 +422,39 @@
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="testBattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="TestBattleCrane" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="testBattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="TestBattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="TestPolyBot" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="testBattleCrane" type="462c0819:PsiDirectoryNode" />
+              <item name="TestBattleCrane" type="462c0819:PsiDirectoryNode" />
               <item name="TestPolyBot" type="462c0819:PsiDirectoryNode" />
               <item name="combinations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleCrane" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="testBattleCrane" type="462c0819:PsiDirectoryNode" />
-              <item name="TestPolyBot" type="462c0819:PsiDirectoryNode" />
-              <item name="probes" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -480,7 +462,278 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
-    <property name="last.edited.regexp" value="T" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/megaDoofense.iml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/bonuses/Bonus.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/bonuses/ControllerBonusesCollection.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/botInterface/Bot.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/botInterface/Turn.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/botInterface/priority/PriorityUnit.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/botInterface/probes/Probe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/botInterface/probes/TemplateProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/adjutants/AdjutantAttacker.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/adjutants/AdjutantFielder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/adjutants/AdjutantReporter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/adjutants/AdjutantWakeUpper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/battleFields/BattleField.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/battleFields/BattleManager.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/battleFields/IdentificationField.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/battleFields/Point.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/controllers/ControllerMatchMaking.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/controllers/ControllerMenu.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/fxmlFiles/fxmlBattleFieldWindow.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/fxmlFiles/fxmlMenu.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/graphics/Painter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/players/Player.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/resourceInitialization/Resource.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/resourceInitialization/ResourceOfBonuses.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/game/unities/Unity.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/BGame.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/Army/iteratorArmy/PolyIteratorArmy.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/CodeContainer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/building/genesisBuilding/PolyGenesisBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/building/iteratorBuilding/PolyIteratorBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/CreatingCombination.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/EstimatedUnit.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/creatingTools/PolyPlanner.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyCombinations/upgrading/PolyIteratorUpgrading.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyTargetProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/polyNexus/probes/parametres/Params.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/priority/PolyAdjutantPriorityField.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/priority/PolyPriorityUnit.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/priority/Priorities.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/steps/AttackStep.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/steps/BonusStep.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/steps/Step.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/polytech/steps/UnityStep.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_10_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_11_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_12_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_13_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_14_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_15_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_16_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_17_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_1_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_2_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_3_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_4_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_5_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_6_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_7_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_8_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/CampaignScenario/Mission_9_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/MultiplayerScenario/StandardScenario.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/scenarios/Scenario.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestBattleCrane/Tests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestInitializer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticAndRadiusProbesTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestBattleCrane/Tests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestBot/Tests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestPolyBot/CreatingArmyTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestPolyBot/GenesisBuildingTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Adjutants/AdjutantAttacker.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Adjutants/AdjutantFielder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Adjutants/AdjutantReporter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Adjutants/AdjutantWakeUpper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/BattleFields/BattleField.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/BattleFields/BattleManager.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/BattleFields/IdentificationField.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/BattleFields/Point.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bonuses/Bonus.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bonuses/ControllerBonusesCollection.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bots/Bot.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bots/Priority/PriorityUnit.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bots/Probes/Probe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bots/Probes/TemplateProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bots/Turn.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Controllers/ControllerMatchMaking.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Controllers/ControllerMenu.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Graphics/Painter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Main/Main.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Players/Player.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/Army/IteratorArmy/PolyIteratorArmy.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/IteratorBuilding/PolyIteratorBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/CodeContainer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/CreatingCombination.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/EstimatedUnit.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/CreatingTools/PolyPlanner.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolyCombinations/upgrading/PolyUpgrading.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/PolytechBot.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Priority/PolyAdjutantPriorityField.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Priority/PolyPriorityUnit.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Priority/Priorities.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Probes/parametres/Params.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Steps/BonusStep.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Steps/Step.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ResourceInit/Resource.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ResourceInit/ResourceOfBonuses.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_10_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_11_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_12_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_13_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_14_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_15_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_16_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_17_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_1_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_2_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_3_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_4_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_5_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_6_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_7_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_8_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/CampaignScenario/Mission_9_.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/MultiplayerScenario/StandardScenario.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Scenarios/Scenario.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Unities/Unity.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/fxmlFiles/fxmlBattleFieldWindow.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/fxmlFiles/fxmlMenu.fxml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -494,202 +747,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="BallisticProbeTest.collect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.BallisticProbeTest" />
-      <option name="METHOD_NAME" value="collect" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="BallisticProbeTest.probeBallisticUnit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.BallisticProbeTest" />
-      <option name="METHOD_NAME" value="probeBallisticUnit" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="BuildingProbeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.BuildingProbeTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="BuildingProbeTest.probeBuildingUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.BuildingProbeTest" />
-      <option name="METHOD_NAME" value="probeBuildingUnitTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="BuildingProbeTest.probeLockTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.BuildingProbeTest" />
-      <option name="METHOD_NAME" value="probeLockTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="DistanceProbeTest.findClosestEnemy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.DistanceProbeTest" />
-      <option name="METHOD_NAME" value="findClosestEnemy" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="Unnamed" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.BallisticProbeTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="UpgradingProbeTest.probeUpgradeTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="TestPolyBot.probes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="megaDoofense" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="TestPolyBot.probes" />
-      <option name="MAIN_CLASS_NAME" value="TestPolyBot.probes.UpgradingProbeTest" />
-      <option name="METHOD_NAME" value="probeUpgradeTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
+  <component name="RunManager" selected="JUnit.IteratorBuildingTest.findTurretCombination">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -711,6 +769,131 @@
       <module name="" />
       <envs />
     </configuration>
+    <configuration name="CreatingArmyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="TestPolyBot.combinations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="megaDoofense" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="TestPolyBot.combinations" />
+      <option name="MAIN_CLASS_NAME" value="TestPolyBot.combinations.CreatingArmyTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="IteratorBuildingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="TestPolyBot.combinations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="megaDoofense" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="TestPolyBot.combinations" />
+      <option name="MAIN_CLASS_NAME" value="TestPolyBot.combinations.IteratorBuildingTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="IteratorBuildingTest.findTurretCombination" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="TestPolyBot.combinations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="megaDoofense" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="TestPolyBot.combinations" />
+      <option name="MAIN_CLASS_NAME" value="TestPolyBot.combinations.IteratorBuildingTest" />
+      <option name="METHOD_NAME" value="findTurretCombination" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="IteratorUpgradingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="TestPolyBot.combinations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="megaDoofense" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="TestPolyBot.combinations" />
+      <option name="MAIN_CLASS_NAME" value="TestPolyBot.combinations.IteratorUpgradingTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="IteratorUpgradingTest.findCombination" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="TestPolyBot.combinations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="megaDoofense" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="TestPolyBot.combinations" />
+      <option name="MAIN_CLASS_NAME" value="TestPolyBot.combinations.IteratorUpgradingTest" />
+      <option name="METHOD_NAME" value="findCombination" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -730,12 +913,6 @@
       </option>
       <envs />
       <patterns />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -771,23 +948,26 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="8">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.Unnamed" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.UpgradingProbeTest.probeUpgradeTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.BuildingProbeTest.probeLockTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DistanceProbeTest.findClosestEnemy" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.BuildingProbeTest" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.BuildingProbeTest.probeBuildingUnitTest" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.BallisticProbeTest.collect" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.BallisticProbeTest.probeBallisticUnit" />
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.CreatingArmyTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.IteratorBuildingTest.findTurretCombination" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.IteratorUpgradingTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.IteratorUpgradingTest.findCombination" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.IteratorBuildingTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.BallisticProbeTest.collect" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.BallisticProbeTest.probeBallisticUnit" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.BuildingProbeTest.probeBuildingUnitTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.BuildingProbeTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.DistanceProbeTest.findClosestEnemy" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.IteratorBuildingTest.findTurretCombination" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.IteratorBuildingTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.IteratorUpgradingTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.IteratorUpgradingTest.findCombination" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CreatingArmyTest" />
       </list>
     </recent_temporary>
   </component>
@@ -819,7 +999,8 @@
       <workItem from="1513375029576" duration="16632000" />
       <workItem from="1513438723829" duration="10236000" />
       <workItem from="1513582310418" duration="1262000" />
-      <workItem from="1513662599547" duration="7453000" />
+      <workItem from="1513662599547" duration="8120000" />
+      <workItem from="1513938952600" duration="10205000" />
     </task>
     <task id="LOCAL-00001" summary="Алгоритм готов">
       <created>1512892736246</created>
@@ -926,99 +1107,57 @@
       <option name="project" value="LOCAL" />
       <updated>1513450483858</updated>
     </task>
-    <task id="LOCAL-00016" summary="Saving Data&#10;WARNING NOT COMPILED CODE!">
-      <created>1513687960875</created>
+    <task id="LOCAL-00016" summary="Separated methods in probe classes">
+      <created>1513670177840</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1513687960875</updated>
+      <updated>1513670177840</updated>
     </task>
-    <task id="LOCAL-00017" summary="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages.">
-      <created>1513698909046</created>
+    <task id="LOCAL-00017" summary="Separated methods in probe classes">
+      <created>1513672597388</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1513698909046</updated>
+      <updated>1513672597388</updated>
     </task>
-    <task id="LOCAL-00018" summary="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages.">
-      <created>1513698927843</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1513698927843</updated>
-    </task>
-    <task id="LOCAL-00019" summary="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages.">
-      <created>1513698975312</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1513698975312</updated>
-    </task>
-    <task id="LOCAL-00020" summary="20.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: interface TestSettings;&#10;Making final test classes &amp; methods">
-      <created>1513791798046</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1513791798046</updated>
-    </task>
-    <task id="LOCAL-00021" summary="21.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: static colors in TestInitializer">
-      <created>1513860906325</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1513860906325</updated>
-    </task>
-    <task id="LOCAL-00022" summary="21.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: static colors in TestInitializer">
-      <created>1513861011481</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1513861011481</updated>
-    </task>
-    <task id="LOCAL-00023" summary="21.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: static colors in TestInitializer">
-      <created>1513861022278</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1513861022278</updated>
-    </task>
-    <option name="localTasksCounter" value="24" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BallisticAndRadiusProbesTest_probeBallisticUnit - 2017.12.21 at 15h 34m 53s.xml">
-      <configuration name="BallisticAndRadiusProbesTest.probeBallisticUnit" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest - 2017.12.22 at 16h 21m 36s.xml">
+      <configuration name="IteratorBuildingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticAndRadiusProbesTest_probeBallisticUnit - 2017.12.21 at 15h 35m 10s.xml">
-      <configuration name="BallisticAndRadiusProbesTest.probeBallisticUnit" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest - 2017.12.22 at 16h 26m 50s.xml">
+      <configuration name="IteratorBuildingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticAndRadiusProbesTest_probeBallisticUnit - 2017.12.21 at 15h 35m 52s.xml">
-      <configuration name="BallisticAndRadiusProbesTest.probeBallisticUnit" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest - 2017.12.22 at 16h 31m 45s.xml">
+      <configuration name="IteratorBuildingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_collect - 2017.12.21 at 15h 49m 52s.xml">
-      <configuration name="BallisticProbeTest.collect" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest - 2017.12.22 at 16h 32m 03s.xml">
+      <configuration name="IteratorBuildingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_collect - 2017.12.21 at 15h 50m 39s.xml">
-      <configuration name="BallisticProbeTest.collect" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest - 2017.12.22 at 16h 32m 56s.xml">
+      <configuration name="IteratorBuildingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_collect - 2017.12.21 at 15h 51m 00s.xml">
-      <configuration name="BallisticProbeTest.collect" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest_findTurretCombination - 2017.12.22 at 16h 51m 35s.xml">
+      <configuration name="IteratorBuildingTest.findTurretCombination" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_collect - 2017.12.21 at 15h 51m 14s.xml">
-      <configuration name="BallisticProbeTest.collect" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest_findTurretCombination - 2017.12.22 at 16h 56m 01s.xml">
+      <configuration name="IteratorBuildingTest.findTurretCombination" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_collect - 2017.12.21 at 15h 52m 53s.xml">
-      <configuration name="BallisticProbeTest.collect" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest_findTurretCombination - 2017.12.22 at 16h 56m 53s.xml">
+      <configuration name="IteratorBuildingTest.findTurretCombination" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_collect - 2017.12.21 at 15h 53m 22s.xml">
-      <configuration name="BallisticProbeTest.collect" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest_findTurretCombination - 2017.12.22 at 17h 02m 15s.xml">
+      <configuration name="IteratorBuildingTest.findTurretCombination" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BallisticProbeTest_probeBallisticUnit - 2017.12.21 at 15h 49m 48s.xml">
-      <configuration name="BallisticProbeTest.probeBallisticUnit" configurationId="JUnit" />
+    <history-entry file="IteratorBuildingTest_findTurretCombination - 2017.12.22 at 17h 02m 42s.xml">
+      <configuration name="IteratorBuildingTest.findTurretCombination" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88368000" />
+    <option name="totallyTimeSpent" value="99240000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1030,22 +1169,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1278" height="992" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.4911147" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49775785" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39175257" sideWeight="0.51130855" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21574973" sideWeight="0.5044843" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.396292" sideWeight="0.48869145" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4243094" sideWeight="0.4955157" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21254072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1056,41 +1197,40 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49434572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21574973" sideWeight="0.5044843" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49775785" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3767956" sideWeight="0.4955157" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4243094" sideWeight="0.4955157" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.278125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875144" sideWeight="0.49434572" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.49434572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1113,72 +1253,215 @@
     <MESSAGE value="added: PolyIteratorBuilder.findTurretCombination&#10;added: IteratorBuildingTest" />
     <MESSAGE value="Separation PolyMainProbe&#10;created classes: PolyBallisticProbe, PolyBuildingProbe, PolyDistanceProbe, PolyRadiusProbe, PolyTargetProbe, PolyUpgradingProbe, PolyZoneProbe;&#10;modified: interface Probe;&#10;added: class Params for ars transfer;&#10;added: comments TODO.&#10;WARNING: NOT COMPILED CODE" />
     <MESSAGE value="added: library Google Guice" />
-    <MESSAGE value="Saving Data&#10;WARNING NOT COMPILED CODE!" />
-    <MESSAGE value="19.12.2017 MODIFIED ARCHITECTURE:&#10;Added: class Combinator;&#10;Refactored: all classes &quot;Probe&quot;;&#10;Separated: all probe tests;&#10;Renamed packages." />
-    <MESSAGE value="20.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: interface TestSettings;&#10;Making final test classes &amp; methods" />
-    <MESSAGE value="21.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: static colors in TestInitializer" />
-    <option name="LAST_COMMIT_MESSAGE" value="21.12.2017 MODIFIED TEST ARCHITECTURE:&#10;Added: static colors in TestInitializer" />
+    <MESSAGE value="Separated methods in probe classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separated methods in probe classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="25" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/polytech/steps/BonusStep.java">
+    <entry file="file://$PROJECT_DIR$/src/Adjutants/AdjutantWakeUpper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BattleFields/BattleField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="13" column="41" lean-forward="false" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/javax.inject-1-sources.jar!/javax/inject/Singleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="27" column="6" lean-forward="false" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bots/Probes/Probe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="82" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyZoneProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="847">
+          <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyUpgradingProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="46" column="32" lean-forward="false" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/BonusStep.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/steps/AttackStep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="32" column="87" lean-forward="false" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/steps/UnityStep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/CodeContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/upgrading/PolyIteratorUpgrading.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2793#2794#0" expanded="false" />
-            <element signature="e#2820#2821#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/Probes/PolyMainProbe.java" />
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/parametres/ParentParams.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/building/iteratorBuilding/PolyIteratorBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/AttackStep.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="941">
-          <caret line="150" column="38" lean-forward="false" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
+        <state relative-caret-position="357">
+          <caret line="32" column="87" lean-forward="false" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Steps/UnityStep.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyRadiusProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyDistanceProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="39" lean-forward="false" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyBuildingProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="43" column="64" lean-forward="false" selection-start-line="43" selection-start-column="64" selection-end-line="43" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyTargetProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="57" column="85" lean-forward="false" selection-start-line="57" selection-start-column="85" selection-end-line="57" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyBallisticProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="987">
+          <caret line="58" column="48" lean-forward="false" selection-start-line="58" selection-start-column="48" selection-end-line="58" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/Probes/PolyMainProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="15" column="45" lean-forward="false" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PolyBot/PolyCombinations/Building/GenesisBuilding/PolyGenesisBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="32" column="58" lean-forward="true" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/UpgradingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/IteratorBuildingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/BGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/graphics/Painter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/controllers/ControllerMatchMaking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1896">
+          <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/botInterface/probes/parametres/ParentParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/TestSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/DistanceProbeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="16" column="9" lean-forward="false" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
@@ -1187,365 +1470,244 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyTargetProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+        <state relative-caret-position="171">
+          <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/botInterface/Bot.java">
+    <entry file="file://$PROJECT_DIR$/src/fxmlFiles/fxmlBattleFieldWindow.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
+        <state relative-caret-position="-945">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/controllers/ControllerMatchMaking.java">
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/BuildingProbeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="105" column="26" lean-forward="false" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
+        <state relative-caret-position="-6">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="method#handle#0;class#3530:46562" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/PolytechnicBot.java">
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/ProbeZoneTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/building/genesisBuilding/PolyGenesisBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4082">
-          <caret line="434" column="1" lean-forward="false" selection-start-line="434" selection-start-column="1" selection-end-line="434" selection-end-column="1" />
+        <state relative-caret-position="-210">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="method#initUnitMap#0;class#PolyGenesisBuilder#0" expanded="false" />
-            <element signature="method#merge#0;class#PolyGenesisBuilder#0" expanded="false" />
-            <element signature="method#mergeAndMutatePopulation#0;class#PolyGenesisBuilder#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/MainProbeTests.java" />
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/botInterface/probes/Probe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        <state relative-caret-position="-205">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/BGame.java">
+    <entry file="file://$PROJECT_DIR$/src/botInterface/probes/TemplateProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestBattleCrane/Tests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="66" column="35" lean-forward="true" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+        <state relative-caret-position="0">
+          <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/Army/iteratorArmy/PolyIteratorArmy.java">
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/RadiusProbeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/battleFields/BattleField.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="42" column="22" lean-forward="false" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/description.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/uiDesigner.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1609">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1440">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/megaDoofense.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="33" column="17" lean-forward="true" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/gradle.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/kotlinc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state relative-caret-position="975">
+          <caret line="67" column="10" lean-forward="false" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
           <folding>
-            <element signature="e#2193#2194#0" expanded="false" />
-            <element signature="e#2220#2221#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/iteratorArmy/PolyIteratorArmy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="-1029">
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding>
-            <element signature="e#1738#1739#0" expanded="false" />
-            <element signature="e#1765#1766#0" expanded="false" />
+            <element signature="e#8340#8341#0" expanded="true" />
+            <element signature="e#8377#8378#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding>
-            <element signature="e#5168#5169#0" expanded="true" />
-            <element signature="e#5195#5196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#1662#1663#0" expanded="true" />
-            <element signature="e#1689#1690#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/PolyNexus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="48" column="29" lean-forward="false" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-          <folding>
-            <element signature="e#557#558#0" expanded="false" />
-            <element signature="e#607#608#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="63" column="34" lean-forward="false" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/polytech/priority/Priorities.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+        <state relative-caret-position="85">
+          <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/TestInitializer.java">
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/probes/BallisticProbeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+        <state relative-caret-position="1113">
+          <caret line="65" column="13" lean-forward="true" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/CreatingArmyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorUpgradingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyZoneProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1113">
+          <caret line="40" column="24" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="89" column="62" lean-forward="false" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+          <folding>
+            <element signature="e#5218#5219#0" expanded="true" />
+            <element signature="e#5252#5253#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/TestInitializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyDistanceProbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#497#498#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="141">
+          <caret line="73" column="20" lean-forward="false" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4291#4292#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBuildingProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="122" column="29" lean-forward="false" selection-start-line="122" selection-start-column="29" selection-end-line="122" selection-end-column="29" />
-          <folding>
-            <element signature="e#4810#4811#0" expanded="true" />
-            <element signature="e#4842#4843#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="141">
+          <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/UpgradingProbeTest.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyBallisticProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        <state relative-caret-position="-1028">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/RadiusProbeTest.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4068#4069#0" expanded="true" />
-            <element signature="e#4095#4096#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/ProbeZoneTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+        <state relative-caret-position="-1322">
+          <caret line="14" column="44" lean-forward="false" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/DistanceProbeTest.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/iteratorBuilding/PolyIteratorBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="37" column="16" lean-forward="false" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+        <state relative-caret-position="441">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initAllBuildings#0;class#PolyIteratorBuilder#0" expanded="false" />
+            <element signature="method#initTurret#0;class#PolyIteratorBuilder#0" expanded="false" />
+            <element signature="e#8006#8007#0" expanded="true" />
+            <element signature="e#8042#8043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/IteratorBuildingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BuildingProbeTest.java">
+    <entry file="file://$PROJECT_DIR$/TestBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="65" column="16" lean-forward="false" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="231">
+          <caret line="39" column="69" lean-forward="true" selection-start-line="39" selection-start-column="69" selection-end-line="39" selection-end-column="69" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testBattleCrane/TestPolyBot/probes/BallisticProbeTest.java">
+    <entry file="file://$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/genesisBuilding/PolyGenesisBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="45" column="37" lean-forward="true" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+        <state relative-caret-position="301">
+          <caret line="134" column="69" lean-forward="true" selection-start-line="134" selection-start-column="69" selection-end-line="134" selection-end-column="69" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#PolyGenesisBuilder#0;class#PolyGenesisBuilder#0" expanded="false" />
+            <element signature="method#initUnitMap#0;class#PolyGenesisBuilder#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1579,7 +1741,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>org.junit.jupiter:junit-jupiter-engine:5.0.0-M2</last-edited>
+          <last-edited>com.google.inject:guice:4.1.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1591,7 +1753,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>9.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1608,7 +1770,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

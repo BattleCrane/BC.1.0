@@ -5,7 +5,6 @@ import game.battleFields.Point;
 import botInterface.probes.Probe;
 import game.players.Player;
 import org.jetbrains.annotations.Contract;
-import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.Priorities;
 import polytech.priority.PolyPriorityUnit;
 import game.unities.Unity;
@@ -39,7 +38,7 @@ public final class PolyBallisticProbe implements Probe {
         consoleHandler.setLevel(Level.FINE);
     }
 
-    public static final class Params extends ParentParams {
+    public static final class Params extends Probe.Params {
         private final Unity unity;
         private final Point point;
 
@@ -60,7 +59,7 @@ public final class PolyBallisticProbe implements Probe {
     }
 
     @Override
-    public final Object probe(ParentParams params) {
+    public final Object probe(Probe.Params params) {
         logger.setLevel(Level.INFO);
         logger.addHandler(consoleHandler);
 

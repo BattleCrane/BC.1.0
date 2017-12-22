@@ -1,14 +1,13 @@
 package TestPolyBot.probes;
 
 import TestPolyBot.TestInitializer;
-import TestPolyBot.TestSettings;
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import polytech.polyNexus.PolyNexus;
 import polytech.polyNexus.probes.PolyZoneProbe;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.Set;
 import java.util.logging.Logger;
@@ -40,7 +39,7 @@ public final class ProbeZoneTest implements TestInitializer {
 
     @NotNull
     @Override
-    public final Object createTest(BattleManager battleManager, ParentParams parentParams) {
+    public final Object createTest(BattleManager battleManager, Probe.Params parentParams) {
         PolyZoneProbe zoneProbe = PolyNexus.createZoneProbe(battleManager);
         zoneProbe.probe(null);
         Set<Point> listOfDangerousZone = zoneProbe.getDangerousZone();

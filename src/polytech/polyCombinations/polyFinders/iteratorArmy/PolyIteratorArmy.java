@@ -1,9 +1,10 @@
-package polytech.polyCombinations.Army.iteratorArmy;
+package polytech.polyCombinations.polyFinders.iteratorArmy;
 
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
+import org.jetbrains.annotations.Contract;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
 import polytech.priority.PolyPriorityUnit;
 import polytech.polyNexus.probes.PolyBallisticProbe;
 import game.unities.Unity;
@@ -147,5 +148,10 @@ public final class PolyIteratorArmy {
             battleManager.removeUnity(p.getPoint(), p.getUnity(), flags.get(i));
         }
         return bestCombination;
+    }
+
+    @Contract(pure = true)
+    public PolyBallisticProbe getBallisticProbe() {
+        return ballisticProbe;
     }
 }

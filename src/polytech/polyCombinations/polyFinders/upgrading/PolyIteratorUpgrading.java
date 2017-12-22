@@ -1,9 +1,9 @@
-package polytech.polyCombinations.upgrading;
+package polytech.polyCombinations.polyFinders.upgrading;
 
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
 import game.unities.Unity;
 import polytech.polyNexus.probes.PolyUpgradingProbe;
 

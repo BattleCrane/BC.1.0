@@ -25,7 +25,7 @@ public class BGame extends Application {
 
     @Override
     public void start(Stage unused) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../game/fxmlFiles/fxmlBattleFieldWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxmlFiles/fxmlBattleFieldWindow.fxml"));
         BattleCraneStage.getIcons().add(new Image("file:src\\Resources\\Icon.png"));
         BattleCraneStage.setResizable(false);
         BattleCraneStage.setTitle("BattleCrane");

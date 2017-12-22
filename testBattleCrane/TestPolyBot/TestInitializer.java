@@ -1,9 +1,9 @@
 package TestPolyBot;
 
+import botInterface.probes.Probe;
 import game.adjutants.AdjutantFielder;
 import game.battleFields.BattleField;
 import game.battleFields.BattleManager;
-import polytech.polyNexus.probes.parametres.ParentParams;
 import static org.junit.Assert.assertTrue;
 
 // TODO: 20.12.17 make injectable
@@ -18,14 +18,14 @@ public interface TestInitializer {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    Object createTest(BattleManager battleManager, ParentParams parentParams);
+    Object createTest(BattleManager battleManager, Probe.Params params);
 
-    default void createTest(BattleManager manager, ParentParams params, Object expectedObject){
+    default void createTest(BattleManager manager, Probe.Params params, Object expectedObject){
         Object o = createTest(manager, params);
         assertTrue(expectedObject.equals(o));
     }
 
-    default void createTest(BattleManager manager, ParentParams params, TestSettings testSettings, Object expectedObject){
+    default void createTest(BattleManager manager, Probe.Params params, TestSettings testSettings, Object expectedObject){
         testSettings.setup();
         createTest(manager, params, expectedObject);
     }

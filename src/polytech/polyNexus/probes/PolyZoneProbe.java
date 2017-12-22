@@ -4,7 +4,6 @@ import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.probes.Probe;
 import game.players.Player;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,12 +19,12 @@ public final class PolyZoneProbe implements Probe {
         this.battleManager = battleManager;
     }
 
-    static final class ZoneParams extends ParentParams {
+    static final class ZoneParams extends Params {
         public ZoneParams() {}
     }
 
     @Override
-    public Object probe(ParentParams params) {
+    public Object probe(Params params) {
         Set<Point> zone = new HashSet<>();
         List<List<String>> matrix = battleManager.getBattleField().getMatrix();
         Pattern basicPattern = Pattern.compile("[GT]");
@@ -101,15 +100,11 @@ public final class PolyZoneProbe implements Probe {
 
     int getRadius(String current) {
         int radius;
-        switch (current.substring(1, 2) + current.substring(4, 5)) {
-            case "^t":
+        switch (current) {
+            case "t":
                 radius = 2;
                 break;
-            case "<t":
-                radius = 3;
-                break;
-            case "^u":
-            case "<u":
+            case "u":
                 radius = 5;
                 break;
             default:

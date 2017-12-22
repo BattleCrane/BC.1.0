@@ -1,5 +1,6 @@
 package TestPolyBot.probes;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
@@ -7,7 +8,6 @@ import game.players.Player;
 import TestPolyBot.TestInitializer;
 import org.junit.Test;
 import polytech.polyNexus.PolyNexus;
-import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.polyNexus.probes.PolyBuildingProbe;
 
 import java.util.logging.Logger;
@@ -63,7 +63,7 @@ public final class BuildingProbeTest implements TestInitializer{
     }
 
     @Override
-    public final Object createTest(BattleManager manager, ParentParams params) {
+    public final Object createTest(BattleManager manager, Probe.Params params) {
         PolyBuildingProbe probe = PolyNexus.createBuildingProbe(manager);
         probe.getZoneProbe().probe(null);
         PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);

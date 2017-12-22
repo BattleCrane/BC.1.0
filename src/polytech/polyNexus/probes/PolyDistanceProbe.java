@@ -5,7 +5,6 @@ import game.battleFields.Point;
 import botInterface.probes.Probe;
 import game.unities.Unity;
 import org.jetbrains.annotations.Contract;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.logging.Logger;
 
@@ -18,7 +17,7 @@ public final class PolyDistanceProbe implements Probe {
         this.battleManager = battleManager;
     }
 
-    public static final class Params extends ParentParams {
+    public static final class Params extends Probe.Params {
         private Unity unity;
         private final int unityWidth;
         private final int unityHeight;
@@ -59,7 +58,7 @@ public final class PolyDistanceProbe implements Probe {
     }
 
     @Override
-    public Object probe(ParentParams params) {
+    public Object probe(Probe.Params params) {
         Params inputParams = (Params) params;
         Point start = inputParams.point;
         int unityWidth = inputParams.unityWidth;

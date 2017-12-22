@@ -1,51 +1,40 @@
 package TestPolyBot.combinations;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import TestPolyBot.TestInitializer;
-import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
+import polytech.polyCombinations.PolyCombinator;
+import polytech.polyCombinations.polyFinders.building.iteratorBuilding.PolyIteratorBuilder;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
 import org.junit.Test;
-import polytech.polyNexus.probes.parametres.ParentParams;
-import polytech.priority.Priorities;
-import polytech.polyNexus.probes.*;
 
-public class IteratorBuildingTest implements TestInitializer{
+import java.util.logging.Logger;
 
-    private PolyIteratorBuilder initPolyIteratorBuilder(BattleManager battleManager){
-        Priorities priorities = new Priorities();
-        PolyDistanceProbe polyDistanceProbe = new PolyDistanceProbe(battleManager);
-        PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManager);
-
-        PolyBuildingProbe polyBuildingProbe = new PolyBuildingProbe(battleManager, priorities
-                , polyZoneProbe, polyDistanceProbe);
-
-        PolyRadiusProbe polyRadiusProbe = new PolyRadiusProbe(battleManager, priorities
-                , polyZoneProbe, polyDistanceProbe);
-
-        return new PolyIteratorBuilder(battleManager, polyBuildingProbe, polyRadiusProbe);
-    }
+public class IteratorBuildingTest implements TestInitializer {
+    private final Logger logger = Logger.getLogger(IteratorBuildingTest.class.getName());
 
     @Test
-    public void findTurretCombination(){
-        BattleManager battleManager = initBattleManager();
-        battleManager.setHowICanBuild(3);
-
-        battleManager.putUnity(battleManager.getPlayer(), new Point(5, 5), battleManager.getTurret());
-        battleManager.putUnity(battleManager.getPlayer(), new Point(12, 2), battleManager.getGenerator());
-        battleManager.putUnity(battleManager.getPlayer(), new Point(7, 4), battleManager.getGenerator());
-        battleManager.putUnity(battleManager.getPlayer(), new Point(3, 14), battleManager.getBarracks());
-
-        battleManager.getBattleField().toString();
-
-        PolyIteratorBuilder polyIteratorBuilder = initPolyIteratorBuilder(battleManager);
-        polyIteratorBuilder.findTurretCombination();
-        CreatingCombination turretCombination = polyIteratorBuilder.getBest();
-        System.out.println(turretCombination);
+    public void findTurretCombination() {
+        BattleManager manager = initBattleManager();
+        createTest(manager, null, () -> {
+            manager.putUnity(manager.getPlayer(), new Point(5, 5), manager.getTurret());
+            manager.putUnity(manager.getPlayer(), new Point(12, 2), manager.getGenerator());
+            manager.putUnity(manager.getPlayer(), new Point(7, 4), manager.getGenerator());
+            manager.putUnity(manager.getPlayer(), new Point(3, 14), manager.getBarracks());
+            manager.setHowICanBuild(3);
+        }, -1);
     }
 
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
-        return null;
+    public Object createTest(BattleManager battleManager, Probe.Params parentParams) {
+        PolyIteratorBuilder iteratorBuilder = PolyCombinator.createIteratorBuilder(battleManager);
+        iteratorBuilder.getBuildingProbe().getZoneProbe().probe(null);
+        iteratorBuilder.findTurretCombination();
+        CreatingCombination turretCombination = iteratorBuilder.getBest();
+
+        logger.info(battleManager.getBattleField().toString());
+        logger.info(turretCombination.toString());
+        return -1;
     }
 }

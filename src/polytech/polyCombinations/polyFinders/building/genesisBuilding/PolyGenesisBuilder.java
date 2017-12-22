@@ -1,15 +1,14 @@
-package polytech.polyCombinations.building.genesisBuilding;
+package polytech.polyCombinations.polyFinders.building.genesisBuilding;
 
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
-import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
-import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
-import polytech.polyNexus.probes.parametres.ParentParams;
+import polytech.polyCombinations.polyFinders.building.iteratorBuilding.PolyIteratorBuilder;
+import polytech.polyCombinations.polyFinders.upgrading.PolyIteratorUpgrading;
 import polytech.priority.PolyPriorityUnit;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
-import polytech.polyCombinations.creatingTools.EstimatedUnit;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
+import polytech.polyCombinations.polyFinders.creatingTools.EstimatedUnit;
 import polytech.polyNexus.probes.PolyBuildingProbe;
 import polytech.polyNexus.probes.PolyRadiusProbe;
 
@@ -39,7 +38,7 @@ public class PolyGenesisBuilder {
     private Set<CreatingCombination> combinations = new HashSet<>();
     private CreatingCombination bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
     private CreatingCombination currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
-    private CreatingCombination bestUpgradeCombination;
+    private CreatingCombination bestUpgradeCombination = new CreatingCombination(new ArrayList<>(), 0.0);
     private List<EstimatedUnit> estimatedUnits = null;
     private CreatingCombination turretCombinations;
 
@@ -134,7 +133,9 @@ public class PolyGenesisBuilder {
         currentCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
 
         bestUpgradeCombination = iteratorUpgrading.findCombination();
-        iteratorBuilder.findTurretCombination();
+        if (battleManager.getHowICanBuild() <= 3){
+            iteratorBuilder.findTurretCombination();
+        }
         turretCombinations = iteratorBuilder.getBest();
 
         createPopulation(battleManager, POPULATION);
@@ -171,10 +172,10 @@ public class PolyGenesisBuilder {
                 int i = new Random().nextInt(estimatedUnitMap.size() - 2); //Берем любое строение, кроме турели и стены
                 EstimatedUnit estimatedUnit = estimatedUnits.get(i);
                 if (estimatedUnit.isPerformedCondition(point)) { //Если это строение можно построить
-                    ParentParams params;
+                    Probe.Params params;
                     Probe probe;
                     if (estimatedUnit.getUnity().getId().equals("t")){
-                        params = new PolyRadiusProbe.RadiusParams(battleManager.getTurret(), point);
+                        params = new PolyRadiusProbe.Params(battleManager.getTurret(), point);
                         probe = radiusProbe;
                     } else {
                         params = new PolyBuildingProbe.Params(estimatedUnit.getUnity(), point);
@@ -278,10 +279,10 @@ public class PolyGenesisBuilder {
                             for (EstimatedUnit unit : estimatedUnitMap.values()) { //Тогда перебираем все строения:
 
                                 if (unit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
-                                    ParentParams params;
+                                    Probe.Params params;
                                     Probe probe;
                                     if (unit.getUnity().getId().equals("t")){
-                                        params = new PolyRadiusProbe.RadiusParams(battleManager.getTurret(), point);
+                                        params = new PolyRadiusProbe.Params(battleManager.getTurret(), point);
                                         probe = radiusProbe;
                                     } else {
                                         params = new PolyBuildingProbe.Params(unit.getUnity(), point);

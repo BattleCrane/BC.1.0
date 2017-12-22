@@ -1,12 +1,11 @@
-package polytech.polyCombinations.building.iteratorBuilding;
+package polytech.polyCombinations.polyFinders.building.iteratorBuilding;
 
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
-import polytech.polyCombinations.creatingTools.EstimatedUnit;
-import polytech.polyNexus.probes.parametres.ParentParams;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
+import polytech.polyCombinations.polyFinders.creatingTools.EstimatedUnit;
 import polytech.priority.PolyPriorityUnit;
 import polytech.polyNexus.probes.PolyBuildingProbe;
 import polytech.polyNexus.probes.PolyRadiusProbe;
@@ -14,8 +13,20 @@ import polytech.polyNexus.probes.PolyRadiusProbe;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PolyIteratorBuilder {
+    private final Logger logger = Logger.getLogger(PolyIteratorBuilder.class.getName());
+
+    {
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.WARNING);
+        logger.setLevel(Level.WARNING);
+        logger.addHandler(consoleHandler);
+    }
+
     private final BattleManager battleManager;
     private final PolyBuildingProbe buildingProbe;
     private final PolyRadiusProbe radiusProbe;
@@ -114,11 +125,10 @@ public class PolyIteratorBuilder {
     private void checkConditionalUnit(BattleManager battleManager, EstimatedUnit conditionalUnit, Point point, String currentUnity, int howICanBuild) {
         if (conditionalUnit.isPerformedCondition(point)) {//Если территория свободна и рядом есть мои строения
             Probe probe;
-            ParentParams params;
+            Probe.Params params;
             PriorityUnit priorityUnit;
             if (conditionalUnit.getUnity().getId().equals("t")){ //Исследуем приоритет на турель
-                System.out.println("TRUE");
-                params = new PolyRadiusProbe.RadiusParams(conditionalUnit.getUnity(), point);
+                params = new PolyRadiusProbe.Params(conditionalUnit.getUnity(), point);
                 probe = radiusProbe;
             } else {
                 params = new PolyBuildingProbe.Params(conditionalUnit.getUnity(), point);
@@ -152,5 +162,11 @@ public class PolyIteratorBuilder {
         System.out.println("Max: " + max);
         return bestCombinationOfBuild;
     }
+
+    public PolyBuildingProbe getBuildingProbe() {
+        return buildingProbe;
+    }
+
+
 
 }

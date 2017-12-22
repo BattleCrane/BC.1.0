@@ -1,13 +1,14 @@
 package TestPolyBot.combinations;
 
+import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import TestPolyBot.TestInitializer;
-import polytech.polyCombinations.building.genesisBuilding.PolyGenesisBuilder;
-import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
-import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
-import polytech.polyNexus.probes.parametres.ParentParams;
+import org.jetbrains.annotations.NotNull;
+import polytech.polyCombinations.polyFinders.building.genesisBuilding.PolyGenesisBuilder;
+import polytech.polyCombinations.polyFinders.building.iteratorBuilding.PolyIteratorBuilder;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
+import polytech.polyCombinations.polyFinders.upgrading.PolyIteratorUpgrading;
 import polytech.priority.PolyPriorityUnit;
 import game.unities.Unity;
 import org.junit.Test;
@@ -15,12 +16,15 @@ import polytech.priority.Priorities;
 import polytech.polyNexus.probes.*;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GenesisBuildingTests implements TestInitializer{
+    private final Logger logger = Logger.getLogger(GenesisBuildingTests.class.getName());
 
+    @NotNull
     private PolyGenesisBuilder initGenesisBuilder(BattleManager battleManager) {
         Priorities priorities = new Priorities();
         PolyDistanceProbe polyDistanceProbe = new PolyDistanceProbe(battleManager);
@@ -108,7 +112,7 @@ public class GenesisBuildingTests implements TestInitializer{
 
 
     @Override
-    public Object createTest(BattleManager battleManager, ParentParams parentParams) {
+    public Object createTest(BattleManager battleManager, Probe.Params parentParams) {
         return null;
     }
 }

@@ -4,15 +4,16 @@ import game.adjutants.AdjutantFielder;
 import game.battleFields.BattleManager;
 import game.controllers.ControllerMatchMaking;
 import game.players.Player;
-import polytech.polyCombinations.Army.iteratorArmy.PolyIteratorArmy;
-import polytech.polyCombinations.building.genesisBuilding.PolyGenesisBuilder;
-import polytech.polyCombinations.building.iteratorBuilding.PolyIteratorBuilder;
-import polytech.polyCombinations.creatingTools.CreatingCombination;
-import polytech.polyCombinations.upgrading.PolyIteratorUpgrading;
+import org.jetbrains.annotations.NotNull;
+import polytech.polyCombinations.polyFinders.iteratorArmy.PolyIteratorArmy;
+import polytech.polyCombinations.polyFinders.building.genesisBuilding.PolyGenesisBuilder;
+import polytech.polyCombinations.polyFinders.building.iteratorBuilding.PolyIteratorBuilder;
+import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
+import polytech.polyCombinations.polyFinders.upgrading.PolyIteratorUpgrading;
+import polytech.polyNexus.probes.*;
+import polytech.priority.Priorities;
 import polytech.steps.AttackStep;
 import polytech.polyNexus.PolyNexus;
-import polytech.polyNexus.probes.PolyTargetProbe;
-import polytech.polyNexus.probes.parametres.ParentParams;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -31,11 +32,9 @@ public class PolyCombinator {
     private CreatingCombination combination;
 
     public PolyCombinator(ControllerMatchMaking controllerMatchMaking) {
-
         this.controllerMatchMaking = controllerMatchMaking;
         this.battleManager = controllerMatchMaking.getBattleManager();
-        PolyNexus nexus = new PolyNexus(controllerMatchMaking);
-        this.nexus = nexus;
+        this.nexus = new PolyNexus(controllerMatchMaking);
         this.iteratorBuilder = new PolyIteratorBuilder(battleManager, nexus.getBuildingProbe(), nexus.getRadiusProbe());
         this.iteratorUpgrading = new PolyIteratorUpgrading(battleManager, nexus.getUpgradingProbe());
         this.genesisBuilder  = new PolyGenesisBuilder(battleManager, nexus.getBuildingProbe(), nexus.getRadiusProbe()
@@ -45,7 +44,7 @@ public class PolyCombinator {
 
     //Определяет, что будет делать:
     public CreatingCombination chooseDevelopment() {
-        nexus.getZoneProbe().probe(new ParentParams());
+        nexus.getZoneProbe().probe(null);
         //Всегда проверяем постройки:
         CreatingCombination genesisBuildings = genesisBuilder.findBuildCombination(battleManager);
         System.out.println("Buildings: " + genesisBuildings);
@@ -77,6 +76,41 @@ public class PolyCombinator {
         return targetProbe.findAttackSteps(player);
     }
 
+
+    //Factories:
+    @NotNull
+    public static PolyIteratorArmy createIteratorArmy(BattleManager manager){
+        return new PolyIteratorArmy(manager,  PolyNexus.createBallisticProbe(manager));
+    }
+
+    @NotNull
+    public static PolyIteratorBuilder createIteratorBuilder(BattleManager battleManager){
+        Priorities priorities = new Priorities();
+        PolyDistanceProbe polyDistanceProbe = new PolyDistanceProbe(battleManager);
+        PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManager);
+
+        PolyBuildingProbe polyBuildingProbe = new PolyBuildingProbe(battleManager, priorities
+                , polyZoneProbe, polyDistanceProbe);
+
+        PolyRadiusProbe polyRadiusProbe = new PolyRadiusProbe(battleManager, priorities
+                , polyZoneProbe, polyDistanceProbe);
+
+        return new PolyIteratorBuilder(battleManager, polyBuildingProbe, polyRadiusProbe);
+    }
+
+    @NotNull
+    public static PolyIteratorUpgrading createIteratorUpgrading(BattleManager battleManager){
+        return new PolyIteratorUpgrading(battleManager, PolyNexus.createUpgradingProbe(battleManager));
+    }
+
+    @NotNull
+    private PolyGenesisBuilder createGenesisBuilder(BattleManager battleManager) {
+        return new PolyGenesisBuilder(battleManager, PolyNexus.createBuildingProbe(battleManager)
+                , PolyNexus.createRadiusProbe(battleManager), createIteratorUpgrading(battleManager)
+                , createIteratorBuilder(battleManager));
+    }
+
+    //Getters:
     public CreatingCombination getCombination() {
         return combination;
     }

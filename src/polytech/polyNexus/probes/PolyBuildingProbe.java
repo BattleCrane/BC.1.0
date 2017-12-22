@@ -6,7 +6,6 @@ import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
 import botInterface.probes.Probe;
 import org.jetbrains.annotations.Contract;
-import polytech.polyNexus.probes.parametres.ParentParams;
 import polytech.priority.PolyPriorityUnit;
 import polytech.priority.Priorities;
 import game.unities.Unity;
@@ -34,7 +33,7 @@ public final class PolyBuildingProbe implements Probe {
         this.distanceProbe = distanceProbe;
     }
 
-    public static final class Params extends ParentParams {
+    public static final class Params extends Probe.Params {
         private final Unity unity;
         private final Point point;
 
@@ -46,7 +45,7 @@ public final class PolyBuildingProbe implements Probe {
 
     @NotNull
     @Override
-    public Object probe(ParentParams params) {
+    public Object probe(Probe.Params params) {
         Params buildingParams = (Params) params;
         return probeBuilding(buildingParams.unity, buildingParams.point);
     }
