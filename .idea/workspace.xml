@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16c613ff-2a58-4f01-9824-5526d1f4b983" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/game/resourceInitialization/Resource.java" afterPath="$PROJECT_DIR$/src/game/resourceInitialization/Resource.java" />
-      <change beforePath="$PROJECT_DIR$/src/polytech/PolytechnicBot.java" afterPath="$PROJECT_DIR$/src/polytech/PolytechnicBot.java" />
-      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/PolyCombinator.java" />
-      <change beforePath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/genesisBuilding/PolyGenesisBuilder.java" afterPath="$PROJECT_DIR$/src/polytech/polyCombinations/polyFinders/building/genesisBuilding/PolyGenesisBuilder.java" />
-      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyRadiusProbe.java" />
-      <change beforePath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java" afterPath="$PROJECT_DIR$/src/polytech/polyNexus/probes/PolyUpgradingProbe.java" />
-      <change beforePath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" afterPath="$PROJECT_DIR$/testBattleCrane/TestPolyBot/combinations/GenesisBuildingTests.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -2967,7 +2960,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513977804812</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="23.12.17 &#10;Modified clazz PolyGenesisBuilder;&#10;TODO: fix turret building">
+      <created>1513980675760</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1513980675760</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3003,7 +3003,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109097000" />
+    <option name="totallyTimeSpent" value="109208000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -3122,7 +3122,8 @@
     <MESSAGE value="Separated methods in probe classes" />
     <MESSAGE value="22.12.17 UPGRADING &amp; REFACTORING:&#10;Modified: class IteratorBuildingTest&#10;Modified: class IteratorCreateArmyTest" />
     <MESSAGE value="23.12.17 UPGRADING &amp; REFACTORING:&#10;Modified: class IteratorBuildingTest&#10;Modified: class IteratorCreateArmyTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="23.12.17 UPGRADING &amp; REFACTORING:&#10;Modified: class IteratorBuildingTest&#10;Modified: class IteratorCreateArmyTest" />
+    <MESSAGE value="23.12.17 &#10;Modified clazz PolyGenesisBuilder;&#10;TODO: fix turret building" />
+    <option name="LAST_COMMIT_MESSAGE" value="23.12.17 &#10;Modified clazz PolyGenesisBuilder;&#10;TODO: fix turret building" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
