@@ -5,6 +5,7 @@ import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import TestPolyBot.TestInitializer;
 import org.jetbrains.annotations.NotNull;
+import polytech.polyCombinations.PolyCombinator;
 import polytech.polyCombinations.polyFinders.building.genesisBuilding.PolyGenesisBuilder;
 import polytech.polyCombinations.polyFinders.building.iteratorBuilding.PolyIteratorBuilder;
 import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
@@ -21,98 +22,91 @@ import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class GenesisBuildingTests implements TestInitializer{
+public final class GenesisBuildingTests implements TestInitializer{
     private final Logger logger = Logger.getLogger(GenesisBuildingTests.class.getName());
 
-    @NotNull
-    private PolyGenesisBuilder initGenesisBuilder(BattleManager battleManager) {
-        Priorities priorities = new Priorities();
-        PolyDistanceProbe polyDistanceProbe = new PolyDistanceProbe(battleManager);
-        PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManager);
-
-        PolyBuildingProbe polyBuildingProbe = new PolyBuildingProbe(battleManager, priorities
-                , polyZoneProbe, polyDistanceProbe);
-
-        PolyRadiusProbe polyRadiusProbe = new PolyRadiusProbe(battleManager, priorities
-                , polyZoneProbe, polyDistanceProbe);
-
-        PolyIteratorUpgrading polyIteratorUpgrading = new PolyIteratorUpgrading(battleManager
-                , new PolyUpgradingProbe(battleManager, priorities));
-
-        PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder(battleManager, polyBuildingProbe
-                , polyRadiusProbe);
-
-        return new PolyGenesisBuilder(battleManager, polyBuildingProbe
-                , polyRadiusProbe, polyIteratorUpgrading, polyIteratorBuilder);
-    }
-
     @Test
-    public void randomCombination() {
+    public final void randomCombination() {
         BattleManager battleManager = initBattleManager();
         setArmy(battleManager, 0, 0, 0, 0, 0 , 0);
         setBuildings(battleManager, 1, false, 2);
         battleManager.getBattleField().toString();
 
-        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
+        PolyGenesisBuilder polyGenesisBuilder = PolyCombinator.createGenesisBuilder(battleManager);
+        polyGenesisBuilder.getBuildingProbe().getZoneProbe().probe(null);
 
         polyGenesisBuilder.createPopulation(battleManager, 5);
-        battleManager.getBattleField().toString();
-        System.out.println(polyGenesisBuilder.getCombinations().toString());
+        logger.info(battleManager.getBattleField().toString());
+        logger.info(polyGenesisBuilder.getCombinations().toString());
     }
 
     @Test
-    public void merge() {
-        CreatingCombination creatingCombination = new CreatingCombination(new ArrayList<>(), 0);
-        creatingCombination.add(new PolyPriorityUnit(10, new Point(0, 0), new Unity("test")));
-        creatingCombination.add(new PolyPriorityUnit(100, new Point(0, 0), new Unity("test")));
-        creatingCombination.add(new PolyPriorityUnit(1000, new Point(0, 0), new Unity("test")));
-        CreatingCombination other = new CreatingCombination(new ArrayList<>(), 0);
-        other.add(new PolyPriorityUnit(20, new Point(7, 7), new Unity("!")));
-        other.add(new PolyPriorityUnit(200, new Point(7, 7), new Unity("!")));
-        other.add(new PolyPriorityUnit(2000, new Point(7, 7), new Unity("!")));
-
-        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(new BattleManager());
+    public final void merge() {
+        CreatingCombination creatingCombination = new CreatingCombination(new ArrayList<>(), 0){{
+            add(new PolyPriorityUnit(10, new Point(0, 0), new Unity("test")));
+            add(new PolyPriorityUnit(100, new Point(0, 0), new Unity("test")));
+            add(new PolyPriorityUnit(1000, new Point(0, 0), new Unity("test")));
+        }};
+        CreatingCombination other = new CreatingCombination(new ArrayList<>(), 0){{
+            add(new PolyPriorityUnit(20, new Point(7, 7), new Unity("!")));
+            add(new PolyPriorityUnit(200, new Point(7, 7), new Unity("!")));
+            add(new PolyPriorityUnit(2000, new Point(7, 7), new Unity("!")));
+        }};
+        BattleManager battleManager = initBattleManager();
+        PolyGenesisBuilder polyGenesisBuilder = PolyCombinator.createGenesisBuilder(battleManager);
         CreatingCombination merged = polyGenesisBuilder.merge(creatingCombination, other);
+
+        logger.info("Sum: " + merged.getSum());
         assertTrue(1210.0 == merged.getSum());
     }
 
     @Test
-    public void mutate() {
+    public final void mutate() {
         BattleManager battleManager = initBattleManager();
 
         CreatingCombination creatingCombination = new CreatingCombination(new ArrayList<>(), 0);
         creatingCombination.add(new PolyPriorityUnit(20, new Point(8, 8), battleManager.getBarracks()));
-        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
+        PolyGenesisBuilder polyGenesisBuilder = PolyCombinator.createGenesisBuilder(battleManager);
+        polyGenesisBuilder.getBuildingProbe().getZoneProbe().probe(null);
         CreatingCombination mutated = polyGenesisBuilder.mutate(battleManager, creatingCombination);
 
-        System.out.println(mutated);
-        battleManager.getBattleField().toString();
+        logger.info(mutated.toString());
+        logger.info(battleManager.getBattleField().toString());
         assertEquals(new PolyPriorityUnit(600.0, new Point(14, 9), battleManager.getGenerator()),
                 mutated.getUnits().get(0));
     }
 
     @Test
-    public void findCombination() {
-        BattleManager battleManager = initBattleManager();
-        setBuildings(battleManager, 2, false, 2);
-        setArmy(battleManager, 0,0,0,0,0, 0);
-
-        battleManager.putUnity(battleManager.getPlayer(), new Point(5, 5), battleManager.getTurret());
-        battleManager.putUnity(battleManager.getPlayer(), new Point(12, 2), battleManager.getGenerator());
-        battleManager.putUnity(battleManager.getPlayer(), new Point(7, 4), battleManager.getGenerator());
-        battleManager.putUnity(battleManager.getPlayer(), new Point(3, 14), battleManager.getBarracks());
-
-        battleManager.getBattleField().toString();
-
-        PolyGenesisBuilder polyGenesisBuilder = initGenesisBuilder(battleManager);
-        CreatingCombination best = polyGenesisBuilder.findBuildCombination(battleManager);
-        System.out.println(best);
-        battleManager.getBattleField().toString();
+    public final void findCombinationTest1() {
+        BattleManager manager = initBattleManager();
+        createTest(manager, null, () -> {
+            setBuildings(manager, 2, false, 2);
+            setArmy(manager, 0,0,0,0,0, 0);
+            manager.putUnity(manager.getPlayer(), new Point(5, 5), manager.getTurret());
+            manager.putUnity(manager.getPlayer(), new Point(12, 2), manager.getGenerator());
+            manager.putUnity(manager.getPlayer(), new Point(7, 4), manager.getGenerator());
+            manager.putUnity(manager.getPlayer(), new Point(3, 14), manager.getBarracks());
+        }, -1);
     }
 
+    @Test
+    public final void findCombinationTest2() {
+        BattleManager manager1 = initBattleManager();
+        createTest(manager1, null, () -> {
+            setBuildings(manager1, 2, false, 2);
+            setArmy(manager1, 0,0,0,0,0, 0);
+        }, -1);
+    }
 
     @Override
-    public Object createTest(BattleManager battleManager, Probe.Params parentParams) {
-        return null;
+    public Object createTest(BattleManager manager, Probe.Params parentParams) {
+        logger.info(manager.getBattleField().toString());
+
+        PolyGenesisBuilder polyGenesisBuilder = PolyCombinator.createGenesisBuilder(manager);
+        polyGenesisBuilder.getBuildingProbe().getZoneProbe().probe(null);
+        CreatingCombination best = polyGenesisBuilder.findBuildCombination();
+        logger.info(best.toString());
+        logger.info(manager.getBattleField().toString());
+        return -1;
     }
 }

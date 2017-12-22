@@ -11,11 +11,11 @@ import org.junit.Test;
 
 import java.util.logging.Logger;
 
-public class IteratorBuildingTest implements TestInitializer {
+public final class IteratorBuildingTest implements TestInitializer {
     private final Logger logger = Logger.getLogger(IteratorBuildingTest.class.getName());
 
     @Test
-    public void findTurretCombination() {
+    public final void findTurretCombination() {
         BattleManager manager = initBattleManager();
         createTest(manager, null, () -> {
             manager.putUnity(manager.getPlayer(), new Point(5, 5), manager.getTurret());
@@ -27,7 +27,7 @@ public class IteratorBuildingTest implements TestInitializer {
     }
 
     @Override
-    public Object createTest(BattleManager battleManager, Probe.Params parentParams) {
+    public final Object createTest(BattleManager battleManager, Probe.Params parentParams) {
         PolyIteratorBuilder iteratorBuilder = PolyCombinator.createIteratorBuilder(battleManager);
         iteratorBuilder.getBuildingProbe().getZoneProbe().probe(null);
         iteratorBuilder.findTurretCombination();
