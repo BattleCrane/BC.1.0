@@ -46,7 +46,7 @@ public class PolyCombinator {
     public CreatingCombination chooseDevelopment() {
         nexus.getZoneProbe().probe(null);
         //Всегда проверяем постройки:
-        CreatingCombination genesisBuildings = genesisBuilder.findBuildCombination(battleManager);
+        CreatingCombination genesisBuildings = genesisBuilder.findBuildCombination();
         System.out.println("Buildings: " + genesisBuildings);
         logger.info("Buildings: " + genesisBuildings);
         if (!controllerMatchMaking.getButtonCreateArmy().isVisible()){
@@ -104,10 +104,25 @@ public class PolyCombinator {
     }
 
     @NotNull
-    private PolyGenesisBuilder createGenesisBuilder(BattleManager battleManager) {
-        return new PolyGenesisBuilder(battleManager, PolyNexus.createBuildingProbe(battleManager)
-                , PolyNexus.createRadiusProbe(battleManager), createIteratorUpgrading(battleManager)
-                , createIteratorBuilder(battleManager));
+    public static PolyGenesisBuilder createGenesisBuilder(BattleManager battleManager) {
+        Priorities priorities = new Priorities();
+        PolyDistanceProbe polyDistanceProbe = new PolyDistanceProbe(battleManager);
+        PolyZoneProbe polyZoneProbe = new PolyZoneProbe(battleManager);
+
+        PolyBuildingProbe polyBuildingProbe = new PolyBuildingProbe(battleManager, priorities
+                , polyZoneProbe, polyDistanceProbe);
+
+        PolyRadiusProbe polyRadiusProbe = new PolyRadiusProbe(battleManager, priorities
+                , polyZoneProbe, polyDistanceProbe);
+
+        PolyIteratorUpgrading polyIteratorUpgrading = new PolyIteratorUpgrading(battleManager
+                , new PolyUpgradingProbe(battleManager, priorities));
+
+        PolyIteratorBuilder polyIteratorBuilder = new PolyIteratorBuilder(battleManager, polyBuildingProbe
+                , polyRadiusProbe);
+
+        return new PolyGenesisBuilder(battleManager, polyBuildingProbe
+                , polyRadiusProbe, polyIteratorUpgrading, polyIteratorBuilder);
     }
 
     //Getters:

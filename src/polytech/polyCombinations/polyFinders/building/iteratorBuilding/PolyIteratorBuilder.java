@@ -17,6 +17,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// TODO: 22.12.2017 MAKE NEXUS
 public class PolyIteratorBuilder {
     private final Logger logger = Logger.getLogger(PolyIteratorBuilder.class.getName());
 

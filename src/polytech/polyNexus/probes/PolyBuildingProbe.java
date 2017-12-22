@@ -11,11 +11,21 @@ import polytech.priority.Priorities;
 import game.unities.Unity;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class PolyBuildingProbe implements Probe {
     private final Logger logger = Logger.getLogger(PolyBuildingProbe.class.getName());
 
+    {
+
+        ConsoleHandler consoleHandler = new ConsoleHandler(){{
+           setLevel(Level.WARNING);
+        }};
+        logger.setLevel(Level.WARNING);
+        logger.addHandler(consoleHandler);
+    }
     private final int WALL_COEFFICIENT = 16;
     private final double DISTANCE_COEFFICIENT = 0.1;
 

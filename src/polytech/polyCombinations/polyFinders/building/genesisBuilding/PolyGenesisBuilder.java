@@ -1,5 +1,6 @@
 package polytech.polyCombinations.polyFinders.building.genesisBuilding;
 
+import com.oracle.tools.packager.Log;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import botInterface.priority.PriorityUnit;
@@ -13,6 +14,7 @@ import polytech.polyNexus.probes.PolyBuildingProbe;
 import polytech.polyNexus.probes.PolyRadiusProbe;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * PolyGenesisBuilder - класс, реализующий выбор наилучшей комбинации построек на основе генетического алгоритма.
@@ -23,7 +25,11 @@ import java.util.*;
  * 4. currentCombinationOfBuild - текущая комбинация из прямого перебора. Используется при мутации.
  */
 
+// TODO: 22.12.2017 MAKE NEXUS
 public class PolyGenesisBuilder {
+    private final Logger logger = Logger.getLogger(PolyGenesisBuilder.class.getName());
+
+
     private final int POPULATION = 100;
     private final int SELECTION = 5;
 
@@ -114,7 +120,8 @@ public class PolyGenesisBuilder {
                         battleManager.isEmptyTerritory(point, battleManager.getTurret());
             }
         });
-        estimatedUnits = Arrays.asList(estimatedUnitMap.get("g"), estimatedUnitMap.get("b"), estimatedUnitMap.get("f"));
+        estimatedUnits = Arrays.asList(estimatedUnitMap.get("g"), estimatedUnitMap.get("b")
+                , estimatedUnitMap.get("f"), estimatedUnitMap.get("w"));
     }
 
     private interface Method {
@@ -126,7 +133,7 @@ public class PolyGenesisBuilder {
     }
 
     //Найти лучшую комбинацию:
-    public CreatingCombination findBuildCombination(BattleManager battleManager) {
+    public CreatingCombination findBuildCombination() {
 
         combinations = new HashSet<>();
         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
@@ -169,7 +176,7 @@ public class PolyGenesisBuilder {
             String currentUnity = battleManager.getBattleField().getMatrix().get(x).get(y);
             Point point = new Point(y, x);
             if (currentUnity.substring(1).equals("    0")) { //Если клетка пустая ->
-                int i = new Random().nextInt(estimatedUnitMap.size() - 2); //Берем любое строение, кроме турели и стены
+                int i = new Random().nextInt(estimatedUnitMap.size() - 1); //Берем любое строение, кроме турели и стены
                 EstimatedUnit estimatedUnit = estimatedUnits.get(i);
                 if (estimatedUnit.isPerformedCondition(point)) { //Если это строение можно построить
                     Probe.Params params;
@@ -228,6 +235,11 @@ public class PolyGenesisBuilder {
         int combinationSize = creatingCombination.getUnits().size();
         int otherCombinationSize = otherCreatingCombination.getUnits().size();
         int size = combinationSize > otherCombinationSize ? combinationSize : otherCombinationSize;
+
+        logger.info("First: " + combinationSize);
+        logger.info("Second: " + otherCombinationSize);
+        logger.info("Third: " + size);
+
         CreatingCombination mergedCombination = new CreatingCombination(new ArrayList<>(), 0);
         for (int i = 0; i < size; i++) {
             if (i % 2 == 0 && combinationSize >= size) {
@@ -291,10 +303,11 @@ public class PolyGenesisBuilder {
                                     PriorityUnit priorityUnit = (PriorityUnit) probe.probe(params);
                                     WallChecker wallChecker = () -> {
                                         if (estimatedUnit.getUnity().getId().equals("w")){
-                                            return battleManager.putDoubleWall(battleManager.getPlayer(), point, battleManager.getWall());
+                                            return battleManager.putDoubleWall(battleManager.getPlayer(), point
+                                                    , battleManager.getWall());
                                         } else {
-                                            return battleManager.putUnity(battleManager.getPlayer(), point,
-                                                    estimatedUnit.getUnity());
+                                            return battleManager.putUnity(battleManager.getPlayer(), point
+                                                    , estimatedUnit.getUnity());
                                         }
                                     };
                                     if (!currentCombinationOfBuild.contains(priorityUnit) && wallChecker.run()) { //Если нет в текущем списке, и построилось строение
@@ -302,6 +315,10 @@ public class PolyGenesisBuilder {
                                         unit.takeResources().run(battleManager);
                                         if (currentCombinationOfBuild.getSum() > bestCombinationOfBuild.getSum()) {
                                             bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0);
+
+                                            logger.info("Current:      " + currentCombinationOfBuild.toString());
+
+
                                             for (PriorityUnit e : currentCombinationOfBuild.getUnits()) {
                                                 bestCombinationOfBuild.add(new PolyPriorityUnit(e.getPriority(), e.getPoint(), e.getUnity()));
                                             }
@@ -323,11 +340,23 @@ public class PolyGenesisBuilder {
                 PriorityUnit newPriorityUnit;
                 Method methodStart;
                 Method methodEnd;
-                PriorityUnit lastCreated = bestCombinationOfBuild.getUnits()
-                        .get(bestCombinationOfBuild.getUnits().size() - 1);
+
+                PriorityUnit lastCreated;
                 PriorityUnit currentUpgraded;
+//
+//                logger.info(bestCombinationOfBuild.toString());
+
+                //Building:
+                if (bestCombinationOfBuild.getUnits().size() - 1 > 0){
+                    lastCreated = bestCombinationOfBuild.getUnits()
+                            .get(bestCombinationOfBuild.getUnits().size() - 1);
+                } else {
+                    lastCreated = new PolyPriorityUnit(-10.0);
+                }
+                //Upgrading:
                 if (bestUpgradeCombination.getUnits().size() - 1 > 0){
                     currentUpgraded = bestUpgradeCombination.getUnits().get(0);
+
                 } else {
                     currentUpgraded = new PolyPriorityUnit(-10.0);
                 }
@@ -432,5 +461,9 @@ public class PolyGenesisBuilder {
 
     public Set<CreatingCombination> getCombinations() {
         return combinations;
+    }
+
+    public PolyBuildingProbe getBuildingProbe() {
+        return buildingProbe;
     }
 }

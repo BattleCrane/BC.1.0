@@ -12,6 +12,7 @@ import game.unities.Unity;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: 22.12.2017 MAKE NEXUS
 public final class PolyIteratorArmy {
     private final BattleManager battleManager;
     private final PolyBallisticProbe ballisticProbe;
@@ -21,6 +22,7 @@ public final class PolyIteratorArmy {
         this.ballisticProbe = ballisticProbe;
     }
 
+    // TODO: 22.12.2017 simplify
     public CreatingCombination findCombination(BattleManager battleManager) {
         CreatingCombination bestCombination = new CreatingCombination(new ArrayList<>(), 0);
         List<String> flags = new ArrayList<>();
