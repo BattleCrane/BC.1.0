@@ -143,6 +143,7 @@ public class PolyGenesisBuilder {
 
     //Найти лучшую комбинацию:
     public CreatingCombination findBuildCombination() {
+        controllerBuilding = battleManager.getHowICanBuild();
 
         combinations = new HashSet<>();
         bestCombinationOfBuild = new CreatingCombination(new ArrayList<>(), 0.0);
@@ -183,7 +184,7 @@ public class PolyGenesisBuilder {
             }
             //Значение клетки ввиде строки, в которой хранится информация о сущности:
             String currentUnity = battleManager.getBattleField().getMatrix().get(x).get(y);
-            Point point = new Point(y, x);
+            Point point = new Point(x, y);
             if (currentUnity.substring(1).equals("    0")) { //Если клетка пустая ->
                 int i = new Random().nextInt(estimatedUnitMap.size() - 1); //Берем любое строение, кроме турели и стены
                 EstimatedUnit estimatedUnit = estimatedUnits.get(i);
@@ -294,7 +295,7 @@ public class PolyGenesisBuilder {
                 String flag = ""; //Определитель территории
                 for (int i = 0; i < 16; i++) { //Ищем сами лучший вариант
                     for (int j = 0; j < 16; j++) {
-                        String currentUnity = battleManager.getBattleField().getMatrix().get(i).get(j);
+                        String currentUnity = battleManager.getBattleField().getMatrix().get(j).get(i);
                         Point point = new Point(j, i);
                         if (currentUnity.substring(1).equals("    0")) { //Если пустая клетка
                             for (EstimatedUnit unit : estimatedUnitMap.values()) { //Тогда перебираем все строения:

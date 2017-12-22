@@ -96,7 +96,7 @@ public final class PolyRadiusProbe implements Probe {
                 boolean inBounds = i >= 0 && i < 16 && j >= 0 && j < 16;
                 if (inBounds){
                     String otherUnit = matrix.get(j).get(i);
-                    if (!otherUnit.substring(1).equals("    0") &&
+                    if (!otherUnit.substring(1).equals("    0") && !otherUnit.substring(1).equals("XXXXX") &&
                             otherUnit.charAt(3) != currentPlayer.getColorType().charAt(0)) {
                         value += DUTY_COEFFICIENT * map.getPriorities().get(otherUnit.charAt(4));
                     }

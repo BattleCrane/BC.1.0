@@ -11,7 +11,7 @@ import game.unities.Unity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class PolyUpgradingProbe implements Probe {
+public final class PolyUpgradingProbe implements Probe {
     private final double GENERATOR_UPGRADING_COEFFICIENT = 0.8;
 
     private final BattleManager battleManager;

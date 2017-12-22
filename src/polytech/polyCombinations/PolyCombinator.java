@@ -18,7 +18,7 @@ import polytech.polyNexus.PolyNexus;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class PolyCombinator {
+public final class PolyCombinator {
     private final Logger logger = Logger.getLogger(PolyCombinator.class.getName());
 
     private final ControllerMatchMaking controllerMatchMaking;

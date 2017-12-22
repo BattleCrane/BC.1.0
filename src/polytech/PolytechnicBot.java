@@ -23,7 +23,6 @@ public class PolytechnicBot implements Bot {
         combinator = new PolyCombinator(controllerMatchMaking);
     }
 
-
     @Override
     public int getCountOfStep() {
         return 0;

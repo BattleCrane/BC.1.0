@@ -16,7 +16,7 @@ public final class Resource {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Пустая клетка
     public final ImageView getEmptyField() {
-        ImageView field = new ImageView(new Image("file:src\\Resources\\game.BattleFields\\Cell.png"));
+        ImageView field = new ImageView(new Image("file:src\\Resources\\BattleFields\\Cell.png"));
         field.setFitWidth(33.5);
         field.setFitHeight(33.5);
         return field;
@@ -35,7 +35,7 @@ public final class Resource {
     }
 
     public final ImageView getDestroyedField(){
-        ImageView field = new ImageView(new Image("file:src\\Resources\\game.BattleFields\\DestroyedField.png"));
+        ImageView field = new ImageView(new Image("file:src\\Resources\\BattleFields\\DestroyedField.png"));
         field.setFitWidth(33.5);
         field.setFitHeight(33.5);
         return field;

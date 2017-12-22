@@ -4,17 +4,12 @@ import botInterface.probes.Probe;
 import game.battleFields.BattleManager;
 import game.battleFields.Point;
 import TestPolyBot.TestInitializer;
-import org.jetbrains.annotations.NotNull;
 import polytech.polyCombinations.PolyCombinator;
 import polytech.polyCombinations.polyFinders.building.genesisBuilding.PolyGenesisBuilder;
-import polytech.polyCombinations.polyFinders.building.iteratorBuilding.PolyIteratorBuilder;
 import polytech.polyCombinations.polyFinders.creatingTools.CreatingCombination;
-import polytech.polyCombinations.polyFinders.upgrading.PolyIteratorUpgrading;
 import polytech.priority.PolyPriorityUnit;
 import game.unities.Unity;
 import org.junit.Test;
-import polytech.priority.Priorities;
-import polytech.polyNexus.probes.*;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
